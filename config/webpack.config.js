@@ -323,7 +323,9 @@ module.exports = function (webpackEnv) {
                 .filter(ext => useTypeScript || !ext.includes('ts')),
             alias: {
                 'react-native': 'react-native-web',
-                'comp': path.resolve('src/assets'),
+                'Comp': path.resolve(__dirname, 'src/components/test/'),
+                //utilities: path.resolve(__dirname, 'src/components/test/'),
+
                 // Allows for better profiling with ReactDevTools
                 ...(isEnvProductionProfile && {
                     'react-dom$': 'react-dom/profiling',

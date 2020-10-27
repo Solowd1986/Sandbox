@@ -2,14 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import "normalize.css";
+import "./assets/scss/custom-reset.scss"
 import './index.css';
 import App from './App';
+import {BrowserRouter} from "react-router-dom";
+
 //import reportWebVitals from './reportWebVitals';
+
 
 // dev-server start with just npm start
 ReactDOM.render(
     <React.StrictMode>
-        <App/>
+        <BrowserRouter>
+            <App/>
+        </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root')
 );
