@@ -1,11 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+
 import "normalize.css";
 import "./assets/scss/custom-reset.scss"
+import "./assets/scss/fonts.css"
+
 import './index.css';
 import App from './App';
+
 import {BrowserRouter} from "react-router-dom";
+
+
+import $ from "jquery";
+import "slick-carousel/slick/slick.min";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+$(document).ready(function () {
+    $('.slider-slick').slick({
+        arrows: false,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        infinite: true,
+        variableWidth: true,
+        variableHeight: true
+    });
+});
+
+
 
 //import reportWebVitals from './reportWebVitals';
 

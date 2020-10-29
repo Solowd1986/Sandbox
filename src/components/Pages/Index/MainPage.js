@@ -6,13 +6,12 @@ import Promo from "./Promo";
 import BrandStory from "./BrandStory";
 import Announcements from "./Announcements";
 import About from "./About";
-import Wrapper from "../../Core/Wrapper/Wrapper";
+import PromoBadge from "../../PromoBadge/PromoBadge";
 
 export default class MainPage extends Component {
     render() {
         return (
             <>
-                <Wrapper type={"section"}/>
                 <Slider/>
                 <Promo/>
                 <BrandStory/>
