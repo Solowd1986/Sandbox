@@ -3,15 +3,19 @@ import React, {Component} from "react";
 export default class Evaluate extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            res: "none"
+        }
     }
 
-    handleField = (e) => {
-        console.log("inp");
+    handleChangeField = (e) => {
+        //console.log("inp");
     };
 
-    blurField = (e) => {
-        console.log("lost");
+    handleblurField = (e) => {
+        this.setState({
+            res: e.target.value
+        })
     };
 
     handlerSend = (e) => {
@@ -21,10 +25,20 @@ export default class Evaluate extends Component {
     render() {
         return (
             <h3 style={{ width: "600px", margin: "30px auto 30px" }}>
+                <p>State: {this.state.res}</p>
                 <form className="form" action="/" name="auth-form" method="POST">
                     <label style={{ marginRight: "20px" }} htmlFor="login">Login</label>
-                    <input onChange={this.handleField} onBlur={this.blurField} style={{ padding: "10px", marginRight: "20px" }} type="text" name="login" required/>
-                    <input onClick={this.handlerSend} type="submit" name="auth-submit" value="Send"/>
+                    <input
+                        onChange={this.handleChangeField}
+                        onBlur={this.handleblurField}
+                        style={{ padding: "10px", marginRight: "20px" }} type="text" name="login"
+                        required
+                    />
+
+                    <input
+                        onClick={this.handlerSend}
+                        type="submit" name="auth-submit" value="Send"
+                    />
                 </form>
             </h3>
         )

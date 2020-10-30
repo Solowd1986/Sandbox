@@ -1,32 +1,29 @@
+
 import React from "react";
-import Style from "./header.module.scss";
+import styles from "./header.module.scss";
 
 import {BrowserRouter, NavLink, Route, Switch} from "react-router-dom";
-import Categories from "../test/Categories";
-import Item from "../test/Item";
-import About from "../test/About";
 
+import MobileNavbar from "./Partials/MobileNavbar";
+import Logo from "./Partials/Logo";
+import NavbarList from "./Partials/NavbarList";
+import Userbar from "./Partials/Userbar";
 
 const Header = props => {
     return (
-        <div className={Style.header}>
-            <div style={{textAlign: "center"}}>
-                <ul className={Style.navbar}>
-                    <li>
-                        <NavLink activeClassName={Style.active} to={"/"} exact>Root</NavLink>
-                    </li>
-                    <li>
-                        <NavLink activeClassName={Style.active} to={"/categories"}>Categories</NavLink>
-                    </li>
-                    <li>
-                        <NavLink activeClassName={Style.active} to={"/product/12/iphone"} exact>Product</NavLink>
-                    </li>
-                    <li>
-                        <NavLink activeClassName={Style.active} to={"/about/cars"}>About</NavLink>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <>
+            <a className={`${styles.portfolio_controls} ${styles.portfolio_controls__left}`} href="#"> вернуться к списку</a>
+            <a className={`${styles.portfolio_controls} ${styles.portfolio_controls__right}`} href="#"> перейти на GitHub сайта</a>
+
+            <nav className={`wrapper ${styles.header}`}>
+                <MobileNavbar/>
+                <Logo/>
+                <NavbarList/>
+                <Userbar/>
+
+            </nav>
+
+        </>
     )
 };
 
