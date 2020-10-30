@@ -6,8 +6,13 @@ import Promo from "./Promo";
 import BrandStory from "./BrandStory";
 import Announcements from "./Announcements";
 import About from "./About";
+import $ from "jquery";
+
+
+
 
 export default class Index extends Component {
+
     render() {
         return (
             <>

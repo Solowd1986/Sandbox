@@ -1,0 +1,36 @@
+/*  Блок промо
+================================
+ */
+
+.promo-about {
+  @media (max-width: 560px) {
+    text-align: center;
+  }
+}
+
+.promo-about__main-title {
+  padding-top: 10px;
+  font-size: 28px;
+  font-weight: 300;
+  color: $grey-300;
+  text-shadow: 0 0 1px rgba(0, 0, 0, .01);
+  @media (max-width: 560px) {
+    font-size: 18px;
+  }
+}
+
+.promo-about__desc {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 28px;
+  @media (max-width: 560px) {
+    font-size: 14px;
+  }
+}
+
+.promo-about__list-title {
+  font-size: 16px;
+  @media (max-width: 560px) {
+    font-size: 14px;
+  }
+}

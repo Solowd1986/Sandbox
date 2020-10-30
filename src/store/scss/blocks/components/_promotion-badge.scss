@@ -1,0 +1,48 @@
+
+.promotion-badge {
+  display: flex;
+  justify-content: space-between; //IE11 фикс
+  justify-content: space-evenly;
+  padding: 35px 20px;
+
+  @media (max-width: 750px) {
+    display: none;
+  }
+}
+
+
+.promotion-badge__item {
+  display: flex;
+  align-items: center;
+
+  &:first-child {
+    margin-right: 20px;
+  }
+}
+
+.promotion-badge__img {
+  fill: $red;
+}
+
+
+.promotion-badge__caption-wrapper {
+  margin-left: 5px;
+}
+
+
+.promotion-badge__caption-lg {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 300;
+  color: $black-100;
+  text-align: center;
+}
+
+.promotion-badge__caption-sm {
+  margin: 0;
+  font-size: 13px;
+
+  font-weight: 300;
+  color: $grey;
+  text-align: center;
+}

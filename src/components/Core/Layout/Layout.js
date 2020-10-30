@@ -9,8 +9,8 @@ import About from "../../test/About";
 
 
 import {Route, Switch, Redirect} from "react-router-dom";
-
 import MainPage from "../../Pages/Index/MainPage";
+
 
 export default class Layout extends Component {
     render() {

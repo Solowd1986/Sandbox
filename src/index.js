@@ -4,13 +4,14 @@ import ReactDOM from 'react-dom';
 
 import "normalize.css";
 import "./assets/scss/custom-reset.scss"
+import "./assets/scss/variables.scss"
 import "./assets/scss/fonts.css"
+import "./assets/scss/core.scss"
 
 import './index.css';
 import App from './App';
 
 import {BrowserRouter} from "react-router-dom";
-
 
 import $ from "jquery";
 import "slick-carousel/slick/slick.min";
@@ -31,7 +32,6 @@ $(document).ready(function () {
 
 
 //import reportWebVitals from './reportWebVitals';
-
 
 // dev-server start with just npm start
 ReactDOM.render(

@@ -324,7 +324,7 @@ module.exports = function (webpackEnv) {
                 .filter(ext => useTypeScript || !ext.includes('ts')),
             alias: {
                 'react-native': 'react-native-web',
-                styles: path.resolve(__dirname, 'src/assets/scss/'),
+
 
 
                 // Allows for better profiling with ReactDevTools
@@ -500,7 +500,7 @@ module.exports = function (webpackEnv) {
                                         ? shouldUseSourceMap
                                         : isEnvDevelopment,
                                 },
-                                'sass-loader'
+                                'sass-loader',
                             ),
                             // Don't consider CSS imports dead code even if the
                             // containing package claims to have no side effects.
@@ -523,7 +523,7 @@ module.exports = function (webpackEnv) {
                                     },
 
                                 },
-                                'sass-loader'
+                                'sass-loader',
                             ),
                         },
 
@@ -703,6 +703,7 @@ module.exports = function (webpackEnv) {
                 // The formatter is invoked directly in WebpackDevServerUtils during development
                 formatter: isEnvProduction ? typescriptFormatter : undefined,
             }),
+
         ].filter(Boolean),
         // Some libraries import Node modules but don't use them in the browser.
         // Tell webpack to provide empty mocks for them so importing them works.

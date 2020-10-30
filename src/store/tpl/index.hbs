@@ -1,0 +1,191 @@
+{{> common/header}}
+{{> partials/slider}}
+
+<div class="app"></div>
+
+<section class="container promo-wrapper">
+    <main class="wrapper promo">
+        <h2 class="promo-section-title">Рекомендуем</h2>
+        <ul class="promo-list">
+            {{#loop 4}}
+                <li class="promo-list__item">
+                    <span class="promo-list__tag">В наличии</span>
+                    <a class="promo-list__link" href="item.html">
+                        <img class="promo-list__img" src="assets/img/oneplus_6t_6gb_128gb_black_275_1.png" alt="image">
+                    </a>
+                    <span class="promo-list__title">Oneplus 7 Pro 8GB + 256GB (туманный синий)</span>
+                    <span class="promo-list__price"><span class="promo-list__price--old">55 000 р.</span>44 000 р.</span>
+                    <button class="btn promo-list__btn">Купить</button>
+                </li>
+            {{/loop}}
+        </ul>
+
+        <h2 class="promo-section-title">Популярные гаджеты</h2>
+        <ul class="promo-list">
+            {{#loop 4}}
+                <li class="promo-list__item">
+                    <span class="promo-list__tag promo-list__tag--not-in-stock">В наличии</span>
+                    <a class="promo-list__link" href="/item.html">
+                        <img class="promo-list__img" src="assets/img/electric_tooth_brush_275_1.png" alt="image">
+                    </a>
+                    <span class="promo-list__title">Oneplus 7 Pro 8GB + 256GB (туманный синий)</span>
+                    <span class="promo-list__price"><span class="promo-list__price--old">55 000</span>44 000</span>
+                    <button class="btn promo-list__btn">Купить</button>
+                </li>
+            {{/loop}}
+        </ul>
+
+        <h2 class="promo-section-title">Аксессуары</h2>
+        <ul class="promo-list">
+            {{#loop 4}}
+                <li class="promo-list__item">
+                    <span class="promo-list__tag">В наличии</span>
+                    <a class="promo-list__link" href="/item.html">
+                        <img class="promo-list__img" src="assets/img/oneplus_dash_charger_275_1.png" alt="image">
+                    </a>
+                    <span class="promo-list__title">Oneplus 7 Pro 8GB + 256GB (туманный синий)</span>
+                    <span class="promo-list__price"><span class="promo-list__price--old">55 000</span>44 000</span>
+                    <button class="btn promo-list__btn">Купить</button>
+                </li>
+            {{/loop}}
+        </ul>
+    </main>
+</section>
+
+<section class="brand-story">
+    <div class="brand-story__item milestone-item">
+        <div class="brand-story__info">
+            <h2 class="brand-story__title">Новые <br> вершины</h2>
+            <div class="brand-story__text-slide">
+                <h4 class="brand-story__subtitle">Завораживающий <br> 90 Гц экран</h4>
+                <p class="brand-story__desc">
+                    Мы представили в OnePlus 7 Pro лидирующий в отрасли
+                    жидкостный жидкокристаллический дисплей с частотой 90 Гц.
+                </p>
+                <a class="brand-story__link" href="#">Узнать больше...</a>
+            </div>
+        </div>
+    </div>
+    <div class="brand-story__item achivments-item">
+        <div class="brand-story__info">
+            <h2 class="brand-story__title">Достижения <br> компании</h2>
+            <div class="brand-story__text-slide">
+                <h4 class="brand-story__subtitle">Игровой режим <br> «Fnatic Mode»</h4>
+                <p class="brand-story__desc">
+                    В сотрудничестве с профессиональной киберспортивной командой Fnatic был
+                    создан режим OnePlus Gaming
+                </p>
+                <a class="brand-story__link" href="#">Узнать больше...</a>
+            </div>
+        </div>
+    </div>
+    <div class="brand-story__item our-people-item">
+
+        <div class="brand-story__info">
+            <h2 class="brand-story__title">Наше <br> сообщество</h2>
+            <div class="brand-story__text-slide">
+                <h4 class="brand-story__subtitle">Создаем наши устройства <br>вместе с вами!</h4>
+                <p class="brand-story__desc">
+                    Мы провели множество глобальных ивентов и митапов в 11 странах и 26 городах,
+                    с более чем 15 000 участников
+                </p>
+                <a class="brand-story__link" href="#">Узнать больше...</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="announcements">
+    <div class="wrapper">
+        <h3 class="announcements__title">Предстоящие мероприятия</h3>
+        <ul class="announcements__list">
+            <li>
+                <a class="announcements__img-wrapper" href="#">
+                    <img src="assets/img/announcement-img-android 11-developer.jpg" alt="announcements-image">
+                </a>
+                <div class="announcements__text-wrapper" href="">
+                    <span><a href="#">Android 11 Developer Preview 3 с дизайном и функциями OxygenOS 11 для OnePlus 8 Series</a></span>
+                    <p>
+                        <a href="#">
+                            Пользователи OnePlus 8 и OnePlus 8 Pro теперь могут опробовать Android 11 Developer Preview 3
+                            и впервые ознакомиться с обновленным дизайном и функциями OxygenOS 11.
+                        </a>
+                    </p>
+                    <a class="" href="#">Подробнее</a>
+                </div>
+            </li>
+            <li>
+                <a class="announcements__img-wrapper" href="#">
+                    <img src="assets/img/announcement-img-lead-with-speed.jpg" alt="announcements-image">
+                </a>
+                <div class="announcements__text-wrapper" href="">
+                    <span><a href="#">
+                        OnePlus Buds обеспечивают великолепный звук при беспроводной передаче</a></span>
+                    <p>
+                        <a href="#">
+                            OnePlus Buds, разработанные для удовлетворения самых взыскательных требований к звуку
+                            и упрощения прослушивания, отличаются потрясающим временем автономной работы и
+                            быстрой зарядкой, отличным качеством звука с глубокими басами и удобным дизайном
+                            с простотой использования для всех пользователей.
+                        </a>
+                    </p>
+                    <a class="" href="#">Подробнее</a>
+                </div>
+            </li>
+            <li>
+                <a class="announcements__img-wrapper" href="#">
+                    <img src="assets/img/announcement-img-oneplus-buds.jpg" alt="announcements-image">
+                </a>
+                <div class="announcements__text-wrapper" href="">
+                    <span><a href="#">
+                        OnePlus запускает серию OnePlus 8 с передовой технологией Speed OnePlus</a></span>
+                    <p>
+                        <a href="#">
+                            Сосредоточившись на обеспечении максимально быстрой и плавной работы для своих
+                            технически подкованных пользователей, OnePlus расширяет свое флагманское превосходство,
+                            поднимая свои фирменные дисплеи с высокой частотой обновления до 120 Гц, снова поднимая
+                            отраслевой эталон для флагманских устройств премиум-класса.
+                        </a>
+                    </p>
+                    <a class="" href="#">Подробнее</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<div class="container promo-about">
+    <section class="wrapper">
+        <h1 class="promo-about__main-title">Интернет-магазин OnePlus</h1>
+        <p class="promo-about__desc">
+            Модельный ряд девайсов OnePlus – это прежде всего высокотехнологичные флагманские смартфоны. Даже спустя несколько лет они не потеряют актуальность. Будучи
+            оснащенными современными процессорами и графическими картами, они показывают достойный показатель производительности. Эргономичность корпуса, высокий уровень
+            сборки, а также продуманный до мелочей дизайн, гарантируют пользователю удобство и комфорт при использовании.
+        </p>
+
+        <p class="promo-about__desc">
+            Камеры, установленные на смартфонах, выделяются качеством съемки, отличной четкостью и цветопередачей. В аппаратах Ван Плас используют модули с матрицей от Sony. С
+            большим дисплеем работать станет гораздо приятнее. Его неотъемлемые составляющие это прежде всего: высокое разрешение, яркость, глубина цвета, хороший угол обзора.
+            Автономность позволит спокойно работать с мобильным телефоном на протяжении всего дня. Функция быстрой зарядки Dash Charge или Warp Charge – это новинка в
+            индустрии, она зарядит Ваш девайс до комфортного уровня за 30 минут. Интуитивно простая операционная система на базе Android – OxygenOS, позволит Вам наслаждаться
+            каждой минутой использования смартфона, даже если вы работаете с ним в первый раз.
+        </p>
+
+        <p class="promo-about__desc">
+            Наш интернет-магазин занимается продажей только оригинальной продукции. Наши специалисты помогут Вам принять рациональное решение в подборе товара. Мы дорожим
+            каждым клиентом и стараемся широко освящать события компании, чтобы каждый, кто следит за брендом, смог получать информацию из единого качественного источника.
+            Основным критерием нашего магазина можно назвать следующее: консультация покупателей должна производиться не только до момента покупки, но и после нее. Каждый
+            пользователь – это частичка огромного сообщества, в этом отношении исключительный подход к каждому является необходимым. Наша цель – это прежде всего развитие
+            данного бренда в России, и мы будем и дальше знакомить Вас с этой замечательной фирмой. Только при тесном контакте с аудиторией можно создать действительно полезное
+            устройство, которое будет отражать вклад каждого, кто не остался в стороне!
+        </p>
+    </section>
+</div>
+
+{{> partials/promotion-badge}}
+{{> common/footer}}
+
+
+
+
+
