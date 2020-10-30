@@ -1,8 +1,11 @@
-/*  Общий свойства окна заказа
+@import "../../../assets/scss/variables";
+@import "../../../assets/scss/mixins";
+
+/*  Общие свойства окна заказа
 ================================
 */
 
-.container-checkout-bg {
+.container_checkout_bg {
   background-color: $white-500;
 }
 
@@ -27,19 +30,12 @@
 }
 
 
-.img-loading {
-  width: 100px;
-  margin: auto;
-}
-
-
 .modal-close {
   position: absolute;
   right: 10px;
   font-size: 40px;
   color: $black-300;
   cursor: pointer;
-
   transition: .3s linear;
 
   &:hover {
@@ -47,17 +43,9 @@
   }
 }
 
-.modal-basket-show {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.stop-body-scroll {
-  position: fixed;
-}
-
-
+/*  Line
+================================
+*/
 .line {
   display: flex;
   margin: 30px;
@@ -67,13 +55,12 @@
   }
 }
 
-.line-stage {
+.line_stage {
   position: relative;
   flex-grow: 1;
-
   padding: 25px;
+  text-align: center;
   border-bottom: 2px solid $red;
-
 
   &::after {
     content: "";
@@ -87,12 +74,9 @@
     border-radius: 50%;
     background-color: $red;
   }
-
-
 }
 
-.line-stage--unactive {
-
+.line_stage__unactive {
   border-bottom: 2px solid $grey;
   opacity: .5;
 
@@ -101,8 +85,10 @@
   }
 }
 
+/*  ================================*/
 
-.basket__wrapper {
+
+.form {
   display: flex;
   @media (max-width: 1120px) {
     flex-direction: column;
@@ -478,6 +464,7 @@
 }
 
 /*=============================*/
+
 
 
 

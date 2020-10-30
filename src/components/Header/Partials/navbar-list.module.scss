@@ -104,9 +104,10 @@
   &:hover {
     box-shadow: 0 2px 0 0 $red-500;
   }
+
+  & > svg {
+    margin-bottom: 8px;
+  }
 }
 
-.header__inner_img {
-  margin-bottom: 15px;
-}
 

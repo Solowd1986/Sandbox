@@ -2,6 +2,7 @@ import classNames from "classnames";
 import React from "react";
 import styles from "./promo.module.scss";
 
+
 const Promo = props => {
     return (
         <section className={`container ${styles.promo_wrapper}`}>

@@ -10,6 +10,7 @@ import About from "../../test/About";
 
 import {Route, Switch, Redirect} from "react-router-dom";
 import MainPage from "../../Pages/Index/MainPage";
+import Order from "../../Pages/Order/Order";
 
 
 export default class Layout extends Component {
@@ -20,6 +21,7 @@ export default class Layout extends Component {
                 <main className={Style.main}>
                     <Switch>
                         <Route path={"/"} component={MainPage} exact/>
+                        <Route path={"/order"} component={Order} exact/>
                         <Route path={"/categories"} component={Categories} exact/>
                         <Route path={"/product/:id/:name"} component={Item} exact/>
                         <Route path={"/about/:name"} component={About}/>
