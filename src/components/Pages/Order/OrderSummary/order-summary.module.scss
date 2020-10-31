@@ -53,7 +53,6 @@
 }
 
 .img_sm {
-  margin-right: 10px;
   vertical-align: bottom;
 }
 
@@ -66,10 +65,13 @@
   font-size: 14px;
   font-weight: 400;
   color: $grey;
+  text-align: center;
 }
 
 .price__sm {
   min-width: 70px;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 

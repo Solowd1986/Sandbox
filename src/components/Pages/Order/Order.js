@@ -7,8 +7,7 @@ export default class Order extends Component {
     render() {
         return (
             <div className={`container ${styles.container_checkout_bg}`}>
-                <div className={`wrapper`}>
-                    <div className="modal-basket">
+                <div className={`wrapper ${styles.order}`}>
                         <div className={styles.line}>
                             <span className={styles.line_stage}>Ваша корзина</span>
                             <span className={styles.line_stage}>Оплата и доставка</span>
@@ -19,7 +18,6 @@ export default class Order extends Component {
                             <OrderInfo/>
                             <OrderSummary/>
                         </form>
-                    </div>
                 </div>
             </div>
         )

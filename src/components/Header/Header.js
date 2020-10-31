@@ -20,7 +20,6 @@ const Header = props => {
                 <Logo/>
                 <NavbarList/>
                 <Userbar/>
-
             </nav>
 
         </>

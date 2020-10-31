@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import "normalize.css";
 import "./assets/scss/custom-reset.scss"
 import "./assets/scss/variables.scss"
+import "./assets/scss/_buttons.scss"
 import "./assets/scss/fonts.css"
 import "./assets/scss/core.scss"
 
