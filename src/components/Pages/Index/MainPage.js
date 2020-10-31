@@ -8,6 +8,7 @@ import About from "./About";
 import PromoBadge from "../../PromoBadge/PromoBadge";
 import Evaluate from "../../test/Evaluate";
 
+
 export default class MainPage extends Component {
     render() {
         return (
@@ -18,6 +19,7 @@ export default class MainPage extends Component {
                 <BrandStory/>
                 <Announcements/>
                 <About/>
+                <PromoBadge/>
             </>
         )
     }

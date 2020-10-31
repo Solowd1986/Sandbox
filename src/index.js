@@ -6,30 +6,9 @@ import "normalize.css";
 // Общие стили для проекта, все специфические - в папках компонентов.
 import "./assets/scss/main.scss"
 
-
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
 
-import $ from "jquery";
-import "slick-carousel/slick/slick.min";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
-
-$(document).ready(function () {
-    $('.slider-slick').slick({
-        arrows: false,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        infinite: true,
-        variableWidth: true,
-        variableHeight: true
-    });
-});
-
-
-
-//import reportWebVitals from './reportWebVitals';
 
 // dev-server start with just npm start
 ReactDOM.render(
@@ -41,7 +20,4 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-//reportWebVitals();
+
