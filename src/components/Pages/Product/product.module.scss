@@ -1,1 +1,344 @@
+@import "../../../assets/scss/variables";
+@import "../../../assets/scss/mixins";
+
+
+/*  Block order single product
+================================
+*/
+
+.item_bg {
+  background-color: $white-100;
+}
+
+.order {
+  display: flex;
+  padding-bottom: 15px;
+  @media (max-width: 870px) {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 25px;
+  }
+}
+
+.order__img_wrapper {
+  max-width: 40%;
+  overflow: hidden;
+  @media (max-width: 870px) {
+    margin-bottom: 15px;
+  }
+}
+
+.order__img {
+  margin-bottom: 10px;
+  vertical-align: bottom;
+}
+
+.order__slider {
+  display: flex;
+  justify-content: center;
+
+  & > img {
+    cursor: pointer;
+  }
+}
+
+
+.order__info_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (max-width: 870px) {
+    align-items: center;
+    padding: 0 10px;
+  }
+}
+
+
+.order__title {
+  font-size: 25px;
+  font-weight: 300;
+  color: $black-100;
+
+  @media (max-width: 870px) {
+    text-align: center;
+  }
+}
+
+
+.order__desc {
+  font-size: 17px;
+  font-weight: 300;
+  color: $grey;
+
+  @media (max-width: 870px) {
+    width: 75%;
+    text-align: center;
+  }
+}
+
+
+.order__price {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 25px;
+  font-size: 28px;
+  font-weight: 400;
+  color: $black-100;
+
+  &__discount {
+    margin-right: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: $grey;
+    text-decoration: line-through;
+  }
+}
+
+.order__btn_block {
+  width: 50%;
+  margin-bottom: 20px;
+  @media (max-width: 448px) {
+    width: 100%;
+  }
+
+}
+
+.order__btn_add_to_cart {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 16px 50px;
+  font-size: 17px;
+  color: $white;
+}
+
+
+.order__btn_buy_by_click {
+  width: 100%;
+  padding: 16px 50px;
+  font-size: 17px;
+  color: $black;
+  border: 1px solid $black;
+  background-color: $white;
+
+  &::before {
+    background-color: $white-100;
+  }
+}
+
+/*  ================================*/
+
+
+/*  Block info about single product
+================================
+*/
+
+.info {
+  padding-bottom: 30px;
+}
+
+
+.info__nav {
+  display: flex;
+  padding: 30px;
+
+  @media (max-width: 870px) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.info__nav_link {
+  padding: 14px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: $grey;
+  cursor: pointer;
+
+  &__active {
+    color: $red;
+    border-bottom: 1px solid $red;
+  }
+
+  @media (max-width: 870px) {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.tab {
+  display: none;
+}
+
+.tab_active {
+  display: block;
+}
+
+
+.features__wrapper {
+  display: flex;
+  flex-direction: column;
+
+  &:not(:last-child) {
+    margin-bottom: 30px;
+  }
+}
+
+.features__title {
+  font-size: 25px;
+  font-weight: 500;
+
+  @media (max-width: 870px) {
+    padding: 0 10px;
+    text-align: center;
+  }
+}
+
+
+.features__desc {
+  margin-bottom: 30px;
+  font-weight: 300;
+
+  @media (max-width: 870px) {
+    padding: 0 10px;
+  }
+}
+
+.features__img {
+  align-self: center;
+  vertical-align: bottom;
+}
+
+
+.delivery_rules {
+  padding: 0 5px;
+  @media (max-width: 870px) {
+    padding: 0 10px;
+  }
+}
+
+.delivery_rules__shipping_title {
+  font-size: 24px;
+  font-weight: 500;
+  color: $grey-100;
+}
+
+.delivery_rules__shipping_city {
+  margin-left: 50px;
+  font-size: 16px;
+  font-weight: 500;
+  color: $black;
+}
+
+.delivery_rules__shipping_conditions {
+  margin-left: 50px;
+  font-size: 13px;
+  color: $grey-100;
+}
+
+.delivery_rules__shipping_country {
+  margin-left: 50px;
+  font-size: 16px;
+  font-weight: 500;
+  color: $black;
+}
+
+
+.delivery_rules__payment_title {
+  font-size: 24px;
+  font-weight: 500;
+  color: $grey-100;
+}
+
+.delivery_rules__payment_options {
+  margin-left: 50px;
+  font-size: 13px;
+  color: $grey-100;
+}
+
+
+.attributes {
+  padding: 0 5px;
+
+  @media (max-width: 870px) {
+    padding: 0 10px;
+  }
+}
+
+.attributes__table_title {
+  margin-bottom: 30px;
+  font-size: 25px;
+  font-weight: 500;
+  color: $grey-100;
+
+  @media (max-width: 870px) {
+    text-align: center;
+  }
+}
+
+
+.attributes__table_data {
+  width: 100%;
+  margin-bottom: 15px;
+  border-spacing: 50px 0;
+  border-collapse: separate;
+
+  & td {
+    width: 30%;
+    margin: 0;
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: 400;
+    border-bottom: 1px solid $white-300;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

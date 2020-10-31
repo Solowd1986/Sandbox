@@ -31,6 +31,15 @@ const postcssNormalize = require('postcss-normalize');
 
 const appPackageJson = require(paths.appPackageJson);
 
+
+/**/
+const imageminGifsicle = require("imagemin-gifsicle");
+const imageminPngquant = require("imagemin-pngquant");
+const imageminSvgo = require("imagemin-svgo");
+const imageminMozjpeg = require('imagemin-mozjpeg');
+/**/
+
+
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 
@@ -326,7 +335,6 @@ module.exports = function (webpackEnv) {
                 'react-native': 'react-native-web',
 
 
-
                 // Allows for better profiling with ReactDevTools
                 ...(isEnvProductionProfile && {
                     'react-dom$': 'react-dom/profiling',
@@ -382,11 +390,42 @@ module.exports = function (webpackEnv) {
                         // A missing `test` is equivalent to a match.
                         {
                             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-                            loader: require.resolve('url-loader'),
-                            options: {
-                                limit: imageInlineSizeLimit,
-                                name: 'static/media/[name].[hash:8].[ext]',
-                            },
+                            use: [
+                                {
+                                    loader: require.resolve('url-loader'),
+                                    options: {
+                                        limit: imageInlineSizeLimit,
+                                        name: 'static/media/[name].[hash:8].[ext]',
+                                    },
+                                },
+                                /*
+                                {
+                                    loader: 'img-loader',
+                                    options: {
+                                        plugins: [
+                                            imageminGifsicle({
+                                                interlaced: false
+                                            }),
+                                            imageminMozjpeg({
+                                                progressive: true,
+                                                arithmetic: false
+                                            }),
+                                            imageminPngquant({
+                                                floyd: 0.5,
+                                                speed: 2
+                                            }),
+                                            imageminSvgo({
+                                                plugins: [
+                                                    {removeTitle: true},
+                                                    {convertPathData: false}
+                                                ]
+                                            })
+                                        ]
+                                    }
+                                }
+                                */
+                            ]
+
                         },
                         // Process application JS with Babel.
                         // The preset includes JSX, Flow, TypeScript, and some ESnext features.

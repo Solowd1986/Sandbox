@@ -2,10 +2,10 @@
 @font-face {
     font-family: "Open Sans";
     src: local("Open Sans");
-    src: url("/src/assets/fonts/opensans-bold.eot?#iefix") format("embedded-opentype"),
-    url("/src/assets/fonts/opensans-regular.woff2") format("woff2"),
-    url("/src/assets/fonts/opensans-regular.woff") format("woff"),
-    url("/src/assets/fonts/opensans-regular.ttf") format("truetype");
+    src: url("../fonts/opensans-bold.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/opensans-regular.woff2") format("woff2"),
+    url("../fonts/opensans-regular.woff") format("woff"),
+    url("../fonts/opensans-regular.ttf") format("truetype");
 
     font-weight: normal;
     font-style: normal;
@@ -15,10 +15,10 @@
 @font-face {
     font-family: "Open Sans";
     src: local("Open Sans");
-    src: url("/src/assets/fonts/opensans-bold.eot?#iefix") format("embedded-opentype"),
-    url("/src/assets/fonts/opensans-bold.woff") format("woff"),
-    url("/src/assets/fonts/opensans-regular.woff2") format("woff2"),
-    url("/src/assets/fonts/opensans-bold.ttf") format("truetype");
+    src: url("../fonts/opensans-bold.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/opensans-bold.woff") format("woff"),
+    url("../fonts/opensans-regular.woff2") format("woff2"),
+    url("../fonts/opensans-bold.ttf") format("truetype");
 
     font-weight: bold;
     font-style: normal;
@@ -29,10 +29,10 @@
 @font-face {
     font-family: "Open Sans";
     src: local("Open Sans");
-    src: url("/src/assets/fonts/opensans-light.eot?#iefix") format("embedded-opentype"),
-    url("/src/assets/fonts/opensans-light.woff2") format("woff2"),
-    url("/src/assets/fonts/opensans-regular.woff") format("woff"),
-    url("/src/assets/fonts/opensans-light.ttf") format("truetype");
+    src: url("../fonts/opensans-light.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/opensans-light.woff2") format("woff2"),
+    url("../fonts/opensans-regular.woff") format("woff"),
+    url("../fonts/opensans-light.ttf") format("truetype");
 
     font-weight: 300;
     font-style: normal;

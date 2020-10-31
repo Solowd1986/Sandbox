@@ -3,21 +3,18 @@ import ReactDOM from 'react-dom';
 
 
 import "normalize.css";
-import "./assets/scss/custom-reset.scss"
-import "./assets/scss/variables.scss"
-import "./assets/scss/_buttons.scss"
-import "./assets/scss/fonts.css"
-import "./assets/scss/core.scss"
+// Общие стили для проекта, все специфические - в папках компонентов.
+import "./assets/scss/main.scss"
 
-import './index.css';
+
 import App from './App';
-
 import {BrowserRouter} from "react-router-dom";
 
 import $ from "jquery";
 import "slick-carousel/slick/slick.min";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
 
 $(document).ready(function () {
     $('.slider-slick').slick({

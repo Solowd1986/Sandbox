@@ -17,6 +17,16 @@ body {
 }
 */
 
+body {
+  font-family: 'Open Sans', 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+
+  -moz-osx-font-smoothing: grayscale;
+}
+
 
 /*  Базовый контейнер для блоков, не центруется, тянется до краев экрана (максимум взят за 2133px), доавлен padding
     для того, чтобы не мобильных текст не прижимался к краям, до мобильных разрешений padding не влияет
