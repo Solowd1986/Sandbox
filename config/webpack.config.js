@@ -393,6 +393,7 @@ module.exports = function (webpackEnv) {
                             use: [
                                 {
                                     loader: require.resolve('url-loader'),
+
                                     options: {
                                         limit: imageInlineSizeLimit,
                                         name: 'static/media/[name].[hash:8].[ext]',

@@ -1,33 +1,32 @@
 @import "../../../assets/scss/mixins";
 @import "../../../assets/scss/variables";
 
-.brand-story {
+
+.brand_story {
   display: flex;
   flex-wrap: wrap;
 }
 
-.brand-story__item {
+.brand_story__item {
   display: flex;
   position: relative;
   @include generate-columns-for-item(4, 12, 0, 0);
-
   min-width: 320px;
-
   text-align: center;
 
   & > *:hover {
     cursor: pointer;
   }
 
-  &:hover .brand-story__subtitle {
+  &:hover .brand_story__subtitle {
     transform: translateY(-60px);
   }
 
-  &:hover .brand-story__desc {
+  &:hover .brand_story__desc {
     transform: translateY(-60px);
   }
 
-  &:hover .brand-story__link {
+  &:hover .brand_story__link {
     transform: scale(1) translateY(-60px);
   }
 
@@ -43,13 +42,13 @@
   }
 }
 
-.milestone-item {
-  //background: url("assets/img/brand-story-1.jpg") no-repeat center;
+.milestone_item {
+  background: url("../../../store/img/all/other/brand-story-1.jpg") no-repeat center;
   background-size: cover;
 }
 
-.achivments-item {
-  //background: url("assets/img/brand-story-2.jpg") no-repeat center;
+.achivments_item {
+  background: url("../../../store/img/all/other/brand-story-1.jpg") no-repeat center;
   background-size: cover;
   // Фикс для IE11, данное изображение при cover имело справа небольшой белый отступ, поэтому для IE11 мы немного
   // растягиваем это фоновое изображение, чтобы компенсировать то пустое место справа.
@@ -58,12 +57,13 @@
   }
 }
 
-.our-people-item {
-  //background: url("assets/img/brand-story-3.jpg") no-repeat center;
+
+.our_people_item {
+  background: url("../../../store/img/all/other/brand-story-3.jpg") no-repeat center;
   background-size: cover;
 }
 
-.brand-story__info {
+.brand_story__info {
   // Это фикс для IE11, данный блок brand-story__info вложен в каждый brand-story__item, который имеет ширину
   // в процентах, что и ограничивает данный brand-story__info блок. Но в IE11, этот блок выходит за пределы
   // родителя, поэтому ему мы тоже задаем ширину
@@ -85,7 +85,7 @@
   }
 }
 
-.brand-story__title {
+.brand_story__title {
   position: relative;
   font-size: 36px;
   font-weight: 300;
@@ -94,7 +94,7 @@
   animation: 0.4s fadeInUp;
 }
 
-.brand-story__text-slide {
+.brand_story__text_slide {
 
   margin-top: auto;
   padding: 55px 10px 5px;
@@ -102,14 +102,12 @@
 }
 
 
-.brand-story__subtitle {
+.brand_story__subtitle {
   position: relative;
   font-size: 20px;
   font-weight: 300;
   line-height: 40px;
-
   transition: .5s cubic-bezier(.645, .045, .355, 1);
-
 
   &:before {
     content: "";
@@ -124,7 +122,7 @@
   }
 }
 
-.brand-story__desc {
+.brand_story__desc {
   position: relative;
   margin: 0 0 20px 0;
   font-size: 16px;
@@ -134,7 +132,7 @@
 }
 
 
-.brand-story__link {
+.brand_story__link {
 
   display: inline-block;
   position: relative;

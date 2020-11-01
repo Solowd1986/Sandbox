@@ -11,12 +11,14 @@ import {Route, Switch, Redirect} from "react-router-dom";
 import MainPage from "../../Pages/Index/MainPage";
 import Order from "../../Pages/Order/Order";
 import Product from "../../Pages/Product/Product";
+import UpButton from "../UpButton/UpButton";
 
 
 export default class Layout extends Component {
     render() {
         return (
             <div className={Style.layout}>
+                <UpButton/>
                 <Header/>
                 <main className={Style.main}>
                     <Switch>

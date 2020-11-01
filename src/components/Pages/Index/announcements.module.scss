@@ -1,7 +1,8 @@
 @import "../../../assets/scss/mixins";
 @import "../../../assets/scss/variables";
 
-.announcements {
+
+.announcements_item {
   margin-top: 40px;
   margin-bottom: 40px;
 
@@ -36,19 +37,20 @@
   }
 }
 
-.announcements__img-wrapper {
+
+.img_wrapper {
   width: 42%;
   @media (max-width: 650px) {
     width: 100%;
   }
 }
 
-.announcements__img-wrapper img {
+.img_wrapper img {
   vertical-align: bottom;
 }
 
 
-.announcements__text-wrapper {
+.text_wrapper {
   display: flex;
   width: 58%;
   flex-direction: column;
@@ -58,14 +60,16 @@
   }
 }
 
-.announcements__text-wrapper span a {
+
+.text_wrapper span a {
   font-size: 25px;
   @media (max-width: 650px) {
     font-size: 18px;
   }
 }
 
-.announcements__text-wrapper p a {
+
+.text_wrapper p a {
   font-size: 16px;
   font-weight: 300;
   line-height: 28px;
@@ -82,11 +86,11 @@
   }
 }
 
-.announcements__text-wrapper > a {
+
+.text_wrapper__link_details {
   position: relative;
   align-self: end;
   margin-top: auto;
-  //border-bottom: 2px solid $black-200;
   font-size: 16px;
   transition: .2s linear;
   @media (max-width: 650px) {
