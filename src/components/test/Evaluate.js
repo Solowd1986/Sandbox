@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 
+
 export default class Evaluate extends Component {
     constructor(props) {
         super(props);
@@ -7,6 +8,9 @@ export default class Evaluate extends Component {
             res: "none"
         }
     }
+
+
+    names = { bob: "12" };
 
     handleChangeField = (e) => {
         //console.log("inp");
@@ -25,6 +29,7 @@ export default class Evaluate extends Component {
     render() {
         return (
             <h3 style={{ width: "600px", margin: "30px auto 30px" }}>
+
                 <p>State: {this.state.res}</p>
                 <form className="form" action="/" name="auth-form" method="POST">
                     <label style={{ marginRight: "20px" }} htmlFor="login">Login</label>

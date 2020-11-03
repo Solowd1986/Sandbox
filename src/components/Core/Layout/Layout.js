@@ -14,6 +14,25 @@ import Product from "../../Pages/Product/Product";
 import UpButton from "../UpButton/UpButton";
 
 
+// class Test {
+//     constructor(props) {
+//         this.selfProp = props;
+//     }
+//     commonProp = "common1";
+//     show () {
+//         console.log(this.commonProp);
+//     }
+// }
+//
+// const m = new Test("a");
+// const m2 = new Test("2");
+// console.log(m.commonProp);
+// console.log(m2.commonProp);
+// console.log(m.show());
+// console.log(m2.show());
+
+
+
 export default class Layout extends Component {
     render() {
         return (
