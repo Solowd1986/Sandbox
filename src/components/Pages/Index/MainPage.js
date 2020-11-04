@@ -47,46 +47,52 @@ class Cart extends Component {
         ]
     };
 
+
     changer = (id, quantity) => {
 
         const obj = this.state.products.find(item => item.id === id);
 
-        if (isNaN(parseInt(quantity))) {
+        if (isNaN(parseInt(quantity)) || !obj) {
             return false;
         } else {
-            quantity = Math.max(1, Math.min(obj.rest, parseInt(quantity)));
+            obj.quantity = Math.max(1, Math.min(obj.rest, parseInt(quantity)));
         }
 
-        obj.quantity = quantity;
-        const index = this.state.products.indexOf(obj);
-
         const base = { ...this.state };
-        base.products[index] = obj;
+        base.products[this.state.products.indexOf(obj)] = obj;
 
         this.setState(base);
+    };
 
+    calcTotal = () => {
+        return this.state.products.reduce((total, item) => {
+            total += (item.price * item.quantity);
+            return total;
+        }, 0);
+    };
 
+    delete = (id) => {
+        const base = { ...this.state };
+        const obj = this.state.products.find(item => item.id === id);
+        base.products.splice(this.state.products.indexOf(obj), 1);
+        this.setState(base);
     };
 
 
     render() {
-
         const styleUl = { padding: "10px", margin: "10px" };
         return (
             <>
                 <ul style={styleUl}>
                     {this.state.products.map(item => {
                         return (
-                            <div key={item.id}>
-                                <li>
-                                    <CartItem min={1} max={item.rest} product={item} itemHandler={this.changer}/>
-                                </li>
-                                <hr/>
-                            </div>
+                            <li key={item.id}>
+                                <CartItem min={1} max={item.rest} product={item} itemHandler={this.changer} deleteItem={this.delete}/>
+                            </li>
                         )
                     })}
                 </ul>
-                <p>Total:</p>
+                <p>Total: {this.calcTotal()}</p>
             </>
         )
     }
@@ -96,7 +102,7 @@ class Cart extends Component {
 class CartItem extends Component {
 
     static defaultState = {
-        min: 1,
+        min: 12,
         itemHandler: () => {
         }
     };
@@ -120,6 +126,11 @@ class CartItem extends Component {
         this.props.itemHandler(id, this.props.product.quantity + 1);
     };
 
+    deleteItem = (id) => {
+        this.props.deleteItem(id);
+    };
+
+
     render() {
 
         const styleLi = { display: 'flex', padding: '10px', marginRight: '15px' };
@@ -129,14 +140,15 @@ class CartItem extends Component {
         return (
             <>
                 <span style={styleLi}>
-                        <p style={styleP}>title: {this.props.product.title}|</p>
-                        <p style={styleP}>quantity: {this.props.product.quantity}|</p>
+                    <p style={styleP}>title: {this.props.product.title}|</p>
+                    <p style={styleP}>quantity: {this.props.product.quantity}|</p>
 
-                        <button onClick={(evt) => this.decreaseAmount(evt, this.props.product.id)} style={{ padding: "5px 10px" }}>-</button>
-                        <input onChange={this.handleChanger} style={styleInput} type="text" value={this.props.product.quantity}/>
-                        <button onClick={(evt) => this.increaseAmount(evt, this.props.product.id)} style={{ padding: "5px 10px" }}>+</button>
+                    <button onClick={(evt) => this.decreaseAmount(evt, this.props.product.id)} style={{ padding: "5px 10px" }}>-</button>
+                    <input onChange={this.handleChanger} style={styleInput} type="text" value={this.props.product.quantity}/>
+                    <button onClick={(evt) => this.increaseAmount(evt, this.props.product.id)} style={{ padding: "5px 10px" }}>+</button>
 
-                        <p style={styleP}>total price: {this.props.product.price * this.props.product.quantity}</p>
+                    <p style={styleP}>total price: {this.props.product.price * this.props.product.quantity}</p>
+                    <button onClick={() => this.deleteItem(this.props.product.id)} style={{ padding: "5px" }}>Delete</button>
                 </span>
             </>
         )
