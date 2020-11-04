@@ -10,7 +10,7 @@ import Evaluate from "../../test/Evaluate";
 import PropTypes from 'prop-types';
 
 
-class DataSet extends Component {
+class Cart extends Component {
 
     state = {
         users: [
@@ -20,54 +20,91 @@ class DataSet extends Component {
             {
                 id: 1,
                 title: "Samsung",
+                color: "green",
                 price: 12000,
+                imgPath: "./photo",
                 quantity: 2,
-                total: 21
+                rest: 21
             },
             {
                 id: 2,
                 title: "IPhone",
+                color: "red",
                 price: 56000,
+                imgPath: "./photo",
                 quantity: 4,
-                total: 15
+                rest: 15
             },
             {
                 id: 3,
                 title: "Nokia",
+                color: "black",
                 price: 34110,
+                imgPath: "./photo",
                 quantity: 1,
-                total: 50
+                rest: 50
             },
         ]
     };
 
-    changer = (obj) => {
-        console.log(obj);
+    changer = (id, quantity) => {
+
+        const obj = this.state.products.find(item => item.id === id);
+
+        if (isNaN(parseInt(quantity))) {
+            return false;
+        } else {
+            quantity = Math.max(1, Math.min(obj.rest, parseInt(quantity)));
+        }
+
+        obj.quantity = quantity;
         const index = this.state.products.indexOf(obj);
 
-        const base = this.state;
+        const base = { ...this.state };
         base.products[index] = obj;
 
         this.setState(base);
-        console.log(this.state);
 
 
-        //return this.state.products;
     };
 
 
     render() {
+
+        const styleUl = { padding: "10px", margin: "10px" };
         return (
-            <Comp title={'order'} min={1} max={10} products={this.state.products} changer={this.changer}/>
+            <>
+                <ul style={styleUl}>
+                    {this.state.products.map(item => {
+                        return (
+                            <div key={item.id}>
+                                <li>
+                                    <CartItem min={1} max={item.rest} product={item} itemHandler={this.changer}/>
+                                </li>
+                                <hr/>
+                            </div>
+                        )
+                    })}
+                </ul>
+                <p>Total:</p>
+            </>
         )
     }
 }
 
 
-class Comp extends Component {
+class CartItem extends Component {
+
+    static defaultState = {
+        min: 1,
+        itemHandler: () => {
+        }
+    };
 
     static propTypes = {
-        title: PropTypes.string.isRequired
+        min: PropTypes.number.isRequired,
+        max: PropTypes.number.isRequired,
+        itemHandler: PropTypes.func.isRequired
     };
 
 
@@ -75,21 +112,12 @@ class Comp extends Component {
         console.log(e.target.value);
     };
 
-    dec = (e, i) => {
-        //console.log('e -', e);
-        //console.log('i -', i);
-
-        const obj = this.props.products.find(item => item.id === i);
-        //obj.quantity = obj.quantity - 1;
-        obj.quantity = Math.max(this.props.min, Math.min(this.props.max, obj.quantity - 1));
-        this.props.changer(obj);
+    decreaseAmount = (e, id) => {
+        this.props.itemHandler(id, this.props.product.quantity - 1);
     };
 
-    inc = (e, i) => {
-        const obj = this.props.products.find(item => item.id === i);
-        //obj.quantity = obj.quantity + 1;
-        obj.quantity = Math.max(this.props.min, Math.min(this.props.max, obj.quantity + 1));
-        this.props.changer(obj);
+    increaseAmount = (e, id) => {
+        this.props.itemHandler(id, this.props.product.quantity + 1);
     };
 
     render() {
@@ -98,31 +126,18 @@ class Comp extends Component {
         const styleP = { marginRight: '15px' };
         const styleInput = { padding: "5px 10px" };
 
-        const list = this.props.products.map((item, i) => {
-            return (
-                <div key={i}>
-                    <li style={i % 2 !== 0 ? { backgroundColor: 'lightgrey', ...styleLi } : { backgroundColor: 'white', ...styleLi }}>
-                        <p style={styleP}>title: {item.title}|</p>
-                        <p style={styleP}>quantity: {item.quantity}|</p>
-
-                        <button onClick={(evt) => this.dec(evt, item.id)} style={{ padding: "5px 10px" }}>-</button>
-                        <input onChange={this.handleChanger} style={styleInput} type="text" value={item.quantity}/>
-                        <button onClick={(evt) => this.inc(evt, item.id)} style={{ padding: "5px 10px" }}>+</button>
-
-                        <p style={styleP}>total price: {item.price * item.quantity}</p>
-                    </li>
-                    <hr/>
-                </div>
-            )
-        });
-
         return (
             <>
-                {this.props.title}
-                <ul>
-                    {list}
-                </ul>
-                <p>Total:</p>
+                <span style={styleLi}>
+                        <p style={styleP}>title: {this.props.product.title}|</p>
+                        <p style={styleP}>quantity: {this.props.product.quantity}|</p>
+
+                        <button onClick={(evt) => this.decreaseAmount(evt, this.props.product.id)} style={{ padding: "5px 10px" }}>-</button>
+                        <input onChange={this.handleChanger} style={styleInput} type="text" value={this.props.product.quantity}/>
+                        <button onClick={(evt) => this.increaseAmount(evt, this.props.product.id)} style={{ padding: "5px 10px" }}>+</button>
+
+                        <p style={styleP}>total price: {this.props.product.price * this.props.product.quantity}</p>
+                </span>
             </>
         )
     }
@@ -136,7 +151,7 @@ export default class MainPage extends Component {
             <>
                 <Slider/>
 
-                <DataSet/>
+                <Cart/>
 
                 <Evaluate/>
 
