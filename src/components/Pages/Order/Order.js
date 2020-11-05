@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import styles from "./order.module.scss";
 import OrderInfo from "./OrderInfo/OrderInfo";
 import OrderSummary from "./OrderSummary/OrderSummary";
-import Input from "../../Form/Input/Input";
+
 
 export default class Order extends Component {
     render() {

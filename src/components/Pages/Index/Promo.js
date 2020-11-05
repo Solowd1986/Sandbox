@@ -8,11 +8,6 @@ import img from "../../../store/img/all/main-page/phone-main-page/oneplus_7pro_6
 //require.context('../../../store/img/', true, /\.jpe?g$|.png$|.svg$|.gif$/);
 
 
-// for (const key in res) {
-//     console.log(key);
-// }
-
-
 const Promo = props => {
     return (
         <section className={`container ${styles.promo_wrapper}`}>

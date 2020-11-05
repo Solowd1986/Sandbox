@@ -10,6 +10,9 @@ import Evaluate from "../../test/Evaluate";
 import PropTypes from 'prop-types';
 
 
+import Input from "../../Core/Form/Input/Input";
+
+
 class Cart extends Component {
 
     state = {
@@ -52,17 +55,16 @@ class Cart extends Component {
 
         const obj = this.state.products.find(item => item.id === id);
 
-        if (isNaN(parseInt(quantity)) || !obj) {
+        if (isNaN(parseInt(quantity))) {
             return false;
         } else {
             obj.quantity = Math.max(1, Math.min(obj.rest, parseInt(quantity)));
+            const products = [...this.state.products];
+            products[this.state.products.indexOf(obj)] = obj;
+            this.setState({ products });
         }
-
-        const base = { ...this.state };
-        base.products[this.state.products.indexOf(obj)] = obj;
-
-        this.setState(base);
     };
+
 
     calcTotal = () => {
         return this.state.products.reduce((total, item) => {
@@ -71,11 +73,13 @@ class Cart extends Component {
         }, 0);
     };
 
+    // 1. Создали копию массива товаров
+    // 2. Удалили элемент, для этого узнали его индекс, передав на вход обьект, найденный по id.
+    // 3. Заменили в обьекте state конкретный массив
     delete = (id) => {
-        const base = { ...this.state };
-        const obj = this.state.products.find(item => item.id === id);
-        base.products.splice(this.state.products.indexOf(obj), 1);
-        this.setState(base);
+        const products = [...this.state.products];
+        products.splice(this.state.products.indexOf(products.find(item => item.id === id)), 1);
+        this.setState({ products });
     };
 
 
@@ -87,7 +91,13 @@ class Cart extends Component {
                     {this.state.products.map(item => {
                         return (
                             <li key={item.id}>
-                                <CartItem min={1} max={item.rest} product={item} itemHandler={this.changer} deleteItem={this.delete}/>
+                                <CartItem
+                                    min={1}
+                                    max={item.rest}
+                                    product={item}
+                                    itemHandler={this.changer}
+                                    deleteItem={this.delete}
+                                />
                             </li>
                         )
                     })}
@@ -100,12 +110,6 @@ class Cart extends Component {
 
 
 class CartItem extends Component {
-
-    static defaultState = {
-        min: 12,
-        itemHandler: () => {
-        }
-    };
 
     static propTypes = {
         min: PropTypes.number.isRequired,
@@ -144,7 +148,14 @@ class CartItem extends Component {
                     <p style={styleP}>quantity: {this.props.product.quantity}|</p>
 
                     <button onClick={(evt) => this.decreaseAmount(evt, this.props.product.id)} style={{ padding: "5px 10px" }}>-</button>
-                    <input onChange={this.handleChanger} style={styleInput} type="text" value={this.props.product.quantity}/>
+
+                    <input
+                        onChange={(evt) => this.handleChanger(evt)}
+                        style={styleInput}
+                        type="text"
+                        value={this.props.product.quantity}
+                    />
+
                     <button onClick={(evt) => this.increaseAmount(evt, this.props.product.id)} style={{ padding: "5px 10px" }}>+</button>
 
                     <p style={styleP}>total price: {this.props.product.price * this.props.product.quantity}</p>
