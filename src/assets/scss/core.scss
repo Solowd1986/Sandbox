@@ -53,7 +53,192 @@ body {
 }
 
 
-.prod {
-  font-size: 12px;
+// styles for modal
+.md-modal {
+  visibility: hidden;
+  position: fixed;
+  width: 50%;
+  min-width: 320px;
+  max-width: 630px;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  z-index: 2000;
+  transform: translateX(-50%) translateY(-50%);
+  backface-visibility: hidden;
 }
+
+// add to show modal
+.md-show {
+  visibility: visible;
+}
+
+.md-overlay {
+  visibility: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: rgba(143, 27, 15, 0.8);
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+// once we add class show to mpodal container, we add opacity and visiblity to overlay
+.md-show ~ .md-overlay {
+  visibility: visible;
+  opacity: 1;
+}
+
+.md-content {
+  position: relative;
+  margin: 0 auto;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  background: #e74c3c;
+}
+
+
+/* Effect 1: Fade in and scale up */
+.md-effect-1 .md-content {
+  opacity: 0;
+  -moz-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  -moz-transform: scale(0.7);
+  -ms-transform: scale(0.7);
+  -webkit-transform: scale(0.7);
+  transform: scale(0.7);
+}
+
+.md-show.md-effect-1 .md-content {
+  opacity: 1;
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+
+/* Effect 2: Slide from the right */
+.md-effect-2 .md-content {
+  opacity: 0;
+  -moz-transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+  -webkit-transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+  transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
+  -moz-transform: translateX(20%);
+  -ms-transform: translateX(20%);
+  -webkit-transform: translateX(20%);
+  transform: translateX(20%);
+}
+
+.md-show.md-effect-2 .md-content {
+  opacity: 1;
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+
+/* Effect 3: Slide from the bottom */
+.md-effect-3 .md-content {
+  opacity: 0;
+  -moz-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  -moz-transform: translateY(20%);
+  -ms-transform: translateY(20%);
+  -webkit-transform: translateY(20%);
+  transform: translateY(20%);
+}
+
+.md-show.md-effect-3 .md-content {
+  opacity: 1;
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
+
+
+/* Effect 5: fall */
+.md-effect-5.md-modal {
+  -webkit-perspective: 1300px;
+  -moz-perspective: 1300px;
+  perspective: 1300px;
+}
+
+.md-effect-5 .md-content {
+  opacity: 0;
+  -moz-transform: translateZ(600px) rotateX(20deg);
+  -ms-transform: translateZ(600px) rotateX(20deg);
+  -webkit-transform: translateZ(600px) rotateX(20deg);
+  transform: translateZ(600px) rotateX(20deg);
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.md-show.md-effect-5 .md-content {
+  opacity: 1;
+  -moz-transition: all 0.3s ease-in;
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+  -moz-transform: translateZ(0px) rotateX(0deg);
+  -ms-transform: translateZ(0px) rotateX(0deg);
+  -webkit-transform: translateZ(0px) rotateX(0deg);
+  transform: translateZ(0px) rotateX(0deg);
+}
+
+
+/* Effect 7:  slide and stick to top */
+.md-effect-7 {
+  top: 0;
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.md-effect-7 .md-content {
+  opacity: 0;
+  -moz-transition: all .3s;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+  -moz-transform: translateY(-200%);
+  -ms-transform: translateY(-200%);
+  -webkit-transform: translateY(-200%);
+  transform: translateY(-200%);
+}
+
+.md-show.md-effect-7 .md-content {
+  border-radius: 0 0 3px 3px;
+  opacity: 1;
+  -moz-transform: translateY(0%);
+  -ms-transform: translateY(0%);
+  -webkit-transform: translateY(0%);
+  transform: translateY(0%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
