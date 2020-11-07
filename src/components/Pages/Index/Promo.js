@@ -1,5 +1,6 @@
 
 import React from "react";
+import common from "~scss/common.module.scss";
 import styles from "./promo.module.scss";
 import {NavLink} from "react-router-dom";
 
@@ -10,8 +11,8 @@ import img from "../../../store/img/all/main-page/phone-main-page/oneplus_7pro_6
 
 const Promo = props => {
     return (
-        <section className={`container ${styles.promo_wrapper}`}>
-            <main className={`wrapper ${styles.promo}`}>
+        <section className={`${common.container} ${styles.promo_wrapper}`}>
+            <main className={`${common.wrapper} ${styles.promo}`}>
                 <h2 className={styles.promo_section_title}>Рекомендуем</h2>
                 <ul className={styles.promo_list}>
                     {Array.from(Array(4), (e, i) => {
@@ -27,7 +28,7 @@ const Promo = props => {
                                 </NavLink>
                                 <span className={styles.promo_list__title}>Oneplus 7 Pro 8GB + 256GB (туманный синий)</span>
                                 <span className={styles.promo_list__price}><span className={styles.promo_list__price__old}>55 000 р.</span>44 000 р.</span>
-                                <button className={`btn ${styles.promo_list__btn}`}>Купить</button>
+                                <button className={`${common.btn} ${styles.promo_list__btn}`}>Купить</button>
                             </li>
                         )
                     })}
@@ -43,7 +44,7 @@ const Promo = props => {
                                 </NavLink>
                                 <span className={styles.promo_list__title}>Oneplus 7 Pro 8GB + 256GB (туманный синий)</span>
                                 <span className={styles.promo_list__price}><span className={styles.promo_list__price__old}>55 000 р.</span>44 000 р.</span>
-                                <button className={`btn ${styles.promo_list__btn}`}>Купить</button>
+                                <button className={`${common.btn} ${styles.promo_list__btn}`}>Купить</button>
                             </li>
                         )
                     })}
@@ -59,7 +60,7 @@ const Promo = props => {
                                 </NavLink>
                                 <span className={styles.promo_list__title}>Oneplus 7 Pro 8GB + 256GB (туманный синий)</span>
                                 <span className={styles.promo_list__price}><span className={styles.promo_list__price__old}>55 000 р.</span>44 000 р.</span>
-                                <button className={`btn ${styles.promo_list__btn}`}>Купить</button>
+                                <button className={`${common.btn} ${styles.promo_list__btn}`}>Купить</button>
                             </li>
                         )
                     })}

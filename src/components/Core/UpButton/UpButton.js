@@ -3,7 +3,7 @@ import styles from "./up-button.module.scss";
 
 const UpButton = props => {
     return (
-        <button className={styles.up_btn}>Up</button>
+        <button className={`${styles.btn}`}>Up</button>
     )
 };
 

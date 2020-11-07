@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import Style from "./layout.module.scss";
+import styles from "./layout.module.scss";
 
 import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
@@ -19,10 +19,11 @@ import UpButton from "../UpButton/UpButton";
 export default class Layout extends Component {
     render() {
         return (
-            <div className={Style.layout}>
+            <div className={styles.layout}>
+
                 <UpButton/>
                 <Header/>
-                <main className={Style.main}>
+                <main className={styles.main}>
                     <Switch>
                         <Route path={"/"} component={MainPage} exact/>
 
