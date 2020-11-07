@@ -111,6 +111,7 @@ class Cart extends Component {
 
 class CartItem extends Component {
 
+    defaul1tProps = "name";
     static propTypes = {
         min: PropTypes.number.isRequired,
         max: PropTypes.number.isRequired,
@@ -176,7 +177,7 @@ export default class MainPage extends Component {
 
                 <Cart/>
 
-                <Evaluate/>
+                <Evaluate classes={'pros names'}/>
 
                 <Promo/>
                 <BrandStory/>

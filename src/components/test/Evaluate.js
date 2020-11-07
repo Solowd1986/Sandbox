@@ -30,14 +30,33 @@ export default class Evaluate extends Component {
         return (
             <div style={{ width: "600px", margin: "30px auto 30px" }}>
 
+
                 <div>
                     <button onClick={() => {
                         const modal = document.querySelector(".md-modal");
+
+                        function calcScrollBarWidth() {
+                            const windowWidth = window.innerWidth;
+                            const documentWidth = document.documentElement.clientWidth;
+                            return windowWidth - documentWidth;
+                        }
+
+                        const offset = calcScrollBarWidth();
+                        if (offset > 0) {
+                            console.log(12);
+
+                            document.body.style.cssText = `padding-right: ${offset}px`
+                        }
+                        document.body.style.cssText += "overflow: hidden";
+
+
+
+
                         modal.classList.add("md-show");
                     }}>show
                     </button>
 
-                    <div className="md-modal md-effect-7" id="modal-1">
+                    <div className="md-modal md-effect-1" id="modal-1">
 
                         <div className="md-content">
                             <h3>Модальное окно</h3>
@@ -48,9 +67,16 @@ export default class Evaluate extends Component {
                         </div>
                     </div>
 
-                    <div className="md-overlay"/>
+                    <div onClick={() => {
+                        const modal = document.querySelector(".md-modal");
+                        modal.classList.remove("md-show");
+                        document.body.style.removeProperty("padding-right");
+                        document.body.style.removeProperty("overflow");
+                    }} className="md-overlay"/>
+
 
                 </div>
+
                 <p>State: {this.state.res}</p>
                 <form className="form" action="/" name="auth-form" method="POST">
                     <label style={{ marginRight: "20px" }} htmlFor="login">Login</label>

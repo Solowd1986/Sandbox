@@ -334,6 +334,9 @@ module.exports = function (webpackEnv) {
             alias: {
                 'react-native': 'react-native-web',
 
+                '~img': path.resolve('src/assets/img/'),
+                '~scss': path.resolve('src/assets/scss/'),
+                '~components': path.resolve('src/components/'),
 
                 // Allows for better profiling with ReactDevTools
                 ...(isEnvProductionProfile && {
@@ -399,32 +402,7 @@ module.exports = function (webpackEnv) {
                                         name: 'static/media/[name].[hash:8].[ext]',
                                     },
                                 },
-                                /*
-                                {
-                                    loader: 'img-loader',
-                                    options: {
-                                        plugins: [
-                                            imageminGifsicle({
-                                                interlaced: false
-                                            }),
-                                            imageminMozjpeg({
-                                                progressive: true,
-                                                arithmetic: false
-                                            }),
-                                            imageminPngquant({
-                                                floyd: 0.5,
-                                                speed: 2
-                                            }),
-                                            imageminSvgo({
-                                                plugins: [
-                                                    {removeTitle: true},
-                                                    {convertPathData: false}
-                                                ]
-                                            })
-                                        ]
-                                    }
-                                }
-                                */
+
                             ]
 
                         },
