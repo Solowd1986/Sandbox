@@ -144,9 +144,7 @@ export default class Promo extends Component {
 
     };
 
-
     render() {
-
         return (
             <section className={`${common.container} ${styles.promo_wrapper}`}>
                 <main className={`${common.wrapper} ${styles.promo}`}>
@@ -177,13 +175,14 @@ export default class Promo extends Component {
                                         {item.discount && <span className={styles.promo_list__price__old}>{item.price} р.</span>}
                                         {item.discount ? item.price - 4000 : item.price} р.
                                     </span>
-                                    <button onClick={() => this.addToCart(1)} className={`${common.btn} ${styles.promo_list__btn}`}>Купить</button>
+                                    <button onClick={() => this.addToCart(item.id)} className={`${common.btn} ${styles.promo_list__btn}`}>Купить</button>
                                 </li>
                             )
                         })}
                     </ul>
 
                     <h2 className={styles.promo_section_title}>Популярные гаджеты</h2>
+
                     <ul className={styles.promo_list}>
                         {this.state.promo.gadgets.map((item) => {
                             return (
@@ -208,7 +207,7 @@ export default class Promo extends Component {
                                         {item.discount && <span className={styles.promo_list__price__old}>{item.price} р.</span>}
                                         {item.discount ? item.price - 4000 : item.price} р.
                                     </span>
-                                    <button onClick={() => this.addToCart(1)} className={`${common.btn} ${styles.promo_list__btn}`}>Купить</button>
+                                    <button onClick={() => this.addToCart(item.id)} className={`${common.btn} ${styles.promo_list__btn}`}>Купить</button>
                                 </li>
                             )
                         })}
@@ -238,7 +237,7 @@ export default class Promo extends Component {
                                         {item.discount && <span className={styles.promo_list__price__old}>{item.price} р.</span>}
                                         {item.discount ? item.price - 4000 : item.price} р.
                                     </span>
-                                    <button onClick={() => this.addToCart(1)} className={`${common.btn} ${styles.promo_list__btn}`}>Купить</button>
+                                    <button onClick={() => this.addToCart(item.id)} className={`${common.btn} ${styles.promo_list__btn}`}>Купить</button>
                                 </li>
                             )
                         })}

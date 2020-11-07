@@ -9,8 +9,13 @@ import PromoBadge from "../../PromoBadge/PromoBadge";
 import Evaluate from "../../test/Evaluate";
 import PropTypes from 'prop-types';
 
+import {NavLink, Route, Switch} from "react-router-dom";
 
 import Input from "../../Core/Form/Input/Input";
+import Category from "../Categorie/Category";
+import Product from "../Product/Product";
+import Order from "../Order/Order";
+import Item from "../../test/Item";
 
 
 class Cart extends Component {
@@ -88,6 +93,25 @@ class Cart extends Component {
 
         return (
             <>
+                <div style={{ width: "50%", margin: "0 auto" }}>
+                    <h3>Links</h3>
+                    <NavLink style={{ padding: "10px", backgroundColor: "lightgrey", marginRight: "10px" }}
+                             to={"/"}>Main Page</NavLink>
+
+                    <NavLink style={{ padding: "10px", backgroundColor: "lightgrey", marginRight: "10px" }}
+                             to={"/category/phones"}>Phones Page</NavLink>
+
+                    <NavLink style={{ padding: "10px", backgroundColor: "lightgrey", marginRight: "10px" }}
+                             to={"/category/phones/other"}>Other Page</NavLink>
+
+                    <NavLink style={{ padding: "10px", backgroundColor: "lightgrey", marginRight: "10px" }}
+                             to={"/product/phones/one"}>Product Page</NavLink>
+
+                    <NavLink style={{ padding: "10px", backgroundColor: "lightgrey", marginRight: "10px" }}
+                             to={"/order"}>Order Page</NavLink>
+                </div>
+
+
                 <ul style={styleUl}>
                     {this.state.products.map(item => {
                         return (
