@@ -30,7 +30,6 @@ export default class Evaluate extends Component {
         return (
             <div style={{ width: "600px", margin: "30px auto 30px" }}>
 
-
                 <div>
                     <button onClick={() => {
                         const modal = document.querySelector(".md-modal");

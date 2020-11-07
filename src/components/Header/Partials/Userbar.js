@@ -6,10 +6,6 @@ import {NavLink} from "react-router-dom";
 export default class Userbar extends React.Component {
 
 
-    orderBtnHandler = (evt) => {
-        evt.preventDefault();
-    };
-
     render() {
         return (
             <div className={styles.header__order_wrapper}>

@@ -85,6 +85,7 @@ class Cart extends Component {
 
     render() {
         const styleUl = { padding: "10px", margin: "10px" };
+
         return (
             <>
                 <ul style={styleUl}>

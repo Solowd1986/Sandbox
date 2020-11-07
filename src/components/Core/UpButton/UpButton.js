@@ -2,8 +2,13 @@ import React from "react";
 import styles from "./up-button.module.scss";
 
 const UpButton = props => {
+
+    const checkScroll = () => {
+        return true;
+    };
+
     return (
-        <button className={`${styles.btn}`}>Up</button>
+        checkScroll() && <button className={`${styles.btn}`}>Up</button>
     )
 };
 
