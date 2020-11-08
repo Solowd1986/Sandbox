@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "./no-match-page.module.scss";
-import img from "~img/other/404-error.png"
+import styles from "./error-404.module.scss";
+import img from "~img/other/error-404.png"
 import {NavLink} from "react-router-dom";
 
-const NoMatchPage = props => {
+const Error404 = props => {
     return (
         <div className={styles.wrapper}>
             <NavLink to={"/"}>
@@ -13,6 +13,6 @@ const NoMatchPage = props => {
     )
 };
 
-export default NoMatchPage;
+export default Error404;
 
 

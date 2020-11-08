@@ -17,7 +17,7 @@ export default class OrderSummary extends Component {
 
                     <div className={styles.counter_block}>
                         <span className={`${styles.counter} ${styles.counter_minus}`}/>
-                        <label><input type="text" name="customer-product-count" value="1"/></label>
+                        <label><input type="text" name="customer-product-count" defaultValue="1"/></label>
                         <span className={`${styles.counter} ${styles.counter_plus}`}/>
                     </div>
                 </div>
@@ -33,7 +33,7 @@ export default class OrderSummary extends Component {
 
                     <div className={styles.counter_block}>
                         <span className={`${styles.counter} ${styles.counter_minus}`}/>
-                        <label><input type="text" name="customer-product-count" value="1"/></label>
+                        <label><input type="text" name="customer-product-count" defaultValue="1"/></label>
                         <span className={`${styles.counter} ${styles.counter_plus}`}/>
                     </div>
                 </div>

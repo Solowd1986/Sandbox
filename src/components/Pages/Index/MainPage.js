@@ -11,11 +11,6 @@ import PropTypes from 'prop-types';
 
 import {NavLink, Route, Switch} from "react-router-dom";
 
-import Input from "../../Core/Form/Input/Input";
-import Category from "../Categorie/Category";
-import Product from "../Product/Product";
-import Order from "../Order/Order";
-import Item from "../../test/Item";
 import Layout from "../../Core/Layout/Layout";
 
 
@@ -97,6 +92,7 @@ class Cart extends Component {
             <>
                 <div style={{ width: "50%", margin: "0 auto" }}>
                     <h3>Links</h3>
+
                     <NavLink style={{ padding: "10px", backgroundColor: "lightgrey", marginRight: "10px" }}
                              to={"/"}>Main Page</NavLink>
 
@@ -104,7 +100,7 @@ class Cart extends Component {
                              to={"/category/phones"}>Phones Page</NavLink>
 
                     <NavLink style={{ padding: "10px", backgroundColor: "lightgrey", marginRight: "10px" }}
-                             to={"/product/phones/one"}>Product Page</NavLink>
+                             to={"/product/phones/12"}>Product Page</NavLink>
 
                     <NavLink style={{ padding: "10px", backgroundColor: "lightgrey", marginRight: "10px" }}
                              to={"/order"}>Order Page</NavLink>

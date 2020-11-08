@@ -2,13 +2,22 @@ import React, {Component} from "react";
 import styles from "./order.module.scss";
 import OrderInfo from "./OrderInfo/OrderInfo";
 import OrderSummary from "./OrderSummary/OrderSummary";
-import Layout from "../../Core/Layout/Layout";
+import Layout from "~components/Core/Layout/Layout";
+import MainPage from "../Index/MainPage";
 
 
 export default class Order extends Component {
+
+    confirm = () => {
+        //this.setState({showModal: false});
+        console.log(this.props);
+        this.props.history.push("/category/phones");
+    };
+
     render() {
         return (
             <Layout>
+                <button onClick={this.confirm}>GO</button>
                 <div className={`container ${styles.container_checkout_bg}`}>
                     <div className={`wrapper ${styles.order}`}>
                         <div className={styles.line}>

@@ -1,14 +1,16 @@
 import React, {Component} from "react";
 import styles from "./product.module.scss";
 import {NavLink} from "react-router-dom";
-import Layout from "../../Core/Layout/Layout";
+import Layout from "~components/Core/Layout/Layout";
 
 export default class Product extends Component {
-
     tabsHandler = () => {
 
     };
+
     render() {
+        //console.log(this.props);
+
         return (
             <Layout>
                 <section className={`container ${styles.item_bg}`}>
