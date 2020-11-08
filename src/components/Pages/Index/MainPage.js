@@ -108,6 +108,9 @@ class Cart extends Component {
 
                     <NavLink style={{ padding: "10px", backgroundColor: "lightgrey", marginRight: "10px" }}
                              to={"/order"}>Order Page</NavLink>
+
+                    <NavLink style={{ padding: "10px", backgroundColor: "lightgrey", marginRight: "10px" }}
+                             to={"/error"}>Error Page</NavLink>
                 </div>
 
 
