@@ -6,7 +6,6 @@ import App from './App';
 import "normalize.css";
 import "~scss/main.scss"
 
-
 ReactDOM.render(
     <App/>,
     document.getElementById('root')

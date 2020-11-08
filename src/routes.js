@@ -1,8 +1,8 @@
-import MainPage from "./components/Pages/Index/MainPage";
-import Category from "./components/Pages/Categorie/Category";
-import Product from "./components/Pages/Product/Product";
-import Order from "./components/Pages/Order/Order";
-import NoMatchPage from "./components/Core/NoMatchPage/NoMatchPage";
+import MainPage from "~components/Pages/Index/MainPage";
+import Category from "~components/Pages/Categorie/Category";
+import Product from "~components/Pages/Product/Product";
+import Order from "~components/Pages/Order/Order";
+import NoMatchPage from "~components/Core/NoMatchPage/NoMatchPage";
 
 
 const routes = [

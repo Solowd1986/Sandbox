@@ -1,6 +1,6 @@
 
 import React, {Component} from "react";
-import styles from "../../../App.module.scss";
+import styles from "./layout.module.scss";
 import UpButton from "../UpButton/UpButton";
 import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";

@@ -1,32 +1,14 @@
 
 .wrapper {
-  display: flex;
   position: relative;
   height: 100vh;
-  flex-direction: column;
-  justify-content: center;
   overflow: hidden;
-  //background-color: #263046;
 }
 
-.controls {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-self: center;
+.img {
+  width: 100vw;
 }
 
-.btn {
-  align-self: center;
-  padding: 12px 25px;
-  font-size: 20px;
-  color: white;
-  border-radius: 10px;
-  background-color: #4B829F;
 
-  &:hover {
-    background-color: indianred;
-  }
-}
 
 

@@ -7,6 +7,7 @@ import Layout from "../../Core/Layout/Layout";
 
 export default class Category extends Component {
     render() {
+        console.log(this.props);
         return (
             <Layout>
                 {this.props.match.params.type === "phones" ? <PhonesCategory/> : <OtherCategory/>}
