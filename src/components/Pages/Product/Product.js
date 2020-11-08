@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import styles from "./product.module.scss";
 import {NavLink} from "react-router-dom";
+import Layout from "../../Core/Layout/Layout";
 
 export default class Product extends Component {
 
@@ -9,7 +10,7 @@ export default class Product extends Component {
     };
     render() {
         return (
-            <>
+            <Layout>
                 <section className={`container ${styles.item_bg}`}>
                     <div className={`wrapper ${styles.order}`}>
                         <div className={styles.order__img_wrapper}>
@@ -175,7 +176,7 @@ export default class Product extends Component {
                     </div>
                 </section>
 
-            </>
+            </Layout>
         )
     }
 }

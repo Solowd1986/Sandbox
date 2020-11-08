@@ -160,7 +160,7 @@ export default class Promo extends Component {
                                             : `${styles.promo_list__tag} ${styles.promo_list__tag__not_in_stock}`}>
                                         В наличии
                                     </span>
-                                    <NavLink to={"/product/phones/one"} className={styles.promo_list__link}>
+                                    <NavLink to={`/product/phones/${item.id}`} className={styles.promo_list__link}>
                                         <img
                                             className={styles.promo_list__img}
                                             // path from public folder
@@ -193,7 +193,7 @@ export default class Promo extends Component {
                                             : `${styles.promo_list__tag} ${styles.promo_list__tag__not_in_stock}`}>
                                         В наличии
                                     </span>
-                                    <NavLink to={"/product/phones/one"} className={styles.promo_list__link}>
+                                    <NavLink to={`/product/gadgets/${item.id}`} className={styles.promo_list__link}>
                                         <img
                                             className={styles.promo_list__img}
                                             // path from public folder
@@ -224,7 +224,7 @@ export default class Promo extends Component {
                                             : `${styles.promo_list__tag} ${styles.promo_list__tag__not_in_stock}`}>
                                         В наличии
                                     </span>
-                                    <NavLink to={"/product/phones/one"} className={styles.promo_list__link}>
+                                    <NavLink to={`/product/accessoires/${item.id}`} className={styles.promo_list__link}>
                                         <img
                                             className={styles.promo_list__img}
                                             src={`img/${item.imgPath}`}

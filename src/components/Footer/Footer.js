@@ -9,7 +9,7 @@ const Footer = props => {
             <div className={common.wrapper}>
                 <footer className={styles.footer}>
                     <p className={styles.copyright}>Copyright © 2017 - 2021 OnePlus Store. Все права защищены.</p>
-                    <a className={styles.phone} href="tel:7499699999">7 (499) 69-9999</a>
+                    <a className={styles.phone} href="tel:8800888888">7 (499) 69-9999</a>
                     <span className={styles.working_hours}>10:00 – 21:00 пн-вс</span>
                     <ul className={styles.social_list}>
                         <li className={styles.social_list__item}>

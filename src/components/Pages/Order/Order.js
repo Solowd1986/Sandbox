@@ -2,13 +2,15 @@ import React, {Component} from "react";
 import styles from "./order.module.scss";
 import OrderInfo from "./OrderInfo/OrderInfo";
 import OrderSummary from "./OrderSummary/OrderSummary";
+import Layout from "../../Core/Layout/Layout";
 
 
 export default class Order extends Component {
     render() {
         return (
-            <div className={`container ${styles.container_checkout_bg}`}>
-                <div className={`wrapper ${styles.order}`}>
+            <Layout>
+                <div className={`container ${styles.container_checkout_bg}`}>
+                    <div className={`wrapper ${styles.order}`}>
                         <div className={styles.line}>
                             <span className={styles.line_stage}>Ваша корзина</span>
                             <span className={styles.line_stage}>Оплата и доставка</span>
@@ -19,8 +21,9 @@ export default class Order extends Component {
                             <OrderInfo/>
                             <OrderSummary/>
                         </form>
+                    </div>
                 </div>
-            </div>
+            </Layout>
         )
     }
 }

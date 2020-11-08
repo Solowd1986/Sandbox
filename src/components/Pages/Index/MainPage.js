@@ -16,6 +16,7 @@ import Category from "../Categorie/Category";
 import Product from "../Product/Product";
 import Order from "../Order/Order";
 import Item from "../../test/Item";
+import Layout from "../../Core/Layout/Layout";
 
 
 class Cart extends Component {
@@ -89,6 +90,7 @@ class Cart extends Component {
 
 
     render() {
+
         const styleUl = { padding: "10px", margin: "10px" };
 
         return (
@@ -100,9 +102,6 @@ class Cart extends Component {
 
                     <NavLink style={{ padding: "10px", backgroundColor: "lightgrey", marginRight: "10px" }}
                              to={"/category/phones"}>Phones Page</NavLink>
-
-                    <NavLink style={{ padding: "10px", backgroundColor: "lightgrey", marginRight: "10px" }}
-                             to={"/category/phones/other"}>Other Page</NavLink>
 
                     <NavLink style={{ padding: "10px", backgroundColor: "lightgrey", marginRight: "10px" }}
                              to={"/product/phones/one"}>Product Page</NavLink>
@@ -197,7 +196,7 @@ export default class MainPage extends Component {
 
     render() {
         return (
-            <>
+            <Layout>
                 <Slider/>
 
                 <Cart/>
@@ -209,7 +208,7 @@ export default class MainPage extends Component {
                 <Announcements/>
                 <About/>
                 <PromoBadge/>
-            </>
+            </Layout>
         )
     }
 }
