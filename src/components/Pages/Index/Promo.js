@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import common from "~scss/common.module.scss";
 import styles from "./promo.module.scss";
 import {NavLink} from "react-router-dom";
+import ModalOverlay from "../../Core/ModalOverlay/ModalOverlay";
 
 //import img from "../../../store/img/all/main-page/phone-main-page/oneplus_7pro_6gb_128gb_grey_275_1.png";
 
@@ -14,6 +15,7 @@ export default class Promo extends Component {
         // get data from server
 
         this.state = {
+            modal: false,
             promo: {
                 phones: [
                     {
@@ -137,17 +139,30 @@ export default class Promo extends Component {
         }
     }
 
+
     addToCart = (id) => {
         // find in data from server needed object and add to cart state
         // change state of cart component
         // change header cart icon
+        this.setState({ modal: true });
+    };
 
+    closeModal = () => {
+        this.setState({ modal: false })
     };
 
     render() {
         return (
             <section className={`${common.container} ${styles.promo_wrapper}`}>
                 <main className={`${common.wrapper} ${styles.promo}`}>
+
+                    {this.state.modal && <ModalOverlay setModalStatus={this.closeModal}>
+                        <div style={{ backgroundColor: "grey", width: "30%", height: "200px" }}>
+                            <NavLink to={"/order"} style={{ backgroundColor: "red", padding: "10px" }}>Order</NavLink>
+                        </div>
+                    </ModalOverlay>
+                    }
+
 
                     <h2 className={styles.promo_section_title}>Рекомендуем</h2>
                     <ul className={styles.promo_list}>

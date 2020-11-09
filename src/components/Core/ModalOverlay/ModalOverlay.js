@@ -2,9 +2,10 @@ import React, {Component} from "react";
 import styles from "./modal-overlay.module.scss"
 
 export default class ModalOverlay extends Component {
-    state = {
-        isActive: false
-    };
+    constructor(props) {
+        super(props);
+        this.addScrollbarOffset();
+    }
 
 
     calcScrollBarWidth = () => {
@@ -18,7 +19,7 @@ export default class ModalOverlay extends Component {
     };
 
     addScrollbarOffset = () => {
-        if (this.calcScrollBarWidth > 0) {
+        if (this.calcScrollBarWidth() > 0) {
             document.body.style.cssText = `padding-right: ${this.calcScrollBarWidth()}px`
         }
         document.body.style.cssText += "overflow: hidden";
@@ -29,17 +30,26 @@ export default class ModalOverlay extends Component {
         document.body.style.removeProperty("overflow");
     };
 
+    closeModal = () => {
+        this.props.setModalStatus();
+    };
 
+    componentWillUnmount() {
+        this.removeScrollbarOffset();
+    }
 
-
-
-
+    stop = (e) => {
+        e.stopPropagation();
+    };
 
     render() {
         return (
             <div
+                onClick={this.closeModal}
                 className={`${styles.main} ${this.props.classList}`}>
-                {this.props.children}
+                <div className={"mod"} onClick={this.stop}>
+                    {this.props.children}
+                </div>
             </div>
         )
     }
