@@ -9,7 +9,7 @@ export default class Order extends Component {
 
     // always on top of page, without smooth scroll
     componentDidMount() {
-        window.scrollTo({ top: 0 })
+        window.scrollTo(0, 0)
     }
 
     render() {

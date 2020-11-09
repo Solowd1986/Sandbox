@@ -1,20 +1,27 @@
 import React, {Component} from "react";
+import common from "~scss/common.module.scss";
 import styles from "./product.module.scss";
 import {NavLink} from "react-router-dom";
 import Layout from "~components/Core/Layout/Layout";
+import PromoBadge from "../../PromoBadge/PromoBadge";
 
 export default class Product extends Component {
     tabsHandler = () => {
 
     };
 
+    // always on top of page, without smooth scroll
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
+
     render() {
         //console.log(this.props);
 
         return (
             <Layout>
-                <section className={`container ${styles.item_bg}`}>
-                    <div className={`wrapper ${styles.order}`}>
+                <section className={`${common.container} ${styles.item_bg}`}>
+                    <div className={`${common.wrapper} ${styles.order}`}>
                         <div className={styles.order__img_wrapper}>
                             <img className={styles.order__img} src="/img/product/oneplus_bullets_wireless_600_1.png" alt="image"/>
                             <div className={styles.order__slider}>
@@ -31,8 +38,8 @@ export default class Product extends Component {
                             </span>
 
                             <div className={styles.order__btn_block}>
-                                <button className={`btn ${styles.order__btn_add_to_cart}`}>Добавить в корзину</button>
-                                <button className={`btn ${styles.order__btn_buy_by_click}`}>Купить в один клик</button>
+                                <button className={`${common.btn} ${styles.order__btn_add_to_cart}`}>Добавить в корзину</button>
+                                <button className={`${common.btn} ${styles.order__btn_buy_by_click}`}>Купить в один клик</button>
                             </div>
                             <span>Наличие: В наличии</span>
                         </div>
@@ -177,6 +184,8 @@ export default class Product extends Component {
                         <p className={styles.delivery_rules__payment_options}>WebMoney, Яндекс.Деньги, QIWI</p>
                     </div>
                 </section>
+
+                <PromoBadge/>
 
             </Layout>
         )

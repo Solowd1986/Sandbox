@@ -3,6 +3,13 @@ import styles from "./category.module.scss";
 import Layout from "~components/Core/Layout/Layout";
 
 export default class Category extends Component {
+
+    // always on top of page, without smooth scroll
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
+
+
     render() {
         return (
             <Layout>

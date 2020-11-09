@@ -51,6 +51,11 @@ class Cart extends Component {
         ]
     };
 
+    // always on top of page, without smooth scroll
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
+
 
     changer = (id, quantity) => {
 
