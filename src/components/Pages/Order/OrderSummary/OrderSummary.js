@@ -36,24 +36,26 @@ class OrderSummary extends Component {
                     return (
                         <div key={item.title} className={styles.item}>
                             <div className={styles.info}>
-
                                 {/*src={`img/${item.imgPath}`}*/}
 
                                 <img className={styles.img_sm} src="img/oneplus_7pro-basket.png" alt="image"/>
                                 <div className={styles.info_inner_wrapper}>
-                                    <p className={styles.product_title}>{item.title}{item.color && item.color}</p>
+                                    <p className={styles.product_title}>
+                                        <span>{item.title}</span>
+                                        {item.color && <span>{item.color}</span>}
+                                    </p>
+                                    <div className={styles.counter_block}>
+                                        <span onClick={() => this.props.productDecrease(item.id)} className={`${styles.counter} ${styles.counter_minus}`}/>
+                                        <label><input type="text" name="customer-product-count" onChange={this.changer} value={item.quantity}/></label>
+                                        <span onClick={() => this.props.productIncrease(item.id)} className={`${styles.counter} ${styles.counter_plus}`}/>
+                                    </div>
                                 </div>
                                 <span className={styles.price__sm}>{item.price * item.quantity} р.</span>
+                                <div>
+                                    <span className={styles.delete} onClick={() => this.props.productDelete(item.id)}>&times;</span>
+                                </div>
                             </div>
 
-                            <div className={styles.counter_block}>
-                                <span onClick={() => this.props.productDecrease(item.id)} className={`${styles.counter} ${styles.counter_minus}`}/>
-                                <label><input type="text" name="customer-product-count" onChange={this.changer} value={item.quantity}/></label>
-                                <span onClick={() => this.props.productIncrease(item.id)} className={`${styles.counter} ${styles.counter_plus}`}/>
-                            </div>
-                            <div>
-                                <span onClick={() => this.props.productDelete(item.id)}>DELETE</span>
-                            </div>
                         </div>
                     )
                 })}

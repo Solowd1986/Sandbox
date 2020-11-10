@@ -141,9 +141,13 @@ function stateHelper(passedState, data) {
 }
 
 
+const Cookies = require("js-cookie");
+
+
 export default function reducer(state = initialState, action) {
 
     switch (action.type) {
+
         case "onProductAdd": {
             const id = action.id;
             let add = [...state.addProducts];
@@ -154,6 +158,9 @@ export default function reducer(state = initialState, action) {
                 add.push({ ...state.promo[action.cat].find(item => item.id === id), quantity: 1 });
             }
 
+            //Cookies.set("cart", add);
+            //console.log(Cookies.get("cart"));
+            
             return {
                 ...state,
                 cartCounter: cartCounter,
@@ -161,10 +168,12 @@ export default function reducer(state = initialState, action) {
             }
         }
 
+
         case "onModalShow": {
 
             break;
         }
+
 
         case "ORDER_ITEM_INC" : {
             //console.log(action.id);
@@ -176,6 +185,32 @@ export default function reducer(state = initialState, action) {
 
 
             let quantity = Math.max(min, Math.min(max, state.addProducts.find(item => item.id === action.id).quantity + 1));
+            //console.log(quantity);
+
+
+            let obj = state.addProducts.find(item => item.id === action.id);
+            obj.quantity = quantity;
+
+            const addProd = [...state.addProducts];
+            addProd[state.addProducts.indexOf(obj)] = obj;
+            //console.log(addProducts);
+
+            return {
+                ...state,
+                addProducts: addProd
+            }
+        }
+
+        case "ORDER_ITEM_DEC" : {
+            //console.log(action.id);
+            const min = 1;
+
+            // check for other caterory
+            const max = state.promo.phones.find(item => item.id === action.id).rest;
+            //console.log(max);
+
+
+            let quantity = Math.max(min, Math.min(max, state.addProducts.find(item => item.id === action.id).quantity - 1));
             //console.log(quantity);
 
 

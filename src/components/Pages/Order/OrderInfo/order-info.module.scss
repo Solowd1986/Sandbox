@@ -14,9 +14,10 @@
     order: 2;
     margin-right: 0;
   }
-  @media (max-width: 560px) {
+  @media (max-width: 1010px) {
     width: 100%;
   }
+
 }
 
 .order_title {
@@ -33,13 +34,6 @@
   background-color: $grey-400;
 }
 
-
-/*  Delivery
-================================
-*/
-
-
-/*  ================================*/
 
 
 /*  Customer

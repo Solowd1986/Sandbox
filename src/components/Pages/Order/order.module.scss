@@ -7,7 +7,11 @@
 
 .container_checkout_bg {
   background-color: $white-500;
+  @media (max-width: 446px) {
+    padding-top: 20px;
+  }
 }
+
 
 .order {
   margin-bottom: 35px;
