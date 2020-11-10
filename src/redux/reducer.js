@@ -145,7 +145,6 @@ export default function reducer(state = initialState, action) {
 
     switch (action.type) {
         case "onProductAdd": {
-
             const id = action.id;
             let add = [...state.addProducts];
             let cartCounter = state.cartCounter;
@@ -166,9 +165,53 @@ export default function reducer(state = initialState, action) {
 
             break;
         }
+
+        case "ORDER_ITEM_INC" : {
+            //console.log(action.id);
+            const min = 1;
+
+            // check for other caterory
+            const max = state.promo.phones.find(item => item.id === action.id).rest;
+            //console.log(max);
+
+
+            let quantity = Math.max(min, Math.min(max, state.addProducts.find(item => item.id === action.id).quantity + 1));
+            //console.log(quantity);
+
+
+            let obj = state.addProducts.find(item => item.id === action.id);
+            obj.quantity = quantity;
+
+            const addProd = [...state.addProducts];
+            addProd[state.addProducts.indexOf(obj)] = obj;
+            //console.log(addProducts);
+
+            return {
+                ...state,
+                addProducts: addProd
+            }
+        }
+
+
+        case "ORDER_ITEM_DELETE": {
+            console.log(action.id);
+
+            let addProd = [...state.addProducts];
+            addProd.splice(state.addProducts.indexOf(addProd.find(item => item.id === action.id)), 1);
+
+
+            return {
+                ...state,
+                cartCounter: state.cartCounter - 1,
+                addProducts: addProd
+            }
+        }
     }
 
     return state;
 }
+// ORDER_ITEM_INC
+// ORDER_ITEM_DEC
+// ORDER_ITEM_DELETE
 
 

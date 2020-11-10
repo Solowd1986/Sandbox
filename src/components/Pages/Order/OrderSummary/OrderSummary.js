@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import styles from "./order-summary.module.scss";
+import {connect} from "react-redux";
 
-export default class OrderSummary extends Component {
+class OrderSummary extends Component {
 
     static defaultProps = {
         orderItems: []
@@ -42,13 +43,16 @@ export default class OrderSummary extends Component {
                                 <div className={styles.info_inner_wrapper}>
                                     <p className={styles.product_title}>{item.title}{item.color && item.color}</p>
                                 </div>
-                                <span className={styles.price__sm}>{item.price} р.</span>
+                                <span className={styles.price__sm}>{item.price * item.quantity} р.</span>
                             </div>
 
                             <div className={styles.counter_block}>
-                                <span onClick={this.inc} className={`${styles.counter} ${styles.counter_minus}`}/>
+                                <span onClick={() => this.props.productDecrease(item.id)} className={`${styles.counter} ${styles.counter_minus}`}/>
                                 <label><input type="text" name="customer-product-count" onChange={this.changer} value={item.quantity}/></label>
-                                <span onClick={this.dec} className={`${styles.counter} ${styles.counter_plus}`}/>
+                                <span onClick={() => this.props.productIncrease(item.id)} className={`${styles.counter} ${styles.counter_plus}`}/>
+                            </div>
+                            <div>
+                                <span onClick={() => this.props.productDelete(item.id)}>DELETE</span>
                             </div>
                         </div>
                     )
@@ -57,12 +61,12 @@ export default class OrderSummary extends Component {
 
                 <div className={styles.delivery_fieldset}>
                     <span className={styles.delivery_item}>Доставка по Москве:</span>
-                    <span className={styles.delivery_item}>{this.calcTotal() > 50000 ? 0 : 400} р.</span>
+                    <span className={styles.delivery_item}>{this.calcTotal() > 100000 ? 0 : 400} р.</span>
                 </div>
 
                 <div className={styles.checkout}>
                     <span className={styles.delivery_item}>Итого:</span>
-                    <span className={styles.price__lg}>{this.calcTotal() > 50000 ? this.calcTotal() : this.calcTotal() + 400} р.</span>
+                    <span className={styles.price__lg}>{this.calcTotal() > 100000 ? this.calcTotal() : this.calcTotal() + 400} р.</span>
                 </div>
 
                 <button className={`btn ${styles.order_btn}`}>Оформить заказ</button>
@@ -73,3 +77,24 @@ export default class OrderSummary extends Component {
 }
 
 
+function getProps(state) {
+    return state
+}
+
+
+function setDispatch(dispatch) {
+    return {
+        productIncrease: (id) => {
+            dispatch({ type: "ORDER_ITEM_INC", id });
+        },
+        productDecrease: (id) => {
+            dispatch({ type: "ORDER_ITEM_DEC", id });
+        },
+        productDelete: (id) => {
+            dispatch({ type: "ORDER_ITEM_DELETE", id });
+        }
+    }
+}
+
+
+export default connect(getProps, setDispatch)(OrderSummary);
