@@ -1,35 +1,56 @@
 import React, {Component} from "react";
+import common from "~scss/common.module.scss";
 import styles from "./order.module.scss";
 import OrderInfo from "./OrderInfo/OrderInfo";
 import OrderSummary from "./OrderSummary/OrderSummary";
 import Layout from "~components/Core/Layout/Layout";
+import {connect} from "react-redux";
 
 
-export default class Order extends Component {
+class Order extends Component {
 
     // always on top of page, without smooth scroll
     componentDidMount() {
         window.scrollTo(0, 0)
     }
 
+
     render() {
         return (
             <Layout>
-                <div className={`container ${styles.container_checkout_bg}`}>
-                    <div className={`wrapper ${styles.order}`}>
-                        <div className={styles.line}>
-                            <span className={styles.line_stage}>Ваша корзина</span>
-                            <span className={styles.line_stage}>Оплата и доставка</span>
-                            <span className={`${styles.line_stage} ${styles.line_stage__unactive}`}>Успешное оформление</span>
+                {this.props.cartCounter > 0
+                    ?
+                    <div className={`${common.container} ${styles.container_checkout_bg}`}>
+                        <div className={`${common.wrapper} ${styles.order}`}>
+                            <div className={styles.line}>
+                                <span className={styles.line_stage}>Ваша корзина</span>
+                                <span className={styles.line_stage}>Оплата и доставка</span>
+                                <span className={`${styles.line_stage} ${styles.line_stage__unactive}`}>Успешное оформление</span>
+                            </div>
+                            <form className={styles.form} action="" name="basket-form" method="POST">
+                                <OrderInfo/>
+                                <OrderSummary orderItems={this.props.addProducts}/>
+                            </form>
                         </div>
-
-                        <form className={styles.form} action="" name="basket-form" method="POST">
-                            <OrderInfo/>
-                            <OrderSummary/>
-                        </form>
                     </div>
-                </div>
+                    :
+                    <>
+                        <div className={`${common.container}`}>
+                            <div className={`${common.wrapper} ${styles.empty_order}`}>
+                                <h1>Корзина покупок</h1>
+                                <p>У вас нет товаров для заказа</p>
+                            </div>
+                        </div>
+                    </>
+                }
+
             </Layout>
         )
     }
 }
+
+function getProps(state) {
+    return state
+}
+
+export default connect(getProps)(Order);

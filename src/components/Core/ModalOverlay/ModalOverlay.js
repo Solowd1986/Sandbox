@@ -2,10 +2,20 @@ import React, {Component} from "react";
 import styles from "./modal-overlay.module.scss"
 
 export default class ModalOverlay extends Component {
+
+
     constructor(props) {
         super(props);
         this.addScrollbarOffset();
     }
+
+
+    static defaultProps = {
+        setModalStatus: () => {
+            console.log("props not have setModalStatus method")
+        }
+    };
+
 
 
     calcScrollBarWidth = () => {

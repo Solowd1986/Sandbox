@@ -32,7 +32,6 @@
   padding-bottom: 30px;
   color: black;
   text-align: center;
-  //background-color: $white;
 }
 
 
@@ -94,6 +93,9 @@
 /*  ================================*/
 
 
+/*  Общая оборачивающая форма для двух компонетов
+================================
+*/
 .form {
   display: flex;
   @media (max-width: 1120px) {
@@ -101,6 +103,29 @@
     align-items: center;
   }
 }
+
+
+/*  Блок отображения пустого заказа
+================================
+*/
+.empty_order {
+  h1 {
+    margin-top: 100px;
+    padding: 8px 0 7px 15px;
+    font-size: 30px;
+    font-weight: 700;
+    color: $grey-200;
+  }
+
+  p {
+    margin-left: 40px;
+    font-size: 20px;
+    font-weight: 400;
+    color: $grey-100;
+  }
+
+}
+
 
 
 
