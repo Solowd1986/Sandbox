@@ -12,7 +12,7 @@ export default class NavbarList extends React.Component {
                     </NavLink>
                     <ul className={styles.header__inner_list}>
                         <li className={styles.header__inner_item}>
-                            <NavLink to={"/category/phones"} className={styles.header__inner_link}>
+                            <NavLink activeClassName={styles.active} to={"/category/phones"} className={styles.header__inner_link}>
                                 <svg viewBox="0 0 1000 1000" width={32} height={32}>
                                     <circle cx={687.4} cy={909.9} r={4}/>
                                     <path

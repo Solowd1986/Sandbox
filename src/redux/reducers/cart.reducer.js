@@ -1,9 +1,11 @@
+import {useState} from "react";
+
+
 const Cookies = require("js-cookie");
+
 
 const initialState = {
     isModalCartShow: false,
-
-
     cartCounter: Cookies.getJSON("cart") ? Cookies.getJSON("cart").length : 0,
     cartStore: [
         { id: 1 },
@@ -139,9 +141,9 @@ const initialState = {
 };
 
 
-export function rootReducer(state = initialState, action) {
+export default function reducer(state = initialState, action) {
     switch (action.type) {
-        case "onProductAdd": {
+        case "cart/addProductToCart": {
             const id = action.id;
             let add = [...state.addProducts];
             let cartCounter = state.cartCounter;
@@ -153,7 +155,7 @@ export function rootReducer(state = initialState, action) {
 
             Cookies.set("cart", add);
             //console.log(Cookies.get("cart"));
-            
+
             return {
                 ...state,
                 cartCounter: cartCounter,
@@ -168,7 +170,7 @@ export function rootReducer(state = initialState, action) {
         }
 
 
-        case "ORDER_ITEM_INC" : {
+        case "cart/increaseProductAmount" : {
             //console.log(action.id);
             const min = 1;
 
@@ -198,7 +200,7 @@ export function rootReducer(state = initialState, action) {
             }
         }
 
-        case "ORDER_ITEM_DEC" : {
+        case "cart/decreaseProductAmount" : {
             //console.log(action.id);
             const min = 1;
 
@@ -229,7 +231,7 @@ export function rootReducer(state = initialState, action) {
         }
 
 
-        case "ORDER_ITEM_DELETE": {
+        case "cart/orderItemDelete": {
             //console.log(action.id);
 
             let addProd = [...state.addProducts];
@@ -250,6 +252,10 @@ export function rootReducer(state = initialState, action) {
         }
     }
 }
+
+
+
+
 
 
 
