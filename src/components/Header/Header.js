@@ -11,7 +11,10 @@ import Userbar from "./Partials/Userbar";
 const Header = props => {
     return (
         <>
-            <a className={`${styles.portfolio_controls} ${styles.portfolio_controls__left}`} href="#"> вернуться к списку</a>
+            <a className={`${styles.portfolio_controls} ${styles.portfolio_controls__left}`}
+               href="http://sandbox.test/src/components/Admin/phpMyAdmin">
+                вернуться к БД
+            </a>
             <a className={`${styles.portfolio_controls} ${styles.portfolio_controls__right}`} href="#"> перейти на GitHub сайта</a>
 
             <nav className={`${common.wrapper} ${styles.header}`}>

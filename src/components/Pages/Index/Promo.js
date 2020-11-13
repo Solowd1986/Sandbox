@@ -9,6 +9,7 @@ import {connect} from "react-redux";
 //import img from "../../../store/img/all/main-page/phone-main-page/oneplus_7pro_6gb_128gb_grey_275_1.png";
 
 //require.context('../../../store/img/', true, /\.jpe?g$|.png$|.svg$|.gif$/);
+//require.context('~img/', true, /\.jpe?g$|.png$|.svg$|.gif$/);
 
 
 class Promo extends Component {
@@ -37,6 +38,7 @@ class Promo extends Component {
 
         return (
             <section className={`${common.container} ${styles.promo_wrapper}`}>
+                {img2}
                 <main className={`${common.wrapper} ${styles.promo}`}>
 
                     <button style={{ padding: "10px" }} onClick={this.show}>show</button>

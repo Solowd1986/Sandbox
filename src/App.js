@@ -8,6 +8,10 @@ import store from "./redux/store-init";
 
 const axios = require('axios').default;
 
+import img21 from "./assets/img/111_1.png";
+import img22 from "./assets/img/main-page/announcements/announcement-img-android 11-developer.jpg";
+
+
 
 export default class App extends Component {
     render() {
