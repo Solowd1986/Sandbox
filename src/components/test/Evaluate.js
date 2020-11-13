@@ -6,16 +6,16 @@ import PropTypes from "prop-types";
 const axios = require('axios').default;
 
 // change path to build
-axios.get('/build/php/app.php').then(function (response) {
-    // handle success
-    console.log(response);
-}).catch(function (error) {
-    // handle error
-    console.log(error);
-})
-    .then(function () {
-        // always executed
-    });
+// axios.get('/build/php/app.php').then(function (response) {
+//     // handle success
+//     console.log(response);
+// }).catch(function (error) {
+//     // handle error
+//     console.log(error);
+// })
+//     .then(function () {
+//         // always executed
+//     });
 
 
 class Cart extends Component {

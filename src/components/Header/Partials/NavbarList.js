@@ -244,7 +244,7 @@ export default class NavbarList extends React.Component {
 
                 {/*Delivery*/}
                 <li className={styles.header__nav_item}>
-                    <NavLink to={"/"} className={styles.header__nav_link}>Доставка и оплата</NavLink>
+                    <NavLink to={"/delivery"} className={styles.header__nav_link}>Доставка и оплата</NavLink>
                 </li>
             </ul>
         )

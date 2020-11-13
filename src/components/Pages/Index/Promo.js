@@ -38,7 +38,7 @@ class Promo extends Component {
 
         return (
             <section className={`${common.container} ${styles.promo_wrapper}`}>
-                {img2}
+
                 <main className={`${common.wrapper} ${styles.promo}`}>
 
                     <button style={{ padding: "10px" }} onClick={this.show}>show</button>

@@ -4,11 +4,22 @@ import styles from "./product.module.scss";
 import {NavLink} from "react-router-dom";
 import Layout from "~components/Core/Layout/Layout";
 import PromoBadge from "../../PromoBadge/PromoBadge";
+import Features from "./Features";
+import Specification from "./Specification";
+import ProductDelivery from "./ProductDelivery";
 
 export default class Product extends Component {
-    tabsHandler = () => {
+    tabsHandler = (evt) => {
 
+        const tabsLinks = document.querySelectorAll("." + styles.info__nav_link);
+        tabsLinks.forEach(item => item.classList.remove(styles.info__nav_link__active));
+        evt.target.classList.add(styles.info__nav_link__active);
+
+        const tabsBlocks = document.querySelectorAll("." + styles.tab);
+        tabsBlocks.forEach(item => item.classList.remove(styles.tab_active));
+        Array.from(tabsBlocks).find(item => item.id === evt.target.dataset.id).classList.add(styles.tab_active);
     };
+
 
     // always on top of page, without smooth scroll
     componentDidMount() {
@@ -48,145 +59,18 @@ export default class Product extends Component {
 
                 <section className={`wrapper ${styles.info}`}>
                     <nav className={styles.info__nav}>
-                        <a onClick={this.tabsHandler} className={`${styles.info__nav_link} ${styles.info__nav_link__active}`} data-id="#tab-features">Описание</a>
-                        <a onClick={this.tabsHandler} className={styles.info__nav_link} data-id="#tab-attributes">Характеристики</a>
-                        <a onClick={this.tabsHandler} className={styles.info__nav_link} data-id="#tab-delivery">Доставка и оплата</a>
+                        <a onClick={this.tabsHandler} className={`${styles.info__nav_link} ${styles.info__nav_link__active}`} data-id="tab-features">Описание</a>
+                        <a onClick={this.tabsHandler} className={styles.info__nav_link} data-id="tab-attributes">Характеристики</a>
+                        <a onClick={this.tabsHandler} className={styles.info__nav_link} data-id="tab-delivery">Доставка и оплата</a>
                     </nav>
 
-                    {/*Блок особенностей*/}
-                    <div className={`${styles.tab} ${styles.tab_active}`} id="tab-features">
-                        <div className={styles.features__wrapper}>
-                            <h2 className={styles.features__title}>Освободите свою музыку</h2>
-                            <p className={styles.features__desc}>
-                                Откройте для себя мягкие высокие частоты и низкие басы, которые вы никогда не слышали раньше, благодаря новым и улучшенным аудио технологиям в
-                                наушниках OnePlus
-                                Bullets Wireless.
-                            </p>
-                            <img className={styles.features__img} src="/img/product/oneplus_bullets_wireless_600_1.jpg " alt="img"/>
-                        </div>
-
-                        <div className={styles.features__wrapper}>
-                            <h2 className={styles.features__title}>Чистый, мощный, превосходный звук</h2>
-                            <p className={styles.features__desc}>
-                                С двумя сбалансированными арматурными драйверами и одним 10-миллиметровым динамическим драйвером в каждом наушнике вам гарантировано превосходное
-                                качество
-                                прослушивания при каждом нажатии кнопки воспроизведения.
-                            </p>
-                            <img className={styles.features__img} src="/img/product/oneplus_bullets_wireless_600_3.jpg" alt="img"/>
-
-                        </div>
-
-                        <div className={styles.features__wrapper}>
-                            <h2 className={styles.features__title}>Магнитный контроль</h2>
-                            <p className={styles.features__desc}>
-                                Вы с легкостью можете приостановить воспроизведение музыки. Просто соедините наушники вместе и благодаря магнитному креплению они выключатся
-                                автоматически. Когда вы
-                                решите возобновить воспроизведение музыки, просто разделите их. Это очень просто!
-                            </p>
-                            <img className={styles.features__img} src="/img/product/oneplus_bullets_wireless_600_2.jpg" alt="img"/>
-                        </div>
-                    </div>
-
-                    {/*Блок характеристик*/}
-                    <div className={`${styles.attributes} ${styles.tab}`} id="tab-attributes">
-                        <h2 className={styles.attributes__table_title}>Общие характеристики</h2>
-                        <table className={styles.attributes__table_data}>
-                            <tbody>
-                            <tr>
-                                <td>Цвет</td>
-                                <td>зеркальный серый</td>
-                            </tr>
-                            <tr>
-                                <td>Тип</td>
-                                <td>смартфон</td>
-                            </tr>
-                            <tr>
-                                <td>Тип корпуса</td>
-                                <td>классический</td>
-                            </tr>
-                            <tr>
-                                <td>Материал корпуса</td>
-                                <td>стекло Gorilla Glass 6 от Corning</td>
-                            </tr>
-                            <tr>
-                                <td>Тип SIM-карты</td>
-                                <td> nano SIM</td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                        <h2 className={styles.attributes__table_title}>Экран</h2>
-
-                        <table className={styles.attributes__table_data}>
-                            <tbody>
-                            <tr>
-                                <td>Тип экрана</td>
-                                <td>Fluid AMOLED, сенсорный</td>
-                            </tr>
-                            <tr>
-                                <td>Тип сенсорного экрана</td>
-                                <td>мультитач, емкостный</td>
-                            </tr>
-                            <tr>
-                                <td>Диагональ</td>
-                                <td>6.67 дюйм.</td>
-                            </tr>
-                            <tr>
-                                <td>Размер изображения</td>
-                                <td>3120 x 1440</td>
-                            </tr>
-                            <tr>
-                                <td>Автоматический поворот экрана</td>
-                                <td>есть</td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                        <h2 className={styles.attributes__table_title}>Мультимедийные возможности</h2>
-                        <table className={styles.attributes__table_data}>
-                            <tbody>
-                            <tr>
-                                <td>Тыловая фотокамера</td>
-                                <td>тройная 8/16/48 МП</td>
-                            </tr>
-                            <tr>
-                                <td>Фотовспышка</td>
-                                <td>тыльная, светодиодная</td>
-                            </tr>
-                            <tr>
-                                <td>Функции тыловой фотокамеры</td>
-                                <td>автофокус, оптическая стабилизация</td>
-                            </tr>
-                            <tr>
-                                <td>Диафрагма тыловой фотокамеры</td>
-                                <td>f/1.6</td>
-                            </tr>
-                            <tr>
-                                <td>Макс. частота кадров видео</td>
-                                <td>60 кадров/с</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    {/*Блок доставки*/}
-                    <div className={`${styles.delivery_rules} ${styles.tab}`} id="tab-delivery">
-
-                        <h2 className={styles.delivery_rules__shipping_title}>Доставка</h2>
-                        <h3 className={styles.delivery_rules__shipping_city}>Доставка по Москве</h3>
-                        <p className={styles.delivery_rules__shipping_conditions}>Самовывоз из магазина - сегодня, м. Парк Победы</p>
-                        <h3 className={styles.delivery_rules__shipping_country}>Доставка по России</h3>
-                        <p className={styles.delivery_rules__shipping_conditions}>Доставка транспортными компаниями: СДЭК, PickPoint, Boxberry, 390 р.</p>
-
-                        <h2 className={styles.delivery_rules__payment_title}>Оплата</h2>
-                        <p className={styles.delivery_rules__payment_options}>Наличными</p>
-                        <p className={styles.delivery_rules__payment_options}>Банковской картой</p>
-                        <p className={styles.delivery_rules__payment_options}>WebMoney, Яндекс.Деньги, QIWI</p>
+                    <div className={common.container}>
+                        <Features/>
+                        <Specification/>
+                        <ProductDelivery/>
                     </div>
                 </section>
-
                 <PromoBadge/>
-
             </Layout>
         )
     }
