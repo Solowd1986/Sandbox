@@ -9,17 +9,18 @@ import Specification from "./Specification";
 import ProductDelivery from "./ProductDelivery";
 
 export default class Product extends Component {
-    tabsHandler = (evt) => {
 
-        const tabsLinks = document.querySelectorAll("." + styles.info__nav_link);
+    tabsHandler = (evt) => {
+        const tabsLinks = document.querySelectorAll(`.${styles.info__nav_link}`);
         tabsLinks.forEach(item => item.classList.remove(styles.info__nav_link__active));
         evt.target.classList.add(styles.info__nav_link__active);
 
-        const tabsBlocks = document.querySelectorAll("." + styles.tab);
+        const tabsBlocks = document.querySelectorAll(`.${styles.tab}`);
         tabsBlocks.forEach(item => item.classList.remove(styles.tab_active));
-        Array.from(tabsBlocks).find(item => item.id === evt.target.dataset.id).classList.add(styles.tab_active);
+        Array.from(tabsBlocks)
+            .find(item => item.id === evt.target.dataset.id)
+            .classList.add(...[`${styles.tab_active}`, "animate__animated", "animate__lightSpeedInRight"]);
     };
-
 
     // always on top of page, without smooth scroll
     componentDidMount() {
@@ -28,7 +29,6 @@ export default class Product extends Component {
 
     render() {
         //console.log(this.props);
-
         return (
             <Layout>
                 <section className={`${common.container} ${styles.item_bg}`}>
