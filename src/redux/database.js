@@ -532,5 +532,10 @@ export default {
     },
 
 
-    slider: {},
+    slider: [
+        { imgPath: "", imgAlt: "slider-image" },
+        { imgPath: "", imgAlt: "slider-image" },
+        { imgPath: "", imgAlt: "slider-image" },
+        { imgPath: "", imgAlt: "slider-image" },
+    ],
 };

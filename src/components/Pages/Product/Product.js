@@ -19,7 +19,7 @@ export default class Product extends Component {
         tabsBlocks.forEach(item => item.classList.remove(styles.tab_active));
         Array.from(tabsBlocks)
             .find(item => item.id === evt.target.dataset.id)
-            .classList.add(...[`${styles.tab_active}`, "animate__animated", "animate__lightSpeedInRight"]);
+            .classList.add(...[`${styles.tab_active}`, "animate__animated", "animate__fadeIn"]);
     };
 
     // always on top of page, without smooth scroll

@@ -1,15 +1,16 @@
 import React from "react";
+import common from "~scss/common.module.scss";
 import styles from "./announcements.module.scss";
 
 const Announcements = props => {
     return (
-        <section className={styles.announcements_item}>
+        <section className={`${common.container} ${styles.announcements_item}`}>
             <div className={`wrapper`}>
                 <h3 className={styles.announcements__title}>Предстоящие мероприятия</h3>
                 <ul className={styles.announcements__list}>
                     <li>
                         <a className={styles.img_wrapper} href="#">
-                            <img src="/img/main-page/announcements/announcement-img-android 11-developer.jpg" alt="announcements-image"/>
+                            <img src="img/main-page/announcements/announcement-img-android-developer.jpg" alt="announcements-image"/>
                         </a>
                         <div className={styles.text_wrapper}>
                             <span>
@@ -28,7 +29,7 @@ const Announcements = props => {
 
                     <li>
                         <a className={styles.img_wrapper} href="#">
-                            <img src="/img/main-page/announcements/announcement-img-lead-with-speed.jpg" alt="announcements-image"/>
+                            <img src="img/main-page/announcements/announcement-img-lead-with-speed.jpg" alt="announcements-image"/>
                         </a>
                         <div className={styles.text_wrapper}>
                             <span>

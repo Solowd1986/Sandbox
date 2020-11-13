@@ -8,6 +8,19 @@ import store from "./redux/store-init";
 
 const axios = require('axios').default;
 
+axios.get('api.php')
+    .then(function (response) {
+        // handle success
+        console.log(response);
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+    .then(function () {
+        // always executed
+    });
+
 
 export default class App extends Component {
     render() {

@@ -168,6 +168,7 @@
     ],
     "resetMocks": true
   },
+  "proxy": "http://sandbox.test/src/components/Admin/php/",
   "babel": {
     "presets": [
       "react-app"
