@@ -334,7 +334,7 @@ module.exports = function (webpackEnv) {
             alias: {
                 'react-native': 'react-native-web',
 
-                '~img': path.resolve('src/assets/img/'),
+                '~img': path.resolve('static/media'),
                 '~scss': path.resolve('src/assets/scss/'),
                 '~components': path.resolve('src/components/'),
 

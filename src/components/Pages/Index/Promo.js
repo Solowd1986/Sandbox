@@ -5,24 +5,7 @@ import {NavLink} from "react-router-dom";
 import ModalOverlay from "../../Core/ModalOverlay/ModalOverlay";
 import {connect} from "react-redux";
 
-
-//import img from "../../../store/img/all/main-page/phone-main-page/oneplus_7pro_6gb_128gb_grey_275_1.png";
-
-//require.context('../../../store/img/', true, /\.jpe?g$|.png$|.svg$|.gif$/);
-//require.context('~img/', true, /\.jpe?g$|.png$|.svg$|.gif$/);
-
-
 class Promo extends Component {
-
-    addToCart = (id) => {
-        // find in data from server needed object and add to cart state
-        // change state of cart component
-        // change header cart icon
-
-        console.log(id);
-
-        //this.setState({ modal: true });
-    };
 
     closeModal = () => {
         this.setState({ modal: false })
@@ -30,12 +13,9 @@ class Promo extends Component {
 
     show = () => {
         console.log(this.props);
-
     };
 
     render() {
-
-
         return (
             <section className={`${common.container} ${styles.promo_wrapper}`}>
 
@@ -65,8 +45,10 @@ class Promo extends Component {
                                         <img
                                             className={styles.promo_list__img}
                                             // path from public folder
-                                            src={`img/${item.imgPath}`}
-                                            alt={item.imgAlt}/>
+                                            src={`/static/media/phones/${item.imgPath}`}
+                                            alt={item.imgAlt}
+                                        />
+
                                     </NavLink>
                                     <div className={styles.promo_list__title}>
                                         <span>{item.title}</span>
@@ -99,7 +81,7 @@ class Promo extends Component {
                                         <img
                                             className={styles.promo_list__img}
                                             // path from public folder
-                                            src={`img/${item.imgPath}`}
+                                            src={`/static/media/gadgets/${item.imgPath}`}
                                             alt={item.imgAlt}/>
                                     </NavLink>
                                     <div className={styles.promo_list__title}>
@@ -129,7 +111,7 @@ class Promo extends Component {
                                     <NavLink to={`/product/accessoires/${item.id}`} className={styles.promo_list__link}>
                                         <img
                                             className={styles.promo_list__img}
-                                            src={`img/${item.imgPath}`}
+                                            src={`/static/media/accessoires/${item.imgPath}`}
                                             alt={item.imgAlt}/>
                                     </NavLink>
                                     <div className={styles.promo_list__title}>

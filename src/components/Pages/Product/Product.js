@@ -1,8 +1,10 @@
 import React, {Component} from "react";
 import common from "~scss/common.module.scss";
 import styles from "./product.module.scss";
+
 import {NavLink} from "react-router-dom";
 import Layout from "~components/Core/Layout/Layout";
+
 import PromoBadge from "../../PromoBadge/PromoBadge";
 import Features from "./Features";
 import Specification from "./Specification";
@@ -34,10 +36,10 @@ export default class Product extends Component {
                 <section className={`${common.container} ${styles.item_bg}`}>
                     <div className={`${common.wrapper} ${styles.order}`}>
                         <div className={styles.order__img_wrapper}>
-                            <img className={styles.order__img} src="/img/product/oneplus_bullets_wireless_600_1.png" alt="image"/>
+                            <img className={styles.order__img} src="/static/media/accessoires/oneplus_bullets_wireless_600_1.png" alt="image"/>
                             <div className={styles.order__slider}>
-                                <img className="" width="60" height="60" src="/img/product/oneplus_bullets_wireless_600_1-sm.png" alt="generic_img"/>
-                                <img className="" width="60" height="60" src="/img/product/oneplus_bullets_wireless_600_2-sm.png" alt="generic_img"/>
+                                <img className="" width="60" height="60" src="/static/media/accessoires/oneplus_bullets_wireless_600_1.png" alt="generic_img"/>
+                                <img className="" width="60" height="60" src="/static/media/accessoires/oneplus_bullets_wireless_600_2.png" alt="generic_img"/>
                             </div>
                         </div>
 

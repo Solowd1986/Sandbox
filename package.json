@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.12.3",
+    "@babel/plugin-proposal-throw-expressions": "^7.12.1",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.2",
     "@svgr/webpack": "5.4.0",
     "@testing-library/jest-dom": "^5.11.5",
@@ -168,10 +169,14 @@
     ],
     "resetMocks": true
   },
-  "proxy": "http://sandbox.test/src/components/Admin/php/",
+  "proxy": "http://sandbox.test/src/components/Admin/php/api.php",
+
   "babel": {
     "presets": [
       "react-app"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-throw-expressions"
     ]
   }
 }

@@ -10,7 +10,7 @@ const Announcements = props => {
                 <ul className={styles.announcements__list}>
                     <li>
                         <a className={styles.img_wrapper} href="#">
-                            <img src="img/main-page/announcements/announcement-img-android-developer.jpg" alt="announcements-image"/>
+                            <img src="/static/media/misc/announcement-img-android-developer.jpg" alt="announcements-image"/>
                         </a>
                         <div className={styles.text_wrapper}>
                             <span>
@@ -29,7 +29,7 @@ const Announcements = props => {
 
                     <li>
                         <a className={styles.img_wrapper} href="#">
-                            <img src="img/main-page/announcements/announcement-img-lead-with-speed.jpg" alt="announcements-image"/>
+                            <img src="/static/media/misc/announcement-img-lead-with-speed.jpg" alt="announcements-image"/>
                         </a>
                         <div className={styles.text_wrapper}>
                             <span>
@@ -50,7 +50,7 @@ const Announcements = props => {
 
                     <li>
                         <a className={styles.img_wrapper} href="#">
-                            <img src="/img/main-page/announcements/announcement-img-oneplus-buds.jpg" alt="announcements-image"/>
+                            <img src="/static/media/misc/announcement-img-oneplus-buds.jpg" alt="announcements-image"/>
                         </a>
                         <div className={styles.text_wrapper}>
                             <span>

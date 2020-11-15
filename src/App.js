@@ -6,20 +6,64 @@ import {Provider} from "react-redux";
 import store from "./redux/store-init";
 
 
+function apiRequest(url) {
+    return fetch(url).then((responce) => {
+        if (responce.status !== 200) {
+            return responce.text().then((text) => throw new Error(text));
+        }
+        return responce.json();
+    })
+}
+
+apiRequest("api.php").then((res) => {
+    //console.log(res);
+}).catch((error) => console.log("error", error));
+
+
 const axios = require('axios').default;
 
-axios.get('api.php')
+axios.get('/api/get/all')
     .then(function (response) {
         // handle success
-        console.log(response);
+        console.log("responce", response);
+    }).catch(function (error) {
+    console.log("Axios Error - ", error);
+}).then(function () {
+    // always executed
+});
+
+
+let tr = document.querySelectorAll("tr > td > a[href*='fitgirl']");
+tr.forEach(item => item.parentElement.parentElement.style.display = "none");
+
+
+function asyncAction(action) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let res = await action();
+            resolve(true);
+        } catch (e) {
+            console.log(e);
+        }
     })
-    .catch(function (error) {
-        // handle error
-        console.log(error);
-    })
-    .then(function () {
-        // always executed
-    });
+}
+
+
+axios.get('/api/get/id/1')
+    .then(function (response) {
+        // handle success
+        console.log("responce", response);
+    }).catch(function (error) {
+    console.log("Axios Error - ", error);
+}).then(function () {
+    // always executed
+});
+
+
+/**
+ * Logic of first loading, get data from server
+ */
+
 
 
 export default class App extends Component {

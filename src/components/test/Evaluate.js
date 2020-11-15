@@ -224,8 +224,24 @@ export default class Evaluate extends Component {
     };
 
     render() {
+
+
+        const ErrorState = props => {
+            return (
+                <p>
+                    {props.children}
+                </p>
+            )
+        };
+
+
+
+
+
         return (
             <div style={{ minWidth: "600px", margin: "30px auto 30px" }}>
+
+                <ErrorState>Error</ErrorState>
 
                 <Cart/>
                 <div>

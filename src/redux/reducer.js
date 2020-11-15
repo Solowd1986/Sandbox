@@ -24,7 +24,7 @@ const initialState = {
                 color: "(черный оникс)",
                 price: 44500,
                 rest: 100,
-                imgPath: "main-page/phone-main-page/oneplus_6t_6gb_128gb_black_275_1.png",
+                imgPath: "oneplus_6t_6gb_128gb_black/oneplus_6t_6gb_128gb_black_275_1.png",
                 imgAlt: "promo-phone-image",
                 discount: true
             },
@@ -34,7 +34,7 @@ const initialState = {
                 color: "(синий ультрамарин)",
                 price: 61000,
                 rest: 60,
-                imgPath: "main-page/phone-main-page/oneplus_6t_8gb_128gb_purple_275_1.png",
+                imgPath: "oneplus_6t_8gb_128gb_purple/oneplus_6t_8gb_128gb_purple_275_1.png",
                 imgAlt: "promo-phone-image",
                 discount: false
             },
@@ -44,7 +44,7 @@ const initialState = {
                 color: "(дымчато красный)",
                 price: 51000,
                 rest: 34,
-                imgPath: "main-page/phone-main-page/oneplus_7_8gb_256gb_red_275_1.png",
+                imgPath: "oneplus_7_8gb_256gb_red/oneplus_7_8gb_256gb_red_275_1.png",
                 imgAlt: "promo-phone-image",
                 discount: true
             },
@@ -54,7 +54,7 @@ const initialState = {
                 color: "(зеркальный серый)",
                 price: 76000,
                 rest: 32,
-                imgPath: "main-page/phone-main-page/oneplus_7_12gb_256gb_grey_275_1.png",
+                imgPath: "oneplus_7_12gb_256gb_grey/oneplus_7_12gb_256gb_grey_275_1.png",
                 imgAlt: "promo-phone-image",
                 discount: true
             },
@@ -65,7 +65,7 @@ const initialState = {
                 title: "Зубная электрощетка Soocas X3 Sonic Electric ToothBrush",
                 price: 7900,
                 rest: 32,
-                imgPath: "main-page/gadgets-main-page/electric_tooth_brush_275_1.png",
+                imgPath: "electric_tooth_brush_380_1.png",
                 imgAlt: "promo-gadgets-image",
                 discount: false
             },
@@ -74,7 +74,7 @@ const initialState = {
                 title: "Робот-пылесос Roborock Sweep One",
                 price: 17200,
                 rest: 52,
-                imgPath: "main-page/gadgets-main-page/roborock_sweep_one_275_1.png",
+                imgPath: "roborock_sweep_one_380_1.png",
                 imgAlt: "promo-gadgets-image",
                 discount: true
             },
@@ -83,7 +83,7 @@ const initialState = {
                 title: "Автомобильное зарядное устройство ZMI Car Charger AP821",
                 price: 11500,
                 rest: 78,
-                imgPath: "main-page/gadgets-main-page/digital_display_car_charger_275_1.png",
+                imgPath: "digital_display_car_charger_380_1.png",
                 imgAlt: "promo-gadgets-image",
                 discount: false
             },
@@ -92,7 +92,7 @@ const initialState = {
                 title: "Зеркало для макияжа Amiro Lux High Color",
                 price: 15000,
                 rest: 7,
-                imgPath: "main-page/gadgets-main-page/amiro_lux_high_color_275_1.png",
+                imgPath: "amiro_lux_high_color_380_1.png",
                 imgAlt: "promo-gadgets-image",
                 discount: false
             },
@@ -103,7 +103,7 @@ const initialState = {
                 title: "Беспроводные наушники OnePlus Bullets Wireless",
                 price: 12000,
                 rest: 12,
-                imgPath: "main-page/accessoires-main-page/oneplus_bullets_wireless_275_1.png",
+                imgPath: "oneplus_bullets_wireless_380_1.png",
                 imgAlt: "promo-accessoires-image",
                 discount: false
             },
@@ -112,7 +112,7 @@ const initialState = {
                 title: "Адаптер OnePlus Dash Power",
                 price: 6000,
                 rest: 42,
-                imgPath: "main-page/accessoires-main-page/oneplus_dash_charger_275_1.png",
+                imgPath: "oneplus_dash_charger_380_1.png",
                 imgAlt: "promo-accessoires-image",
                 discount: false
             },
@@ -121,7 +121,7 @@ const initialState = {
                 title: "Автомобильное зарядное устройство OnePlus Warp Charge",
                 price: 9800,
                 rest: 17,
-                imgPath: "main-page/accessoires-main-page/oneplus_warp_charge_30_275_1.png",
+                imgPath: "oneplus_warp_charge_30_380_1.png",
                 imgAlt: "promo-accessoires-image",
                 discount: true
             },
@@ -130,7 +130,7 @@ const initialState = {
                 title: "Адаптер OnePlus Type-C - 3.5мм",
                 price: 2000,
                 rest: 52,
-                imgPath: "main-page/accessoires-main-page/oth_cable_oneplus_type_c_275_1.png",
+                imgPath: "oth_cable_oneplus_type_c_380_1.png",
                 imgAlt: "promo-accessoires-image",
                 discount: false
             }

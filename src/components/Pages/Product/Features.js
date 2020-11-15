@@ -13,7 +13,7 @@ const Features = props => {
                         наушниках OnePlus
                         Bullets Wireless.
                     </p>
-                    <img className={styles.features__img} src="/img/product/oneplus_bullets_wireless_600_1.jpg " alt="img"/>
+                    <img className={styles.features__img} src="/static/media/accessoires/oneplus_bullets_wireless_2_promo.jpg" alt="img"/>
                 </div>
 
                 <div className={styles.features__wrapper}>
@@ -24,7 +24,7 @@ const Features = props => {
                         качество
                         прослушивания при каждом нажатии кнопки воспроизведения.
                     </p>
-                    <img className={styles.features__img} src="/img/product/oneplus_bullets_wireless_600_3.jpg" alt="img"/>
+                    <img className={styles.features__img} src="/static/media/accessoires/oneplus_bullets_wireless_3_promo.jpg" alt="img"/>
 
                 </div>
 
@@ -35,7 +35,7 @@ const Features = props => {
                         автоматически. Когда вы
                         решите возобновить воспроизведение музыки, просто разделите их. Это очень просто!
                     </p>
-                    <img className={styles.features__img} src="/img/product/oneplus_bullets_wireless_600_2.jpg" alt="img"/>
+                    <img className={styles.features__img} src="/static/media/accessoires/oneplus_bullets_wireless_4_promo.jpg" alt="img"/>
                 </div>
             </div>
         </>

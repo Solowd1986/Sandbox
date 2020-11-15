@@ -1,7 +1,27 @@
 <?php
 
 
-print "good";
+// timeout 4 sec maximun, else - error msg
+//sleep(4);
+
+$uri = $_SERVER["REQUEST_URI"];
+$prefix = "api/";
+$cnt = strpos($uri, $prefix) + strlen($prefix);
+$res = mb_substr($uri, $cnt, strlen($uri));
+
+print json_encode($res);
+
+
+spl_autoload_register(function ($class) {
+    $path = __DIR__ . DIRECTORY_SEPARATOR . str_replace('\\', '/', $class . '.php');
+    if (file_exists($path)) {
+        include $path;
+    } else {
+        echo 'Такой файл не найден по пути : ' . $path . '</br>';
+    }
+});
+
+
 
 
 /*

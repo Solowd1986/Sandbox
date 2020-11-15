@@ -31,27 +31,27 @@ export default class Slider extends Component {
                 <div className="slider-slick">
                     <div>
                         <a className="" href="#">
-                            <img className={styles.slider__slider_img} src="img/slider/slider-1-lg-1920_600.jpg" alt="image"/>
+                            <img className={styles.slider__slider_img} src="static/media/slider/slider-1-lg-1920_600.jpg" alt="image"/>
                         </a>
                     </div>
                     <div>
                         <a className="" href="#">
-                            <img className={styles.slider__slider_img} src="img/slider/slider-2-lg-1920_600.jpg" alt="image"/>
+                            <img className={styles.slider__slider_img} src="static/media/slider/slider-2-lg-1920_600.jpg" alt="image"/>
                         </a>
                     </div>
                     <div>
                         <a className="" href="#">
-                            <img className={styles.slider__slider_img} src="img/slider/slider-3-lg-1920_600.jpg" alt="image"/>
+                            <img className={styles.slider__slider_img} src="static/media/slider/slider-3-lg-1920_600.jpg" alt="image"/>
                         </a>
                     </div>
                     <div>
                         <a className="" href="#">
-                            <img className={styles.slider__slider_img} src="img/slider/slider-4-lg-1920_600.jpg" alt="image"/>
+                            <img className={styles.slider__slider_img} src="static/media/slider/slider-4-lg-1920_600.jpg" alt="image"/>
                         </a>
                     </div>
                     <div>
                         <a className="" href="#">
-                            <img className={styles.slider__slider_img} src="img/slider/slider-5-lg-1920_600.jpg" alt="image"/>
+                            <img className={styles.slider__slider_img} src="static/media/slider/slider-5-lg-1920_600.jpg" alt="image"/>
                         </a>
                     </div>
                 </div>

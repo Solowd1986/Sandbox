@@ -38,7 +38,8 @@ class OrderSummary extends Component {
                             <div className={styles.info}>
                                 {/*src={`img/${item.imgPath}`}*/}
 
-                                <img className={styles.img_sm} src="img/oneplus_7pro-basket.png" alt="image"/>
+                                <img width={82} height={82} className={styles.img_sm} src="static/media/phones/oneplus_3_6gb_64gb_grey/oneplus_3_6gb_64gb_grey_275_1.png"
+                                     alt="image"/>
                                 <div className={styles.info_inner_wrapper}>
                                     <p className={styles.product_title}>
                                         <span>{item.title}</span>

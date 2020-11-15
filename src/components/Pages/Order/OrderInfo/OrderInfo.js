@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import styles from "./order-info.module.scss";
 
+import basketEpayment from "./img/basket-epayment.png";
+import basketShipping from "./img/basket-shipping.png";
+
 export default class OrderInfo extends Component {
     render() {
         return (
@@ -31,7 +34,7 @@ export default class OrderInfo extends Component {
                                 <span className={styles.card__pay}>бесплатно</span>
                             </div>
                             <div className={styles.card__extra}>
-                                <img src="img/other/basket-shipping.png" alt="shipping"/>
+                                <img src={basketEpayment} alt="shipping"/>
                             </div>
                         </div>
                     </div>
@@ -110,7 +113,7 @@ export default class OrderInfo extends Component {
                                 <span className={styles.card__pay}>бесплатно</span>
                             </p>
                             <span>
-                                <img src="img/other/basket-epayment.png" alt="epayment"/>
+                                <img src={basketShipping} alt="epayment"/>
                             </span>
                         </div>
                         <div className={styles.card}>
