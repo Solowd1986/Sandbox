@@ -5,7 +5,7 @@ import styles from "./announcements.module.scss";
 const Announcements = props => {
     return (
         <section className={`${common.container} ${styles.announcements_item}`}>
-            <div className={`wrapper`}>
+            <div className={`${common.wrapper}`}>
                 <h3 className={styles.announcements__title}>Предстоящие мероприятия</h3>
                 <ul className={styles.announcements__list}>
                     <li>

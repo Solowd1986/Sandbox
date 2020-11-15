@@ -1,29 +1,10 @@
 @import "variables";
 
-/*  Фикс IE11 для прижатия футера к подвалу
-html {
-  display: flex;
-  flex-direction: column;
-}
 
 body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-
-  font-family: "Open Sans", "Arial", sans-serif;
-  font-size: 16px;
-  color: $main-text-color;
-}
-*/
-
-body {
-  font-family: 'Open Sans', 'Segoe UI', 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
-
   -moz-osx-font-smoothing: grayscale;
 }
 

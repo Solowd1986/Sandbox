@@ -6,6 +6,12 @@ import {Provider} from "react-redux";
 import store from "./redux/store-init";
 
 
+let str = "alert";
+//console.log(/[1-9*]/.test(str));
+
+console.log('abc'.match(/(?<errorMsg>a)/));
+
+
 function apiRequest(url) {
     return fetch(url).then((responce) => {
         if (responce.status !== 200) {

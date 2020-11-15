@@ -1,7 +1,4 @@
-
-@import "../../assets/scss/core";
-@import "~scss/mixins";
-@import "~scss/variables";
+@import "~scss/common.module";
 
 .promotion_badge {
   display: flex;

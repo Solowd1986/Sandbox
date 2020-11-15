@@ -1,5 +1,5 @@
-@import "~scss/mixins";
-@import "~scss/variables";
+@import "~scss/common.module";
+
 
 .brand_story {
   display: flex;
@@ -41,13 +41,14 @@
   }
 }
 
+
 .milestone_item {
-  background: url("img/brand-story-1.jpg") no-repeat center;
+  background: url("./img/brand-story-1.jpg") no-repeat center;
   background-size: cover;
 }
 
 .achivments_item {
-  background: url("img/brand-story-2.jpg") no-repeat center;
+  background: url("./img/brand-story-2.jpg") no-repeat center;
   background-size: cover;
   // Фикс для IE11, данное изображение при cover имело справа небольшой белый отступ, поэтому для IE11 мы немного
   // растягиваем это фоновое изображение, чтобы компенсировать то пустое место справа.
@@ -58,7 +59,7 @@
 
 
 .our_people_item {
-  background: url("img/brand-story-3.jpg") no-repeat center;
+  background: url("./img/brand-story-3.jpg") no-repeat center;
   background-size: cover;
 }
 

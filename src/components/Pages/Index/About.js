@@ -1,10 +1,11 @@
 import React from "react";
+import common from "~scss/common.module.scss";
 import styles from "./about.module.scss";
 
 const About = props => {
     return (
-        <div className={`container ${styles.promo}`}>
-            <section className={`wrapper`}>
+        <div className={`${common.container}`}>
+            <section className={`${common.wrapper}`}>
                 <h1 className={styles.promo__main_title}>Интернет-магазин OnePlus</h1>
                 <p className={styles.promo__desc}>
                     Модельный ряд девайсов OnePlus – это прежде всего высокотехнологичные флагманские смартфоны. Даже спустя несколько лет они не потеряют актуальность. Будучи

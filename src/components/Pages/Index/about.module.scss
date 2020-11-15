@@ -1,6 +1,4 @@
-@import "~scss/mixins";
-@import "~scss/variables";
-
+@import "~scss/common.module";
 
 .promo {
   @media (max-width: 560px) {

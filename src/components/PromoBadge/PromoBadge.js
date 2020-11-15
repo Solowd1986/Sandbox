@@ -1,10 +1,10 @@
 import React from "react";
-import classNames from "classnames";
+import common from "~scss/common.module.scss";
 import styles from "./promobadge.module.scss";
 
 const PromoBadge = props => {
     return (
-        <ul className={classNames(styles.wrapper, styles.promotion_badge)}>
+        <ul className={`${common.wrapper} ${styles.promotion_badge}`}>
             <li className={styles.promotion_badge__item}>
                 <svg
                     className={styles.promotion_badge__img}

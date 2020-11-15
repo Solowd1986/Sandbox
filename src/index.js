@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 
 import "normalize.css";
-import "~scss/main.scss"
+import "~scss/custom-reset.scss"
+import "~scss/fonts.css"
 
 
 ReactDOM.render(
