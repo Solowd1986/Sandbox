@@ -18,9 +18,7 @@ class Promo extends Component {
     render() {
         return (
             <section className={`${common.container} ${styles.promo_wrapper}`}>
-
                 <main className={`${common.wrapper} ${styles.promo}`}>
-
                     <button style={{ padding: "10px" }} onClick={this.show}>show</button>
 
                     {this.props.modal && <ModalOverlay setModalStatus={this.closeModal}>
@@ -32,6 +30,7 @@ class Promo extends Component {
 
                     <h2 className={styles.promo_section_title}>Рекомендуем</h2>
                     <ul className={styles.promo_list}>
+
                         {this.props.promo.phones.map((item) => {
                             return (
                                 <li key={item.id} className={styles.promo_list__item}>

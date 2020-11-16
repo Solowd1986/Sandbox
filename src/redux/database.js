@@ -73,7 +73,7 @@ export default {
                 announceDate: "2016-04-14",
 
 
-                imgPath: "main-page/phone-main-page/oneplus_6t_6gb_128gb_black_275_1.png",
+                imgPath: "oneplus_7pro_6gb_128gb_grey/oneplus_7pro_6gb_128gb_grey_275_1.png",
                 imgAlt: "promo-phone-image",
                 discount: true,
             },
@@ -117,7 +117,7 @@ export default {
                 supplies: "смартфон, защитная пленка, чехол, кабель Type-C, зарядное устройство Warp Charge 30, шпилька для извлечения SIM",
                 announceDate: "2017-02-19",
 
-                imgPath: "main-page/phone-main-page/oneplus_6t_8gb_128gb_purple_275_1.png",
+                imgPath: "oneplus_6t_8gb_128gb_purple/oneplus_6t_8gb_128gb_purple_275_1.png",
                 imgAlt: "promo-phone-image",
                 discount: false
             },
@@ -161,7 +161,7 @@ export default {
                 supplies: "смартфон, защитная пленка, чехол, кабель Type-C, зарядное устройство Warp Charge 30, шпилька для извлечения SIM",
                 announceDate: "2018-10-02",
 
-                imgPath: "main-page/phone-main-page/oneplus_7_8gb_256gb_red_275_1.png",
+                imgPath: "oneplus_7_8gb_256gb_red/oneplus_7_8gb_256gb_red_275_1.png",
                 imgAlt: "promo-phone-image",
                 discount: true
             },
@@ -206,7 +206,7 @@ export default {
                 announceDate: "2020-01-12",
 
 
-                imgPath: "main-page/phone-main-page/oneplus_7_12gb_256gb_grey_275_1.png",
+                imgPath: "oneplus_7_12gb_256gb_grey/oneplus_7_12gb_256gb_grey_275_1.png",
                 imgAlt: "promo-phone-image",
                 discount: true
             },
@@ -252,7 +252,7 @@ export default {
                 announceDate: "2014-07-12",
 
 
-                imgPath: "main-page/phone-main-page/oneplus_7_12gb_256gb_grey_275_1.png",
+                imgPath: "oneplus_3_6gb_64gb_grey/oneplus_3_6gb_64gb_grey_275_1.png",
                 imgAlt: "promo-phone-image",
                 discount: true
             },
@@ -299,7 +299,7 @@ export default {
                 announceDate: "2015-11-12",
 
 
-                imgPath: "main-page/phone-main-page/oneplus_7_12gb_256gb_grey_275_1.png",
+                imgPath: "oneplus_6t_6gb_128gb_black/oneplus_6t_6gb_128gb_black_275_1.png",
                 imgAlt: "promo-phone-image",
                 discount: true
             },
@@ -335,7 +335,7 @@ export default {
                     },
                 ],
 
-                imgPath: "main-page/accessoires-main-page/oneplus_bullets_wireless_275_1.png",
+                imgPath: "oneplus_bullets_wireless_275_1.png",
                 imgAlt: "promo-accessoires-image",
                 discount: false
             },
@@ -360,7 +360,7 @@ export default {
                     },
                 ],
 
-                imgPath: "main-page/accessoires-main-page/oneplus_dash_charger_275_1.png",
+                imgPath: "oneplus_dash_charger_275_1.png",
                 imgAlt: "promo-accessoires-image",
                 discount: false
             },
@@ -388,7 +388,7 @@ export default {
 
                 ],
 
-                imgPath: "main-page/accessoires-main-page/oneplus_warp_charge_30_275_1.png",
+                imgPath: "oneplus_warp_charge_30_275_1.png",
                 imgAlt: "promo-accessoires-image",
                 discount: true
             },
@@ -415,7 +415,7 @@ export default {
                     },
                 ],
 
-                imgPath: "main-page/accessoires-main-page/oth_cable_oneplus_type_c_275_1.png",
+                imgPath: "oth_cable_oneplus_type_c_275_1.png",
                 imgAlt: "promo-accessoires-image",
                 discount: false
             }
@@ -449,7 +449,7 @@ export default {
                     }
                 ],
 
-                imgPath: "main-page/gadgets-main-page/electric_tooth_brush_275_1.png",
+                imgPath: "electric_tooth_brush_275_1.png",
                 imgAlt: "promo-gadgets-image",
                 discount: false
             },
@@ -474,7 +474,7 @@ export default {
                     },
                 ],
 
-                imgPath: "main-page/gadgets-main-page/roborock_sweep_one_275_1.png",
+                imgPath: "roborock_sweep_one_275_1.png",
                 imgAlt: "promo-gadgets-image",
                 discount: true
             },
@@ -499,7 +499,7 @@ export default {
                     },
                 ],
 
-                imgPath: "main-page/gadgets-main-page/digital_display_car_charger_275_1.png",
+                imgPath: "digital_display_car_charger_275_1.png",
                 imgAlt: "promo-gadgets-image",
                 discount: false
             },
@@ -524,7 +524,7 @@ export default {
                     },
                 ],
 
-                imgPath: "main-page/gadgets-main-page/amiro_lux_high_color_275_1.png",
+                imgPath: "amiro_lux_high_color_275_1.png",
                 imgAlt: "promo-gadgets-image",
                 discount: false
             },
@@ -533,9 +533,30 @@ export default {
 
 
     slider: [
-        { imgPath: "", imgAlt: "slider-image" },
-        { imgPath: "", imgAlt: "slider-image" },
-        { imgPath: "", imgAlt: "slider-image" },
-        { imgPath: "", imgAlt: "slider-image" },
+        {
+            imgFullPath: "slider-1-lg-1920_600.jpg",
+            imgSmPath: "slider-1-sm-530_400.jpg",
+            imgAlt: "slider-image"
+        },
+        {
+            imgFullPath: "slider-2-lg-1920_600.jpg",
+            imgSmPath: "slider-2-sm-530_400.jpg",
+            imgAlt: "slider-image"
+        },
+        {
+            imgFullPath: "slider-3-lg-1920_600.jpg",
+            imgSmPath: "slider-3-sm-530_400.jpg",
+            imgAlt: "slider-image"
+        },
+        {
+            imgFullPath: "slider-4-lg-1920_600.jpg",
+            imgSmPath: "slider-4-sm-530_400.jpg",
+            imgAlt: "slider-image"
+        },
+        {
+            imgFullPath: "slider-5-lg-1920_600.jpg",
+            imgSmPath: "slider-5-sm-530_400.jpg",
+            imgAlt: "slider-image"
+        }
     ],
 };

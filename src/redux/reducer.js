@@ -1,8 +1,11 @@
+
 const Cookies = require("js-cookie");
+
+import db from "./database";
+
 
 const initialState = {
     isModalCartShow: false,
-
 
     cartCounter: Cookies.getJSON("cart") ? Cookies.getJSON("cart").length : 0,
     cartStore: [
@@ -11,6 +14,8 @@ const initialState = {
         { id: 3 },
         { id: 3 },
     ],
+
+    db,
 
     //addProducts: [],
     addProducts: Cookies.getJSON("cart") || [],
