@@ -7,11 +7,16 @@ import {connect} from "react-redux";
 
 class Promo extends Component {
 
+    state = {
+        modal: false
+    };
+
     closeModal = () => {
         this.setState({ modal: false })
     };
 
     show = () => {
+        this.setState({ modal: true });
         console.log(this.props);
     };
 
@@ -19,13 +24,15 @@ class Promo extends Component {
         return (
             <section className={`${common.container} ${styles.promo_wrapper}`}>
                 <main className={`${common.wrapper} ${styles.promo}`}>
-                    <button style={{ padding: "10px" }} onClick={this.show}>show</button>
 
-                    {this.props.modal && <ModalOverlay setModalStatus={this.closeModal}>
-                        <div style={{ backgroundColor: "grey", width: "30%", height: "200px" }}>
+                    {/*modal*/}
+                    <button style={{ padding: "10px" }} onClick={this.show}>show</button>
+                    {
+                        this.state.modal && <ModalOverlay mod={true} setModalStatus={this.closeModal}>
+                            <div style={{ backgroundColor: "grey", height: "200px" }}>
                             <NavLink to={"/order"} style={{ backgroundColor: "red", padding: "10px" }}>Order</NavLink>
                         </div>
-                    </ModalOverlay>
+                        </ModalOverlay>
                     }
 
                     <h2 className={styles.promo_section_title}>Рекомендуем</h2>

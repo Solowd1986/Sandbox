@@ -3,7 +3,6 @@ import styles from "./modal-overlay.module.scss"
 
 export default class ModalOverlay extends Component {
 
-
     constructor(props) {
         super(props);
         this.addScrollbarOffset();
@@ -15,8 +14,6 @@ export default class ModalOverlay extends Component {
             console.log("props not have setModalStatus method")
         }
     };
-
-
 
     calcScrollBarWidth = () => {
         // Получаем ширину окна, это аналог width: 100vw (то есть ширина 100% + ширина scrollbar)
@@ -53,13 +50,14 @@ export default class ModalOverlay extends Component {
     };
 
     render() {
+        console.log(this.props);
+        
         return (
-            <div
-                onClick={this.closeModal}
-                className={`${styles.main} ${this.props.classList}`}>
-                <div className={"mod"} onClick={this.stop}>
+            <div onClick={this.closeModal}>
+                <div className={`${styles.md_modal} ${this.props.mod && styles.md_show}`} onClick={this.stop}>
                     {this.props.children}
                 </div>
+                <div className={`${styles.md_overlay}`}/>
             </div>
         )
     }

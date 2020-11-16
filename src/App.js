@@ -13,9 +13,9 @@ console.log('abc'.match(/(?<errorMsg>a)/));
 
 
 function apiRequest(url) {
-    return fetch(url).then((responce) => {
+    return fetch(url).then((responce, reject) => {
         if (responce.status !== 200) {
-            return responce.text().then((text) => throw new Error(text));
+            return responce.text().then((text) => reject(text));
         }
         return responce.json();
     })

@@ -244,7 +244,9 @@ export default class Evaluate extends Component {
                 <ErrorState>Error</ErrorState>
 
                 <Cart/>
+
                 <div>
+
                     <button onClick={() => {
                         const modal = document.querySelector(".md-modal");
 
@@ -262,15 +264,11 @@ export default class Evaluate extends Component {
                         }
                         document.body.style.cssText += "overflow: hidden";
 
-
-
-
                         modal.classList.add("md-show");
                     }}>show
                     </button>
 
                     <div className="md-modal md-effect-1" id="modal-1">
-
                         <div className="md-content">
                             <h3>Модальное окно</h3>
                             <div>
@@ -286,8 +284,6 @@ export default class Evaluate extends Component {
                         document.body.style.removeProperty("padding-right");
                         document.body.style.removeProperty("overflow");
                     }} className="md-overlay"/>
-
-
                 </div>
 
                 <p>State: {this.state.res}</p>

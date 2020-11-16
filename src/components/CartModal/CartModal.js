@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+
 import styles from "./cart-modal.module.scss";
 
 export default class CartModal extends Component {
