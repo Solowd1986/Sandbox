@@ -1,26 +1,19 @@
 
 const Cookies = require("js-cookie");
-
 import db from "./database";
+import axios from "axios";
 
-
+// Default state of application
 const initialState = {
     isModalCartShow: false,
 
     cartCounter: Cookies.getJSON("cart") ? Cookies.getJSON("cart").length : 0,
-    cartStore: [
-        { id: 1 },
-        { id: 2 },
-        { id: 3 },
-        { id: 3 },
-    ],
-
     db,
 
-    //addProducts: [],
     addProducts: Cookies.getJSON("cart") || [],
 
     modal: false,
+
     promo: {
         phones: [
             {
@@ -144,8 +137,26 @@ const initialState = {
 };
 
 
-export function rootReducer(state = initialState, action) {
+/*
+import {combineReducers} from "redux";
+import cartReducer from "./reducers/cart.reducer";
+
+export default combineReducers({
+    cartReducer,
+});
+
+// call method after passing them and processing
+export const getData = async dispatch => {
+    const responce = await axios.get("/");
+    dispatch(responce);
+};
+*/
+
+
+// Данный базовый reducer экспортируется по-умолчанию в storeInit
+export default function (state = initialState, action) {
     switch (action.type) {
+        //case "cart/addProductToCart"
         case "onProductAdd": {
             const id = action.id;
             let add = [...state.addProducts];

@@ -3,13 +3,12 @@ import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom
 import routes from "./routes/routes";
 
 import {Provider} from "react-redux";
-import store from "./redux/store-init";
+import store from "./redux/storeInit";
+
 
 
 let str = "alert";
 //console.log(/[1-9*]/.test(str));
-
-console.log('abc'.match(/(?<errorMsg>a)/));
 
 
 function apiRequest(url) {
@@ -31,16 +30,13 @@ const axios = require('axios').default;
 axios.get('/api/get/all')
     .then(function (response) {
         // handle success
-        console.log("responce", response);
+        //console.log("responce", response);
     }).catch(function (error) {
-    console.log("Axios Error - ", error);
+    //console.log("Axios Error - ", error);
 }).then(function () {
     // always executed
 });
 
-
-let tr = document.querySelectorAll("tr > td > a[href*='fitgirl']");
-tr.forEach(item => item.parentElement.parentElement.style.display = "none");
 
 
 function asyncAction(action) {
@@ -58,9 +54,10 @@ function asyncAction(action) {
 axios.get('/api/get/id/1')
     .then(function (response) {
         // handle success
-        console.log("responce", response);
+        //console.log("responce", response);
     }).catch(function (error) {
-    console.log("Axios Error - ", error);
+    //
+    // console.log("Axios Error - ", error);
 }).then(function () {
     // always executed
 });

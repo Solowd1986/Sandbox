@@ -1,6 +1,4 @@
 import {useState} from "react";
-
-
 const Cookies = require("js-cookie");
 
 
@@ -142,6 +140,7 @@ const initialState = {
 
 
 export default function reducer(state = initialState, action) {
+
     switch (action.type) {
         case "cart/addProductToCart": {
             const id = action.id;

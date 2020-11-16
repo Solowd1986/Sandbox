@@ -1,5 +1,5 @@
 import {applyMiddleware, createStore} from "redux";
-import {rootReducer as reducer} from "./reducer";
+import reducer from "./reducer";
 import {compose} from "redux";
 
 

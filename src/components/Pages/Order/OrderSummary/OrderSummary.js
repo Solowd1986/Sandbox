@@ -26,7 +26,7 @@ class OrderSummary extends Component {
     };
 
     render() {
-        console.log(this.props.orderItems);
+        //console.log(this.props.orderItems);
 
         return (
             <section className={styles.summary}>

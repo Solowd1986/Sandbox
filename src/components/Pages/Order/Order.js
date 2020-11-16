@@ -16,6 +16,8 @@ class Order extends Component {
 
 
     render() {
+        console.log('state', this.props);
+        
         return (
             <Layout>
                 {this.props.cartCounter > 0
@@ -50,7 +52,8 @@ class Order extends Component {
 }
 
 function getProps(state) {
-    return state
+    return { ...state }
 }
+
 
 export default connect(getProps)(Order);
