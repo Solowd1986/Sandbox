@@ -4,6 +4,9 @@ import styles from "./promo.module.scss";
 import {NavLink} from "react-router-dom";
 import ModalOverlay from "../../Core/ModalOverlay/ModalOverlay";
 import {connect} from "react-redux";
+import {func} from "prop-types";
+
+import actions from "../../../redux/actions/index"
 
 class Promo extends Component {
 
@@ -20,7 +23,19 @@ class Promo extends Component {
         console.log(this.props);
     };
 
+    btn = (i, data) => {
+        console.log(i);
+        console.log(data);
+    };
+
+
     render() {
+        console.log(this.props);
+        const [phones, accessoires, gadgets] = this.props.db.category;
+        console.dir(phones.categoryAlias);
+        
+
+
         return (
             <section className={`${common.container} ${styles.promo_wrapper}`}>
                 <main className={`${common.wrapper} ${styles.promo}`}>
@@ -37,8 +52,8 @@ class Promo extends Component {
 
                     <h2 className={styles.promo_section_title}>Рекомендуем</h2>
                     <ul className={styles.promo_list}>
-
-                        {this.props.promo.phones.map((item) => {
+                        {/*ограничиваем вывод четырьмя элементами*/}
+                        {phones.productList.slice(0, 4).map((item, i) => {
                             return (
                                 <li key={item.id} className={styles.promo_list__item}>
                                     <span className={
@@ -51,7 +66,7 @@ class Promo extends Component {
                                         <img
                                             className={styles.promo_list__img}
                                             // path from public folder
-                                            src={`/static/media/phones/${item.imgPath}`}
+                                            src={`${phones.imgPrefix}${phones.categoryAlias}/${item.imgPath}`}
                                             alt={item.imgAlt}
                                         />
 
@@ -74,7 +89,7 @@ class Promo extends Component {
                     <h2 className={styles.promo_section_title}>Популярные гаджеты</h2>
 
                     <ul className={styles.promo_list}>
-                        {this.props.promo.gadgets.map((item) => {
+                        {gadgets.productList.map((item) => {
                             return (
                                 <li key={item.id} className={styles.promo_list__item}>
                                     <span className={
@@ -87,7 +102,7 @@ class Promo extends Component {
                                         <img
                                             className={styles.promo_list__img}
                                             // path from public folder
-                                            src={`/static/media/gadgets/${item.imgPath}`}
+                                            src={`${gadgets.imgPrefix}${gadgets.categoryAlias}/${item.imgPath}`}
                                             alt={item.imgAlt}/>
                                     </NavLink>
                                     <div className={styles.promo_list__title}>
@@ -105,7 +120,7 @@ class Promo extends Component {
 
                     <h2 className={styles.promo_section_title}>Аксессуары</h2>
                     <ul className={styles.promo_list}>
-                        {this.props.promo.accessoires.map((item) => {
+                        {accessoires.productList.map((item) => {
                             return (
                                 <li key={item.id} className={styles.promo_list__item}>
                                     <span className={
@@ -117,7 +132,7 @@ class Promo extends Component {
                                     <NavLink to={`/product/accessoires/${item.id}`} className={styles.promo_list__link}>
                                         <img
                                             className={styles.promo_list__img}
-                                            src={`/static/media/accessoires/${item.imgPath}`}
+                                            src={`${accessoires.imgPrefix}${accessoires.categoryAlias}/${item.imgPath}`}
                                             alt={item.imgAlt}/>
                                     </NavLink>
                                     <div className={styles.promo_list__title}>
@@ -140,17 +155,18 @@ class Promo extends Component {
 }
 
 
+// wrap in obj give you double invoke
 function getProps(state) {
-    return state
+    return {
+        db: state.db,
+        cart: state.cart
+    }
 }
 
 
 function setDispatch(dispatch) {
     return {
-        modalShow: () => dispatch({ type: "onModalShow" }),
-        productAddToCart: (id, cat) => {
-            dispatch({ type: "onProductAdd", id, cat });
-        }
+        productAddToCart: (id, category) => dispatch(actions.cart.addItem(id, category))
     }
 }
 

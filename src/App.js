@@ -6,7 +6,6 @@ import {Provider} from "react-redux";
 import store from "./redux/storeInit";
 
 
-
 let str = "alert";
 //console.log(/[1-9*]/.test(str));
 

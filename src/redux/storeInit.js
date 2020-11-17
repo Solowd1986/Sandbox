@@ -21,7 +21,7 @@ const composeEnhancers =
  * но для отладчика оборачиваем все в composeEnhancers, чтобы работал redux-dev-tools
  */
 const store = createStore(reducer, composeEnhancers(applyMiddleware(
-
+    // ...middlwere
 )));
 
 export default store;

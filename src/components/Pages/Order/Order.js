@@ -15,9 +15,12 @@ class Order extends Component {
     }
 
 
+    /**
+     * Опиши логику работы с залержаки от сервера, чтобы кнопки блокировались, нельзя было мультикликать
+     */
     render() {
         console.log('state', this.props);
-        
+
         return (
             <Layout>
                 {this.props.cartCounter > 0
@@ -50,6 +53,7 @@ class Order extends Component {
         )
     }
 }
+
 
 function getProps(state) {
     return { ...state }
