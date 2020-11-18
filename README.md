@@ -4,5 +4,5 @@
 
 ## Стек
 
-React + Redux
+React + Redux + Formik
 

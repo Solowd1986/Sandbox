@@ -59,7 +59,7 @@ export default class Product extends Component {
                     </div>
                 </section>
 
-                <section className={`wrapper ${styles.info}`}>
+                <section className={`${common.wrapper} ${styles.info}`}>
                     <nav className={styles.info__nav}>
                         <a onClick={this.tabsHandler} className={`${styles.info__nav_link} ${styles.info__nav_link__active}`} data-id="tab-features">Описание</a>
                         <a onClick={this.tabsHandler} className={styles.info__nav_link} data-id="tab-attributes">Характеристики</a>

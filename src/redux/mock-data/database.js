@@ -329,6 +329,7 @@ export default {
                     title: "Беспроводные наушники OnePlus Bullets Wireless",
                     price: 12000,
                     rest: 12,
+                    color: "красный",
 
                     promoBlock: [
                         {

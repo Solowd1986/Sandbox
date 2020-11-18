@@ -29,10 +29,9 @@ class Promo extends Component {
 
 
     render() {
-        console.log(this.props);
+        //console.log(this.props);
         const [phones, accessoires, gadgets] = this.props.db.category;
-        console.dir(phones.categoryAlias);
-        
+        //console.dir(phones.categoryAlias);
 
 
         return (
@@ -50,6 +49,7 @@ class Promo extends Component {
                     }
 
                     <h2 className={styles.promo_section_title}>Рекомендуем</h2>
+
                     <ul className={styles.promo_list}>
                         {/*ограничиваем вывод четырьмя элементами*/}
                         {phones.productList.slice(0, 4).map((item, i) => {
