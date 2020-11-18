@@ -13,9 +13,6 @@ class Category extends Component {
 
     render() {
         const category = this.props.category.find(category => category.categoryAlias === this.props.match.params.type);
-        const productList = [...category.productList, ...category.productList, ...category.productList];
-
-        const res = ["bob", "stan", "bill"];
 
         return (
             <Layout>
