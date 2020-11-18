@@ -12,8 +12,8 @@ const Header = props => {
     return (
         <>
             <a className={`${styles.portfolio_controls} ${styles.portfolio_controls__left}`}
-               href="http://sandbox.test/src/components/Admin/phpMyAdmin">
-                вернуться к БД
+               href="">
+                вернуться
             </a>
             <a className={`${styles.portfolio_controls} ${styles.portfolio_controls__right}`} href="#"> перейти на GitHub сайта</a>
 

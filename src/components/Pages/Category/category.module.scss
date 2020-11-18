@@ -36,6 +36,7 @@
 ================================
 */
 .title__bg {
+  height: 60px;
   background-color: $white-400;
 }
 
@@ -60,15 +61,21 @@
   flex-wrap: wrap;
 }
 
-.item_tag {
-  align-self: center;
+
+.tag {
+  align-self: flex-end;
   margin-bottom: 10px;
-  padding: 2px 5px;
-  font-size: 10px;
+  padding: 5px 10px;
   color: $white;
   text-transform: uppercase;
   background-color: $red-100;
+
+  &__not_in_stock {
+    text-decoration: line-through;
+    background-color: $grey;
+  }
 }
+
 
 
 .item {
@@ -133,12 +140,35 @@
   line-height: 1.7;
   color: $black-100;
 
+  & > span {
+    display: block;
+  }
+
   &:last-of-type {
     font-size: 16px;
     font-weight: 400;
 
   }
 }
+
+
+.price {
+  margin-top: auto;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+  text-align: center;
+
+  &__old {
+    margin-right: 10px;
+    font-size: 15px;
+    color: $grey;
+    text-decoration: line-through;
+  }
+}
+
+
 
 .item_buy_btn {
   padding: 10px 30px;

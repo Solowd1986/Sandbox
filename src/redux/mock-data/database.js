@@ -44,7 +44,7 @@ export default {
                 {
                     id: 1,
                     title: "Oneplus 6T 6GB + 128GB",
-                    color: "(черный оникс)",
+                    color: "черный оникс",
                     price: 44500,
                     rest: 100,
 
@@ -90,9 +90,9 @@ export default {
                 {
                     id: 2,
                     title: "Oneplus 6T 8GB + 128GB",
-                    color: "(синий ультрамарин)",
+                    color: "синий ультрамарин",
                     price: 61000,
-                    rest: 60,
+                    rest: 0,
 
                     type: "смартфон",
                     caseType: "классический",
@@ -134,7 +134,7 @@ export default {
                 {
                     id: 3,
                     title: "Oneplus 7 Pro 8GB + 256GB",
-                    color: "(дымчато красный)",
+                    color: "дымчато красный",
                     price: 51000,
                     rest: 34,
 
@@ -173,12 +173,12 @@ export default {
 
                     imgPath: "oneplus_7_8gb_256gb_red/oneplus_7_8gb_256gb_red_275_1.png",
                     imgAlt: "promo-phone-image",
-                    discount: true
+                    discount: false
                 },
                 {
                     id: 4,
                     title: "Oneplus 7 Pro 12GB + 256GB",
-                    color: "(зеркальный серый)",
+                    color: "зеркальный серый",
                     price: 76000,
                     rest: 32,
 
@@ -218,13 +218,13 @@ export default {
 
                     imgPath: "oneplus_7_12gb_256gb_grey/oneplus_7_12gb_256gb_grey_275_1.png",
                     imgAlt: "promo-phone-image",
-                    discount: true
+                    discount: false
                 },
 
                 {
                     id: 5,
                     title: "Oneplus 6 6GB + 64GB",
-                    color: "(зеркальный серый)",
+                    color: "зеркальный серый",
                     price: 26000,
                     rest: 12,
 
@@ -311,7 +311,7 @@ export default {
 
                     imgPath: "oneplus_6t_6gb_128gb_black/oneplus_6t_6gb_128gb_black_275_1.png",
                     imgAlt: "promo-phone-image",
-                    discount: true
+                    discount: false
                 },
             ],
 
@@ -356,7 +356,9 @@ export default {
                     id: 21,
                     title: "Адаптер OnePlus Dash Power",
                     price: 6000,
-                    rest: 42,
+                    rest: 0,
+                    color: "синий",
+
 
                     promoBlock: [
                         {
@@ -382,6 +384,7 @@ export default {
                     title: "Автомобильное зарядное устройство OnePlus Warp Charge",
                     price: 9800,
                     rest: 17,
+                    color: "белый",
 
                     promoBlock: [
                         {
@@ -410,6 +413,7 @@ export default {
                     title: "Адаптер OnePlus Type-C - 3.5мм",
                     price: 2000,
                     rest: 52,
+                    color: "черный",
 
                     promoBlock: [
                         {
@@ -447,6 +451,7 @@ export default {
                     title: "Зубная электрощетка Soocas X3 Sonic Electric ToothBrush",
                     price: 7900,
                     rest: 32,
+                    color: "черный",
 
                     promoBlock: [
                         {
@@ -474,6 +479,8 @@ export default {
                     title: "Робот-пылесос Roborock Sweep One",
                     price: 17200,
                     rest: 52,
+                    color: "черный",
+
                     promoBlock: [
                         {
                             title: "Эффективная уборка",
@@ -498,6 +505,7 @@ export default {
                     title: "Автомобильное зарядное устройство ZMI Car Charger AP821",
                     price: 11500,
                     rest: 78,
+                    color: "черный",
 
                     promoBlock: [
                         {
@@ -523,6 +531,8 @@ export default {
                     title: "Зеркало для макияжа Amiro Lux High Color",
                     price: 15000,
                     rest: 7,
+                    color: "черный",
+
 
                     promoBlock: [
                         {

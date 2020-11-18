@@ -3,9 +3,8 @@ import common from "~scss/common.module.scss";
 import styles from "./promo.module.scss";
 import {NavLink} from "react-router-dom";
 import ModalOverlay from "../../Core/ModalOverlay/ModalOverlay";
-import {connect} from "react-redux";
-import {func} from "prop-types";
 
+import {connect} from "react-redux";
 import actions from "../../../redux/actions/index"
 
 class Promo extends Component {
@@ -73,7 +72,7 @@ class Promo extends Component {
                                     </NavLink>
                                     <div className={styles.promo_list__title}>
                                         <span>{item.title}</span>
-                                        <span>{item.color}</span>
+                                        <span>({item.color})</span>
                                     </div>
                                     <span className={styles.promo_list__price}>
                                         {item.discount && <span className={styles.promo_list__price__old}>{item.price} р.</span>}
