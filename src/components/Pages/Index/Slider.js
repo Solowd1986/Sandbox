@@ -1,13 +1,15 @@
 import React, {Component} from "react";
 import styles from "./slider.module.scss";
 
+import {connect} from "react-redux";
+
 import $ from "jquery";
 import "slick-carousel/slick/slick.min";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 
-export default class Slider extends Component {
+class Slider extends Component {
 
     // Инициализация слайдера после отрисовки компонента. Была ошибка "cant' call add", это из-за
     // двойной инициализации, поэтому тут проверка - not('.slick-initialized'), и только потом инициализация
@@ -29,37 +31,30 @@ export default class Slider extends Component {
         return (
             <div className={styles.slider}>
                 <div className="slider-slick">
-                    <div>
-                        <a className="" href="#">
-                            <img className={styles.slider__slider_img} src="static/media/slider/slider-1-lg-1920_600.jpg" alt="image"/>
-                        </a>
-                    </div>
-                    <div>
-                        <a className="" href="#">
-                            <img className={styles.slider__slider_img} src="static/media/slider/slider-2-lg-1920_600.jpg" alt="image"/>
-                        </a>
-                    </div>
-                    <div>
-                        <a className="" href="#">
-                            <img className={styles.slider__slider_img} src="static/media/slider/slider-3-lg-1920_600.jpg" alt="image"/>
-                        </a>
-                    </div>
-                    <div>
-                        <a className="" href="#">
-                            <img className={styles.slider__slider_img} src="static/media/slider/slider-4-lg-1920_600.jpg" alt="image"/>
-                        </a>
-                    </div>
-                    <div>
-                        <a className="" href="#">
-                            <img className={styles.slider__slider_img} src="static/media/slider/slider-5-lg-1920_600.jpg" alt="image"/>
-                        </a>
-                    </div>
+                    {this.props.slider.map((item, i) => {
+                        return (
+                            <div key={i}>
+                                <a className="" href="#">
+                                    <img
+                                        className={styles.slider__slider_img}
+                                        src={`${item.imgPrefix}/slider/${item.imgFullPath}`}
+                                        alt={item.imgAlt}/>
+                                </a>
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
         )
     }
-};
+}
 
+function mapStateToProps(state) {
+    return {
+        slider: state.db.slider
+    }
+}
 
+export default connect(mapStateToProps)(Slider)
 
 

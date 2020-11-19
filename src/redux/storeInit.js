@@ -1,7 +1,7 @@
 import {applyMiddleware, createStore} from "redux";
-import reducer from "./reducer";
+import reducer from "./reducers/reducer";
 import {compose} from "redux";
-
+import logger from "./middlwere/logger";
 
 /**
  * Инициализация блока для отладки redux компонента, в возвращаемую им функцию нужно обренуть нативный Middlwere для redux
@@ -12,7 +12,8 @@ const composeEnhancers =
         window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
             // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
         })
-        : compose
+        :
+        compose
 ;
 
 
@@ -21,7 +22,7 @@ const composeEnhancers =
  * но для отладчика оборачиваем все в composeEnhancers, чтобы работал redux-dev-tools
  */
 const store = createStore(reducer, composeEnhancers(applyMiddleware(
-    // ...middlwere
+    logger
 )));
 
 export default store;

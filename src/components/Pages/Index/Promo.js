@@ -7,7 +7,9 @@ import ModalOverlay from "../../Core/ModalOverlay/ModalOverlay";
 import {connect} from "react-redux";
 import actions from "../../../redux/actions/index"
 
+
 class Promo extends Component {
+
 
     state = {
         modal: false
@@ -29,10 +31,8 @@ class Promo extends Component {
 
 
     render() {
-        //console.log(this.props);
+        console.log(this.props);
         const [phones, accessoires, gadgets] = this.props.db.category;
-        //console.dir(phones.categoryAlias);
-
 
         return (
             <section className={`${common.container} ${styles.promo_wrapper}`}>
@@ -51,7 +51,7 @@ class Promo extends Component {
                     <h2 className={styles.promo_section_title}>Рекомендуем</h2>
 
                     <ul className={styles.promo_list}>
-                        {/*ограничиваем вывод четырьмя элементами*/}
+                        {/*ограничиваем вывод четырьмя элементами на странице promo*/}
                         {phones.productList.slice(0, 4).map((item, i) => {
                             return (
                                 <li key={item.id} className={styles.promo_list__item}>
@@ -61,6 +61,7 @@ class Promo extends Component {
                                             : `${styles.promo_list__tag} ${styles.promo_list__tag__not_in_stock}`}>
                                         В наличии
                                     </span>
+
                                     <NavLink to={`/product/phones/${item.id}`} className={styles.promo_list__link}>
                                         <img
                                             className={styles.promo_list__img}
@@ -68,7 +69,6 @@ class Promo extends Component {
                                             src={`${phones.imgPrefix}${phones.categoryAlias}/${item.imgPath}`}
                                             alt={item.imgAlt}
                                         />
-
                                     </NavLink>
                                     <div className={styles.promo_list__title}>
                                         <span>{item.title}</span>
@@ -79,7 +79,7 @@ class Promo extends Component {
                                         {item.discount ? item.price - 4000 : item.price} р.
                                     </span>
 
-                                    <button onClick={() => this.props.productAddToCart(item.id, "phones")} className={`${common.btn} ${styles.promo_list__btn}`}>Купить</button>
+                                    <button onClick={() => this.props.onAddToCart(item.id, "phones")} className={`${common.btn} ${styles.promo_list__btn}`}>Купить</button>
                                 </li>
                             )
                         })}
@@ -111,7 +111,7 @@ class Promo extends Component {
                                         {item.discount && <span className={styles.promo_list__price__old}>{item.price} р.</span>}
                                         {item.discount ? item.price - 4000 : item.price} р.
                                     </span>
-                                    <button onClick={() => this.props.productAddToCart(item.id, "gadgets")} className={`${common.btn} ${styles.promo_list__btn}`}>Купить</button>
+                                    <button onClick={() => this.props.onAddToCart(item.id, "gadgets")} className={`${common.btn} ${styles.promo_list__btn}`}>Купить</button>
                                 </li>
                             )
                         })}
@@ -141,7 +141,7 @@ class Promo extends Component {
                                         {item.discount && <span className={styles.promo_list__price__old}>{item.price} р.</span>}
                                         {item.discount ? item.price - 4000 : item.price} р.
                                     </span>
-                                    <button onClick={() => this.props.productAddToCart(item.id, "accessoires")} className={`${common.btn} ${styles.promo_list__btn}`}>Купить
+                                    <button onClick={() => this.props.onAddToCart(item.id, "accessoires")} className={`${common.btn} ${styles.promo_list__btn}`}>Купить
                                     </button>
                                 </li>
                             )
@@ -165,7 +165,8 @@ function getProps(state) {
 
 function setDispatch(dispatch) {
     return {
-        productAddToCart: (id, category) => dispatch(actions.cart.addItem(id, category))
+        onAddToCart: (id, category) => dispatch(actions.cart.addItem(id, category)),
+        onDeleteFromCart: (id) => dispatch(actions.cart.removeItem(id))
     }
 }
 

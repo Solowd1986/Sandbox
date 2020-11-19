@@ -15,145 +15,24 @@ const initialState = {
     isModalCartShow: false,
 
     cartCounter: Cookies.getJSON("cart") ? Cookies.getJSON("cart").length : 0,
-    //db,
 
     addProducts: Cookies.getJSON("cart") || [],
 
     modal: false,
-
-    promo: {
-        phones: [
-            {
-                id: 1,
-                title: "Oneplus 6T 6GB + 128GB",
-                color: "(черный оникс)",
-                price: 44500,
-                rest: 100,
-                imgPath: "oneplus_6t_6gb_128gb_black/oneplus_6t_6gb_128gb_black_275_1.png",
-                imgAlt: "promo-phone-image",
-                discount: true
-            },
-            {
-                id: 2,
-                title: "Oneplus 6T 8GB + 128GB",
-                color: "(синий ультрамарин)",
-                price: 61000,
-                rest: 60,
-                imgPath: "oneplus_6t_8gb_128gb_purple/oneplus_6t_8gb_128gb_purple_275_1.png",
-                imgAlt: "promo-phone-image",
-                discount: false
-            },
-            {
-                id: 3,
-                title: "Oneplus 7 Pro 8GB + 256GB",
-                color: "(дымчато красный)",
-                price: 51000,
-                rest: 34,
-                imgPath: "oneplus_7_8gb_256gb_red/oneplus_7_8gb_256gb_red_275_1.png",
-                imgAlt: "promo-phone-image",
-                discount: true
-            },
-            {
-                id: 4,
-                title: "Oneplus 7 Pro 12GB + 256GB",
-                color: "(зеркальный серый)",
-                price: 76000,
-                rest: 32,
-                imgPath: "oneplus_7_12gb_256gb_grey/oneplus_7_12gb_256gb_grey_275_1.png",
-                imgAlt: "promo-phone-image",
-                discount: true
-            },
-        ],
-        gadgets: [
-            {
-                id: 566,
-                title: "Зубная электрощетка Soocas X3 Sonic Electric ToothBrush",
-                price: 7900,
-                rest: 32,
-                imgPath: "electric_tooth_brush_380_1.png",
-                imgAlt: "promo-gadgets-image",
-                discount: false
-            },
-            {
-                id: 766,
-                title: "Робот-пылесос Roborock Sweep One",
-                price: 17200,
-                rest: 52,
-                imgPath: "roborock_sweep_one_380_1.png",
-                imgAlt: "promo-gadgets-image",
-                discount: true
-            },
-            {
-                id: 567,
-                title: "Автомобильное зарядное устройство ZMI Car Charger AP821",
-                price: 11500,
-                rest: 78,
-                imgPath: "digital_display_car_charger_380_1.png",
-                imgAlt: "promo-gadgets-image",
-                discount: false
-            },
-            {
-                id: 311,
-                title: "Зеркало для макияжа Amiro Lux High Color",
-                price: 15000,
-                rest: 7,
-                imgPath: "amiro_lux_high_color_380_1.png",
-                imgAlt: "promo-gadgets-image",
-                discount: false
-            },
-        ],
-        accessoires: [
-            {
-                id: 11,
-                title: "Беспроводные наушники OnePlus Bullets Wireless",
-                price: 12000,
-                rest: 12,
-                imgPath: "oneplus_bullets_wireless_380_1.png",
-                imgAlt: "promo-accessoires-image",
-                discount: false
-            },
-            {
-                id: 21,
-                title: "Адаптер OnePlus Dash Power",
-                price: 6000,
-                rest: 42,
-                imgPath: "oneplus_dash_charger_380_1.png",
-                imgAlt: "promo-accessoires-image",
-                discount: false
-            },
-            {
-                id: 34,
-                title: "Автомобильное зарядное устройство OnePlus Warp Charge",
-                price: 9800,
-                rest: 17,
-                imgPath: "oneplus_warp_charge_30_380_1.png",
-                imgAlt: "promo-accessoires-image",
-                discount: true
-            },
-            {
-                id: 151,
-                title: "Адаптер OnePlus Type-C - 3.5мм",
-                price: 2000,
-                rest: 52,
-                imgPath: "oth_cable_oneplus_type_c_380_1.png",
-                imgAlt: "promo-accessoires-image",
-                discount: false
-            }
-        ]
-    }
 };
 
-//import removeOrderItem from "./reducers/modal.reducer";
 
 
 // Данный базовый reducer экспортируется по-умолчанию в storeInit
 export default function (state = initialState, action) {
+
     switch (action.type) {
         case "cart/removeCartItem": {
 
             //return removeOrderItem(state, action.id, action.category);
             break;
         }
+
 
         case "cart/addItemToCart": {
             console.log(1211);
