@@ -90,6 +90,7 @@ class Promo extends Component {
                                         className={`${common.btn} ${styles.promo_list__btn}`}
                                         onClick={() => this.props.onAddToCart(item.id, "phones")}>
                                         Купить
+                                        <span className={styles.loader}/>
                                     </Button>
                                 </li>
                             )
@@ -179,10 +180,7 @@ function setDispatch(dispatch) {
         onAddToCart: (id, category) => {
             dispatch({ type: "stop" });
             dispatch(actions.cart.addItemAsync(id, category))
-        }
-
-
-        ,
+        },
         onDeleteFromCart: (id) => dispatch(actions.cart.removeItem(id))
     }
 }
