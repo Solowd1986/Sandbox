@@ -8,6 +8,9 @@ import {connect} from "react-redux";
 import actions from "../../../redux/actions/index"
 
 
+import Button from "../../Core/Button/Button"
+
+
 class Promo extends Component {
 
 
@@ -31,12 +34,14 @@ class Promo extends Component {
 
 
     render() {
-        console.log(this.props);
+        //console.log(this.props);
         const [phones, accessoires, gadgets] = this.props.db.category;
 
         return (
             <section className={`${common.container} ${styles.promo_wrapper}`}>
                 <main className={`${common.wrapper} ${styles.promo}`}>
+
+                    <Button>name</Button>
 
                     {/*modal*/}
                     <button style={{ padding: "10px" }} onClick={this.show}>show</button>

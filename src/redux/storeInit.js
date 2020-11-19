@@ -1,6 +1,7 @@
 import {applyMiddleware, createStore} from "redux";
 import reducer from "./reducers/reducer";
 import {compose} from "redux";
+import reduxThunk from "redux-thunk"
 import logger from "./middlwere/logger";
 
 /**
@@ -22,6 +23,7 @@ const composeEnhancers =
  * но для отладчика оборачиваем все в composeEnhancers, чтобы работал redux-dev-tools
  */
 const store = createStore(reducer, composeEnhancers(applyMiddleware(
+    reduxThunk,
     logger
 )));
 
