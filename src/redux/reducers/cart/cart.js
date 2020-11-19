@@ -23,6 +23,17 @@ export default (state = initialState, action) => {
         }
 
 
+        case "stop" : {
+            return {
+                ...state,
+                defaultSettings: {
+                    buttonsDisabled: true
+                },
+            }
+        }
+
+
+
         default:
             return state;
     }

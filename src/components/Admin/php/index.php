@@ -2,7 +2,7 @@
 
 
 // timeout 4 sec maximun, else - error msg
-//sleep(4);
+sleep(4);
 
 $uri = $_SERVER["REQUEST_URI"];
 $prefix = "api/";

@@ -9,7 +9,9 @@ const Button = props => {
     console.log(props);
 
     return (
-        <button disabled={props.state.cart.defaultSettings.buttonsDisabled}>
+        <button onClick={props.onClick}
+                className={props.className}
+                disabled={props.state.cart.defaultSettings.buttonsDisabled}>
             {props.children}
         </button>
     )

@@ -120,6 +120,7 @@
   line-height: 1.7;
   text-align: center;
 
+
   &__old {
     margin-right: 10px;
     font-size: 15px;
@@ -131,6 +132,11 @@
 .promo_list__btn {
   padding: 8px 42px;
   border-radius: 3px;
+
+  &:disabled {
+    cursor: pointer;
+    //background-color: grey;
+  }
 }
 
 

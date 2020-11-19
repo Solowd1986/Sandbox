@@ -5,12 +5,21 @@ export default function addItemToCart(state, id, category) {
 
     const products = [...state.products];
 
-    //fetch("index.php").then(res => res.json()).then(res => console.log(res));
+    fetch("index.php").then(res => res.json()).then(res => {
+        console.log(res)
+    });
     const product = { name: "bob" };
 
-    if (products.find(item => item.id === product.id)) return state;
-    products.push(product);
+    if (products.find(item => item.id === product.id)) {
+        return {
+            ...state,
+            defaultSettings: {
+                buttonsDisabled: false
+            }
+        };
+    }
 
+    products.push(product);
 
     return {
         ...state,

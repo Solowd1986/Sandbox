@@ -84,7 +84,13 @@ class Promo extends Component {
                                         {item.discount ? item.price - 4000 : item.price} р.
                                     </span>
 
-                                    <button onClick={() => this.props.onAddToCart(item.id, "phones")} className={`${common.btn} ${styles.promo_list__btn}`}>Купить</button>
+                                    {/*<button onClick={() => this.props.onAddToCart(item.id, "phones")} className={`${common.btn} ${styles.promo_list__btn}`}>Купить</button>*/}
+
+                                    <Button
+                                        className={`${common.btn} ${styles.promo_list__btn}`}
+                                        onClick={() => this.props.onAddToCart(item.id, "phones")}>
+                                        Купить
+                                    </Button>
                                 </li>
                             )
                         })}
@@ -170,7 +176,13 @@ function getProps(state) {
 
 function setDispatch(dispatch) {
     return {
-        onAddToCart: (id, category) => dispatch(actions.cart.addItem(id, category)),
+        onAddToCart: (id, category) => {
+            dispatch({ type: "stop" });
+            dispatch(actions.cart.addItemAsync(id, category))
+        }
+
+
+        ,
         onDeleteFromCart: (id) => dispatch(actions.cart.removeItem(id))
     }
 }
