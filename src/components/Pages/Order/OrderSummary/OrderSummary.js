@@ -135,7 +135,6 @@ class OrderSummary extends Component {
             orderedItems: [...temporary]
         });
 
-
         this.props.onChangeAmountOfProduct(evt, id, value);
     };
 
@@ -145,7 +144,7 @@ class OrderSummary extends Component {
         const currentProduct = { ...temporary.find(item => item.id === id) };
 
 
-        currentProduct.quantity = Math.max(1, Math.min(currentProduct.rest, value));
+        currentProduct.quantity = value;
         temporary[temporary.indexOf(temporary.find(item => item.id === id))] = currentProduct;
 
         this.setState({
@@ -167,8 +166,8 @@ class OrderSummary extends Component {
 
 
     render() {
-        //console.log(this.props);
-        //console.log(this.state);
+        console.log(this.props);
+        console.log(this.state);
         return (
             <section className={styles.summary}>
                 <h2 className={styles.caption}>Ваш заказ</h2>
