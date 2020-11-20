@@ -28,20 +28,36 @@ class OrderSummary extends Component {
      * */
 
 
+    state = {
+        orderedItems: [...this.props.orderedItems]
+    };
+
 
     transitionalValueHandler = (evt, id) => {
 
-        const temporary = [...this.state.transitionalValue];
-        const currentProduct = temporary.find(item => item.id === id);
-        console.log('curr', currentProduct);
+        const value = evt.target.value;
 
-        currentProduct.value = evt.target.value;
+        const temporary = [...this.state.orderedItems];
+        const currentProduct = { ...temporary.find(item => item.id === id) };
+        currentProduct.quantity = value;
         temporary[temporary.indexOf(temporary.find(item => item.id === id))] = currentProduct;
 
-
         this.setState({
-            transitionalValue: [...temporary]
-        })
+            orderedItems: [...temporary]
+        });
+
+
+        // const temporary = [...this.state.transitionalValue];
+        // const currentProduct = temporary.find(item => item.id === id);
+        // console.log('curr', currentProduct);
+        //
+        // currentProduct.value = evt.target.value;
+        // temporary[temporary.indexOf(temporary.find(item => item.id === id))] = currentProduct;
+        //
+        //
+        // this.setState({
+        //     transitionalValue: [...temporary]
+        // })
 
 
         // const temporary = [...this.state.temporary];
@@ -59,8 +75,88 @@ class OrderSummary extends Component {
 
 
     onBlurHandler = (evt, id, quantity) => {
-        this.props.onChangeAmountOfProduct(evt, id, quantity);
+
+        const value = Math.abs(parseInt(quantity));
+
+        if (isNaN(value)) {
+            const temporary = [...this.props.orderedItems];
+            this.setState({
+                orderedItems: [...temporary]
+            });
+        } else {
+            const temporary = [...this.state.orderedItems];
+            const currentProduct = { ...temporary.find(item => item.id === id) };
+
+            currentProduct.quantity = Math.max(1, Math.min(currentProduct.rest, value));
+
+            temporary[temporary.indexOf(temporary.find(item => item.id === id))] = currentProduct;
+
+            this.setState({
+                orderedItems: [...temporary]
+            });
+            this.props.onChangeAmountOfProduct(evt, id, value);
+
+
+        }
+
+
+        //this.props.onChangeAmountOfProduct(evt, id, quantity);
+
+
+        // if (isNaN(Math.abs(parseInt(quantity)))) {
+        //
+        //     const temporary = [...this.state.orderedItems];
+        //     this.setState({
+        //         orderedItems: [...temporary]
+        //     });
+        // }
+
+        // const temporary = [...this.state.orderedItems];
+        // const currentProduct = temporary.find(item => item.id === id);
+        // currentProduct.quantity = value;
+        // temporary[temporary.indexOf(temporary.find(item => item.id === id))] = currentProduct;
+        //
+        // this.setState({
+        //     orderedItems: [...temporary]
+        // });
+
+
     };
+
+
+    dec = (evt, id, value) => {
+        const temporary = [...this.state.orderedItems];
+        const currentProduct = { ...temporary.find(item => item.id === id) };
+
+        currentProduct.quantity = Math.max(1, Math.min(currentProduct.rest, value));
+        temporary[temporary.indexOf(temporary.find(item => item.id === id))] = currentProduct;
+
+        this.setState({
+            orderedItems: [...temporary]
+        });
+
+
+        this.props.onChangeAmountOfProduct(evt, id, value);
+    };
+
+
+    inc = (evt, id, value) => {
+        const temporary = [...this.state.orderedItems];
+        const currentProduct = { ...temporary.find(item => item.id === id) };
+
+
+        currentProduct.quantity = Math.max(1, Math.min(currentProduct.rest, value));
+        temporary[temporary.indexOf(temporary.find(item => item.id === id))] = currentProduct;
+
+        this.setState({
+            orderedItems: [...temporary]
+        });
+
+
+        this.props.onChangeAmountOfProduct(evt, id, value);
+    };
+
+
 
     calcTotal = () => {
         return this.props.orderedItems.reduce((total, item) => {
@@ -91,7 +187,7 @@ class OrderSummary extends Component {
                                         {item.color && <span>{item.color}</span>}
                                     </p>
                                     <div className={styles.counter_block}>
-                                        <span onClick={(evt) => this.props.onChangeAmountOfProduct(evt, item.id, item.quantity - 1)}
+                                        <span onClick={(evt) => this.dec(evt, item.id, item.quantity - 1)}
                                               className={`${styles.counter} ${styles.counter_minus}`}/>
 
                                         {/*<label>*/}
@@ -108,11 +204,11 @@ class OrderSummary extends Component {
                                                 type="text" name="customer-product-count"
                                                 onChange={(evt) => this.transitionalValueHandler(evt, item.id)}
                                                 onBlur={(evt) => this.onBlurHandler(evt, item.id, evt.target.value)}
-                                                value={item.quantity}
+                                                value={this.state.orderedItems.find(citem => citem.id === item.id).quantity}
                                             />
                                         </label>
 
-                                        <span onClick={(evt) => this.props.onChangeAmountOfProduct(evt, item.id, item.quantity + 1)}
+                                        <span onClick={(evt) => this.inc(evt, item.id, item.quantity + 1)}
                                               className={`${styles.counter} ${styles.counter_plus}`}/>
                                     </div>
                                 </div>
