@@ -4,30 +4,6 @@ import {connect} from "react-redux";
 import actions from "../../../../redux/actions";
 
 class OrderSummary extends Component {
-    constructor(props) {
-        super(props);
-
-        this.temp = [];
-        this.props.orderedItems.forEach(item => {
-            this.temp.push({
-                id: item.id,
-                value: item.quantity
-            })
-        });
-        //console.log(this.temp);
-
-        this.state = {
-            orderedItems: this.props.orderedItems,
-            transitionalValue: [...this.temp]
-        };
-
-
-    }
-
-
-    static defaultProps = {
-        orderedItems: []
-    };
 
 
     transitionalValueHandler = (evt, id) => {
@@ -62,28 +38,8 @@ class OrderSummary extends Component {
     onBlurHandler = (evt, id) => {
 
 
-        this.props.onChangeAmountOfProduct(evt, id, this.state.transitionalValue);
+        this.props.onChangeAmountOfProduct(evt, id, this.state.transitionalValue.find(item => item.id === id).value);
 
-
-
-        const value = Math.abs(parseInt(evt.target.value));
-        const currentItem = this.props.orderedItems.find(item => item.id === id);
-
-        if (isNaN(value)) {
-            evt.target.value = currentItem.quantity;
-        } else {
-            // //evt.target.value = Math.max(1, Math.min(currentItem.rest, value));
-            // const orderedItems = [...this.state.orderedItems];
-            // const currentProduct = {...this.state.orderedItems.find(item => item.id === id)};
-            // currentProduct.quantity = Math.max(1, Math.min(currentItem.rest, value));
-            // orderedItems[orderedItems.indexOf(orderedItems.find(item => item.id === id))] = currentProduct;
-            //
-            // this.setState({
-            //     orderedItems
-            // });
-
-            this.props.onChangeAmountOfProduct(evt, id, value);
-        }
     };
 
 
@@ -144,7 +100,7 @@ class OrderSummary extends Component {
                                                 type="text" name="customer-product-count"
                                                 onChange={(evt) => this.transitionalValueHandler(evt, item.id)}
                                                 onBlur={(evt) => this.onBlurHandler(evt, item.id)}
-                                                value={this.temp.find(tempItem => tempItem.id === item.id).value}
+                                                value={item.quantity}
                                             />
                                         </label>
 

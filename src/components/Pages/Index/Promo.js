@@ -112,7 +112,6 @@ class Promo extends Component {
                                                 </svg>
                                                 <span className={styles.loader}/>
                                             </Button>
-
                                             :
                                             <Button
                                                 outOfStock={item.rest === 0}
