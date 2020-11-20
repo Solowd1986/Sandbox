@@ -40,6 +40,31 @@ class Promo extends Component {
         //console.log(this.props);
         const [phones, accessoires, gadgets] = this.props.db.category;
 
+        const data1 = [
+            { id: 1, data: "new" },
+            { id: 2, data: "new1" },
+            { id: 3, data: "new2" },
+        ];
+
+        const data2 = [...data1];
+        //console.log(data2 === data1);
+
+
+        const currentProduct = { ...data1.find(item => item.id === 1) };
+        currentProduct.data = "new-tst";
+
+        data2[0] = currentProduct;
+
+        console.log(data1[0] === data2[0]);
+        console.log(data1[0]);
+        console.log(data2[0]);
+
+        
+        
+        
+        
+        
+
         return (
             <section className={`${common.container} ${styles.promo_wrapper}`}>
                 <main className={`${common.wrapper} ${styles.promo}`}>
