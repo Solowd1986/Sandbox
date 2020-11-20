@@ -5,7 +5,6 @@ import actions from "../../../../redux/actions";
 
 class OrderSummary extends Component {
 
-
     transitionalValueHandler = (evt, id) => {
 
         const temporary = [...this.state.transitionalValue];
@@ -36,12 +35,8 @@ class OrderSummary extends Component {
 
 
     onBlurHandler = (evt, id) => {
-
-
         this.props.onChangeAmountOfProduct(evt, id, this.state.transitionalValue.find(item => item.id === id).value);
-
     };
-
 
 
     calcTotal = () => {
@@ -55,28 +50,18 @@ class OrderSummary extends Component {
     render() {
         //console.log(this.props);
         //console.log(this.state);
-
         return (
             <section className={styles.summary}>
                 <h2 className={styles.caption}>Ваш заказ</h2>
-
                 {this.props.orderedItems.map(item => {
-                    //console.log(item);
-                    
                     return (
                         <div key={item.title} className={styles.item}>
                             <div className={styles.info}>
-                                {/*src={`img/${item.imgPath}`}*/}
-
                                 <img
                                     width={82} height={82} className={styles.img_sm}
-                                    // src="static/media/phones/oneplus_3_6gb_64gb_grey/oneplus_3_6gb_64gb_grey_275_1.png"
-                                    // alt="image"
-
                                     src={item.imgFullPath}
                                     alt={item.imgAlt}
                                 />
-                                     
                                 <div className={styles.info_inner_wrapper}>
                                     <p className={styles.product_title}>
                                         <span>{item.title}</span>
