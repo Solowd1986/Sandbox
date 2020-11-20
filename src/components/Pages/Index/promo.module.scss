@@ -136,44 +136,6 @@
   font-size: 20px;
   font-weight: 400;
   border-radius: 3px;
-
-
-  //&:disabled:hover {
-  //  color: rgba($black, 0.2);
-  //  background-color: rgba($black, 0.70);;
-  //}
-  //
-  //&:disabled:hover svg {
-  //  fill: rgba($black, 0.2);
-  //}
-  //
-  //&:disabled:hover::before {
-  //  width: 0;
-  //  transition: initial;
-  //}
-  //
-  //&:disabled:hover .loader {
-  //  display: inline-block;
-  //}
-
-
-  &.active:disabled {
-    color: rgba($black, 0.2);
-    background-color: rgba($black, 0.70);;
-  }
-
-  &.active:disabled svg {
-    fill: rgba($black, 0.2);
-  }
-
-  &.active:disabled::before {
-    width: 0;
-    transition: initial;
-  }
-
-  &active:disabled .loader {
-    display: inline-block;
-  }
 }
 
 
@@ -209,7 +171,7 @@
 
 
 .btn_remove_item {
-  padding: 14px 35px 14px;
+  padding: 14px 34px 14px;
   background-color: $grey-400;
 
 

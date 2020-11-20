@@ -28,10 +28,11 @@ export const disableButton = (evt) => {
 export const removeItem = (evt, id) => {
     return {
         type: "cart/removeItemFromCart",
-        id,
-        evt
+        evt,
+        id
     }
 };
+
 
 export const removeItemAsync = (evt, id) => {
     return dispatch => {
@@ -40,5 +41,41 @@ export const removeItemAsync = (evt, id) => {
         }, 1000)
     }
 };
+
+
+export const decreaseeProductsAmount = (evt, id) => {
+    return {
+        type: "cart/decreaseeProductsAmount",
+        id,
+        evt
+    }
+};
+
+
+export const increaseProductsAmount = (evt, id) => {
+    return {
+        type: "cart/increaseProductsAmount",
+        id,
+        evt
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

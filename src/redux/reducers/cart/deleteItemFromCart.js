@@ -1,7 +1,7 @@
 export default function deleteItemFromCart(state, evt, id) {
-    //console.log(id);
+    console.log(id);
     //console.log(category);
-    //console.log(state);
+    console.log(state);
 
     let products = [...state.products];
     evt.target.classList.remove(evt.target.dataset.disabled);

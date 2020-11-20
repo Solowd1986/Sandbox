@@ -11,7 +11,7 @@ const Button = props => {
         <button onClick={props.onClick}
                 data-disabled={props.classToDisableBtn}
                 className={props.className}
-                disabled={props.state.cart.defaultSettings.buttonsDisabled}>
+                disabled={props.outOfStock || props.state.cart.defaultSettings.buttonsDisabled}>
             {props.children}
         </button>
     )

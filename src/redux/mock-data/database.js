@@ -1,4 +1,4 @@
-const imgPrefix = "/static/media/";
+const imgPrefix = "/static/media";
 
 export default {
 

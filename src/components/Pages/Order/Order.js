@@ -14,16 +14,15 @@ class Order extends Component {
         window.scrollTo(0, 0)
     }
 
-
     /**
      * Опиши логику работы с залержаки от сервера, чтобы кнопки блокировались, нельзя было мультикликать
      */
     render() {
-        console.log('state', this.props);
+        //console.log('state', this.props);
 
         return (
             <Layout>
-                {this.props.cartCounter > 0
+                {this.props.cart.amountOfProductsInCart > 0
                     ?
                     <div className={`${common.container} ${styles.container_checkout_bg}`}>
                         <div className={`${common.wrapper} ${styles.order}`}>
@@ -34,7 +33,7 @@ class Order extends Component {
                             </div>
                             <form className={styles.form} action="" name="basket-form" method="POST">
                                 <OrderInfo/>
-                                <OrderSummary orderItems={this.props.addProducts}/>
+                                <OrderSummary orderItems={this.props.cart.products}/>
                             </form>
                         </div>
                     </div>

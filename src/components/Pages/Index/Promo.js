@@ -78,7 +78,7 @@ class Promo extends Component {
                                         <img
                                             className={styles.promo_list__img}
                                             // path from public folder
-                                            src={`${phones.imgPrefix}${phones.categoryAlias}/${item.imgPath}`}
+                                            src={`${phones.imgPrefix}/${phones.categoryAlias}/${item.imgPath}`}
                                             alt={item.imgAlt}
                                         />
                                     </NavLink>
@@ -99,10 +99,13 @@ class Promo extends Component {
 
                                     {/*<button onClick={() => this.props.onAddToCart(item.id, "phones")} className={`${common.btn} ${styles.promo_list__btn}`}>В заказ</button>*/}
 
+
                                     {
                                         this.isProductInCart(this.props.cart.products, item.id)
                                             ?
+
                                             <Button
+                                                outOfStock={item.rest === 0}
                                                 className={`${common.btn} ${styles.promo_list__btn} ${styles.btn_remove_item}`}
                                                 classToDisableBtn={styles.active}
                                                 onClick={(evt) => this.props.onDeleteFromCart(evt, item.id)}>
@@ -114,12 +117,14 @@ class Promo extends Component {
                                                 </svg>
                                                 <span className={styles.loader}/>
                                             </Button>
+
                                             :
                                             <Button
-                                                className={`${common.btn} ${styles.promo_list__btn}`}
+                                                outOfStock={item.rest === 0}
+                                                className={`${common.btn} ${styles.promo_list__btn} ${item.rest === 0 && styles.btn_remove_item}`}
                                                 classToDisableBtn={styles.active}
                                                 onClick={(evt) => this.props.onAddToCart(evt, item.id, phones)}>
-                                                Добавить в заказ
+                                                {item.rest === 0 ? "Нет в наличии" : "Добавить в заказ"}
                                                 <svg className={styles.btn_img} xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 1000 1000">
                                                     <path
 
@@ -149,7 +154,7 @@ class Promo extends Component {
                                         <img
                                             className={styles.promo_list__img}
                                             // path from public folder
-                                            src={`${gadgets.imgPrefix}${gadgets.categoryAlias}/${item.imgPath}`}
+                                            src={`${gadgets.imgPrefix}/${gadgets.categoryAlias}/${item.imgPath}`}
                                             alt={item.imgAlt}/>
                                     </NavLink>
                                     <div className={styles.promo_list__title}>
@@ -181,7 +186,7 @@ class Promo extends Component {
                                     <NavLink to={`/product/${accessoires.categoryAlias}/${item.id}`} className={styles.promo_list__link}>
                                         <img
                                             className={styles.promo_list__img}
-                                            src={`${accessoires.imgPrefix}${accessoires.categoryAlias}/${item.imgPath}`}
+                                            src={`${accessoires.imgPrefix}/${accessoires.categoryAlias}/${item.imgPath}`}
                                             alt={item.imgAlt}/>
                                     </NavLink>
                                     <div className={styles.promo_list__title}>
