@@ -1,7 +1,7 @@
 export default function addItemToCart(state, evt, id, category) {
     //console.log(id);
-    console.log(category);
-    console.log(state);
+    //console.log(category);
+    //console.log(state);
 
     evt.target.classList.remove(evt.target.dataset.disabled);
 

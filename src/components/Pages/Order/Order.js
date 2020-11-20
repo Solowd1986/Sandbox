@@ -33,7 +33,7 @@ class Order extends Component {
                             </div>
                             <form className={styles.form} action="" name="basket-form" method="POST">
                                 <OrderInfo/>
-                                <OrderSummary orderItems={this.props.cart.products}/>
+                                <OrderSummary orderedItems={this.props.cart.products}/>
                             </form>
                         </div>
                     </div>

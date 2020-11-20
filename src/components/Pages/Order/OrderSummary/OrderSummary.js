@@ -6,37 +6,50 @@ import actions from "../../../../redux/actions";
 class OrderSummary extends Component {
 
     static defaultProps = {
-        orderItems: []
+        orderedItems: []
     };
 
-    changer = () => {
-
-    };
-    inc = () => {
-
+    state = {
+        transitionalValue: 1
     };
 
-    dec = () => {
 
+    transitionalValueHandler = (evt) => {
     };
+
+
+    onBlurHandler = (evt, id) => {
+        const value = Math.abs(parseInt(evt.target.value));
+        const currentItem = this.props.orderedItems.find(item => item.id === id);
+
+        if (isNaN(Math.abs(parseInt(evt.target.value)))) {
+            evt.target.value = currentItem.quantity;
+        } else {
+            evt.target.value = Math.max(1, Math.min(currentItem.rest, value));
+            this.props.onChangeAmountOfProduct(evt, id, value);
+        }
+    };
+
 
     calcTotal = () => {
-        return this.props.orderItems.reduce((total, item) => {
+        return this.props.orderedItems.reduce((total, item) => {
             total += (item.price * item.quantity);
             return total;
         }, 0);
     };
 
+
     render() {
         console.log(this.props);
+        //console.log(this.state);
 
 
         return (
             <section className={styles.summary}>
                 <h2 className={styles.caption}>Ваш заказ</h2>
 
-                {this.props.orderItems.map(item => {
-                    console.log(item);
+                {this.props.orderedItems.map(item => {
+                    //console.log(item);
                     
                     return (
                         <div key={item.title} className={styles.item}>
@@ -58,11 +71,28 @@ class OrderSummary extends Component {
                                         {item.color && <span>{item.color}</span>}
                                     </p>
                                     <div className={styles.counter_block}>
-                                        <span onClick={(evt) => this.props.onDecreaseeProductsAmount(evt, item.id)} className={`${styles.counter} ${styles.counter_minus}`}/>
+                                        <span onClick={(evt) => this.props.onChangeAmountOfProduct(evt, item.id, item.quantity - 1)}
+                                              className={`${styles.counter} ${styles.counter_minus}`}/>
+                                        {/*<label>*/}
+                                        {/*    <input*/}
+                                        {/*        type="text" name="customer-product-count"*/}
+                                        {/*        onChange={this.changer}*/}
+                                        {/*        value={item.quantity}*/}
+                                        {/*    />*/}
+                                        {/*</label>*/}
+
+
                                         <label>
-                                            <input type="text" name="customer-product-count" onChange={this.changer} value={item.quantity}/>
+                                            <input
+                                                type="text" name="customer-product-count"
+                                                onChange={(evt) => this.transitionalValueHandler(evt)}
+                                                onBlur={(evt) => this.onBlurHandler(evt, item.id)}
+                                                defaultValue={item.quantity}
+                                            />
                                         </label>
-                                        <span onClick={(evt) => this.props.onIncreaseProductsAmount(evt, item.id)} className={`${styles.counter} ${styles.counter_plus}`}/>
+
+                                        <span onClick={(evt) => this.props.onChangeAmountOfProduct(evt, item.id, item.quantity + 1)}
+                                              className={`${styles.counter} ${styles.counter_plus}`}/>
                                     </div>
                                 </div>
                                 <span className={styles.price__sm}>{item.price * item.quantity} р.</span>
@@ -108,6 +138,10 @@ function setDispatch(dispatch) {
         onIncreaseProductsAmount: (evt, id) => {
             dispatch(actions.cart.increaseProductsAmount(evt, id))
         },
+        onChangeAmountOfProduct: (evt, id, quantity) => {
+            dispatch(actions.cart.changeAmountOfProduct(evt, id, quantity))
+        },
+
         onDeleteProductFromCart: (evt, id) => {
             dispatch(actions.cart.removeItem(evt, id))
         },

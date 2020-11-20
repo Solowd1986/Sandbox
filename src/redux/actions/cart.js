@@ -61,6 +61,14 @@ export const increaseProductsAmount = (evt, id) => {
 };
 
 
+export const changeAmountOfProduct = (evt, id, quantity) => {
+    return {
+        type: "cart/changeAmountOfProduct",
+        evt,
+        id,
+        quantity
+    }
+};
 
 
 

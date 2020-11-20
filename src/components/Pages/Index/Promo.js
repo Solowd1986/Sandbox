@@ -32,11 +32,7 @@ class Promo extends Component {
         console.log(data);
     };
 
-    isProductInCart = (products, id) => {
-        //console.log(1222);
-        return products.find(item => item.id === id)
-    };
-
+    isProductInCart = (products, id) => products.find(item => item.id === id);
 
     render() {
 
@@ -103,7 +99,6 @@ class Promo extends Component {
                                     {
                                         this.isProductInCart(this.props.cart.products, item.id)
                                             ?
-
                                             <Button
                                                 outOfStock={item.rest === 0}
                                                 className={`${common.btn} ${styles.promo_list__btn} ${styles.btn_remove_item}`}

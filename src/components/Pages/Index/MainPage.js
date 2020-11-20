@@ -16,7 +16,7 @@ export default class MainPage extends Component {
             <Layout>
                 <Slider/>
 
-                <Evaluate/>
+                {/*<Evaluate/>*/}
 
                 <Promo/>
                 <BrandStory/>

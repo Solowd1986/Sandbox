@@ -2,6 +2,7 @@ import addItemToCart from "./addItemToCart";
 import deleteItemFromCart from "./deleteItemFromCart";
 import increaseProductsAmount from "./increaseProductsAmount";
 import decreaseeProductsAmount from "./decreaseeProductsAmount";
+import changeAmountOfProduct from "./changeAmountOfProduct";
 
 const initialState = {
     defaultSettings: {
@@ -74,6 +75,10 @@ export default (state = initialState, action) => {
 
         case "cart/removeItemFromCart" : {
             return deleteItemFromCart(state, action.evt, action.id);
+        }
+
+        case "cart/changeAmountOfProduct" : {
+            return changeAmountOfProduct(state, action.evt, action.id, action.quantity);
         }
 
         case "cart/disableButton" : {
