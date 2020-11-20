@@ -138,25 +138,65 @@
   border-radius: 3px;
 
 
-  &:disabled:hover {
+  //&:disabled:hover {
+  //  color: rgba($black, 0.2);
+  //  background-color: rgba($black, 0.70);;
+  //}
+  //
+  //&:disabled:hover svg {
+  //  fill: rgba($black, 0.2);
+  //}
+  //
+  //&:disabled:hover::before {
+  //  width: 0;
+  //  transition: initial;
+  //}
+  //
+  //&:disabled:hover .loader {
+  //  display: inline-block;
+  //}
+
+
+  &.active:disabled {
     color: rgba($black, 0.2);
     background-color: rgba($black, 0.70);;
   }
 
-  &:disabled:hover svg {
+  &.active:disabled svg {
     fill: rgba($black, 0.2);
   }
 
-  &:disabled:hover::before {
+  &.active:disabled::before {
     width: 0;
     transition: initial;
   }
 
-  &:disabled:hover .loader {
+  &active:disabled .loader {
     display: inline-block;
   }
-
 }
+
+
+.active {
+  &:disabled {
+    color: rgba($black, 0.2);
+    background-color: rgba($black, 0.70);;
+  }
+
+  &:disabled svg {
+    fill: rgba($black, 0.2);
+  }
+
+  &:disabled::before {
+    width: 0;
+    transition: initial;
+  }
+
+  &:disabled .loader {
+    display: inline-block;
+  }
+}
+
 
 
 .btn_img {
@@ -168,10 +208,22 @@
 }
 
 
-//display: none;
-//position: absolute;
-//width: 30px;
-//height: 30px;
+.btn_remove_item {
+  padding: 14px 35px 14px;
+  background-color: $grey-400;
+
+
+  &::before {
+    display: none;
+  }
+
+  & svg {
+    display: none;
+  }
+}
+
+
+
 
 
 .loader {

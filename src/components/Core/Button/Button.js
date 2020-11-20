@@ -6,10 +6,10 @@ import actions from "../../../redux/actions/index"
 
 
 const Button = props => {
-    //console.log(props);
 
     return (
         <button onClick={props.onClick}
+                data-disabled={props.classToDisableBtn}
                 className={props.className}
                 disabled={props.state.cart.defaultSettings.buttonsDisabled}>
             {props.children}

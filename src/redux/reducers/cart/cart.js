@@ -1,4 +1,5 @@
 import addItemToCart from "./addItemToCart";
+import deleteItemFromCart from "./deleteItemFromCart";
 
 const initialState = {
     defaultSettings: {
@@ -18,12 +19,12 @@ export default (state = initialState, action) => {
         }
 
         case "cart/removeItemFromCart" : {
-            console.log("del");
-            break;
+            return deleteItemFromCart(state, action.evt, action.id);
         }
 
 
-        case "cart/disableAddButton" : {
+        case "cart/disableButton" : {
+            action.evt.target.classList.add(action.evt.target.dataset.disabled);
 
             return {
                 ...state,
@@ -32,7 +33,6 @@ export default (state = initialState, action) => {
                 },
             }
         }
-
 
         default:
             return state;

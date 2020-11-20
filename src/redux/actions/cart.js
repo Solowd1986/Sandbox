@@ -17,18 +17,28 @@ export const addItemAsync = (evt, id, category) => {
 };
 
 
-export const disableAddButton = (evt) => {
+export const disableButton = (evt) => {
     return {
-        type: "cart/disableAddButton",
+        type: "cart/disableButton",
         evt
     }
 };
 
 
-
-export const removeItem = (id) => {
+export const removeItem = (evt, id) => {
     return {
         type: "cart/removeItemFromCart",
-        id
+        id,
+        evt
     }
 };
+
+export const removeItemAsync = (evt, id) => {
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(removeItem(evt, id))
+        }, 1000)
+    }
+};
+
+
