@@ -1,18 +1,26 @@
-
-export const addItem = (id, category) => {
+export const addItem = (evt, id, category) => {
     return {
         type: "cart/addItemToCart",
+        evt,
         id,
         category
     }
 };
 
 
-export const addItemAsync = (id, category) => {
+export const addItemAsync = (evt, id, category) => {
     return dispatch => {
         setTimeout(() => {
-            dispatch(addItem(id, category))
-        }, 3000)
+            dispatch(addItem(evt, id, category))
+        }, 1000)
+    }
+};
+
+
+export const disableAddButton = (evt) => {
+    return {
+        type: "cart/disableAddButton",
+        evt
     }
 };
 

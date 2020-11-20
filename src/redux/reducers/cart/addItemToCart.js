@@ -1,16 +1,14 @@
-export default function addItemToCart(state, id, category) {
+export default function addItemToCart(state, evt, id, category) {
     //console.log(id);
     //console.log(category);
-    //console.log(state);
+    console.log(state);
 
     const products = [...state.products];
 
-    fetch("index.php").then(res => res.json()).then(res => {
-        console.log(res)
-    });
-    const product = { name: "bob" };
+    // emulate request to database
+    const currentProduct = category.productList.find(item => item.id === id);
 
-    if (products.find(item => item.id === product.id)) {
+    if (products.find(item => item.id === currentProduct.id)) {
         return {
             ...state,
             defaultSettings: {
@@ -19,7 +17,7 @@ export default function addItemToCart(state, id, category) {
         };
     }
 
-    products.push(product);
+    products.push(currentProduct);
 
     return {
         ...state,

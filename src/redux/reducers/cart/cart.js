@@ -10,11 +10,11 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-    console.log('state', state);
+    //console.log('state', state);
     
     switch (action.type) {
         case "cart/addItemToCart" : {
-            return addItemToCart(state, action.id, action.category);
+            return addItemToCart(state, action.evt, action.id, action.category);
         }
 
         case "cart/removeItemFromCart" : {
@@ -23,7 +23,8 @@ export default (state = initialState, action) => {
         }
 
 
-        case "stop" : {
+        case "cart/disableAddButton" : {
+
             return {
                 ...state,
                 defaultSettings: {
@@ -31,7 +32,6 @@ export default (state = initialState, action) => {
                 },
             }
         }
-
 
 
         default:

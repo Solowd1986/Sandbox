@@ -25,10 +25,10 @@ class Userbar extends React.Component {
                     </svg>
 
                     {
-                        this.props.cartCounter > 0
+                        this.props.amountOfProductsInCart > 0
                         &&
                         <span className={styles.basket_counter_bg}>
-                            <span className={styles.basket_counter}>{this.props.cartCounter}</span>
+                            <span className={styles.basket_counter}>{this.props.amountOfProductsInCart}</span>
                         </span>
                     }
                 </NavLink>
@@ -40,7 +40,9 @@ class Userbar extends React.Component {
 
 
 function getProps(state) {
-    return state;
+    return {
+        amountOfProductsInCart: state.cart.amountOfProductsInCart
+    };
 }
 
 export default connect(getProps)(Userbar);

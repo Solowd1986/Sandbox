@@ -115,8 +115,8 @@
 .promo_list__price {
   margin-top: auto;
   margin-bottom: 10px;
-  font-size: 16px;
-  font-weight: 300;
+  font-size: 18px;
+  font-weight: 500;
   line-height: 1.7;
   text-align: center;
 
@@ -131,14 +131,20 @@
 
 .promo_list__btn {
   position: relative;
-  padding: 10px 22px 10px 45px;
+  padding: 14px 22px 14px 45px;
   overflow: hidden;
   font-size: 20px;
   font-weight: 400;
   border-radius: 3px;
 
-  &:disabled {
-    background-color: lightgrey;
+
+  &:disabled:hover {
+    color: rgba($black, 0.2);
+    background-color: rgba($black, 0.70);;
+  }
+
+  &:disabled:hover svg {
+    fill: rgba($black, 0.2);
   }
 
   &:disabled:hover::before {
@@ -146,10 +152,10 @@
     transition: initial;
   }
 
-
-  &:disabled .loader {
+  &:disabled:hover .loader {
     display: inline-block;
   }
+
 }
 
 
@@ -158,84 +164,56 @@
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
+  fill: $white;
 }
+
+
+//display: none;
+//position: absolute;
+//width: 30px;
+//height: 30px;
 
 
 .loader {
+
   display: none;
+
+  box-sizing: border-box;
   position: absolute;
   width: 30px;
-  height: 15px;
-
+  height: 30px;
   top: 50%;
-
   left: 50%;
+  border: 10px solid;
+
+  border-radius: 50%;
   transform: translate(-50%, -50%);
-  --base-color: white; /*use your base color*/
+  animation: animloader 1s linear infinite alternate;
 }
 
-
-.loader::before {
-  content: '';
-  box-sizing: border-box;
-  position: absolute;
-  width: 36px;
-  height: 36px;
-  top: 0;
-  left: 0;
-  border-radius: 50%;
-  background-color: #a4a4a4;
-  background-image: radial-gradient(circle 8px at 18px 18px, var(--base-color) 100%, transparent 0),
-  radial-gradient(circle 4px at 18px 0px, var(--base-color) 100%, transparent 0),
-  radial-gradient(circle 4px at 0px 18px, var(--base-color) 100%, transparent 0),
-  radial-gradient(circle 4px at 36px 18px, var(--base-color) 100%, transparent 0),
-  radial-gradient(circle 4px at 18px 36px, var(--base-color) 100%, transparent 0),
-  radial-gradient(circle 4px at 30px 5px, var(--base-color) 100%, transparent 0),
-  radial-gradient(circle 4px at 30px 5px, var(--base-color) 100%, transparent 0),
-  radial-gradient(circle 4px at 30px 30px, var(--base-color) 100%, transparent 0),
-  radial-gradient(circle 4px at 5px 30px, var(--base-color) 100%, transparent 0),
-  radial-gradient(circle 4px at 5px 5px, var(--base-color) 100%, transparent 0);
-  background-repeat: no-repeat;
-  animation: rotationBack 3s linear infinite;
-}
-
-
-.loader::after {
-  content: '';
-  box-sizing: border-box;
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  top: 15px;
-  left: 35px;
-  border-radius: 50%;
-  background-color: transparent;
-  background-image: radial-gradient(circle 5px at 12px 12px,
-          var(--base-color) 100%, transparent 0),
-  radial-gradient(circle 2.5px at 12px 0px, var(--base-color) 100%, transparent 0),
-  radial-gradient(circle 2.5px at 0px 12px, var(--base-color) 100%, transparent 0),
-  radial-gradient(circle 2.5px at 24px 12px, var(--base-color) 100%, transparent 0),
-  radial-gradient(circle 2.5px at 12px 24px, var(--base-color) 100%, transparent 0),
-  radial-gradient(circle 2.5px at 20px 3px, var(--base-color) 100%, transparent 0),
-  radial-gradient(circle 2.5px at 20px 3px, var(--base-color) 100%, transparent 0),
-  radial-gradient(circle 2.5px at 20px 20px, var(--base-color) 100%, transparent 0),
-  radial-gradient(circle 2.5px at 3px 20px, var(--base-color) 100%, transparent 0),
-  radial-gradient(circle 2.5px at 3px 3px, var(--base-color) 100%, transparent 0);
-  background-repeat: no-repeat;
-  animation: rotationBack 4s linear infinite reverse;
-}
-
-
-@keyframes rotationBack {
+@keyframes rotation {
   0% {
     transform: rotate(0deg);
   }
   100% {
-    transform: rotate(-360deg);
+    transform: rotate(360deg);
   }
 }
 
-
+@keyframes animloader {
+  0% {
+    border-color: white rgba(255, 255, 255, 0) rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
+  }
+  33% {
+    border-color: white white rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
+  }
+  66% {
+    border-color: white white white rgba(255, 255, 255, 0);
+  }
+  100% {
+    border-color: white white white white;
+  }
+}
 
 
 
