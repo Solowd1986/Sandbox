@@ -5,6 +5,30 @@ import actions from "../../../../redux/actions";
 
 class OrderSummary extends Component {
 
+    static defaultProps = {
+        orderedItems: []
+    };
+
+    /**
+     *
+     * Проблема:
+     * 1. Нам приходят пропсы, мы в цикле выводим блок товаров из них, количество их в корзине
+     * 2. Клик на +/- вызывает метод смены общего стейта, что вызывает переририсовку тещкуего компонента и смену количествоа товара выбранного
+     * 3. Если, пытаться создать локальный стейт, который будет держат ьв себе любое значение, даже неверное, до момента блюра
+     * 4. После блюра, вызывается опять же, метод общего стора, который по id меняет количество или ничего не делает, если переданное количество
+     * оказалось некорректным. На этом этапе опять же, меняется внешний сто ри все ок.
+     * 5. Сложность в том, чтобы после блюра отразить изменения в поле потерявшем фокус. То есть, синхронизировать общий стейт
+     * с локальным стейстом, который держит в себе значение до момента блюра и после. Нам нужно, после блюра, прийти с новыми данныи
+     * и поменять локальынй стейт на них, что отразится на самом поел ввода. Само это поле, соответственно, тоже изначально опирается на стейт
+     * 6. То есть, в общем, связь локального промежутого стейта, который принимает любые данные, со внешним стором, который данные после блюра
+     * проверяем и использует или нет, после чего пропсы опять приходят и локальный стейт должен это как-то обработать.
+     * Само поел ввода опирается на этот самый промежуточный стейт в плане value
+     *
+     *
+     * */
+
+
+
     transitionalValueHandler = (evt, id) => {
 
         const temporary = [...this.state.transitionalValue];
@@ -34,10 +58,9 @@ class OrderSummary extends Component {
     };
 
 
-    onBlurHandler = (evt, id) => {
-        this.props.onChangeAmountOfProduct(evt, id, this.state.transitionalValue.find(item => item.id === id).value);
+    onBlurHandler = (evt, id, quantity) => {
+        this.props.onChangeAmountOfProduct(evt, id, quantity);
     };
-
 
     calcTotal = () => {
         return this.props.orderedItems.reduce((total, item) => {
@@ -84,7 +107,7 @@ class OrderSummary extends Component {
                                             <input
                                                 type="text" name="customer-product-count"
                                                 onChange={(evt) => this.transitionalValueHandler(evt, item.id)}
-                                                onBlur={(evt) => this.onBlurHandler(evt, item.id)}
+                                                onBlur={(evt) => this.onBlurHandler(evt, item.id, evt.target.value)}
                                                 value={item.quantity}
                                             />
                                         </label>

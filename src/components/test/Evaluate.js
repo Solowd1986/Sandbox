@@ -198,6 +198,7 @@ class CartItem extends Component {
     }
 }
 
+
 export default class Evaluate extends Component {
     constructor(props) {
         super(props);
