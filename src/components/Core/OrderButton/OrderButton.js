@@ -10,8 +10,6 @@ import actions from "../../../redux/actions/index"
 const Button = props => {
 
 
-    console.log(props);
-    
     return (
         <button
             className={

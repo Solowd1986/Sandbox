@@ -242,6 +242,7 @@ export default {
                     },
 
                     imgPath: "oneplus_7_8gb_256gb_red/oneplus_7_8gb_256gb_red_275_1.png",
+                    imgLgPath: "oneplus_7_8gb_256gb_red/oneplus_7_8gb_256gb_red_600_1.png",
                     imgAlt: "promo-phone-image",
                     discount: false
                 },
@@ -319,6 +320,7 @@ export default {
 
 
                     imgPath: "oneplus_7_12gb_256gb_grey/oneplus_7_12gb_256gb_grey_275_1.png",
+                    imgLgPath: "oneplus_7_12gb_256gb_grey/oneplus_7_12gb_256gb_grey_600_1.png",
                     imgAlt: "promo-phone-image",
                     discount: false
                 },
@@ -396,6 +398,7 @@ export default {
                     },
 
                     imgPath: "oneplus_3_6gb_64gb_grey/oneplus_3_6gb_64gb_grey_275_1.png",
+                    imgLgPath: "oneplus_3_6gb_64gb_grey/oneplus_3_6gb_64gb_grey_600_1.png",
                     imgAlt: "promo-phone-image",
                     discount: true
                 },
@@ -436,7 +439,6 @@ export default {
                     ],
 
                     specifications: {
-
                         type: "смартфон",
                         color: "(черный оникс)",
                         caseType: "классический",
@@ -479,6 +481,7 @@ export default {
 
 
                     imgPath: "oneplus_6t_6gb_128gb_black/oneplus_6t_6gb_128gb_black_275_1.png",
+                    imgLgPath: "oneplus_6t_6gb_128gb_black/oneplus_6t_6gb_128gb_black_600_1.png",
                     imgAlt: "promo-phone-image",
                     discount: false
                 },

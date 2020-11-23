@@ -112,7 +112,7 @@
   }
 }
 
-.promo_list__price {
+.price {
   margin-top: auto;
   margin-bottom: 10px;
   font-size: 18px;
@@ -121,7 +121,7 @@
   text-align: center;
 
 
-  &__old {
+  &__discount {
     margin-right: 10px;
     font-size: 15px;
     color: $grey;

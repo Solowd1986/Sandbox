@@ -12,6 +12,7 @@ import ProductDelivery from "./ProductDelivery";
 import actions from "../../../redux/actions";
 import {connect} from "react-redux";
 import OrderButton from "../../Core/OrderButton/OrderButton";
+import ProductPrice from "../../Core/ProductPrice/ProductPrice";
 
 
 class Product extends Component {
@@ -43,7 +44,6 @@ class Product extends Component {
         const category = this.props.db.category.find(item => item.categoryAlias === this.props.match.params.category);
         const product = this.props.db.category.find(item => item.categoryAlias === category.categoryAlias).productList.find(item => item.id === id);
 
-
         return (
             <Layout>
                 <section className={`${common.container} ${styles.item_bg}`}>
@@ -64,20 +64,7 @@ class Product extends Component {
                             <h1 className={styles.order__title}>{product.title}</h1>
                             <p className={styles.order__desc}>OnePlus Bullets Wireless дают Вам ту свободу и удобство, которой Вам так не хватало.</p>
 
-                            <span className={styles.order__price}>
-                                {
-                                    product.rest === 0 || !product.discount
-                                        ?
-                                        <>
-                                            {new Intl.NumberFormat().format(product.price)} р.
-                                        </>
-                                        :
-                                        <>
-                                            <span className={styles.order__price__discount}>{new Intl.NumberFormat().format(product.price)} р.</span>
-                                            {new Intl.NumberFormat().format(product.price - (product.price * 10 / 100))} р.
-                                        </>
-                                }
-                            </span>
+                            <ProductPrice product={product} classList={{ main: `${styles.order__price}`, discount: `${styles.order__price__discount}` }}/>
 
 
                             <div className={styles.order__btn_block}>
@@ -123,14 +110,6 @@ class Product extends Component {
                                         </>
                                 }
                             </div>
-
-                            {/*<div className={styles.order__btn_block}>*/}
-                            {/*    <button className={`${common.btn} ${styles.order__btn_add_to_cart}`}>Добавить в корзину</button>*/}
-                            {/*    <button className={`${common.btn} ${styles.order__btn_buy_by_click}`}>Купить в один клик</button>*/}
-                            {/*</div>*/}
-
-
-
                             <span>Наличие: {product.rest === 0 ? "нет в наличии" : "в наличии"}</span>
                         </div>
                     </div>
@@ -139,13 +118,13 @@ class Product extends Component {
                 <section className={`${common.wrapper} ${styles.info}`}>
                     <nav className={styles.info__nav}>
                         <a onClick={this.tabsHandler} className={`${styles.info__nav_link} ${styles.info__nav_link__active}`} data-id="tab-features">Описание</a>
-                        <a onClick={this.tabsHandler} className={styles.info__nav_link} data-id="tab-attributes">Характеристики</a>
+                        {category.categoryAlias === "phones" && <a onClick={this.tabsHandler} className={styles.info__nav_link} data-id="tab-attributes">Характеристики</a>}
                         <a onClick={this.tabsHandler} className={styles.info__nav_link} data-id="tab-delivery">Доставка и оплата</a>
                     </nav>
 
                     <div className={common.container}>
                         <Features promo={product.promoBlock}/>
-                        <Specification specs={product.specifications}/>
+                        {category.categoryAlias === "phones" && <Specification specs={product.specifications}/>}
                         <ProductDelivery/>
                     </div>
                 </section>

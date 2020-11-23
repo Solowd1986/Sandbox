@@ -9,6 +9,7 @@ import actions from "../../../redux/actions/index"
 
 
 import OrderButton from "../../Core/OrderButton/OrderButton"
+import ProductPrice from "../../Core/ProductPrice/ProductPrice";
 
 
 class Promo extends Component {
@@ -82,20 +83,8 @@ class Promo extends Component {
                                         <span>({item.specifications.color})</span>
                                     </div>
 
-                                    <span className={styles.promo_list__price}>
-                                        {
-                                            item.rest === 0 || !item.discount
-                                                ?
-                                                <>
-                                                    {new Intl.NumberFormat().format(item.price)} р.
-                                                </>
-                                                :
-                                                <>
-                                                    <span className={styles.promo_list__price__old}>{new Intl.NumberFormat().format(item.price)} р.</span>
-                                                    {new Intl.NumberFormat().format(item.price - (item.price * 10 / 100))} р.
-                                                </>
-                                        }
-                                    </span>
+                                    <ProductPrice product={item} classList={{ main: `${styles.price}`, discount: `${styles.price__discount}` }}/>
+
 
 
                                     {
