@@ -4,10 +4,13 @@ import styles from "./up-button.module.scss";
 class UpButton extends Component {
     constructor(props) {
         super(props);
-        window.addEventListener("scroll", this.handleScroll);
         this.state = {
             isPageScrolledToBottom: false
         }
+    }
+
+    componentDidMount() {
+        window.addEventListener("scroll", this.handleScroll);
     }
 
     handleScroll = () => {

@@ -10,10 +10,13 @@ import Userbar from "./Partials/Userbar";
 class Header extends Component {
     constructor(props) {
         super(props);
-        window.addEventListener("scroll", this.handleScroll);
         this.state = {
             isPageScrolled: false
         }
+    }
+
+    componentDidMount() {
+        window.addEventListener("scroll", this.handleScroll);
     }
 
     handleScroll = () => {
@@ -29,10 +32,9 @@ class Header extends Component {
         }
     };
 
-
     render() {
         return (
-            <div className={this.state.isPageScrolled && styles.header_fixed}>
+            <div className={this.state.isPageScrolled ? styles.header_fixed : ''}>
                 <a className={`${styles.portfolio_controls} ${styles.portfolio_controls__left}`}
                    href="">
                     вернуться
