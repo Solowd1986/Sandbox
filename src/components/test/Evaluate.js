@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {NavLink} from "react-router-dom";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 
 
 const axios = require('axios').default;
@@ -92,7 +93,6 @@ class Cart extends Component {
         this.setState({ products });
     };
 
-
     render() {
 
         const styleUl = { padding: "10px", margin: "10px" };
@@ -141,6 +141,7 @@ class Cart extends Component {
 }
 
 
+
 class CartItem extends Component {
 
     static propTypes = {
@@ -179,7 +180,12 @@ class CartItem extends Component {
                     <p style={styleP}>title: {this.props.product.title}|</p>
                     <p style={styleP}>quantity: {this.props.product.quantity}|</p>
 
+
+
+
+
                     <button onClick={(evt) => this.decreaseAmount(evt, this.props.product.id)} style={{ padding: "5px 10px" }}>-</button>
+
 
                     <input
                         onChange={(evt) => this.handleChanger(evt)}

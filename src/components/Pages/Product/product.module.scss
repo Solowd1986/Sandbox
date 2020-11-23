@@ -194,7 +194,7 @@
 
 .features__title {
   font-size: 25px;
-  font-weight: 500;
+  font-weight: 600;
 
   @media (max-width: 870px) {
     padding: 0 10px;
@@ -205,7 +205,9 @@
 
 .features__desc {
   margin-bottom: 30px;
-  font-weight: 300;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: normal;
 
   @media (max-width: 870px) {
     padding: 0 10px;

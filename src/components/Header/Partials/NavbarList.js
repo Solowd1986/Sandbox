@@ -11,7 +11,7 @@ export default class NavbarList extends React.Component {
                         <span className={styles.header__nav_link__arrow}/>
                     </NavLink>
 
-                    <ul className={`${styles.header__inner_list} animate__animated animate__fadeIn faster `}>
+                    <ul className={`${styles.header__inner_list} animate__animated animate__fadeIn animate__fast`}>
                         <li className={styles.header__inner_item}>
                             <NavLink activeClassName={styles.active} to={"/category/phones"} className={styles.header__inner_link}>
                                 <svg viewBox="0 0 1000 1000" width={32} height={32}>
@@ -70,7 +70,7 @@ export default class NavbarList extends React.Component {
                     <NavLink to={"/category/accessoires"} className={styles.header__nav_link}>Аксессуары
                         <span className={styles.header__nav_link__arrow}/>
                     </NavLink>
-                    <ul className={`${styles.header__inner_list} animate__animated animate__fadeIn faster `}>
+                    <ul className={`${styles.header__inner_list} animate__animated animate__fadeIn animate__fast`}>
                         <li className={styles.header__inner_item}>
                             <NavLink to={"/category/accessoires"} className={styles.header__inner_link}>
                                 <svg viewBox="0 0 1000 1000" width={32} height={32}>
@@ -161,7 +161,7 @@ export default class NavbarList extends React.Component {
                     <NavLink to={"/category/gadgets"} className={styles.header__nav_link}>Гаджеты
                         <span className={styles.header__nav_link__arrow}/>
                     </NavLink>
-                    <ul className={`${styles.header__inner_list} animate__animated animate__fadeIn faster `}>
+                    <ul className={`${styles.header__inner_list} animate__animated animate__fadeIn animate__fast`}>
                         <li className={styles.header__inner_item}>
                             <NavLink to={"/category/gadgets"} className={styles.header__inner_link}>
                                 <svg viewBox="0 0 1000 1000" width={32} height={32}>
