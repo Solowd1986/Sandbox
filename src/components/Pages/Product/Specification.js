@@ -2,6 +2,11 @@ import React from "react";
 import styles from "./product.module.scss";
 
 const Specification = props => {
+    console.log(props);
+    const specs = props.specs;
+    console.log(specs);
+    
+    
     return (
         <>
             {/*Блок характеристик*/}
@@ -10,32 +15,36 @@ const Specification = props => {
                 <table className={styles.attributes__table_data}>
                     <tbody>
                     <tr>
-                        <td>Цвет</td>
-                        <td>зеркальный серый</td>
+                        <td>Тип</td>
+                        <td>{specs.type}</td>
                     </tr>
                     <tr>
-                        <td>Тип</td>
-                        <td>смартфон</td>
+                        <td>Цвет</td>
+                        <td>{specs.color}</td>
                     </tr>
                     <tr>
                         <td>Тип корпуса</td>
-                        <td>классический</td>
+                        <td>{specs.caseType}</td>
                     </tr>
                     <tr>
                         <td>Материал корпуса</td>
-                        <td>стекло Gorilla Glass 6 от Corning</td>
+                        <td>{specs.caseMaterial}</td>
                     </tr>
                     <tr>
                         <td>Тип SIM-карты</td>
-                        <td> nano SIM</td>
+                        <td>{specs.simType}</td>
+                    </tr>
+                    <tr>
+                        <td>Количество SIM-карт</td>
+                        <td>{specs.simCount}</td>
                     </tr>
                     <tr>
                         <td>Вес</td>
-                        <td> nano SIM</td>
+                        <td>{specs.weight}</td>
                     </tr>
                     <tr>
                         <td>Размеры</td>
-                        <td> nano SIM</td>
+                        <td>{specs.size}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -45,23 +54,19 @@ const Specification = props => {
                     <tbody>
                     <tr>
                         <td>Тип экрана</td>
-                        <td>Fluid AMOLED, сенсорный</td>
-                    </tr>
-                    <tr>
-                        <td>Тип сенсорного экрана</td>
-                        <td>мультитач, емкостный</td>
+                        <td>{specs.screenType}</td>
                     </tr>
                     <tr>
                         <td>Диагональ</td>
-                        <td>6.67 дюйм.</td>
+                        <td>{specs.screenSize}</td>
                     </tr>
                     <tr>
                         <td>Размер изображения</td>
-                        <td>3120 x 1440</td>
+                        <td>{specs.screenResolution}</td>
                     </tr>
                     <tr>
                         <td>Автоматический поворот экрана</td>
-                        <td>есть</td>
+                        <td>{specs.screenRotate}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -71,49 +76,54 @@ const Specification = props => {
                     <tbody>
                     <tr>
                         <td>Тыловая фотокамера</td>
-                        <td>тройная 8/16/48 МП</td>
+                        <td>{specs.mainCamera}</td>
                     </tr>
                     <tr>
                         <td>Фотовспышка</td>
-                        <td>тыльная, светодиодная</td>
+                        <td>{specs.flashType}</td>
                     </tr>
                     <tr>
                         <td>Функции тыловой фотокамеры</td>
-                        <td>автофокус, оптическая стабилизация</td>
+                        <td>{specs.mainCameraFunction}</td>
                     </tr>
                     <tr>
                         <td>Диафрагма тыловой фотокамеры</td>
-                        <td>f/1.6</td>
+                        <td>{specs.caseType}</td>
+                    </tr>
+                    <tr>
+                        <td>Запись видео</td>
+                        <td>{specs.recordingVideo}</td>
                     </tr>
                     <tr>
                         <td>Макс. частота кадров видео</td>
-                        <td>60 кадров/с</td>
+                        <td>{specs.maximumFramerate}</td>
+                    </tr>
+                    <tr>
+                        <td>Аудио</td>
+                        <td>{specs.audioSupport}</td>
                     </tr>
                     </tbody>
                 </table>
+
 
                 <h2 className={styles.attributes__table_title}>Связь</h2>
                 <table className={styles.attributes__table_data}>
                     <tbody>
                     <tr>
-                        <td>Тыловая фотокамера</td>
-                        <td>тройная 8/16/48 МП</td>
+                        <td>Стандарт</td>
+                        <td>{specs.connectionStandart}</td>
                     </tr>
                     <tr>
-                        <td>Фотовспышка</td>
-                        <td>тыльная, светодиодная</td>
+                        <td>Поддержка диапазонов LTE</td>
+                        <td>{specs.lte}</td>
                     </tr>
                     <tr>
-                        <td>Функции тыловой фотокамеры</td>
-                        <td>автофокус, оптическая стабилизация</td>
+                        <td>Интерфейсы</td>
+                        <td>{specs.interfaces}</td>
                     </tr>
                     <tr>
-                        <td>Диафрагма тыловой фотокамеры</td>
-                        <td>f/1.6</td>
-                    </tr>
-                    <tr>
-                        <td>Макс. частота кадров видео</td>
-                        <td>60 кадров/с</td>
+                        <td>Спутниковая навигация</td>
+                        <td>{specs.satellite}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -122,24 +132,24 @@ const Specification = props => {
                 <table className={styles.attributes__table_data}>
                     <tbody>
                     <tr>
-                        <td>Тыловая фотокамера</td>
-                        <td>тройная 8/16/48 МП</td>
+                        <td>Процессор</td>
+                        <td>{specs.cpu}</td>
                     </tr>
                     <tr>
-                        <td>Фотовспышка</td>
-                        <td>тыльная, светодиодная</td>
+                        <td>Количество ядер процессора</td>
+                        <td>{specs.cpuCoresAmount}</td>
                     </tr>
                     <tr>
-                        <td>Функции тыловой фотокамеры</td>
-                        <td>автофокус, оптическая стабилизация</td>
+                        <td>Видеопроцессор</td>
+                        <td>{specs.videoCpu}</td>
                     </tr>
                     <tr>
-                        <td>Диафрагма тыловой фотокамеры</td>
-                        <td>f/1.6</td>
+                        <td>Объем встроенной памяти</td>
+                        <td>{specs.memory}</td>
                     </tr>
                     <tr>
-                        <td>Макс. частота кадров видео</td>
-                        <td>60 кадров/с</td>
+                        <td>Объем оперативной памяти</td>
+                        <td>{specs.ram}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -148,24 +158,16 @@ const Specification = props => {
                 <table className={styles.attributes__table_data}>
                     <tbody>
                     <tr>
-                        <td>Тыловая фотокамера</td>
-                        <td>тройная 8/16/48 МП</td>
+                        <td>Емкость аккумулятора</td>
+                        <td>{specs.acc}</td>
                     </tr>
                     <tr>
-                        <td>Фотовспышка</td>
-                        <td>тыльная, светодиодная</td>
+                        <td>Тип аккумулятора</td>
+                        <td>{specs.accType}</td>
                     </tr>
                     <tr>
-                        <td>Функции тыловой фотокамеры</td>
-                        <td>автофокус, оптическая стабилизация</td>
-                    </tr>
-                    <tr>
-                        <td>Диафрагма тыловой фотокамеры</td>
-                        <td>f/1.6</td>
-                    </tr>
-                    <tr>
-                        <td>Макс. частота кадров видео</td>
-                        <td>60 кадров/с</td>
+                        <td>Тип разъема для зарядки</td>
+                        <td>{specs.connectorType}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -174,24 +176,12 @@ const Specification = props => {
                 <table className={styles.attributes__table_data}>
                     <tbody>
                     <tr>
-                        <td>Тыловая фотокамера</td>
-                        <td>тройная 8/16/48 МП</td>
+                        <td>Комплектация</td>
+                        <td>{specs.supplies}</td>
                     </tr>
                     <tr>
-                        <td>Фотовспышка</td>
-                        <td>тыльная, светодиодная</td>
-                    </tr>
-                    <tr>
-                        <td>Функции тыловой фотокамеры</td>
-                        <td>автофокус, оптическая стабилизация</td>
-                    </tr>
-                    <tr>
-                        <td>Диафрагма тыловой фотокамеры</td>
-                        <td>f/1.6</td>
-                    </tr>
-                    <tr>
-                        <td>Макс. частота кадров видео</td>
-                        <td>60 кадров/с</td>
+                        <td>Дата анонсирования</td>
+                        <td>{specs.announceDate}</td>
                     </tr>
                     </tbody>
                 </table>

@@ -79,7 +79,7 @@ class Promo extends Component {
 
                                     <div className={styles.promo_list__title}>
                                         <span>{item.title}</span>
-                                        <span>({item.color})</span>
+                                        <span>({item.specifications.color})</span>
                                     </div>
 
                                     <span className={styles.promo_list__price}>

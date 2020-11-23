@@ -16,7 +16,7 @@ export default {
                 {
                     id: 1,
                     title: "Oneplus 6T 6GB + 128GB",
-                    color: "черный оникс",
+
                     price: 44500,
                     rest: 100,
 
@@ -50,6 +50,7 @@ export default {
 
                     specifications: {
                         type: "смартфон",
+                        color: "черный оникс",
                         caseType: "классический",
                         caseMaterial: "алюминиевый сплав, стекло",
                         simType: "nano SIM",
@@ -74,6 +75,8 @@ export default {
                         cpuCoresAmount: "8",
                         videoCpu: "Adreno 650",
                         memory: "128 Гб",
+                        lte: "FDD: bands 1, 2, 3, 4, 5, 7, 8, 12, 13, 17, 18, 19, 20, 25, 26, 28, 29, 30, 32, 66; TDD: bands 34, 38, 39, 40, 41, 78, 79",
+
                         ram: "6 Гб",
                         acc: "2800 мА⋅ч",
                         accType: "Li-Polymer",
@@ -91,7 +94,6 @@ export default {
                 {
                     id: 2,
                     title: "Oneplus 6T 8GB + 128GB",
-                    color: "синий ультрамарин",
                     price: 61000,
                     rest: 0,
 
@@ -125,6 +127,7 @@ export default {
 
                     specifications: {
                         type: "смартфон",
+                        color: "синий ультрамарин",
                         caseType: "классический",
                         caseMaterial: "алюминиевый сплав, стекло",
                         simType: "nano SIM",
@@ -150,6 +153,8 @@ export default {
                         videoCpu: "Adreno 650",
                         memory: "128 Гб",
                         ram: "8 Гб",
+                        lte: "FDD: bands 1, 2, 3, 4, 5, 7, 8, 12, 13, 17, 18, 19, 20, 25, 26, 28, 29, 30, 32, 66; TDD: bands 34, 38, 39, 40, 41, 78, 79",
+
                         acc: "3200 мА⋅ч",
                         accType: "Li-Polymer",
                         connectorType: "USB Type-C",
@@ -167,7 +172,6 @@ export default {
                 {
                     id: 3,
                     title: "Oneplus 7 Pro 8GB + 256GB",
-                    color: "дымчато красный",
                     price: 51000,
                     rest: 34,
 
@@ -201,6 +205,7 @@ export default {
 
                     specifications: {
                         type: "смартфон",
+                        color: "дымчато красный",
                         caseType: "классический",
                         caseMaterial: "алюминиевый сплав, стекло",
                         simType: "nano SIM",
@@ -225,6 +230,8 @@ export default {
                         cpuCoresAmount: "8",
                         videoCpu: "Adreno 850",
                         memory: "256 Гб",
+                        lte: "FDD: bands 1, 2, 3, 4, 5, 7, 8, 12, 13, 17, 18, 19, 20, 25, 26, 28, 29, 30, 32, 66; TDD: bands 34, 38, 39, 40, 41, 78, 79",
+
                         ram: "8 Гб",
                         acc: "4100 мА⋅ч",
                         accType: "Li-Polymer",
@@ -241,7 +248,6 @@ export default {
                 {
                     id: 4,
                     title: "Oneplus 7 Pro 12GB + 256GB",
-                    color: "зеркальный серый",
                     price: 76000,
                     rest: 32,
 
@@ -276,6 +282,7 @@ export default {
 
                     specifications: {
                         type: "смартфон",
+                        color: "зеркальный серый",
                         caseType: "классический",
                         caseMaterial: "алюминиевый сплав, стекло",
                         simType: "nano SIM",
@@ -300,6 +307,7 @@ export default {
                         cpuCoresAmount: "8",
                         videoCpu: "Adreno 850",
                         memory: "256 Гб",
+                        lte: "FDD: bands 1, 2, 3, 4, 5, 7, 8, 12, 13, 17, 18, 19, 20, 25, 26, 28, 29, 30, 32, 66; TDD: bands 34, 38, 39, 40, 41, 78, 79",
                         ram: "12 Гб",
                         acc: "4600 мА⋅ч",
                         accType: "Li-Polymer",
@@ -318,7 +326,6 @@ export default {
                 {
                     id: 5,
                     title: "Oneplus 6 6GB + 64GB",
-                    color: "зеркальный серый",
                     price: 26000,
                     rest: 12,
 
@@ -352,6 +359,7 @@ export default {
 
                     specifications: {
                         type: "смартфон",
+                        color: "зеркальный серый",
                         caseType: "классический",
                         caseMaterial: "алюминиевый сплав, стекло",
                         simType: "nano SIM",
@@ -363,6 +371,8 @@ export default {
                         screenResolution: "1950 x 980",
                         screenRotate: "есть",
                         gorillaGlass: "есть",
+                        lte: "FDD: bands 1, 2, 3, 4, 5, 7, 8, 12, 13, 17, 18, 19, 20, 25, 26, 28, 29, 30, 32, 66; TDD: bands 34, 38, 39, 40, 41, 78, 79",
+
                         mainCamera: "тройная 2/16/48 МП",
                         flashType: "тыльная, светодиодная",
                         mainCameraFunction: "автофокус, оптическая стабилизация",
@@ -394,7 +404,6 @@ export default {
                 {
                     id: 6,
                     title: "Oneplus 6 6GB + 128GB",
-                    color: "(черный оникс)",
                     price: 31000,
                     rest: 52,
 
@@ -427,36 +436,43 @@ export default {
                     ],
 
                     specifications: {
+
                         type: "смартфон",
+                        color: "(черный оникс)",
                         caseType: "классический",
                         caseMaterial: "алюминиевый сплав, стекло",
                         simType: "nano SIM",
                         simCount: 1,
                         weight: "196 г",
                         size: "160.2x72.9x8.0 мм",
+
                         screenType: "Fluid AMOLED, сенсорный",
                         screenSize: "4.25 дюйм",
                         screenResolution: "1850 x 1200",
                         screenRotate: "есть",
-                        gorillaGlass: "есть",
+
                         mainCamera: "тройная 2/16/48 МП",
                         flashType: "тыльная, светодиодная",
                         mainCameraFunction: "автофокус, оптическая стабилизация",
                         recordingVideo: "есть (MP4)",
                         maximumFramerate: "30 кадров/с",
                         audioSupport: "MP3, AAC, AAC+, WMA, AMR-NB, AMR-WB, WAV, FLAC, APE, OGG, MID, M4A, IMY, AC3, EAC3, EAC3-JOC, AC4",
+
                         connectionStandart: "GSM 850/900/1800/1900, 3G, 4G LTE, 5G",
+                        lte: "FDD: bands 1, 2, 3, 4, 5, 7, 8, 12, 13, 17, 18, 19, 20, 25, 26, 28, 29, 30, 32, 66; TDD: bands 34, 38, 39, 40, 41, 78, 79",
                         interfaces: "Wi-Fi 802.11ac Dual Band, Bluetooth 5.1, USB 3.1, NFC",
                         satellite: "GPS, ГЛОНАСС, BeiDou, Galileo, A-GPS",
+
                         cpu: "Qualcomm Snapdragon 865 (Octa-core, 7nm, up to 2.84 GHz)",
                         cpuCoresAmount: "8",
                         videoCpu: "Adreno 850",
                         memory: "128 Гб",
                         ram: "6 Гб",
+
                         acc: "3760 мА⋅ч",
                         accType: "Li-Polymer",
                         connectorType: "USB Type-C",
-                        flashLight: "есть",
+
                         supplies: "смартфон, защитная пленка, чехол, кабель Type-C, зарядное устройство Warp Charge 30, шпилька для извлечения SIM",
                         announceDate: "2015-11-12",
                     },
