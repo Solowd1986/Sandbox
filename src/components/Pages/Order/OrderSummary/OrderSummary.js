@@ -95,16 +95,16 @@ class OrderSummary extends Component {
             });
         } else {
 
-            // const temporary = [...this.state.orderedItems];
-            // const currentProduct = { ...temporary.find(item => item.id === id) };
-            //
-            // currentProduct.quantity = Math.max(1, Math.min(currentProduct.rest, value));
-            //
-            // temporary[temporary.indexOf(temporary.find(item => item.id === id))] = currentProduct;
-            //
-            // this.setState({
-            //     orderedItems: [...temporary]
-            // });
+            const temporary = [...this.state.orderedItems];
+            const currentProduct = { ...temporary.find(item => item.id === id) };
+
+            currentProduct.quantity = Math.max(1, Math.min(currentProduct.rest, value));
+
+            temporary[temporary.indexOf(temporary.find(item => item.id === id))] = currentProduct;
+
+            this.setState({
+                orderedItems: [...temporary]
+            });
 
             this.props.onChangeAmountOfProduct(evt, id, value);
 

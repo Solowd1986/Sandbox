@@ -18,7 +18,10 @@ class Category extends Component {
         return (
             <Layout>
                 <div className={styles.sign_bg}>
-                    <img className={styles.sign_bg__img} src={`${category.imgPrefix}${category.categoryAlias}/${category.categoryTitleImg}`} alt="Категории"/>
+                    <img
+                        className={styles.sign_bg__img}
+                        src={`${category.imgPrefix}/${category.categoryAlias}/${category.categoryTitleImg}`}
+                        alt="Категории"/>
                     <h3 className={styles.sign_bg__title}>{category.categoryTitle}</h3>
                 </div>
 
@@ -35,7 +38,6 @@ class Category extends Component {
                                     {category.productList.map(item => {
                                         return (
                                             <li key={item.id} className={styles.item}>
-
                                                 <span className={
                                                     item.rest > 0
                                                         ? `${styles.tag}`
@@ -46,7 +48,7 @@ class Category extends Component {
                                                 <NavLink to={`/product/${category.categoryAlias}/${item.id}`} className={styles.list_link}>
                                                     <img
                                                         className={styles.img_centered}
-                                                        src={`${category.imgPrefix}${category.categoryAlias}/${item.imgPath}`}
+                                                        src={`${category.imgPrefix}/${category.categoryAlias}/${item.imgPath}`}
                                                         //src="/img/categories/accessoires-categorie/oneplus_7t_silicone_red_380_380-crop.png"
                                                         alt="image"
                                                     />
