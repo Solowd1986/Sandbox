@@ -44,6 +44,9 @@ class Product extends Component {
         const category = this.props.db.category.find(item => item.categoryAlias === this.props.match.params.category);
         const product = this.props.db.category.find(item => item.categoryAlias === category.categoryAlias).productList.find(item => item.id === id);
 
+        console.log(category);
+        console.log(product);
+
         return (
             <Layout>
                 <section className={`${common.container} ${styles.item_bg}`}>
@@ -123,7 +126,7 @@ class Product extends Component {
                     </nav>
 
                     <div className={common.container}>
-                        <Features promo={product.promoBlock}/>
+                        <Features imgPrefix={`${category.imgPrefix}/${category.categoryAlias}`} promo={product.promoBlock}/>
                         {category.categoryAlias === "phones" && <Specification specs={product.specifications}/>}
                         <ProductDelivery/>
                     </div>

@@ -7,14 +7,10 @@ import ModalOverlay from "../../Core/ModalOverlay/ModalOverlay";
 import {connect} from "react-redux";
 import actions from "../../../redux/actions/index"
 
-
 import OrderButton from "../../Core/OrderButton/OrderButton"
 import ProductPrice from "../../Core/ProductPrice/ProductPrice";
 
-
 class Promo extends Component {
-
-
     state = {
         modal: false
     };
@@ -35,7 +31,6 @@ class Promo extends Component {
 
     isProductInCart = (products, id) => products.find(item => item.id === id);
 
-
     getRandomProducts = (list, amount = 4) => {
         const result = [];
         while (result.length < 4) {
@@ -53,7 +48,6 @@ class Promo extends Component {
     render() {
         //console.log(this.props);
         const [phones, accessoires, gadgets] = this.props.db.category;
-
         return (
             <section className={`${common.container} ${styles.promo_wrapper}`}>
                 <main className={`${common.wrapper} ${styles.promo}`}>

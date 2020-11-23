@@ -19,6 +19,10 @@ class Header extends Component {
         window.addEventListener("scroll", this.handleScroll);
     }
 
+    componentWillUnmount() {
+        window.removeEventListener("scroll", this.handleScroll);
+    }
+
     handleScroll = () => {
         const offset = window.scrollY;
         if (offset > 200) {

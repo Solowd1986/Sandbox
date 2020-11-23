@@ -13,6 +13,10 @@ class UpButton extends Component {
         window.addEventListener("scroll", this.handleScroll);
     }
 
+    componentWillUnmount() {
+        window.removeEventListener("scroll", this.handleScroll);
+    }
+
     handleScroll = () => {
         const offset = window.scrollY;
         const viewport = document.documentElement.clientHeight;
