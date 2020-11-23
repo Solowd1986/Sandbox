@@ -29,7 +29,9 @@ class Promo extends Component {
         console.log(data);
     };
 
+
     isProductInCart = (products, id) => products.find(item => item.id === id);
+
 
     getRandomProducts = (list, amount = 4) => {
         const result = [];
@@ -44,6 +46,7 @@ class Promo extends Component {
         }
         return result;
     };
+
 
     render() {
         //console.log(this.props);
