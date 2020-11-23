@@ -547,6 +547,8 @@ export default {
                     ],
 
                     imgPath: "oneplus_bullets_wireless_380_1.png",
+                    imgLgPath: "oneplus_bullets_wireless_600_1.png",
+
                     imgAlt: "promo-accessoires-image",
                     discount: false
                 },
@@ -574,7 +576,9 @@ export default {
                     ],
 
                     imgPath: "oneplus_dash_charger_380_1.png",
+                    imgLgPath: "oneplus_dash_charger_600_1.png",
                     imgAlt: "promo-accessoires-image",
+
                     discount: false
                 },
                 {
@@ -603,6 +607,8 @@ export default {
                     ],
 
                     imgPath: "oneplus_warp_charge_30_380_1.png",
+                    imgLgPath: "oneplus_warp_charge_30_600_1.png",
+
                     imgAlt: "promo-accessoires-image",
                     discount: true
                 },
@@ -631,6 +637,8 @@ export default {
                     ],
 
                     imgPath: "oth_cable_oneplus_type_c_380_1.png",
+                    imgLgPath: "oth_cable_oneplus_type_c_600_1.png",
+
                     imgAlt: "promo-accessoires-image",
                     discount: false
                 }

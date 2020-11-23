@@ -80,7 +80,7 @@ class Promo extends Component {
                                         В наличии
                                     </span>
 
-                                    <NavLink to={`/product/phones/${item.id}`} className={styles.promo_list__link}>
+                                    <NavLink to={`/product/${phones.categoryAlias}/${item.id}`} className={styles.promo_list__link}>
                                         <img
                                             className={styles.promo_list__img}
                                             // path from public folder
@@ -93,6 +93,7 @@ class Promo extends Component {
                                         <span>{item.title}</span>
                                         <span>({item.specifications.color})</span>
                                     </div>
+
 
                                     <ProductPrice product={item} classList={{ main: `${styles.price}`, discount: `${styles.price__discount}` }}/>
 
@@ -138,13 +139,24 @@ class Promo extends Component {
                                     <div className={styles.promo_list__title}>
                                         <span>{item.title}</span>
                                     </div>
-                                    <span className={styles.promo_list__price}>
-                                        {item.discount && <span className={styles.promo_list__price__old}>{item.price} р.</span>}
-                                        {item.discount ? item.price - 4000 : item.price} р.
-                                    </span>
-                                    <button onClick={() => this.props.onAddToCart(item.id, "gadgets")} className={`${common.btn} ${styles.promo_list__btn}`}>
-                                        В заказ
-                                    </button>
+
+                                    <ProductPrice product={item} classList={{ main: `${styles.price}`, discount: `${styles.price__discount}` }}/>
+
+                                    {
+                                        this.isProductInCart(this.props.cart.products, item.id)
+                                            ?
+                                            <OrderButton
+                                                product={item}
+                                                onClick={(evt) => this.props.onDeleteFromCart(evt, item.id)}>
+                                                Убрать из заказа
+                                            </OrderButton>
+                                            :
+                                            <OrderButton
+                                                product={item}
+                                                onClick={(evt) => this.props.onAddToCart(evt, item.id, gadgets)}>
+                                                {item.rest === 0 ? "Нет в наличии" : "Добавить в заказ"}
+                                            </OrderButton>
+                                    }
                                 </li>
                             )
                         })}
@@ -170,14 +182,25 @@ class Promo extends Component {
                                     <div className={styles.promo_list__title}>
                                         <span>{item.title}</span>
                                     </div>
-                                    <span className={styles.promo_list__price}>
-                                        {item.discount && <span className={styles.promo_list__price__old}>{item.price} р.</span>}
-                                        {item.discount ? item.price - 4000 : item.price} р.
-                                    </span>
-                                    <button onClick={() => this.props.onAddToCart(item.id, "accessoires")} className={`${common.btn} ${styles.promo_list__btn}`}>
 
-                                        В заказ
-                                    </button>
+                                    <ProductPrice product={item} classList={{ main: `${styles.price}`, discount: `${styles.price__discount}` }}/>
+
+                                    {
+                                        this.isProductInCart(this.props.cart.products, item.id)
+                                            ?
+                                            <OrderButton
+                                                product={item}
+                                                onClick={(evt) => this.props.onDeleteFromCart(evt, item.id)}>
+                                                Убрать из заказа
+                                            </OrderButton>
+                                            :
+                                            <OrderButton
+                                                product={item}
+                                                onClick={(evt) => this.props.onAddToCart(evt, item.id, accessoires)}>
+                                                {item.rest === 0 ? "Нет в наличии" : "Добавить в заказ"}
+                                            </OrderButton>
+                                    }
+
                                 </li>
                             )
                         })}

@@ -13,7 +13,7 @@ const Features = props => {
                         <div key={item.title} className={styles.features__wrapper}>
                             <h2 className={styles.features__title}>{item.title}</h2>
                             <p className={styles.features__desc}>{item.desc}</p>
-                            <img className={styles.features__img} src={`${props.imgPrefix}/${item.imgPath}`} alt={item.imgAlt}/>
+                            {item.imgPath && <img className={styles.features__img} src={`${props.imgPrefix}/${item.imgPath}`} alt={item.imgAlt}/>}
                         </div>
                     )
                 })}
