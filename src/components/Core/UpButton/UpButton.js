@@ -1,32 +1,41 @@
-import React from "react";
+import React, {Component} from "react";
 import styles from "./up-button.module.scss";
 
-const UpButton = props => {
+class UpButton extends Component {
+    constructor(props) {
+        super(props);
+        window.addEventListener("scroll", this.handleScroll);
+        this.state = {
+            isPageScrolledToBottom: false
+        }
+    }
 
-    const checkScroll = () => {
-        return true;
+    handleScroll = () => {
+        const offset = window.scrollY;
+        const viewport = document.documentElement.clientHeight;
+        if (offset > viewport) {
+            this.setState({
+                isPageScrolledToBottom: true
+            });
+        } else {
+            this.setState({
+                isPageScrolledToBottom: false
+            });
+        }
     };
 
-    const scrollUp = () => {
+    scrollUp = () => {
         window.scrollTo({ "top": 0, behavior: "smooth" });
     };
 
-    return (
-        // checkScroll() && <button onClick={scrollUp} className={`${styles.btn}`}>Up</button>
+    render() {
+        return (
+            // checkScroll() && <button onClick={scrollUp} className={`${styles.btn}`}>Up</button>
+            <div onClick={this.scrollUp} className={`${styles.up} ${this.state.isPageScrolledToBottom && styles.up__show}`}/>
+        )
+    }
+}
 
-        <div className={styles.up}>
-
-        </div>
-        //
-        // <div onClick={scrollUp} className={`${styles.btn}`}>
-        //     <svg width={20} height={20} viewBox="0 0 16 16">
-        //         <path fill="#FFF" d="M8 2.8l8 7.9-2.4 2.4-5.5-5.5-5.6 5.6L0 10.7z"/>
-        //     </svg>
-        // </div>
-
-
-    )
-};
 
 export default UpButton;
 
