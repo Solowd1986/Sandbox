@@ -11,6 +11,7 @@ import Specification from "./Specification";
 import ProductDelivery from "./ProductDelivery";
 import actions from "../../../redux/actions";
 import {connect} from "react-redux";
+import OrderButton from "../../Core/OrderButton/OrderButton";
 
 
 class Product extends Component {
@@ -32,15 +33,16 @@ class Product extends Component {
         window.scrollTo(0, 0)
     }
 
-    render() {
-        console.log(this.props);
+    isProductInCart = (products, id) => products.find(item => item.id === id);
 
+    render() {
+
+        //console.log(this.props);
+        
         const id = parseInt(this.props.match.params.id);
         const category = this.props.db.category.find(item => item.categoryAlias === this.props.match.params.category);
         const product = this.props.db.category.find(item => item.categoryAlias === category.categoryAlias).productList.find(item => item.id === id);
 
-
-        console.log(product);
 
         return (
             <Layout>
@@ -77,10 +79,57 @@ class Product extends Component {
                                 }
                             </span>
 
+
                             <div className={styles.order__btn_block}>
-                                <button className={`${common.btn} ${styles.order__btn_add_to_cart}`}>Добавить в корзину</button>
-                                <button className={`${common.btn} ${styles.order__btn_buy_by_click}`}>Купить в один клик</button>
+                                {
+                                    this.isProductInCart(this.props.cart.products, product.id)
+                                        ?
+                                        <>
+                                            <OrderButton
+                                                product={product}
+                                                classList={styles.order__btn_add_to_cart}
+                                                onClick={(evt) => this.props.onDeleteFromCart(evt, product.id)}>
+                                                Убрать из заказа
+                                            </OrderButton>
+
+                                            <OrderButton
+                                                product={product}
+                                                classList={styles.order__btn_buy_by_click}
+                                                onClick={(evt) => this.props.onAddToCart(evt, product.id, category)}>
+                                                {product.rest === 0 ? "Нет в наличии" : "Купить в один клик"}
+                                            </OrderButton>
+                                        </>
+
+                                        :
+
+                                        <>
+                                            <OrderButton
+                                                product={product}
+                                                classList={`${styles.order__btn_add_to_cart} ${styles.order_btn_img}`}
+                                                onClick={(evt) => this.props.onAddToCart(evt, product.id, category)}>
+                                                {product.rest === 0 ? "Нет в наличии" : "Добавить в заказ"}
+                                            </OrderButton>
+
+                                            {
+                                                product.rest !== 0
+                                                &&
+                                                <OrderButton
+                                                    product={product}
+                                                    classList={styles.order__btn_buy_by_click}
+                                                    onClick={(evt) => this.props.onAddToCart(evt, product.id, category)}>
+                                                    {product.rest === 0 ? "Нет в наличии" : "Купить в один клик"}
+                                                </OrderButton>
+                                            }
+                                        </>
+                                }
                             </div>
+
+                            {/*<div className={styles.order__btn_block}>*/}
+                            {/*    <button className={`${common.btn} ${styles.order__btn_add_to_cart}`}>Добавить в корзину</button>*/}
+                            {/*    <button className={`${common.btn} ${styles.order__btn_buy_by_click}`}>Купить в один клик</button>*/}
+                            {/*</div>*/}
+
+
 
                             <span>Наличие: {product.rest === 0 ? "нет в наличии" : "в наличии"}</span>
                         </div>
@@ -130,4 +179,4 @@ function setDispatch(dispatch) {
 }
 
 
-export default connect(getProps, null)(Product);
+export default connect(getProps, setDispatch)(Product);

@@ -103,13 +103,10 @@ class Promo extends Component {
                                             ?
                                             <OrderButton
                                                 product={item}
-                                                className={`${styles.promo_list__btn} ${styles.btn_remove_item}`}
                                                 onClick={(evt) => this.props.onDeleteFromCart(evt, item.id)}>
                                                 Убрать из заказа
                                             </OrderButton>
-
                                             :
-
                                             <OrderButton
                                                 product={item}
                                                 onClick={(evt) => this.props.onAddToCart(evt, item.id, phones)}>
