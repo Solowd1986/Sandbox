@@ -4,6 +4,9 @@ import styles from "./category.module.scss";
 import Layout from "~components/Core/Layout/Layout";
 import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
+import ProductPrice from "../../Core/ProductPrice/ProductPrice";
+import OrderButton from "../../Core/OrderButton/OrderButton";
+import actions from "../../../redux/actions";
 
 class Category extends Component {
 
@@ -11,6 +14,8 @@ class Category extends Component {
     componentDidMount() {
         window.scrollTo(0, 0)
     }
+
+    isProductInCart = (products, id) => products.find(item => item.id === id);
 
     render() {
         const category = this.props.category.find(category => category.categoryAlias === this.props.match.params.type);
@@ -58,11 +63,27 @@ class Category extends Component {
                                                     </div>
                                                 </NavLink>
 
-                                                <span className={styles.price}>
-                                                    {item.discount && <span className={styles.price__old}>{item.price} р.</span>}
-                                                    {item.discount ? item.price - 4000 : item.price} р.
-                                                </span>
-                                                <button className={`${common.btn} ${styles.item_buy_btn}`}>Купить</button>
+                                                <ProductPrice product={item} classList={{ main: `${styles.price}`, discount: `${styles.price__discount}` }}/>
+
+                                                {
+                                                    this.isProductInCart(this.props.cart.products, item.id)
+                                                        ?
+                                                        <OrderButton
+                                                            product={item}
+                                                            onClick={(evt) => this.props.onDeleteFromCart(evt, item.id)}>
+                                                            Убрать из заказа
+                                                        </OrderButton>
+                                                        :
+                                                        <OrderButton
+                                                            product={item}
+                                                            onClick={(evt) => this.props.onAddToCart(evt, item.id, category)}>
+                                                            {item.rest === 0 ? "Нет в наличии" : "Добавить в заказ"}
+                                                        </OrderButton>
+                                                }
+
+
+
+
                                             </li>
                                         )
                                     })}
@@ -78,9 +99,27 @@ class Category extends Component {
 
 const getState = (state) => {
     return {
-        category: state.db.category
+        category: state.db.category,
+        cart: state.cart
     }
 
 };
 
-export default connect(getState)(Category);
+function setDispatch(dispatch) {
+    return {
+        onAddToCart: (evt, id, category) => {
+            dispatch(actions.cart.disableButton(evt));
+            dispatch(actions.cart.addItemAsync(evt, id, category))
+        },
+        onDeleteFromCart: (evt, id) => {
+            dispatch(actions.cart.disableButton(evt));
+            dispatch(actions.cart.removeItemAsync(evt, id))
+        },
+    }
+}
+
+
+export default connect(getState, setDispatch)(Category);
+
+
+
