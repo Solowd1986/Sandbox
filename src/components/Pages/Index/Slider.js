@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import styles from "./slider.module.scss";
-
 import {connect} from "react-redux";
 
 import $ from "jquery";
@@ -23,7 +22,6 @@ class Slider extends Component {
                 variableWidth: true,
                 variableHeight: true
             });
-
         });
     }
 

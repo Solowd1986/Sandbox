@@ -17,6 +17,7 @@ import ProductPrice from "../../Core/ProductPrice/ProductPrice";
 
 class Product extends Component {
 
+
     tabsHandler = (evt) => {
         const tabsLinks = document.querySelectorAll(`.${styles.info__nav_link}`);
         tabsLinks.forEach(item => item.classList.remove(styles.info__nav_link__active));
@@ -31,7 +32,9 @@ class Product extends Component {
 
     // always on top of page, without smooth scroll
     componentDidMount() {
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 0);
+
+
     }
 
     isProductInCart = (products, id) => products.find(item => item.id === id);
@@ -51,6 +54,7 @@ class Product extends Component {
             <Layout>
                 <section className={`${common.container} ${styles.item_bg}`}>
                     <div className={`${common.wrapper} ${styles.order}`}>
+
                         <div className={styles.order__img_wrapper}>
                             <img
                                 className={styles.order__img}
