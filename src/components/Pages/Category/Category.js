@@ -59,7 +59,7 @@ class Category extends Component {
                                                 <NavLink to={`/product/${category.categoryAlias}/${item.id}`} className={styles.list_link}>
                                                     <img
                                                         className={styles.img_centered}
-                                                        src={`${category.imgPrefix}/${category.categoryAlias}/${item.imgPath}`}
+                                                        src={`${category.imgPrefix}/${category.categoryAlias}/${item.imgPath.md}`}
                                                         //src="/img/categories/accessoires-categorie/oneplus_7t_silicone_red_380_380-crop.png"
                                                         alt="image"
                                                     />
