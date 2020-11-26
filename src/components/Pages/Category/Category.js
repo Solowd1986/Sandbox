@@ -7,6 +7,7 @@ import {NavLink} from "react-router-dom";
 import ProductPrice from "../../Core/ProductPrice/ProductPrice";
 import OrderButton from "../../Core/OrderButton/OrderButton";
 import actions from "../../../redux/actions";
+import SortPorducts from "../../Core/SortProducts/SortProducts";
 
 class Category extends Component {
 
@@ -35,6 +36,11 @@ class Category extends Component {
                         {/*<h3 className={styles.title}>{category.categoryTitle}</h3>*/}
                     </div>
                 </div>
+
+                <div className={common.wrapper}>
+                    <SortPorducts/>
+                </div>
+
                 <div className={`${common.wrapper} ${styles.list_wrapper}`}>
                     <ul className={styles.list}>
                         {Array.from(Array(3), (e, i) => {

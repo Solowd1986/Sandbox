@@ -102,14 +102,36 @@
 .promo_list__title {
   margin-bottom: 10px;
   padding: 0 15px;
-  font-size: 14px;
-  font-weight: 300;
+  font-size: 16px;
+  font-weight: 500;
   line-height: 1.7;
   text-align: center;
 
   & > span {
     display: inline-block;
   }
+}
+
+.installment {
+  align-self: center;
+  margin-bottom: 10px;
+  padding: 4px 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: $white;
+  border-radius: 5px;
+  background-color: $blue;
+}
+
+
+.most_endorsed {
+  align-self: center;
+  margin-bottom: 10px;
+  padding: 4px 8px;
+  font-weight: 600;
+  color: $white;
+  border-radius: 5px;
+  background-color: $red-100;
 }
 
 .price {

@@ -1,0 +1,55 @@
+@import "~scss/common.module";
+
+.sort_wrapper {
+  width: 250px;
+  margin-bottom: 30px;
+}
+
+
+.sort_btn_default {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  height: 44px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  font-size: .875rem;
+  line-height: 1.25rem;
+  border: 2px solid #e6e8f0;
+  border-radius: 4px;
+  background: #fff;
+
+  &:hover svg {
+    transform: rotate(180deg);
+  }
+
+  &:hover + .list {
+    display: flex;
+  }
+
+  & > svg {
+    transition: transform .2s linear;
+  }
+
+
+}
+
+.list {
+  display: none;
+  position: absolute;
+  height: 0;
+  flex-direction: column;
+  background-color: $white;
+  transition: .3s linear;
+}
+
+.sort_btn {
+  padding: 12px 16px;
+  font-size: 16px;
+  line-height: 20px;
+  color: $black;
+  text-align: left;
+  background-color: $white;
+  cursor: pointer;
+}

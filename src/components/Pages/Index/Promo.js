@@ -11,6 +11,10 @@ import OrderButton from "../../Core/OrderButton/OrderButton"
 import ProductPrice from "../../Core/ProductPrice/ProductPrice";
 
 class Promo extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     state = {
         modal: false
     };
@@ -48,7 +52,10 @@ class Promo extends Component {
     };
 
 
+
     render() {
+
+
         //console.log(this.props);
         const [phones, accessoires, gadgets] = this.props.db.category;
         return (
@@ -68,9 +75,10 @@ class Promo extends Component {
 
 
                     <h2 className={styles.promo_section_title}>Рекомендуем</h2>
+
                     <ul className={styles.promo_list}>
                         {/*ограничиваем вывод четырьмя элементами на странице promo*/}
-                        {this.getRandomProducts(phones.productList).map((item, i) => {
+                        {phones.productList.slice(0, 4).map((item, i) => {
                             return (
                                 <li key={item.id} className={styles.promo_list__item}>
                                     <span className={
@@ -93,6 +101,8 @@ class Promo extends Component {
                                         <span>{item.title}</span>
                                         <span>({item.specifications.color})</span>
                                     </div>
+                                    <div className={styles.installment}>Рассрочка 0-0-12</div>
+                                    <div className={styles.most_endorsed}>Хит продаж</div>
 
 
                                     <ProductPrice product={item} classList={{ main: `${styles.price}`, discount: `${styles.price__discount}` }}/>
