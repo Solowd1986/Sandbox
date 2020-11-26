@@ -204,10 +204,11 @@
 
 
 .features__desc {
+  margin-top: 0;
   margin-bottom: 30px;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: normal;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 28px;
 
   @media (max-width: 870px) {
     padding: 0 10px;
