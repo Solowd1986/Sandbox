@@ -107,6 +107,7 @@
 
 .order__btn_block {
   width: 50%;
+  min-width: 325px;
   margin-bottom: 20px;
   @media (max-width: 448px) {
     width: 100%;
@@ -197,13 +198,10 @@
 .features__wrapper {
   display: flex;
   flex-direction: column;
-
-  &:not(:last-child) {
-    margin-bottom: 30px;
-  }
 }
 
 .features__title {
+  margin-top: 0;
   font-size: 25px;
   font-weight: 600;
 
@@ -228,6 +226,7 @@
 
 .features__img {
   align-self: center;
+  margin-bottom: 35px;
   overflow: hidden;
   vertical-align: bottom;
   border-radius: 8px;

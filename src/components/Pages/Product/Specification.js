@@ -2,11 +2,7 @@ import React from "react";
 import styles from "./product.module.scss";
 
 const Specification = props => {
-    console.log(props);
     const specs = props.specs;
-    console.log(specs);
-    
-    
     return (
         <>
             {/*Блок характеристик*/}

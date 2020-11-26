@@ -44,8 +44,8 @@ class Product extends Component {
         const category = this.props.db.category.find(item => item.categoryAlias === this.props.match.params.category);
         const product = this.props.db.category.find(item => item.categoryAlias === category.categoryAlias).productList.find(item => item.id === id);
 
-        console.log(category);
-        console.log(product);
+        //console.log(category);
+        //console.log(product);
 
         return (
             <Layout>
@@ -76,7 +76,6 @@ class Product extends Component {
                             </p>
 
                             <ProductPrice product={product} classList={{ main: `${styles.order__price}`, discount: `${styles.order__price__discount}` }}/>
-
 
                             <div className={styles.order__btn_block}>
                                 {

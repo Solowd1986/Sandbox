@@ -143,7 +143,7 @@ class Promo extends Component {
                                         <img
                                             className={styles.promo_list__img}
                                             // path from public folder
-                                            src={`${gadgets.imgPrefix}/${gadgets.categoryAlias}/${item.imgPath}`}
+                                            src={`${gadgets.imgPrefix}/${gadgets.categoryAlias}/${item.imgPath.md}`}
                                             alt={item.imgAlt}/>
                                     </NavLink>
                                     <div className={styles.promo_list__title}>
