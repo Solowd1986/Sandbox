@@ -84,7 +84,6 @@ class OrderSummary extends Component {
 
     onBlurHandler = (evt, id, quantity) => {
 
-        console.log(2);
         
         const value = Math.abs(parseInt(quantity));
 

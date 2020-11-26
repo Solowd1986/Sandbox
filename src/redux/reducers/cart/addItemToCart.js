@@ -12,7 +12,7 @@ export default function addItemToCart(state, evt, id, category) {
 
     //add some fields
     currentProduct.quantity = 1;
-    currentProduct.imgFullPath = `${category.imgPrefix}/${category.categoryAlias}/${currentProduct.imgPath}`;
+    currentProduct.imgFullPath = `${category.imgPrefix}/${category.categoryAlias}/${currentProduct.imgPath.md}`;
 
 
     if (products.find(item => item.id === currentProduct.id)) {
