@@ -17,9 +17,9 @@ export default {
                 {
                     id: 1,
                     title: "OnePlus 8T 8GB + 128GB ",
+                    desc: "Смартфон, Android 10, OxygenOS 10.0 Четыре камеры 48 МП/8 МП/48 МП/5 МП, автофокус Количество SIM: 2, Режим работы: Попеременный Диагональ: 6.78, 3168x1440 (AMOLED)",
                     price: 76000,
                     rest: 12,
-
 
                     promoBlock: [
                         {
@@ -88,8 +88,16 @@ export default {
                         announceDate: "2020-04-12",
                     },
 
-                    imgPath: "oneplus_8_8gb_128gb_aqua/oneplus_8_8gb_128gb_aqua_275_1.png",
-                    imgLgPath: "oneplus_8_8gb_128gb_aqua/oneplus_8_8gb_128gb_aqua_600_1.png",
+                    imgPath: {
+                        sm: "oneplus_8_8gb_128gb_aqua/oneplus_8_8gb_128gb_aqua_275_1.png",
+                        md: "oneplus_8_8gb_128gb_aqua/oneplus_8_8gb_128gb_aqua_380_1.png",
+                        lg: [
+                            "oneplus_8_8gb_128gb_aqua/oneplus_8_8gb_128gb_aqua_600_1.png",
+                            "oneplus_8_8gb_128gb_aqua/oneplus_8_8gb_128gb_aqua_600_2.png",
+                            "oneplus_8_8gb_128gb_aqua/oneplus_8_8gb_128gb_aqua_600_3.png",
+                        ],
+                    },
+
                     imgAlt: "promo-phone-image",
                     discount: true
                 },
@@ -97,6 +105,7 @@ export default {
                 {
                     id: 2,
                     title: "OnePlus 8T 12GB + 256GB",
+                    desc: "Смартфон, Android 10, OxygenOS 10.0 Четыре камеры 48 МП/8 МП/48 МП/5 МП, автофокус Количество SIM: 2, Режим работы: Попеременный Диагональ: 6.78, 3168x1440 (AMOLED)",
                     price: 81000,
                     rest: 52,
 
@@ -170,9 +179,16 @@ export default {
                         announceDate: "2020-05-12",
                     },
 
+                    imgPath: {
+                        sm: "oneplus_8_12gb_256gb_moon/oneplus_8_12gb_256gb_moon_275_1.png",
+                        md: "oneplus_8_12gb_256gb_moon/oneplus_8_12gb_256gb_moon_380_1.png",
+                        lg: [
+                            "oneplus_8_12gb_256gb_moon/oneplus_8_12gb_256gb_moon_600_1.png",
+                            "oneplus_8_12gb_256gb_moon/oneplus_8_12gb_256gb_moon_600_2.png",
+                            "oneplus_8_12gb_256gb_moon/oneplus_8_12gb_256gb_moon_600_3.png",
+                        ],
+                    },
 
-                    imgPath: "oneplus_8_12gb_256gb_moon/oneplus_8_12gb_256gb_moon_275_1.png",
-                    imgLgPath: "oneplus_8_12gb_256gb_moon/oneplus_8_12gb_256gb_moon_600_1.png",
                     imgAlt: "promo-phone-image",
                     discount: false
                 },
@@ -181,6 +197,8 @@ export default {
                 {
                     id: 3,
                     title: "Oneplus 7 Pro 8GB + 256GB",
+                    desc: "Смартфон, Android 9, OxygenOS 8.5 Четыре камеры 48 МП/8 МП/48 МП/5 МП, автофокус Количество SIM: 1, Режим работы: Попеременный Диагональ: 5.78," +
+                        " 2168x1440 (AMOLED)",
                     price: 51000,
                     rest: 34,
 
@@ -253,14 +271,24 @@ export default {
                         announceDate: "2018-10-02",
                     },
 
-                    imgPath: "oneplus_7_8gb_256gb_red/oneplus_7_8gb_256gb_red_275_1.png",
-                    imgLgPath: "oneplus_7_8gb_256gb_red/oneplus_7_8gb_256gb_red_600_1.png",
+                    imgPath: {
+                        sm: "oneplus_7_8gb_256gb_red/oneplus_7_8gb_256gb_red_275_1.png",
+                        md: "oneplus_7_8gb_256gb_red/oneplus_7_8gb_256gb_red_380_1.png",
+                        lg: [
+                            "oneplus_7_8gb_256gb_red/oneplus_7_8gb_256gb_red_600_1.png",
+                            "oneplus_7_8gb_256gb_red/oneplus_7_8gb_256gb_red_600_2.png",
+                            "oneplus_7_8gb_256gb_red/oneplus_7_8gb_256gb_red_600_3.png",
+                        ],
+                    },
+
                     imgAlt: "promo-phone-image",
                     discount: false
                 },
                 {
                     id: 4,
                     title: "Oneplus 7 Pro 12GB + 256GB",
+                    desc: "Смартфон, Android 9, OxygenOS 8.5 Четыре камеры 48 МП/8 МП/48 МП/5 МП, автофокус Количество SIM: 1, Режим работы: Попеременный Диагональ: 5.78," +
+                        " 2168x1440 (AMOLED)",
                     price: 76000,
                     rest: 32,
 
@@ -334,9 +362,16 @@ export default {
                         announceDate: "2020-01-12",
                     },
 
+                    imgPath: {
+                        sm: "oneplus_7_12gb_256gb_grey/oneplus_7_12gb_256gb_grey_275_1.png",
+                        md: "oneplus_7_12gb_256gb_grey/oneplus_7_12gb_256gb_grey_380_1.png",
+                        lg: [
+                            "oneplus_7_12gb_256gb_grey/oneplus_7_12gb_256gb_grey_600_1.png",
+                            "oneplus_7_12gb_256gb_grey/oneplus_7_12gb_256gb_grey_600_2.png",
+                            "oneplus_7_12gb_256gb_grey/oneplus_7_12gb_256gb_grey_600_3.png",
+                        ],
+                    },
 
-                    imgPath: "oneplus_7_12gb_256gb_grey/oneplus_7_12gb_256gb_grey_275_1.png",
-                    imgLgPath: "oneplus_7_12gb_256gb_grey/oneplus_7_12gb_256gb_grey_600_1.png",
                     imgAlt: "promo-phone-image",
                     discount: false
                 },
@@ -344,6 +379,8 @@ export default {
                 {
                     id: 8,
                     title: "Oneplus 6T 6GB + 128GB",
+                    desc: "Смартфон, Android 8, OxygenOS 6 Три камеры 48 МП/4 МП/5 МП, автофокус Количество SIM: 1, Режим работы: Попеременный Диагональ: 4.78," +
+                        " 1268x1140 (LED)",
                     price: 44500,
                     rest: 100,
 
@@ -418,14 +455,24 @@ export default {
                         announceDate: "2016-04-14",
                     },
 
-                    imgPath: "oneplus_6t_6gb_128gb_black/oneplus_6t_6gb_128gb_black_275_1.png",
-                    imgLgPath: "oneplus_6t_6gb_128gb_black/oneplus_6t_6gb_128gb_black_600_1.png",
+                    imgPath: {
+                        sm: "oneplus_6t_6gb_128gb_black/oneplus_6t_6gb_128gb_black_275_1.png",
+                        md: "oneplus_6t_6gb_128gb_black/oneplus_6t_6gb_128gb_black_380_1.png",
+                        lg: [
+                            "oneplus_6t_6gb_128gb_black/oneplus_6t_6gb_128gb_black_600_1.png",
+                            "oneplus_6t_6gb_128gb_black/oneplus_6t_6gb_128gb_black_600_2.png",
+                            "oneplus_6t_6gb_128gb_black/oneplus_6t_6gb_128gb_black_600_3.png",
+                        ],
+                    },
+
                     imgAlt: "promo-phone-image",
                     discount: true,
                 },
                 {
                     id: 9,
                     title: "Oneplus 6T 8GB + 128GB",
+                    desc: "Смартфон, Android 8, OxygenOS 6 Три камеры 48 МП/4 МП/5 МП, автофокус Количество SIM: 1, Режим работы: Попеременный Диагональ: 4.78," +
+                        " 1268x1140 (LED)",
                     price: 61000,
                     rest: 0,
 
@@ -500,9 +547,15 @@ export default {
                         announceDate: "2017-02-19",
                     },
 
-
-                    imgPath: "oneplus_6t_8gb_128gb_purple/oneplus_6t_8gb_128gb_purple_275_1.png",
-                    imgLgPath: "oneplus_6t_8gb_128gb_purple/oneplus_6t_8gb_128gb_purple_600_1.png",
+                    imgPath: {
+                        sm: "oneplus_6t_8gb_128gb_purple/oneplus_6t_8gb_128gb_purple_275_1.png",
+                        md: "oneplus_6t_8gb_128gb_purple/oneplus_6t_8gb_128gb_purple_380_1.png",
+                        lg: [
+                            "oneplus_6t_8gb_128gb_purple/oneplus_6t_8gb_128gb_purple_600_1.png",
+                            "oneplus_6t_8gb_128gb_purple/oneplus_6t_8gb_128gb_purple_600_2.png",
+                            "oneplus_6t_8gb_128gb_purple/oneplus_6t_8gb_128gb_purple_600_3.png",
+                        ],
+                    },
                     imgAlt: "promo-phone-image",
                     discount: false
                 },

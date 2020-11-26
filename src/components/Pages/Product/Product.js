@@ -54,18 +54,26 @@ class Product extends Component {
                         <div className={styles.order__img_wrapper}>
                             <img
                                 className={styles.order__img}
-                                src={`${category.imgPrefix}/${category.categoryAlias}/${product.imgLgPath}`}
+                                src={`${category.imgPrefix}/${category.categoryAlias}/${product.imgPath.lg[0]}`}
                                 alt={product.imgAlt}
                             />
                             <div className={styles.order__slider}>
-                                <img className="" width="60" height="60" src="/static/media/accessoires/oneplus_bullets_wireless_600_1.png" alt="generic_img"/>
-                                <img className="" width="60" height="60" src="/static/media/accessoires/oneplus_bullets_wireless_600_2.png" alt="generic_img"/>
+                                <img className="" width="60" height="60"
+                                     src={`${category.imgPrefix}/${category.categoryAlias}/${product.imgPath.lg[1]}`}
+                                     alt={product.imgAlt}
+                                />
+                                <img className="" width="60" height="60"
+                                     src={`${category.imgPrefix}/${category.categoryAlias}/${product.imgPath.lg[2]}`}
+                                     alt={product.imgAlt}
+                                />
                             </div>
                         </div>
 
                         <div className={styles.order__info_wrapper}>
                             <h1 className={styles.order__title}>{product.title}</h1>
-                            <p className={styles.order__desc}>OnePlus Bullets Wireless дают Вам ту свободу и удобство, которой Вам так не хватало.</p>
+                            <p className={styles.order__desc}>
+                                {product.desc && product.desc}
+                            </p>
 
                             <ProductPrice product={product} classList={{ main: `${styles.order__price}`, discount: `${styles.order__price__discount}` }}/>
 
