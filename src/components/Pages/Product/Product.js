@@ -33,9 +33,30 @@ class Product extends Component {
     // always on top of page, without smooth scroll
     componentDidMount() {
         window.scrollTo(0, 0);
-
-
     }
+
+
+    slider = (evt) => {
+        const target = evt.target;
+        console.dir(target);
+
+        if (target.dataset.active === "true") return;
+
+        const activeDataset = document.querySelector("[data-active='true']");
+        activeDataset.removeAttribute('data-active');
+
+        target.dataset.active = "true";
+        const activeSlide = document.querySelector("[data-img='lg']");
+
+        activeSlide.classList.add("animate__fadeOutLeft", "animate__animated");
+        activeSlide.addEventListener("animationend", function (evt) {
+            activeSlide.src = target.src;
+            activeSlide.classList.remove("animate__fadeOutLeft", "animate__animated");
+            activeSlide.classList.add("animate__fadeIn", "animate__animated");
+            console.log(activeSlide.src);
+        });
+    };
+
 
     isProductInCart = (products, id) => products.find(item => item.id === id);
 
@@ -58,15 +79,24 @@ class Product extends Component {
                         <div className={styles.order__img_wrapper}>
                             <img
                                 className={styles.order__img}
+                                data-img={"lg"}
                                 src={`${category.imgPrefix}/${category.categoryAlias}/${product.imgPath.lg[0]}`}
                                 alt={product.imgAlt}
                             />
                             <div className={styles.order__slider}>
                                 <img className="" width="60" height="60"
+                                     onClick={this.slider}
+                                     data-active={true}
+                                     src={`${category.imgPrefix}/${category.categoryAlias}/${product.imgPath.lg[0]}`}
+                                     alt={product.imgAlt}
+                                />
+                                <img className="" width="60" height="60"
+                                     onClick={this.slider}
                                      src={`${category.imgPrefix}/${category.categoryAlias}/${product.imgPath.lg[1]}`}
                                      alt={product.imgAlt}
                                 />
                                 <img className="" width="60" height="60"
+                                     onClick={this.slider}
                                      src={`${category.imgPrefix}/${category.categoryAlias}/${product.imgPath.lg[2]}`}
                                      alt={product.imgAlt}
                                 />
