@@ -65,7 +65,7 @@ class Category extends Component {
                                                     />
                                                     <div className={styles.item_desc}>
                                                         <span>{item.title}</span>
-                                                        {category.categoryAlias === "phones" && <span>Цвет: {item.color}</span>}
+                                                        {category.categoryAlias === "phones" && <span>Цвет: {item.specifications.color}</span>}
                                                     </div>
                                                 </NavLink>
 

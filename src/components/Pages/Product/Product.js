@@ -38,7 +38,7 @@ class Product extends Component {
 
     slider = (evt) => {
         const target = evt.target;
-        console.dir(target);
+        //console.dir(target);
 
         if (target.dataset.active === "true") return;
 
@@ -53,7 +53,7 @@ class Product extends Component {
             activeSlide.src = target.src;
             activeSlide.classList.remove("animate__fadeOutLeft", "animate__animated");
             activeSlide.classList.add("animate__fadeIn", "animate__animated");
-            console.log(activeSlide.src);
+            //console.log(activeSlide.src);
         });
     };
 
@@ -75,7 +75,6 @@ class Product extends Component {
             <Layout>
                 <section className={`${common.container} ${styles.item_bg}`}>
                     <div className={`${common.wrapper} ${styles.order}`}>
-
                         <div className={styles.order__img_wrapper}>
                             <img
                                 className={styles.order__img}
