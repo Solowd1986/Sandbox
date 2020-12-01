@@ -9,7 +9,7 @@
 
 // Фикс для IE, иначе слайд не занимал всю ширину экрана и справа оставалось пустое место. Так мы только в IE
 // растягиваем слайд на 100% экрана.
-.slider__slider_img {
+.img {
   vertical-align: bottom;
   @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     width: 100%;

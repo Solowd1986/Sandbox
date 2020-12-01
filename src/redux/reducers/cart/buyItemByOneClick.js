@@ -14,17 +14,17 @@ export default function addItemToCart(state, evt, id, category) {
     currentProduct.quantity = 1;
     currentProduct.imgFullPath = `${category.imgPrefix}/${category.categoryAlias}/${currentProduct.imgPath.md}`;
 
-    // if (products.find(item => item.id === currentProduct.id)) {
-    //     return {
-    //         ...state,
-    //         defaultSettings: {
-    //             buttonsDisabled: false
-    //         }
-    //     };
-    // }
+
+    if (products.find(item => item.id === currentProduct.id)) {
+        return {
+            ...state,
+            defaultSettings: {
+                buttonsDisabled: false
+            }
+        };
+    }
 
     products.push(currentProduct);
-    localStorage.setItem("cart", JSON.stringify(products));
 
     return {
         ...state,
@@ -35,5 +35,9 @@ export default function addItemToCart(state, evt, id, category) {
         products
     };
 }
+
+
+
+
 
 

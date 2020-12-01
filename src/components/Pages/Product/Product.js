@@ -16,6 +16,15 @@ import ProductPrice from "../../Core/ProductPrice/ProductPrice";
 
 
 class Product extends Component {
+    constructor(props) {
+        super(props);
+        this.slideTransitionEnabled = false;
+    }
+
+    // always on top of page, without smooth scroll
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
 
 
     tabsHandler = (evt) => {
@@ -30,18 +39,14 @@ class Product extends Component {
             .classList.add(...[`${styles.tab_active}`, "animate__animated", "animate__fadeIn"]);
     };
 
-    // always on top of page, without smooth scroll
-    componentDidMount() {
-        window.scrollTo(0, 0);
-    }
-
 
     slider = (evt) => {
         const target = evt.target;
         //console.dir(target);
 
-        if (target.dataset.active === "true") return;
+        if (target.dataset.active === "true" || this.slideTransitionEnabled) return;
 
+        this.slideTransitionEnabled = true;
         const activeDataset = document.querySelector("[data-active='true']");
         activeDataset.removeAttribute('data-active');
 
@@ -49,10 +54,11 @@ class Product extends Component {
         const activeSlide = document.querySelector("[data-img='lg']");
 
         activeSlide.classList.add("animate__fadeOutLeft", "animate__animated");
-        activeSlide.addEventListener("animationend", function (evt) {
+        activeSlide.addEventListener("animationend", () => {
             activeSlide.src = target.src;
             activeSlide.classList.remove("animate__fadeOutLeft", "animate__animated");
             activeSlide.classList.add("animate__fadeIn", "animate__animated");
+            this.slideTransitionEnabled = false;
             //console.log(activeSlide.src);
         });
     };
@@ -61,15 +67,10 @@ class Product extends Component {
     isProductInCart = (products, id) => products.find(item => item.id === id);
 
     render() {
-
         //console.log(this.props);
-        
         const id = parseInt(this.props.match.params.id);
         const category = this.props.db.category.find(item => item.categoryAlias === this.props.match.params.category);
         const product = this.props.db.category.find(item => item.categoryAlias === category.categoryAlias).productList.find(item => item.id === id);
-
-        //console.log(category);
-        //console.log(product);
 
         return (
             <Layout>
@@ -113,6 +114,7 @@ class Product extends Component {
                             <div className={styles.order__btn_block}>
                                 {
                                     this.isProductInCart(this.props.cart.products, product.id)
+                                        // Если товар внесен в корзину:
                                         ?
                                         <>
                                             <OrderButton
@@ -124,14 +126,15 @@ class Product extends Component {
 
                                             <OrderButton
                                                 product={product}
-                                                classList={styles.order__btn_buy_by_click}
+                                                disabled={true}
+                                                classList={styles.order__btn_buy_by_click__disable}
                                                 onClick={(evt) => this.props.onAddToCart(evt, product.id, category)}>
                                                 {product.rest === 0 ? "Нет в наличии" : "Купить в один клик"}
                                             </OrderButton>
                                         </>
 
+                                        // Если товар не внесен в корзину:
                                         :
-
                                         <>
                                             <OrderButton
                                                 product={product}

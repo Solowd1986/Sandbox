@@ -1,18 +1,9 @@
-export const addItem = (evt, id, category) => {
+export const buyItemByOneClick = (evt, id, category) => {
     return {
-        type: "cart/addItemToCart",
+        type: "cart/buyItemByOneClick",
         evt,
         id,
         category
-    }
-};
-
-
-export const addItemAsync = (evt, id, category) => {
-    return dispatch => {
-        setTimeout(() => {
-            dispatch(addItem(evt, id, category))
-        }, 1000)
     }
 };
 
@@ -24,6 +15,23 @@ export const disableButton = (evt) => {
     }
 };
 
+export const addItem = (evt, id, category) => {
+    return {
+        type: "cart/addItemToCart",
+        evt,
+        id,
+        category
+    }
+};
+
+export const addItemAsync = (evt, id, category) => {
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(addItem(evt, id, category))
+        }, 1000)
+    }
+};
+
 
 export const removeItem = (evt, id) => {
     return {
@@ -32,7 +40,6 @@ export const removeItem = (evt, id) => {
         id
     }
 };
-
 
 export const removeItemAsync = (evt, id) => {
     return dispatch => {

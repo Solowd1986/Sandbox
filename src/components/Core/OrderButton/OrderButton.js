@@ -21,8 +21,9 @@ const Button = props => {
                 `}
 
             onClick={props.onClick}
+            // данный атрибут используется для передачи имени класса кнопки, для смены ее вида на активную/неактивную
             data-disabled={styles.active}
-            disabled={props.product.rest === 0 || props.state.cart.defaultSettings.buttonsDisabled}>
+            disabled={props.product.rest === 0 || props.state.cart.defaultSettings.buttonsDisabled || props.disabled}>
             {props.children}
             {
                 (props.product.rest !== 0 && props.children !== "Убрать из заказа")

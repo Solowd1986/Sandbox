@@ -1,5 +1,5 @@
 export default function deleteItemFromCart(state, evt, id) {
-    console.log(id);
+    //console.log(id);
     //console.log(category);
     //console.log(state);
 
@@ -10,6 +10,7 @@ export default function deleteItemFromCart(state, evt, id) {
 
         const currentProductIndex = products.indexOf(products.find(item => item.id === id));
         products.splice(currentProductIndex, 1);
+        localStorage.setItem("cart", JSON.stringify(products));
 
         return {
             ...state,
@@ -20,7 +21,6 @@ export default function deleteItemFromCart(state, evt, id) {
             products
         };
     }
-
 
     return {
         ...state,

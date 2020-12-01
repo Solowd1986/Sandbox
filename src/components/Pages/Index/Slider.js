@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import styles from "./slider.module.scss";
 import {connect} from "react-redux";
+import {NavLink} from "react-router-dom";
 
 import $ from "jquery";
 import "slick-carousel/slick/slick.min";
@@ -32,12 +33,12 @@ class Slider extends Component {
                     {this.props.slider.map((item, i) => {
                         return (
                             <div key={i}>
-                                <a className="" href="#">
+                                <NavLink className="" to={"/category/phones"}>
                                     <img
-                                        className={styles.slider__slider_img}
+                                        className={styles.img}
                                         src={`${item.imgPrefix}/slider/${item.imgFullPath}`}
                                         alt={item.imgAlt}/>
-                                </a>
+                                </NavLink>
                             </div>
                         )
                     })}

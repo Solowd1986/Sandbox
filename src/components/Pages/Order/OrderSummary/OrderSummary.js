@@ -23,7 +23,7 @@ class OrderSummary extends Component {
      *
      * То есть, твоя задача узнать, когда стейт заполняется данными, и повторяется ли это.
      *
-     * Каждый метод, кроме transitionalValueHandler просто еберт значение, и записывает ег ов оба обьекта, стейт и пропс.
+     * Каждый метод, кроме transitionalValueHandler просто берет значение, и записывает его в оба обьекта, стейт и пропс.
      * Так они синхронны, корретны и всегда при рендере выводятся свойства для нужных комопнетов, так ка у нас используются оба
      *, часть от пропсов, часть отейта, ну, чтобы получать значение от свободного ввода и хранить его где-то. На этапе transitionalValueHandler
      * корретность не провертся а просто пишется как ест ьв стейт. А вот при блюре - проверятся и результат пишется уже нормальный
@@ -183,6 +183,8 @@ class OrderSummary extends Component {
             <section className={styles.summary}>
                 <h2 className={styles.caption}>Ваш заказ</h2>
                 {this.props.orderedItems.map(item => {
+                    console.log(item);
+
                     return (
                         <div key={item.title} className={styles.item}>
                             <div className={styles.info}>
@@ -194,20 +196,11 @@ class OrderSummary extends Component {
                                 <div className={styles.info_inner_wrapper}>
                                     <p className={styles.product_title}>
                                         <span>{item.title}</span>
-                                        {item.color && <span>{item.color}</span>}
+                                        {item.specifications !== undefined && <span>({item.specifications.color})</span>}
                                     </p>
                                     <div className={styles.counter_block}>
                                         <span onClick={(evt) => this.dec(evt, item.id, item.quantity - 1)}
                                               className={`${styles.counter} ${styles.counter_minus}`}/>
-
-                                        {/*<label>*/}
-                                        {/*    <input*/}
-                                        {/*        type="text" name="customer-product-count"*/}
-                                        {/*        onChange={this.changer}*/}
-                                        {/*        value={item.quantity}*/}
-                                        {/*    />*/}
-                                        {/*</label>*/}
-
 
                                         <label>
                                             <input
