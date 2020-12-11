@@ -36,7 +36,6 @@ class Promo extends Component {
 
     isProductInCart = (products, id) => products.find(item => item.id === id);
 
-
     getRandomProducts = (list, amount = 4) => {
         const result = [];
         while (result.length < 4) {
@@ -51,17 +50,12 @@ class Promo extends Component {
         return result;
     };
 
-
-
     render() {
-
-
         //console.log(this.props);
         const [phones, accessoires, gadgets] = this.props.db.category;
         return (
             <section className={`${common.container} ${styles.promo_wrapper}`}>
                 <main className={`${common.wrapper} ${styles.promo}`}>
-
 
                     {/*modal*/}
                     <button style={{ padding: "10px" }} onClick={this.show}>show</button>
@@ -75,7 +69,6 @@ class Promo extends Component {
 
 
                     <h2 className={styles.promo_section_title}>Рекомендуем</h2>
-
                     <ul className={styles.promo_list}>
                         {/*ограничиваем вывод четырьмя элементами на странице promo*/}
                         {phones.productList.slice(0, 4).map((item, i) => {
@@ -104,9 +97,7 @@ class Promo extends Component {
                                     <div className={styles.installment}>Рассрочка 0-0-12</div>
                                     <div className={styles.most_endorsed}>Хит продаж</div>
 
-
                                     <ProductPrice product={item} classList={{ main: `${styles.price}`, discount: `${styles.price__discount}` }}/>
-
                                     {
                                         this.isProductInCart(this.props.cart.products, item.id)
                                             ?
@@ -130,7 +121,7 @@ class Promo extends Component {
                     <h2 className={styles.promo_section_title}>Популярные гаджеты</h2>
 
                     <ul className={styles.promo_list}>
-                        {this.getRandomProducts(gadgets.productList).map((item) => {
+                        {gadgets.productList.slice(0, 4).map((item, i) => {
                             return (
                                 <li key={item.id} className={styles.promo_list__item}>
                                     <span className={
@@ -174,7 +165,7 @@ class Promo extends Component {
 
                     <h2 className={styles.promo_section_title}>Аксессуары</h2>
                     <ul className={styles.promo_list}>
-                        {this.getRandomProducts(accessoires.productList).map((item) => {
+                        {accessoires.productList.slice(0, 4).map((item, i) => {
                             return (
                                 <li key={item.id} className={styles.promo_list__item}>
                                     <span className={

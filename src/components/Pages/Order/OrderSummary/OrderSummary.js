@@ -177,8 +177,8 @@ class OrderSummary extends Component {
 
 
     render() {
-        console.log(this.props);
-        console.log(this.state);
+        //console.log(this.props);
+        //console.log(this.state);
         return (
             <section className={styles.summary}>
                 <h2 className={styles.caption}>Ваш заказ</h2>

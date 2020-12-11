@@ -6,10 +6,6 @@ import {Provider} from "react-redux";
 import store from "./redux/storeInit";
 
 
-let str = "alert";
-//console.log(/[1-9*]/.test(str));
-
-
 function apiRequest(url) {
     return fetch(url).then((responce, reject) => {
         if (responce.status !== 200) {
@@ -35,7 +31,6 @@ axios.get('/api/get/all')
 }).then(function () {
     // always executed
 });
-
 
 
 function asyncAction(action) {
@@ -65,9 +60,6 @@ axios.get('/api/get/id/1')
 /**
  * Logic of first loading, get data from server
  */
-
-
-
 export default class App extends Component {
     render() {
         return (
