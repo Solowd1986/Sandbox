@@ -9,6 +9,7 @@ import PromoBadge from "../../PromoBadge/PromoBadge";
 import Evaluate from "../../test/Evaluate";
 
 import Layout from "../../Core/Layout/Layout";
+import LazyLoad from "../../Core/LazyLoad/LazyLoad";
 
 export default class MainPage extends Component {
     render() {
@@ -16,8 +17,10 @@ export default class MainPage extends Component {
             <Layout>
                 <Slider/>
 
+
                 {/*<Evaluate/>*/}
 
+                <LazyLoad/>
                 <Promo/>
                 <BrandStory/>
                 <Announcements/>

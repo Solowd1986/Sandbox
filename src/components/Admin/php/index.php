@@ -2,15 +2,22 @@
 
 
 // timeout 4 sec maximun, else - error msg
-sleep(4);
+sleep(1);
 
-$uri = $_SERVER["REQUEST_URI"];
-$prefix = "api/";
-$cnt = strpos($uri, $prefix) + strlen($prefix);
-$res = mb_substr($uri, $cnt, strlen($uri));
+$data = ["first", "second", "third"];
 
-print json_encode($res);
+print json_encode($data);
 
+
+//$uri = $_SERVER["REQUEST_URI"];
+//$prefix = "api/";
+//$cnt = strpos($uri, $prefix) + strlen($prefix);
+//$res = mb_substr($uri, $cnt, strlen($uri));
+
+//print json_encode($res);
+
+
+die();
 
 spl_autoload_register(function ($class) {
     $path = __DIR__ . DIRECTORY_SEPARATOR . str_replace('\\', '/', $class . '.php');
