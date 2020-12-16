@@ -20,12 +20,9 @@ class LazyLoad extends Component {
             controller.abort()
         }, 5000);
 
-        let overlay = SimpleOverlay.create();
+        let overlay = new SimpleOverlay();
 
-        overlay.addEventListener("click", function (evt) {
-            SimpleOverlay.destroy(overlay);
-            //this.remove();
-            //overlay = null;
+        overlay.node.addEventListener("click", function (evt) {
             controller.abort();
         });
 
@@ -33,12 +30,7 @@ class LazyLoad extends Component {
             //console.log(responce);
 
             getDataBtn.classList.remove(styles.active);
-            //document.body.classList.remove(styles.body_fixed);
-            SimpleOverlay.destroy(overlay);
-
-            //overlay.remove();
-            //overlay = null;
-
+            overlay.destroy();
 
             if (responce.length === 0) {
                 getDataBtn.remove();
@@ -50,23 +42,14 @@ class LazyLoad extends Component {
             div.classList.add(styles.data_block);
             const parentElement = document.querySelector(`.${styles.data_wrapper}`);
             parentElement.append(div);
-
         })).catch(err => {
-            SimpleOverlay.destroy(overlay);
+            overlay.destroy();
             getDataBtn.classList.remove(styles.active);
             timeoutExceeded && getDataBtn.classList.add(styles.error);
-            //document.body.classList.remove(styles.body_fixed);
             console.log("abort from catch");
         });
     };
 
-
-    createOverlay = () => {
-        const overlay = document.createElement("div");
-        overlay.classList.add(styles.overlay);
-        document.body.append(overlay);
-        return overlay;
-    };
 
 
     loadHandler = (evt) => {
