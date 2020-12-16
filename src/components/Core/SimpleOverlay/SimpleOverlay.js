@@ -3,6 +3,8 @@ import styles from "./simple_overlay.module.scss";
 
 class SimpleOverlay {
 
+    static selectorForFixedElements = "[data-fs]";
+
     static calcScrollBarWidth() {
         // Получаем ширину окна, это аналог width: 100vw (то есть ширина 100% + ширина scrollbar)
         const windowWidth = window.innerWidth;
@@ -32,7 +34,6 @@ class SimpleOverlay {
                     const resultOffset = offsetRigth + SimpleOverlay.calcScrollBarWidth();
                     item.style.cssText = `right: ${resultOffset}px;`;
                 }
-
             })
         }
     }
@@ -43,7 +44,6 @@ class SimpleOverlay {
         elements.forEach(item => {
             item.style.removeProperty("width");
             item.style.removeProperty("right");
-
         })
     }
 
@@ -51,15 +51,14 @@ class SimpleOverlay {
     static addScrollbarOffset() {
         if (SimpleOverlay.calcScrollBarWidth() > 0) {
             document.body.style.cssText = `padding-right: ${SimpleOverlay.calcScrollBarWidth()}px`;
-            SimpleOverlay.addOffsetFixedElements("[data-fs]");
+            SimpleOverlay.addOffsetFixedElements(SimpleOverlay.selectorForFixedElements);
         }
-
         document.body.style.cssText += "overflow: hidden";
     };
 
     static removeScrollbarOffset() {
         document.body.style.removeProperty("padding-right");
-        SimpleOverlay.removeOffsetFixedElements("[data-fs]");
+        SimpleOverlay.removeOffsetFixedElements(SimpleOverlay.selectorForFixedElements);
         document.body.style.removeProperty("overflow");
     };
 

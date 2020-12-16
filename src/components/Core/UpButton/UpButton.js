@@ -20,7 +20,7 @@ class UpButton extends Component {
     handleScroll = () => {
         const offset = window.scrollY;
         const viewport = document.documentElement.clientHeight;
-        if (offset > 12) {
+        if (offset > viewport) {
             this.setState({
                 isPageScrolledToBottom: true
             });
