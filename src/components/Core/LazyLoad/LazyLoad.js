@@ -6,9 +6,14 @@ class LazyLoad extends Component {
 
     initRequest = (getDataBtn) => {
 
+        let timeoutExceeded = false;
+
         const controller = new AbortController();
         const signal = controller.signal;
-        setTimeout(() => controller.abort(), 5000);
+        setTimeout(() => {
+            timeoutExceeded = true;
+            controller.abort()
+        }, 5000);
 
         let overlay = this.createOverlay();
         overlay.addEventListener("click", function (evt) {
@@ -39,6 +44,7 @@ class LazyLoad extends Component {
 
         })).catch(err => {
             getDataBtn.classList.remove(styles.active);
+            timeoutExceeded && getDataBtn.classList.add(styles.error);
             document.body.classList.remove(styles.body_fixed);
             console.log("abort from catch");
         });
@@ -56,6 +62,7 @@ class LazyLoad extends Component {
     loadHandler = (evt) => {
         const getDataBtn = evt.currentTarget;
         getDataBtn.classList.add(styles.active);
+        getDataBtn.classList.remove(styles.error);
         document.body.classList.add(styles.body_fixed);
         this.initRequest(getDataBtn);
     };

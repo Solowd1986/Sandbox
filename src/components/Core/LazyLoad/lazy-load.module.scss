@@ -18,6 +18,7 @@
 .data_wrapper {
   display: flex;
   position: relative;
+  min-height: 300px;
   flex-direction: column;
   padding: 10px 10px 70px;
 
@@ -46,6 +47,27 @@
   border: 2px solid #c51abb;
   border-radius: 50px;
   background-color: $white;
+
+  &.error::before {
+    display: block;
+  }
+
+  &::before {
+    content: "Сбой сервера. Попробуйте позже";
+    display: none;
+    position: absolute;
+    width: 340px;
+    top: -45px;
+    left: 50%;
+    z-index: 12;
+    padding: 6px 0;
+    font-size: 19px;
+    font-weight: 500;
+    color: red;
+    border-radius: 10px;
+    background-color: lightgrey;
+    transform: translateX(-50%);
+  }
 
   &.active > .loader {
     animation: rotate .8s linear infinite;
