@@ -8,7 +8,6 @@ export default class ModalOverlay extends Component {
         this.addScrollbarOffset();
     }
 
-
     static defaultProps = {
         setModalStatus: () => {
             console.log("props not have setModalStatus method")
@@ -51,7 +50,7 @@ export default class ModalOverlay extends Component {
 
     render() {
         console.log(this.props);
-        
+
         return (
             <div onClick={this.closeModal}>
                 <div className={`${styles.md_modal} ${this.props.mod && styles.md_show}`} onClick={this.stop}>

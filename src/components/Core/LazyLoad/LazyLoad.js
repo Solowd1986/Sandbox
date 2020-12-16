@@ -1,8 +1,13 @@
 import React, {Component} from "react";
 import styles from "./lazy-load.module.scss"
+import SimpleOverlay from "../SimpleOverlay/SimpleOverlay";
 
 
 class LazyLoad extends Component {
+
+    fixedScrollbar = () => {
+
+    };
 
     initRequest = (getDataBtn) => {
 
@@ -15,10 +20,12 @@ class LazyLoad extends Component {
             controller.abort()
         }, 5000);
 
-        let overlay = this.createOverlay();
+        let overlay = SimpleOverlay.create();
+
         overlay.addEventListener("click", function (evt) {
-            this.remove();
-            overlay = null;
+            SimpleOverlay.destroy(overlay);
+            //this.remove();
+            //overlay = null;
             controller.abort();
         });
 
@@ -26,9 +33,11 @@ class LazyLoad extends Component {
             //console.log(responce);
 
             getDataBtn.classList.remove(styles.active);
-            document.body.classList.remove(styles.body_fixed);
-            overlay.remove();
-            overlay = null;
+            //document.body.classList.remove(styles.body_fixed);
+            SimpleOverlay.destroy(overlay);
+
+            //overlay.remove();
+            //overlay = null;
 
 
             if (responce.length === 0) {
@@ -43,9 +52,10 @@ class LazyLoad extends Component {
             parentElement.append(div);
 
         })).catch(err => {
+            SimpleOverlay.destroy(overlay);
             getDataBtn.classList.remove(styles.active);
             timeoutExceeded && getDataBtn.classList.add(styles.error);
-            document.body.classList.remove(styles.body_fixed);
+            //document.body.classList.remove(styles.body_fixed);
             console.log("abort from catch");
         });
     };
@@ -61,9 +71,11 @@ class LazyLoad extends Component {
 
     loadHandler = (evt) => {
         const getDataBtn = evt.currentTarget;
+
         getDataBtn.classList.add(styles.active);
         getDataBtn.classList.remove(styles.error);
-        document.body.classList.add(styles.body_fixed);
+
+        //document.body.classList.add(styles.body_fixed);
         this.initRequest(getDataBtn);
     };
 

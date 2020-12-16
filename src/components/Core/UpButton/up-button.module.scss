@@ -9,7 +9,7 @@
   border-radius: 5px;
   background-color: $red;
   cursor: pointer;
-  transition: .4s linear;
+  transition: background-color .4s linear;
 
   &:hover {
     background-color: darken($red, 15%);
@@ -19,7 +19,6 @@
     outline: 0;
   }
 }
-
 
 
 .up {
@@ -36,7 +35,7 @@
   background-repeat: no-repeat;
   background-size: contain;
   opacity: 0;
-  transition: .3s linear;
+  transition: opacity .3s linear;
 
   &__show {
     opacity: 0.8;
