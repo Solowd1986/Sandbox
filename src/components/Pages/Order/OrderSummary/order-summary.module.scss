@@ -226,17 +226,11 @@
 // checkout modal
 .checkout_modal {
   display: flex;
-  position: fixed;
-  width: 100%;
-  max-width: 400px;
-  height: 300px;
-  top: 50%;
-  left: 50%;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10px 15px;
+  padding: 30px 20px;
   background-color: lightgrey;
-  transform: translate(-50%, -50%);
-}
 
+}
 /*=============================*/

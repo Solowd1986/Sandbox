@@ -3,6 +3,7 @@ import styles from "./order-summary.module.scss";
 import {connect} from "react-redux";
 import actions from "../../../../redux/actions";
 import OverlayComp from "../../../Core/OverlayComp/OverlayComp";
+import CloseIcon from "../../../Core/CloseIcon/CloseIcon";
 
 class OrderSummary extends Component {
 
@@ -190,7 +191,10 @@ class OrderSummary extends Component {
                     this.props.state.cart.modals.showCheckoutModal
                     &&
                     <OverlayComp toggleOverlay={this.props.toggleOverlay}>
-                        <div className={styles.checkout_modal}>MODAL</div>
+                        <div className={styles.checkout_modal}>
+                            <h3>Спасибо за заказ</h3>
+                            <p>Наш менеджер свяжется с вами в ближайшее время</p>
+                        </div>
                     </OverlayComp>
 
                 }

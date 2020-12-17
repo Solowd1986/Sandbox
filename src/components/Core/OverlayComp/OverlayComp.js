@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import styles from "./overlay-comp.module.scss";
 import actions from "../../../redux/actions";
 import {connect} from "react-redux";
+import CloseIcon from "../CloseIcon/CloseIcon";
 
 class OverlayComp extends Component {
     constructor(props) {
@@ -76,7 +77,7 @@ class OverlayComp extends Component {
             }
         })
 
-    }
+    };
 
     /**
      * Обратная процедура, удаление скроллбара и смещений элементов.
@@ -100,12 +101,13 @@ class OverlayComp extends Component {
     };
 
     render() {
-        console.log(this.props);
-
         return (
             <div onClick={this.destroy} className={styles.overlay}>
-                <div onClick={(evt) => evt.stopPropagation()}>
-                    {this.props.children}
+                <div className={styles.modal_wrapper}>
+                    <CloseIcon/>
+                    <div onClick={(evt) => evt.stopPropagation()}>
+                        {this.props.children}
+                    </div>
                 </div>
             </div>
         )
