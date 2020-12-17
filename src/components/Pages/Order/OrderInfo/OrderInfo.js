@@ -17,7 +17,7 @@ export default class OrderInfo extends Component {
                         <label htmlFor="moscow" className={styles.card}>
                             <div className={styles.card__info}>
                                 <span> Доставка по Москве</span>
-                                <span className={styles.card__pay}>бесплатно</span>
+                                <span className={styles.card__pay}>400 р.</span>
                             </div>
                             <div className={styles.card__extra}>сегодня</div>
                         </label>
@@ -35,7 +35,7 @@ export default class OrderInfo extends Component {
                         <label htmlFor="russia" className={styles.card}>
                             <div className={styles.card__info}>
                                 <span>Доставка по России</span>
-                                <span className={styles.card__pay}>бесплатно</span>
+                                <span className={styles.card__pay}>450 р.</span>
                             </div>
                             <div className={styles.card__extra}>
                                 <img src={basketEpayment} alt="shipping"/>
@@ -120,7 +120,6 @@ export default class OrderInfo extends Component {
                             <div>
                                 <p className={styles.card__info}>
                                     <span className={styles.card__title}>Электронными деньгами</span>
-                                    <span className={styles.card__pay}>бесплатно</span>
                                 </p>
                                 <span>
                                 <img src={basketShipping} alt="epayment"/>

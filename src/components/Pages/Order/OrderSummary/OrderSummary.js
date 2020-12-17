@@ -190,7 +190,7 @@ class OrderSummary extends Component {
                 {
                     this.props.state.cart.modals.showCheckoutModal
                     &&
-                    <OverlayComp toggleOverlay={this.props.toggleOverlay}>
+                    <OverlayComp toggleOverlay={this.props.toggleOverlay} delay={true} coloredBg={true}>
                         <div className={styles.checkout_modal}>
                             <h3>Спасибо за заказ</h3>
                             <p>Наш менеджер свяжется с вами в ближайшее время</p>

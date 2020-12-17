@@ -37,6 +37,7 @@ class Promo extends Component {
 
     isProductInCart = (products, id) => products.find(item => item.id === id);
 
+
     getRandomProducts = (list, amount = 4) => {
         const result = [];
         while (result.length < 4) {
@@ -95,8 +96,12 @@ class Promo extends Component {
                                         <span>{item.title}</span>
                                         <span>({item.specifications.color})</span>
                                     </div>
-                                    {item.discount && <div className={styles.installment}>Рассрочка 0-0-12</div>}
-                                    {!item.discount && <div className={styles.most_endorsed}>Хит продаж</div>}
+
+                                    {item.rest > 0 && item.discount && <div className={styles.installment}>Рассрочка 0-0-12</div>}
+                                    {item.rest > 0 && !item.discount && <div className={styles.most_endorsed}>Хит продаж</div>}
+                                    {item.rest > 0 && (!item.discount || item.discount) && <div className={styles.sim}>
+                                        <span>SIM</span>
+                                        в подарок</div>}
 
                                     <ProductPrice product={item} classList={{ main: `${styles.price}`, discount: `${styles.price__discount}` }}/>
                                     {

@@ -40,7 +40,7 @@ class Header extends Component {
         return (
             <header className={this.state.isPageScrolled ? styles.header_fixed : ''} data-fs={true}>
                 <a className={`${styles.portfolio_controls} ${styles.portfolio_controls__left}`} href="">вернуться</a>
-                <a className={`${styles.portfolio_controls} ${styles.portfolio_controls__right}`} href="#">перейти на GitHub сайта</a>
+                <a className={`${styles.portfolio_controls} ${styles.portfolio_controls__right}`} href="#">перейти на GitHub проекта</a>
 
                 <nav className={`${common.wrapper} ${styles.header}`}>
                     <MobileNavbar/>
