@@ -276,9 +276,6 @@ function setDispatch(dispatch) {
         onDeleteProductFromCart: (evt, id) => {
             dispatch(actions.cart.removeItem(evt, id))
         },
-        enableOverlay: () => {
-            dispatch(actions.cart.enableOverlay());
-        },
         toggleOverlay: () => {
             dispatch(actions.cart.toggleOverlay());
         }

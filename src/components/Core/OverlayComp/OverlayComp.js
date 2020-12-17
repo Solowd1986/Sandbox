@@ -112,21 +112,8 @@ class OverlayComp extends Component {
     }
 }
 
-function getProps(state) {
-    return {
-        state
-    }
-}
 
-function setDispatch(dispatch) {
-    return {
-        disableOverlay: () => {
-            dispatch(actions.cart.disableOverlay());
-        }
-    }
-}
-
-export default connect(getProps, setDispatch)(OverlayComp);
+export default OverlayComp;
 
 
 
