@@ -8,6 +8,7 @@ import ProductPrice from "../../Core/ProductPrice/ProductPrice";
 import OrderButton from "../../Core/OrderButton/OrderButton";
 import actions from "../../../redux/actions";
 import SortPorducts from "../../Core/SortProducts/SortProducts";
+import LazyLoad from "../../Core/LazyLoad/LazyLoad";
 
 class Category extends Component {
 
@@ -23,80 +24,75 @@ class Category extends Component {
 
         return (
             <Layout>
-                <div className={styles.sign_bg}>
-                    <img
-                        className={styles.sign_bg__img}
-                        src={`${category.imgPrefix}/${category.categoryAlias}/${category.categoryTitleImg}`}
-                        alt="Категории"/>
-                    <h3 className={styles.sign_bg__title}>{category.categoryTitle}</h3>
-                </div>
-
-                <div className={styles.title__bg}>
-                    <div className={common.wrapper}>
-                        {/*<h3 className={styles.title}>{category.categoryTitle}</h3>*/}
+                <div className={styles.category_wrapper}>
+                    <div className={styles.sign_bg}>
+                        <img
+                            className={styles.sign_bg__img}
+                            src={`${category.imgPrefix}/${category.categoryAlias}/${category.categoryTitleImg}`}
+                            alt="Категории"/>
+                        <h3 className={styles.sign_bg__title}>{category.categoryTitle}</h3>
                     </div>
-                </div>
 
-                <div className={common.wrapper}>
-                    <SortPorducts/>
-                </div>
+                    <div className={common.wrapper}>
+                        <SortPorducts/>
+                    </div>
 
-                <div className={`${common.wrapper} ${styles.list_wrapper}`}>
-                    <ul className={styles.list}>
-                        {Array.from(Array(3), (e, i) => {
-                            return (
-                                <React.Fragment key={i}>
-                                    {category.productList.map(item => {
-                                        return (
-                                            <li key={item.id} className={styles.item}>
-                                                <span className={
-                                                    item.rest > 0
-                                                        ? `${styles.tag}`
-                                                        : `${styles.tag} ${styles.tag__not_in_stock}`}>
-                                                    В наличии
-                                                </span>
+                    <div className={`${common.wrapper} ${styles.list_wrapper}`}>
+                        <LazyLoad>
+                            <ul className={styles.list}>
+                                {Array.from(Array(2), (e, i) => {
+                                    return (
+                                        <React.Fragment key={i}>
+                                            {category.productList.map(item => {
+                                                return (
+                                                    <li key={item.id} className={styles.item}>
+                                                        <span className={
+                                                            item.rest > 0
+                                                                ? `${styles.tag}`
+                                                                : `${styles.tag} ${styles.tag__not_in_stock}`}>
+                                                            В наличии
+                                                        </span>
 
-                                                <NavLink to={`/product/${category.categoryAlias}/${item.id}`} className={styles.list_link}>
-                                                    <img
-                                                        className={styles.img_centered}
-                                                        src={`${category.imgPrefix}/${category.categoryAlias}/${item.imgPath.md}`}
-                                                        //src="/img/categories/accessoires-categorie/oneplus_7t_silicone_red_380_380-crop.png"
-                                                        alt="image"
-                                                    />
-                                                    <div className={styles.item_desc}>
-                                                        <span>{item.title}</span>
-                                                        {category.categoryAlias === "phones" && <span>Цвет: {item.specifications.color}</span>}
-                                                    </div>
-                                                </NavLink>
+                                                        <NavLink to={`/product/${category.categoryAlias}/${item.id}`} className={styles.list_link}>
+                                                            <img
+                                                                className={styles.img_centered}
+                                                                src={`${category.imgPrefix}/${category.categoryAlias}/${item.imgPath.md}`}
+                                                                //src="/img/categories/accessoires-categorie/oneplus_7t_silicone_red_380_380-crop.png"
+                                                                alt="image"
+                                                            />
+                                                            <div className={styles.item_desc}>
+                                                                <span>{item.title}</span>
+                                                                {category.categoryAlias === "phones" && <span>Цвет: {item.specifications.color}</span>}
+                                                            </div>
+                                                        </NavLink>
 
-                                                <ProductPrice product={item} classList={{ main: `${styles.price}`, discount: `${styles.price__discount}` }}/>
+                                                        <ProductPrice product={item} classList={{ main: `${styles.price}`, discount: `${styles.price__discount}` }}/>
 
-                                                {
-                                                    this.isProductInCart(this.props.cart.products, item.id)
-                                                        ?
-                                                        <OrderButton
-                                                            product={item}
-                                                            onClick={(evt) => this.props.onDeleteFromCart(evt, item.id)}>
-                                                            Убрать из заказа
-                                                        </OrderButton>
-                                                        :
-                                                        <OrderButton
-                                                            product={item}
-                                                            onClick={(evt) => this.props.onAddToCart(evt, item.id, category)}>
-                                                            {item.rest === 0 ? "Нет в наличии" : "Добавить в заказ"}
-                                                        </OrderButton>
-                                                }
+                                                        {
+                                                            this.isProductInCart(this.props.cart.products, item.id)
+                                                                ?
+                                                                <OrderButton
+                                                                    product={item}
+                                                                    onClick={(evt) => this.props.onDeleteFromCart(evt, item.id)}>
+                                                                    Убрать из заказа
+                                                                </OrderButton>
+                                                                :
+                                                                <OrderButton
+                                                                    product={item}
+                                                                    onClick={(evt) => this.props.onAddToCart(evt, item.id, category)}>
+                                                                    {item.rest === 0 ? "Нет в наличии" : "Добавить в заказ"}
+                                                                </OrderButton>
+                                                        }
 
-
-
-
-                                            </li>
-                                        )
-                                    })}
-                                </React.Fragment>
-                            )
-                        })}
-                    </ul>
+                                                    </li>
+                                                )
+                                            })}
+                                        </React.Fragment>
+                                    )
+                                })}
+                            </ul>
+                        </LazyLoad>
+                    </div>
                 </div>
             </Layout>
         )

@@ -22,15 +22,9 @@ const SortPorducts = props => {
             </button>
 
             <ul className={styles.list}>
-                <li>
-                    <button className={styles.sort_btn}>По новизне</button>
-                </li>
-                <li>
-                    <button className={styles.sort_btn}>Сначала дорогие</button>
-                </li>
-                <li>
-                    <button className={styles.sort_btn}>Сначала дешевые</button>
-                </li>
+                <li>По новизне</li>
+                <li>Сначала дорогие</li>
+                <li>Сначала дешевые</li>
             </ul>
         </div>
 

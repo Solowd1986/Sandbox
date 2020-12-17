@@ -9,6 +9,7 @@ import actions from "../../../redux/actions/index"
 
 import OrderButton from "../../Core/OrderButton/OrderButton"
 import ProductPrice from "../../Core/ProductPrice/ProductPrice";
+import LazyLoad from "../../Core/LazyLoad/LazyLoad";
 
 class Promo extends Component {
     constructor(props) {
@@ -94,8 +95,8 @@ class Promo extends Component {
                                         <span>{item.title}</span>
                                         <span>({item.specifications.color})</span>
                                     </div>
-                                    <div className={styles.installment}>Рассрочка 0-0-12</div>
-                                    <div className={styles.most_endorsed}>Хит продаж</div>
+                                    {item.discount && <div className={styles.installment}>Рассрочка 0-0-12</div>}
+                                    {!item.discount && <div className={styles.most_endorsed}>Хит продаж</div>}
 
                                     <ProductPrice product={item} classList={{ main: `${styles.price}`, discount: `${styles.price__discount}` }}/>
                                     {
@@ -201,7 +202,6 @@ class Promo extends Component {
                                                 {item.rest === 0 ? "Нет в наличии" : "Добавить в заказ"}
                                             </OrderButton>
                                     }
-
                                 </li>
                             )
                         })}

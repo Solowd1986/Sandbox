@@ -1,11 +1,16 @@
 @import "~scss/common.module";
 
 
+.category_wrapper {
+  margin-bottom: 70px;
+}
+
 /*  Banner
 ================================
 */
 .sign_bg {
   position: relative;
+  margin-bottom: 30px;
 }
 
 .sign_bg__img {
@@ -49,7 +54,6 @@
     text-align: center;
   }
 }
-
 /*  ================================*/
 
 
@@ -59,7 +63,7 @@
 
 
 .list_wrapper {
-  margin-bottom: 50px;
+  margin-bottom: 45px;
 }
 
 .list {

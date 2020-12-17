@@ -1,18 +1,20 @@
 import React, {Component} from "react";
 import styles from "./lazy-load.module.scss"
-import SimpleOverlay from "../SimpleOverlay/SimpleOverlay";
+import Overlay from "../Overlay/Overlay";
 
 
 class LazyLoad extends Component {
-
-    fixedScrollbar = () => {
-
-    };
+    constructor(props) {
+        super(props);
+        //this.uri = "";
+        //this.numberOfElements = 3;
+        //this.parentElement = this.props.parent;
+        //this.innerElementType = this.props.element || "li";
+        //this.innerElementClassList = this.props.classList || [];
+    }
 
     initRequest = (getDataBtn) => {
-
         let timeoutExceeded = false;
-
         const controller = new AbortController();
         const signal = controller.signal;
         setTimeout(() => {
@@ -20,23 +22,18 @@ class LazyLoad extends Component {
             controller.abort()
         }, 5000);
 
-        let overlay = new SimpleOverlay();
-
+        let overlay = new Overlay();
         overlay.node.addEventListener("click", function (evt) {
             controller.abort();
         });
 
         fetch("api/loadMoreData", { signal }).then((res) => res.json().then(responce => {
-            //console.log(responce);
-
             getDataBtn.classList.remove(styles.active);
             overlay.destroy();
 
             if (responce.length === 0) {
                 getDataBtn.remove();
             }
-
-
             const div = document.createElement("div");
             div.innerHTML = "Block";
             div.classList.add(styles.data_block);
@@ -50,23 +47,17 @@ class LazyLoad extends Component {
         });
     };
 
-
-
     loadHandler = (evt) => {
         const getDataBtn = evt.currentTarget;
-
         getDataBtn.classList.add(styles.active);
         getDataBtn.classList.remove(styles.error);
-
-        //document.body.classList.add(styles.body_fixed);
         this.initRequest(getDataBtn);
     };
 
-
     render() {
-        //console.log(this.props);
         return (
             <div className={styles.data_wrapper}>
+                {this.props.children}
                 <button onClick={this.loadHandler} className={styles.more}>
                     <svg
                         className={styles.loader}

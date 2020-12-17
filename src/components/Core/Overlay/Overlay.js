@@ -1,15 +1,17 @@
 //import React, {Component} from "react";
-import styles from "./simple_overlay.module.scss";
+import styles from "./overlay.module.scss";
 
-class SimpleOverlay {
-    constructor(classList = null) {
+class Overlay {
+    constructor(classList = null, innerElement = null, coloredBackground = false) {
         /**
          * defaultFixedElemSelector - селектор для обработчика всех fixed/absolute элементов(чтобы элементы не прыгали при скрытии скролла)
          * classList - классы для overlay в виде массива (деструктурируются), если нет - берем стандартные классы
-         * overlay - переменная с DOM-узлом, в методе init создается и возвращается при создании SimpleOverlay
+         * overlay - переменная с DOM-узлом, в методе init создается и возвращается при создании Overlay
          */
         this.defaultFixedElemSelector = "[data-fs]";
         this.classList = classList || [];
+        this.innerElement = innerElement || null;
+        this.coloredBackground = coloredBackground;
         this.node = null;
         this.init();
     }
@@ -36,8 +38,14 @@ class SimpleOverlay {
      */
     init() {
         this.node = document.createElement("div");
-        this.node.classList.add(styles.overlay);
+        this.classList.length > 0 ? this.node.add(...this.classList) : this.node.classList.add(styles.overlay);
+        if (this.coloredBackground) {
+            this.node.classList.add(styles.overlay_bg)
+        }
         this.addScrollbarOffset();
+        if (this.innerElement) {
+            node.append(this.innerElement);
+        }
         document.body.append(this.node);
     };
 
@@ -46,8 +54,8 @@ class SimpleOverlay {
      * Также вызываем метод смещения fixed/absolute элементов, все элементы берутся по селектору defaultFixedElemSelector
      */
     addScrollbarOffset() {
-        if (SimpleOverlay.calcScrollBarWidth() > 0) {
-            document.body.style.cssText = `padding-right: ${SimpleOverlay.calcScrollBarWidth()}px`;
+        if (Overlay.calcScrollBarWidth() > 0) {
+            document.body.style.cssText = `padding-right: ${Overlay.calcScrollBarWidth()}px`;
             this.addOffsetFixedElements(this.defaultFixedElemSelector);
         }
         document.body.style.cssText += "overflow: hidden";
@@ -67,7 +75,7 @@ class SimpleOverlay {
 
     addOffsetFixedElements(selector) {
         const elements = document.querySelectorAll(selector);
-        let documentWidth = document.documentElement.clientWidth;
+        const documentWidth = document.documentElement.clientWidth;
         elements.forEach(item => {
             const elementWidth = parseInt(getComputedStyle(item).getPropertyValue("width"));
 
@@ -75,7 +83,7 @@ class SimpleOverlay {
                 item.style.cssText = `width: ${elementWidth}px;`;
             } else {
                 const offsetRigth = parseInt(getComputedStyle(item).getPropertyValue("right"));
-                item.style.cssText = `right: ${offsetRigth + SimpleOverlay.calcScrollBarWidth()}px;`;
+                item.style.cssText = `right: ${offsetRigth + Overlay.calcScrollBarWidth()}px;`;
             }
         })
 
@@ -105,7 +113,7 @@ class SimpleOverlay {
 }
 
 
-export default SimpleOverlay;
+export default Overlay;
 
 
 
