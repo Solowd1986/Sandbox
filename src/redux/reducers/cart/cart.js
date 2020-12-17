@@ -6,6 +6,9 @@ import decreaseeProductsAmount from "./decreaseeProductsAmount";
 import changeAmountOfProduct from "./changeAmountOfProduct";
 
 const initialState = {
+    modals: {
+        showCheckoutModal: false,
+    },
     defaultSettings: {
         buttonsDisabled: false
     },
@@ -17,7 +20,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
     //console.log('state', state);
-    
+
     switch (action.type) {
         case "cart/addItemToCart" : {
             return addItemToCart(state, action.evt, action.id, action.category);
@@ -26,6 +29,28 @@ export default (state = initialState, action) => {
         case "cart/buyItemByOneClick" : {
             return buyItemByOneClick(state, action.evt, action.id, action.category);
         }
+
+
+        case "cart/disableOverlay" : {
+            return {
+                ...state,
+                modals: {
+                    showCheckoutModal: false,
+                },
+            }
+        }
+
+        case "cart/enableOverlay" : {
+            return {
+                ...state,
+                modals: {
+                    showCheckoutModal: true,
+                },
+            }
+        }
+
+
+
 
 
         case "cart/removeItemFromCart" : {

@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import styles from "./order-summary.module.scss";
 import {connect} from "react-redux";
 import actions from "../../../../redux/actions";
+import OverlayComp from "../../../Core/OverlayComp/OverlayComp";
 
 class OrderSummary extends Component {
 
@@ -35,9 +36,9 @@ class OrderSummary extends Component {
 
 
     state = {
+        show: false,
         orderedItems: [...this.props.orderedItems]
     };
-
 
 
     transitionalValueHandler = (evt, id) => {
@@ -84,7 +85,7 @@ class OrderSummary extends Component {
 
     onBlurHandler = (evt, id, quantity) => {
 
-        
+
         const value = Math.abs(parseInt(quantity));
 
         if (isNaN(value)) {
@@ -175,15 +176,28 @@ class OrderSummary extends Component {
         }, 0);
     };
 
+    checkout = () => {
+        this.props.enableOverlay();
+    };
 
     render() {
-        //console.log(this.props);
+        console.log(this.props);
         //console.log(this.state);
         return (
             <section className={styles.summary}>
+
+                {
+                    this.props.state.cart.modals.showCheckoutModal
+                    &&
+                    <OverlayComp>
+                        <div className={styles.checkout_modal}>MODAL</div>
+                    </OverlayComp>
+
+                }
+
                 <h2 className={styles.caption}>Ваш заказ</h2>
                 {this.props.orderedItems.map(item => {
-                    console.log(item);
+                    //console.log(item);
 
                     return (
                         <div key={item.title} className={styles.item}>
@@ -234,10 +248,8 @@ class OrderSummary extends Component {
                     <span className={styles.delivery_item}>Итого:</span>
                     <span className={styles.price__lg}>{this.calcTotal() > 100000 ? this.calcTotal() : this.calcTotal() + 400} р.</span>
                 </div>
-
-                <button className={`btn ${styles.order_btn}`}>Оформить заказ</button>
+                <button onClick={this.checkout} className={`btn ${styles.order_btn}`}>Оформить заказ</button>
             </section>
-
         )
     }
 }
@@ -261,10 +273,12 @@ function setDispatch(dispatch) {
         onChangeAmountOfProduct: (evt, id, quantity) => {
             dispatch(actions.cart.changeAmountOfProduct(evt, id, quantity))
         },
-
         onDeleteProductFromCart: (evt, id) => {
             dispatch(actions.cart.removeItem(evt, id))
         },
+        enableOverlay: () => {
+            dispatch(actions.cart.enableOverlay());
+        }
     }
 }
 

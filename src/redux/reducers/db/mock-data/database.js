@@ -4,6 +4,10 @@ export default {
 
     defaultSettings: {},
 
+    modals: {
+        showCheckoutModal: false,
+    },
+
     category: [
 
         {

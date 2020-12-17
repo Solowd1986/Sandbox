@@ -223,4 +223,20 @@
   background-color: $red;
 }
 
+// checkout modal
+.checkout_modal {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  max-width: 400px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: lightgrey;
+  transform: translate(-50%, -50%);
+}
+
 /*=============================*/

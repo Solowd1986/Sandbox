@@ -15,6 +15,19 @@ export const disableButton = (evt) => {
     }
 };
 
+export const disableOverlay = () => {
+    return {
+        type: "cart/disableOverlay",
+    }
+};
+
+export const enableOverlay = () => {
+    return {
+        type: "cart/enableOverlay",
+    }
+};
+
+
 export const addItem = (evt, id, category) => {
     return {
         type: "cart/addItemToCart",

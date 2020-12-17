@@ -47,7 +47,6 @@ class Order extends Component {
                         </div>
                     </>
                 }
-
             </Layout>
         )
     }
