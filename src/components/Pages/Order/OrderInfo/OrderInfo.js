@@ -13,9 +13,8 @@ export default class OrderInfo extends Component {
                     <h2 className={styles.order_title}>1. Доставка</h2>
                     <div className={styles.cards_wrapper}>
 
-                        <input id={"moscow"} type="radio" name={"shipping"} value={"moscow"}/>
-
-                        <label htmlFor="moscow" className={styles.card} data-delivery={true}>
+                        <input id={"moscow"} type="radio" name={"shipping"} value={"moscow"} data-delivery={true}/>
+                        <label htmlFor="moscow" className={styles.card}>
                             <div className={styles.card__info}>
                                 <span> Доставка по Москве</span>
                                 <span className={styles.card__pay}>бесплатно</span>
@@ -23,8 +22,8 @@ export default class OrderInfo extends Component {
                             <div className={styles.card__extra}>сегодня</div>
                         </label>
 
-                        <input id={"pickup"} type="radio" name={"shipping"} value={"pickup"}/>
-                        <label htmlFor="pickup" className={styles.card} data-delivery={true}>
+                        <input id={"pickup"} type="radio" name={"shipping"} value={"pickup"} data-delivery={true}/>
+                        <label htmlFor="pickup" className={styles.card}>
                             <div className={styles.card__info}>
                                 <span>Самовывоз</span>
                                 <span className={styles.card__pay}>бесплатно</span>
@@ -32,8 +31,8 @@ export default class OrderInfo extends Component {
                             <div className={styles.card__extra}>Москва, Барклая 6, стр. 5, БЦ "Барклай Плаза" (м. Парк Победы)</div>
                         </label>
 
-                        <input id={"russia"} type="radio" name={"shipping"} value={"russia"}/>
-                        <label htmlFor="russia" className={styles.card} data-delivery={true}>
+                        <input id={"russia"} type="radio" name={"shipping"} value={"russia"} data-delivery={true}/>
+                        <label htmlFor="russia" className={styles.card}>
                             <div className={styles.card__info}>
                                 <span>Доставка по России</span>
                                 <span className={styles.card__pay}>бесплатно</span>
@@ -107,7 +106,7 @@ export default class OrderInfo extends Component {
                 <div>
                     <h2 className={styles.order_title}>3. Оплата</h2>
                     <div className={styles.cards_wrapper}>
-                        <input id={"cash"} type="radio" name={"payment"} value={"cash"}/>
+                        <input id={"cash"} type="radio" name={"payment"} value={"cash"} data-payment={true}/>
                         <label htmlFor={"cash"} className={`${styles.card}`}>
                             <div data-payment={true}>
                                 <p className={styles.card__info}>
@@ -116,7 +115,7 @@ export default class OrderInfo extends Component {
                             </div>
                         </label>
 
-                        <input id={"emoney"} type="radio" name={"payment"} value={"emoney"}/>
+                        <input id={"emoney"} type="radio" name={"payment"} value={"emoney"} data-payment={true}/>
                         <label htmlFor={"emoney"} className={styles.card}>
                             <div>
                                 <p className={styles.card__info}>
@@ -129,7 +128,7 @@ export default class OrderInfo extends Component {
                             </div>
                         </label>
 
-                        <input id={"card"} type="radio" name={"payment"} value={"card"}/>
+                        <input id={"card"} type="radio" name={"payment"} value={"card"} data-payment={true}/>
                         <label htmlFor={"card"} className={styles.card}>
                             <div>
                                 <p className={styles.card__info}>
