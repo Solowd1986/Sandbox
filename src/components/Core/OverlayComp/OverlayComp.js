@@ -2,16 +2,13 @@ import React, {Component} from "react";
 import styles from "./overlay-comp.module.scss";
 import actions from "../../../redux/actions";
 import {connect} from "react-redux";
-import CloseIcon from "../CloseIcon/CloseIcon";
 
 class OverlayComp extends Component {
     constructor(props) {
         super(props);
         this.defaultFixedElemSelector = "[data-fs]";
         this.classList = [];
-        this.innerElement = null;
-        this.coloredBackground = false;
-        this.node = null;
+        this.coloredBg = props.coloredBg || false;
         this.init();
     }
 
@@ -102,9 +99,9 @@ class OverlayComp extends Component {
 
     render() {
         return (
-            <div onClick={this.destroy} className={styles.overlay}>
+            <div onClick={this.destroy} className={`${styles.overlay} ${this.coloredBg && styles.overlay_bg}`}>
                 <div className={styles.modal_wrapper}>
-                    <CloseIcon/>
+                    <span className={styles.close}/>
                     <div onClick={(evt) => evt.stopPropagation()}>
                         {this.props.children}
                     </div>

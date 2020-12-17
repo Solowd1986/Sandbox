@@ -12,23 +12,28 @@ export default class OrderInfo extends Component {
                 <div>
                     <h2 className={styles.order_title}>1. Доставка</h2>
                     <div className={styles.cards_wrapper}>
-                        <div className={`${styles.card} ${styles.card__active}`}>
+
+                        <input id={"moscow"} type="radio" name={"shipping"} value={"moscow"}/>
+
+                        <label htmlFor="moscow" className={styles.card} data-delivery={true}>
                             <div className={styles.card__info}>
                                 <span> Доставка по Москве</span>
                                 <span className={styles.card__pay}>бесплатно</span>
                             </div>
                             <div className={styles.card__extra}>сегодня</div>
-                        </div>
+                        </label>
 
-                        <div className={styles.card}>
+                        <input id={"pickup"} type="radio" name={"shipping"} value={"pickup"}/>
+                        <label htmlFor="pickup" className={styles.card} data-delivery={true}>
                             <div className={styles.card__info}>
                                 <span>Самовывоз</span>
                                 <span className={styles.card__pay}>бесплатно</span>
                             </div>
                             <div className={styles.card__extra}>Москва, Барклая 6, стр. 5, БЦ "Барклай Плаза" (м. Парк Победы)</div>
-                        </div>
+                        </label>
 
-                        <div className={styles.card}>
+                        <input id={"russia"} type="radio" name={"shipping"} value={"russia"}/>
+                        <label htmlFor="russia" className={styles.card} data-delivery={true}>
                             <div className={styles.card__info}>
                                 <span>Доставка по России</span>
                                 <span className={styles.card__pay}>бесплатно</span>
@@ -36,7 +41,7 @@ export default class OrderInfo extends Component {
                             <div className={styles.card__extra}>
                                 <img src={basketEpayment} alt="shipping"/>
                             </div>
-                        </div>
+                        </label>
                     </div>
                 </div>
 
@@ -102,25 +107,36 @@ export default class OrderInfo extends Component {
                 <div>
                     <h2 className={styles.order_title}>3. Оплата</h2>
                     <div className={styles.cards_wrapper}>
-                        <div className={`${styles.card} ${styles.card__active}`}>
-                            <p className={styles.card__info}>
-                                <span className={styles.card__title}>Оплата наличными</span>
-                            </p>
-                        </div>
-                        <div className={styles.card}>
-                            <p className={styles.card__info}>
-                                <span className={styles.card__title}>Электронными деньгами</span>
-                                <span className={styles.card__pay}>бесплатно</span>
-                            </p>
-                            <span>
+                        <input id={"cash"} type="radio" name={"payment"} value={"cash"}/>
+                        <label htmlFor={"cash"} className={`${styles.card}`}>
+                            <div data-payment={true}>
+                                <p className={styles.card__info}>
+                                    <span className={styles.card__title}>Оплата наличными</span>
+                                </p>
+                            </div>
+                        </label>
+
+                        <input id={"emoney"} type="radio" name={"payment"} value={"emoney"}/>
+                        <label htmlFor={"emoney"} className={styles.card}>
+                            <div>
+                                <p className={styles.card__info}>
+                                    <span className={styles.card__title}>Электронными деньгами</span>
+                                    <span className={styles.card__pay}>бесплатно</span>
+                                </p>
+                                <span>
                                 <img src={basketShipping} alt="epayment"/>
                             </span>
-                        </div>
-                        <div className={styles.card}>
-                            <p className={styles.card__info}>
-                                <span className={styles.card__title}>Безналичный расчет (для юр. лиц)</span>
-                            </p>
-                        </div>
+                            </div>
+                        </label>
+
+                        <input id={"card"} type="radio" name={"payment"} value={"card"}/>
+                        <label htmlFor={"card"} className={styles.card}>
+                            <div>
+                                <p className={styles.card__info}>
+                                    <span className={styles.card__title}>Безналичный расчет (для юр. лиц)</span>
+                                </p>
+                            </div>
+                        </label>
                     </div>
                 </div>
             </section>

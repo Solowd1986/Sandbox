@@ -3,7 +3,7 @@ import styles from "./order-summary.module.scss";
 import {connect} from "react-redux";
 import actions from "../../../../redux/actions";
 import OverlayComp from "../../../Core/OverlayComp/OverlayComp";
-import CloseIcon from "../../../Core/CloseIcon/CloseIcon";
+
 
 class OrderSummary extends Component {
 
@@ -196,7 +196,6 @@ class OrderSummary extends Component {
                             <p>Наш менеджер свяжется с вами в ближайшее время</p>
                         </div>
                     </OverlayComp>
-
                 }
 
                 <h2 className={styles.caption}>Ваш заказ</h2>
