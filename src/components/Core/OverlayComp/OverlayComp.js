@@ -15,20 +15,6 @@ class OverlayComp extends Component {
     }
 
 
-    // constructor(classList = null, innerElement = null, coloredBackground = false) {
-    //     /**
-    //      * defaultFixedElemSelector - селектор для обработчика всех fixed/absolute элементов(чтобы элементы не прыгали при скрытии скролла)
-    //      * classList - классы для overlay в виде массива (деструктурируются), если нет - берем стандартные классы
-    //      * overlay - переменная с DOM-узлом, в методе init создается и возвращается при создании Overlay
-    //      */
-    //     this.defaultFixedElemSelector = "[data-fs]";
-    //     this.classList = classList || [];
-    //     this.innerElement = innerElement || null;
-    //     this.coloredBackground = coloredBackground;
-    //     this.node = null;
-    //     this.init();
-    // }
-
     /**
      * Статический метод расчета ширины скроллбара
      * @returns {number}
@@ -76,7 +62,6 @@ class OverlayComp extends Component {
      *    По-умолчанию, она, к примеру прижимается к правому краю страницы с right:0, потом скролл исчезает и элемент прыгает. Решение: дать элементу
      *    right справа в ширину этого исчезнувшего скролла, так элемент не прыгает.
      */
-
     addOffsetFixedElements = (selector) => {
         const elements = document.querySelectorAll(selector);
         const documentWidth = document.documentElement.clientWidth;
@@ -111,7 +96,7 @@ class OverlayComp extends Component {
      */
     destroy = () => {
         this.removeScrollbarOffset();
-        this.props.disableOverlay();
+        this.props.toggleOverlay();
     };
 
     render() {
@@ -132,7 +117,6 @@ function getProps(state) {
         state
     }
 }
-
 
 function setDispatch(dispatch) {
     return {

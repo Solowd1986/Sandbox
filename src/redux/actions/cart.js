@@ -21,6 +21,13 @@ export const disableOverlay = () => {
     }
 };
 
+export const toggleOverlay = () => {
+    return {
+        type: "cart/toggleOverlay",
+    }
+};
+
+
 export const enableOverlay = () => {
     return {
         type: "cart/enableOverlay",

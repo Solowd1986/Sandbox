@@ -177,7 +177,7 @@ class OrderSummary extends Component {
     };
 
     checkout = () => {
-        this.props.enableOverlay();
+        this.props.toggleOverlay();
     };
 
     render() {
@@ -189,7 +189,7 @@ class OrderSummary extends Component {
                 {
                     this.props.state.cart.modals.showCheckoutModal
                     &&
-                    <OverlayComp>
+                    <OverlayComp toggleOverlay={this.props.toggleOverlay}>
                         <div className={styles.checkout_modal}>MODAL</div>
                     </OverlayComp>
 
@@ -278,6 +278,9 @@ function setDispatch(dispatch) {
         },
         enableOverlay: () => {
             dispatch(actions.cart.enableOverlay());
+        },
+        toggleOverlay: () => {
+            dispatch(actions.cart.toggleOverlay());
         }
     }
 }

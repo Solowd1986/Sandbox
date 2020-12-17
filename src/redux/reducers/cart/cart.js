@@ -49,7 +49,14 @@ export default (state = initialState, action) => {
             }
         }
 
-
+        case "cart/toggleOverlay" : {
+            return {
+                ...state,
+                modals: {
+                    showCheckoutModal: !state.modals.showCheckoutModal,
+                },
+            }
+        }
 
 
 
