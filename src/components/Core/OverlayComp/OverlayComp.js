@@ -22,7 +22,6 @@ class OverlayComp extends Component {
         }
     };
 
-
     componentWillUnmount = () => {
         clearTimeout(this.timer);
     };
@@ -60,7 +59,7 @@ class OverlayComp extends Component {
      */
     addScrollbarOffset = () => {
         if (this.calcScrollBarWidth() > 0) {
-            document.body.style.cssText = `padding: ${this.calcScrollBarWidth()}px`;
+            document.body.style.cssText = `padding-right: ${this.calcScrollBarWidth()}px`;
             this.addOffsetFixedElements(this.defaultFixedElemSelector);
         }
         document.body.style.cssText += "overflow: hidden";

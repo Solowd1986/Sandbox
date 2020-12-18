@@ -36,7 +36,6 @@ class OrderSummary extends Component {
      * Это нужно, чтобы можно было где-то хранить некорреткную инфу до блюра.
      * */
 
-
     state = {
         show: false,
         orderedItems: [...this.props.orderedItems]
@@ -179,7 +178,6 @@ class OrderSummary extends Component {
     };
 
     checkout = () => {
-        //this.props.delayOrderAsync();
         this.props.enableOverlay();
     };
 
@@ -284,9 +282,6 @@ function setDispatch(dispatch) {
         },
         onDeleteProductFromCart: (evt, id) => {
             dispatch(actions.cart.removeItem(evt, id))
-        },
-        delayOrderAsync: () => {
-            dispatch(actions.cart.delayOrderAsync());
         },
         delayOrder: () => {
             dispatch(actions.cart.delayOrder());
