@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import actions from "../../../../redux/actions";
 import OverlayComp from "../../../Core/OverlayComp/OverlayComp";
 
+import img from "./img/thankssir.png";
 
 class OrderSummary extends Component {
 
@@ -178,11 +179,12 @@ class OrderSummary extends Component {
     };
 
     checkout = () => {
+        this.props.delayOrderAsync();
         this.props.toggleOverlay();
     };
 
     render() {
-        console.log(this.props);
+        //console.log(this.props);
         //console.log(this.state);
         return (
             <section className={styles.summary}>
@@ -190,11 +192,18 @@ class OrderSummary extends Component {
                 {
                     this.props.state.cart.modals.showCheckoutModal
                     &&
-                    <OverlayComp toggleOverlay={this.props.toggleOverlay} delay={true} coloredBg={true}>
+                    <OverlayComp
+                        toggleOverlay={this.props.toggleOverlay}
+                        orderIsProcessed={this.props.state.cart.orderIsProcessed}
+                        delay={true}
+                        coloredBg={true}>
+
                         <div className={styles.checkout_modal}>
+                            <img src={img} alt="image"/>
                             <h3>Спасибо за заказ</h3>
                             <p>Наш менеджер свяжется с вами в ближайшее время</p>
                         </div>
+
                     </OverlayComp>
                 }
 
@@ -251,7 +260,7 @@ class OrderSummary extends Component {
                     <span className={styles.delivery_item}>Итого:</span>
                     <span className={styles.price__lg}>{this.calcTotal() > 100000 ? this.calcTotal() : this.calcTotal() + 400} р.</span>
                 </div>
-                <button onClick={this.checkout} className={`btn ${styles.order_btn}`}>Оформить заказ</button>
+                <button onClick={this.checkout} className={`${styles.order_btn}`} disabled={false}>Оформить заказ</button>
             </section>
         )
     }
@@ -281,6 +290,9 @@ function setDispatch(dispatch) {
         },
         toggleOverlay: () => {
             dispatch(actions.cart.toggleOverlay());
+        },
+        delayOrderAsync: () => {
+            dispatch(actions.cart.delayOrderAsync());
         }
     }
 }
