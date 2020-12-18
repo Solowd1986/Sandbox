@@ -182,21 +182,15 @@ class OrderSummary extends Component {
     };
 
     render() {
-        //console.log(this.props);
+        console.log(this.props);
         //console.log(this.state);
         return (
             <section className={styles.summary}>
 
                 {
-                    this.props.state.cart.modals.showCheckoutModal
+                    this.props.state.cart.modals.showModal
                     &&
-                    <OverlayComp
-                        disableOverlay={this.props.disableOverlay}
-                        delayOrder={this.props.delayOrder}
-                        orderIsProcessed={this.props.state.cart.orderIsProcessed}
-                        coloredBg={true}
-                        delay={true}>
-
+                    <OverlayComp coloredBg={true} delay={true}>
                         <div className={styles.checkout_modal}>
                             <img src={img} alt="image"/>
                             <h3>Спасибо за заказ</h3>

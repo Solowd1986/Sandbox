@@ -28,6 +28,7 @@ export const disableOverlay = () => {
     }
 };
 
+
 export const enableOverlay = () => {
     return {
         type: "cart/enableOverlay",
@@ -77,7 +78,6 @@ export const removeItem = (evt, id) => {
         id
     }
 };
-
 export const removeItemAsync = (evt, id) => {
     return dispatch => {
         setTimeout(() => {
@@ -94,8 +94,6 @@ export const decreaseeProductsAmount = (evt, id) => {
         evt
     }
 };
-
-
 export const increaseProductsAmount = (evt, id) => {
     return {
         type: "cart/increaseProductsAmount",
@@ -103,8 +101,6 @@ export const increaseProductsAmount = (evt, id) => {
         evt
     }
 };
-
-
 export const changeAmountOfProduct = (evt, id, quantity) => {
     return {
         type: "cart/changeAmountOfProduct",

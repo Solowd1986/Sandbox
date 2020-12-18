@@ -6,9 +6,9 @@ import decreaseeProductsAmount from "./decreaseeProductsAmount";
 import changeAmountOfProduct from "./changeAmountOfProduct";
 
 const initialState = {
-    orderIsProcessed: false,
     modals: {
-        showCheckoutModal: false,
+        isdelayModalProcessCompleted: false,
+        showModal: false,
     },
     defaultSettings: {
         buttonsDisabled: false
@@ -32,41 +32,34 @@ export default (state = initialState, action) => {
         }
 
 
-        // Всегда обнуляем завершенность заказа, чтобы при каждом клике показывать delay
-        case "cart/toggleOverlay" : {
+        case "cart/enableOverlay" : {
             return {
                 ...state,
-                orderIsProcessed: false,
                 modals: {
-                    showCheckoutModal: !state.modals.showCheckoutModal,
+                    isdelayModalProcessCompleted: false,
+                    showModal: true,
                 },
             }
         }
 
         case "cart/disableOverlay" : {
-
             return {
                 ...state,
-                orderIsProcessed: false,
                 modals: {
-                    showCheckoutModal: false,
+                    isdelayModalProcessCompleted: false,
+                    showModal: false,
                 },
             }
         }
 
-        case "cart/enableOverlay" : {
-            return {
-                ...state,
-                modals: {
-                    showCheckoutModal: true,
-                },
-            }
-        }
 
         case "cart/delayOrder" : {
             return {
                 ...state,
-                orderIsProcessed: true,
+                modals: {
+                    isdelayModalProcessCompleted: true,
+                    showModal: true,
+                },
             }
         }
 
