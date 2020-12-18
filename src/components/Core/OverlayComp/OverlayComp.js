@@ -10,7 +10,24 @@ class OverlayComp extends Component {
         this.classList = [];
         this.coloredBg = props.coloredBg || false;
         this.init();
+        this.timer = null;
     }
+
+
+    componentDidMount = () => {
+        if (this.props.delay) {
+            this.timer = setTimeout(() => {
+                this.props.delayOrder()
+            }, 1500);
+        }
+    };
+
+
+    componentWillUnmount = () => {
+        clearTimeout(this.timer);
+    };
+
+
 
 
     /**
@@ -35,7 +52,6 @@ class OverlayComp extends Component {
      */
     init = () => {
         this.addScrollbarOffset();
-
     };
 
     /**
@@ -73,7 +89,6 @@ class OverlayComp extends Component {
                 item.style.cssText = `right: ${offsetRigth + this.calcScrollBarWidth()}px;`;
             }
         })
-
     };
 
     /**

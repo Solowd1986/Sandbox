@@ -44,9 +44,9 @@ export const delayOrder = () => {
 
 export const delayOrderAsync = () => {
     return dispatch => {
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             dispatch(delayOrder());
-        }, 1500)
+        }, 1500);
     }
 };
 

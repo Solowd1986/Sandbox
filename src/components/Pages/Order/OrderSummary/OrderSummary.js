@@ -179,7 +179,7 @@ class OrderSummary extends Component {
     };
 
     checkout = () => {
-        this.props.delayOrderAsync();
+        //this.props.delayOrderAsync();
         this.props.enableOverlay();
     };
 
@@ -194,6 +194,7 @@ class OrderSummary extends Component {
                     &&
                     <OverlayComp
                         disableOverlay={this.props.disableOverlay}
+                        delayOrder={this.props.delayOrder}
                         orderIsProcessed={this.props.state.cart.orderIsProcessed}
                         coloredBg={true}
                         delay={true}>
@@ -247,7 +248,6 @@ class OrderSummary extends Component {
                     )
                 })}
 
-
                 <div className={styles.delivery_fieldset}>
                     <span className={styles.delivery_item}>Доставка по Москве:</span>
                     <span className={styles.delivery_item}>{this.calcTotal() > 100000 ? 0 : 400} р.</span>
@@ -287,6 +287,9 @@ function setDispatch(dispatch) {
         },
         delayOrderAsync: () => {
             dispatch(actions.cart.delayOrderAsync());
+        },
+        delayOrder: () => {
+            dispatch(actions.cart.delayOrder());
         },
         enableOverlay: () => {
             dispatch(actions.cart.enableOverlay());

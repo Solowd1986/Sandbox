@@ -43,8 +43,8 @@ export default (state = initialState, action) => {
             }
         }
 
-
         case "cart/disableOverlay" : {
+
             return {
                 ...state,
                 orderIsProcessed: false,
@@ -63,14 +63,12 @@ export default (state = initialState, action) => {
             }
         }
 
-
         case "cart/delayOrder" : {
             return {
                 ...state,
                 orderIsProcessed: true,
             }
         }
-
 
 
         case "cart/removeItemFromCart" : {
