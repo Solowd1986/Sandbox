@@ -17,6 +17,30 @@ class Order extends Component {
     /**
      * Опиши логику работы с залержаки от сервера, чтобы кнопки блокировались, нельзя было мультикликать
      */
+
+    blockBtn = () => {
+
+    };
+
+    submit = (evt) => {
+        if (!evt.currentTarget.checkValidity()) {
+            for (const formElement of evt.currentTarget.elements) {
+                if (formElement.nodeName === "INPUT" && formElement.type === "text" || formElement.type === "email") {
+                    if (!formElement.checkValidity()) {
+                        for (const key in formElement.validity) {
+                            if (formElement.validity[key] === true) {
+                                console.log(key);
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+        evt.preventDefault();
+    };
+
+
     render() {
         //console.log('state', this.props);
 
@@ -31,10 +55,19 @@ class Order extends Component {
                                 <span className={styles.line_stage}>Оплата и доставка</span>
                                 <span className={`${styles.line_stage} ${styles.line_stage__unactive}`}>Успешное оформление</span>
                             </div>
-                            <form className={styles.form} action="" name="basket-form" method="POST">
+
+                            <form
+                                onSubmit={this.submit}
+                                className={styles.form}
+                                action=""
+                                name="basket-form"
+                                method="POST"
+                                noValidate={true}
+                            >
                                 <OrderInfo/>
                                 <OrderSummary orderedItems={this.props.cart.products}/>
                             </form>
+
                         </div>
                     </div>
                     :

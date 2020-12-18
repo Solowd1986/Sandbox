@@ -98,11 +98,12 @@ class OverlayComp extends Component {
     };
 
     render() {
+        //console.log(this.props);
         return (
             <div onClick={this.destroy} className={`${styles.overlay} ${this.coloredBg && styles.overlay_bg}`}>
-                <div className={styles.modal_wrapper}>
+                <div>
                     {
-                        this.props.delay
+                        !this.props.orderIsProcessed
                             ?
                             <svg
                                 className={styles.spinner}
@@ -116,19 +117,21 @@ class OverlayComp extends Component {
                                 </g>
                             </svg>
                             :
-                            <>
+                            <div className={"animate__animated animate__bounceInRight"}>
                                 <span className={styles.close}/>
+                                {/*тут div нужен для перехвата кликов, чтобы любой модальный элемент не вызывал закрытие окна*/}
+                                {/*практика общая, поэтому вынесено сюда*/}
                                 <div onClick={(evt) => evt.stopPropagation()}>
                                     {this.props.children}
                                 </div>
-                            </>
+                            </div>
                     }
                 </div>
+
             </div>
         )
     }
 }
-
 
 export default OverlayComp;
 
