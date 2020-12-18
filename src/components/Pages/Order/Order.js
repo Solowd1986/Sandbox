@@ -29,7 +29,7 @@ class Order extends Component {
                     if (!formElement.checkValidity()) {
                         for (const key in formElement.validity) {
                             if (formElement.validity[key] === true) {
-                                console.log(key);
+                                //console.log(key);
                             }
                         }
                     }

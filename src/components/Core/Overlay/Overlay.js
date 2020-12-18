@@ -75,11 +75,16 @@ class Overlay {
 
     addOffsetFixedElements(selector) {
         const elements = document.querySelectorAll(selector);
-        const documentWidth = document.documentElement.clientWidth;
+        //console.dir(elements);
+        //const documentWidth = document.documentElement.clientWidth;
         elements.forEach(item => {
             const elementWidth = parseInt(getComputedStyle(item).getPropertyValue("width"));
+            const parent = parseInt(getComputedStyle(item.parentElement).getPropertyValue("width"));
+            //item.style.cssText = `width: ${elementWidth}px;`;
+            console.log('fixed', elementWidth);
+            console.log('parent', item.parentElement.clientWidth);
 
-            if (documentWidth === elementWidth) {
+            if (item.parentElement.clientWidth < item.clientWidth) {
                 item.style.cssText = `width: ${elementWidth}px;`;
             } else {
                 const offsetRigth = parseInt(getComputedStyle(item).getPropertyValue("right"));

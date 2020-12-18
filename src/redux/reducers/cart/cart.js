@@ -44,6 +44,26 @@ export default (state = initialState, action) => {
         }
 
 
+        case "cart/disableOverlay" : {
+            return {
+                ...state,
+                orderIsProcessed: false,
+                modals: {
+                    showCheckoutModal: false,
+                },
+            }
+        }
+
+        case "cart/enableOverlay" : {
+            return {
+                ...state,
+                modals: {
+                    showCheckoutModal: true,
+                },
+            }
+        }
+
+
         case "cart/delayOrder" : {
             return {
                 ...state,

@@ -17,6 +17,7 @@ class LazyLoad extends Component {
         let timeoutExceeded = false;
         const controller = new AbortController();
         const signal = controller.signal;
+
         setTimeout(() => {
             timeoutExceeded = true;
             controller.abort()

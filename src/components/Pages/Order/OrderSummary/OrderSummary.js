@@ -180,7 +180,7 @@ class OrderSummary extends Component {
 
     checkout = () => {
         this.props.delayOrderAsync();
-        this.props.toggleOverlay();
+        this.props.enableOverlay();
     };
 
     render() {
@@ -193,24 +193,21 @@ class OrderSummary extends Component {
                     this.props.state.cart.modals.showCheckoutModal
                     &&
                     <OverlayComp
-                        toggleOverlay={this.props.toggleOverlay}
+                        disableOverlay={this.props.disableOverlay}
                         orderIsProcessed={this.props.state.cart.orderIsProcessed}
-                        delay={true}
-                        coloredBg={true}>
+                        coloredBg={true}
+                        delay={true}>
 
                         <div className={styles.checkout_modal}>
                             <img src={img} alt="image"/>
                             <h3>Спасибо за заказ</h3>
                             <p>Наш менеджер свяжется с вами в ближайшее время</p>
                         </div>
-
                     </OverlayComp>
                 }
 
                 <h2 className={styles.caption}>Ваш заказ</h2>
                 {this.props.orderedItems.map(item => {
-                    //console.log(item);
-
                     return (
                         <div key={item.title} className={styles.item}>
                             <div className={styles.info}>
@@ -288,11 +285,14 @@ function setDispatch(dispatch) {
         onDeleteProductFromCart: (evt, id) => {
             dispatch(actions.cart.removeItem(evt, id))
         },
-        toggleOverlay: () => {
-            dispatch(actions.cart.toggleOverlay());
-        },
         delayOrderAsync: () => {
             dispatch(actions.cart.delayOrderAsync());
+        },
+        enableOverlay: () => {
+            dispatch(actions.cart.enableOverlay());
+        },
+        disableOverlay: () => {
+            dispatch(actions.cart.disableOverlay());
         }
     }
 }

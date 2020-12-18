@@ -10,6 +10,8 @@ import actions from "../../../redux/actions/index"
 import OrderButton from "../../Core/OrderButton/OrderButton"
 import ProductPrice from "../../Core/ProductPrice/ProductPrice";
 import LazyLoad from "../../Core/LazyLoad/LazyLoad";
+import OverlayComp from "../../Core/OverlayComp/OverlayComp";
+import img from "../Order/OrderSummary/img/thankssir.png";
 
 class Promo extends Component {
     constructor(props) {
@@ -52,6 +54,7 @@ class Promo extends Component {
         return result;
     };
 
+
     render() {
         //console.log(this.props);
         const [phones, accessoires, gadgets] = this.props.db.category;
@@ -59,15 +62,23 @@ class Promo extends Component {
             <section className={`${common.container} ${styles.promo_wrapper}`}>
                 <main className={`${common.wrapper} ${styles.promo}`}>
 
-                    {/*modal*/}
-                    <button style={{ padding: "10px" }} onClick={this.show}>show</button>
-                    {
-                        this.state.modal && <ModalOverlay mod={true} setModalStatus={this.closeModal}>
-                            <div style={{ backgroundColor: "grey", height: "200px" }}>
-                            <NavLink to={"/order"} style={{ backgroundColor: "red", padding: "10px" }}>Order</NavLink>
-                        </div>
-                        </ModalOverlay>
-                    }
+                    {/*{*/}
+                    {/*    this.props.cart.modals.showCheckoutModal*/}
+                    {/*    &&*/}
+                    {/*    <OverlayComp*/}
+                    {/*        toggleOverlay={this.props.toggleOverlay}*/}
+                    {/*        orderIsProcessed={this.props.cart.orderIsProcessed}*/}
+                    {/*        delay={false}*/}
+                    {/*        coloredBg={true}>*/}
+
+                    {/*        <div className={styles.go_cart_modal}>*/}
+                    {/*            <NavLink to={`/order`}>*/}
+                    {/*                <h3 onClick={this.goToCart}>Перейти в корзину</h3>*/}
+                    {/*            </NavLink>*/}
+                    {/*        </div>*/}
+                    {/*    </OverlayComp>*/}
+                    {/*}*/}
+
 
 
                     <h2 className={styles.promo_section_title}>Рекомендуем</h2>
@@ -99,9 +110,14 @@ class Promo extends Component {
 
                                     {item.rest > 0 && item.discount && <div className={styles.installment}>Рассрочка 0-0-12</div>}
                                     {item.rest > 0 && !item.discount && <div className={styles.most_endorsed}>Хит продаж</div>}
-                                    {item.rest > 0 && (!item.discount || item.discount) && <div className={styles.sim}>
-                                        <span>SIM</span>
-                                        в подарок</div>}
+                                    {
+                                        item.rest > 0 && (!item.discount || item.discount)
+                                        &&
+                                        <div className={styles.sim}>
+                                            <span>SIM</span>
+                                            в подарок</div>
+                                    }
+
 
                                     <ProductPrice product={item} classList={{ main: `${styles.price}`, discount: `${styles.price__discount}` }}/>
                                     {
@@ -115,7 +131,11 @@ class Promo extends Component {
                                             :
                                             <OrderButton
                                                 product={item}
-                                                onClick={(evt) => this.props.onAddToCart(evt, item.id, phones)}>
+                                                onClick={(evt) => {
+                                                    this.props.onAddToCart(evt, item.id, phones);
+
+                                                }
+                                                }>
                                                 {item.rest === 0 ? "Нет в наличии" : "Добавить в заказ"}
                                             </OrderButton>
                                     }
@@ -231,11 +251,14 @@ function setDispatch(dispatch) {
     return {
         onAddToCart: (evt, id, category) => {
             dispatch(actions.cart.disableButton(evt));
-            dispatch(actions.cart.addItemAsync(evt, id, category))
+            dispatch(actions.cart.addItemAsync(evt, id, category));
         },
         onDeleteFromCart: (evt, id) => {
             dispatch(actions.cart.disableButton(evt));
             dispatch(actions.cart.removeItemAsync(evt, id))
+        },
+        toggleOverlay: () => {
+            dispatch(actions.cart.toggleOverlay());
         },
     }
 }

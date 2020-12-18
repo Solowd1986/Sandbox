@@ -22,6 +22,18 @@ export const toggleOverlay = () => {
     }
 };
 
+export const disableOverlay = () => {
+    return {
+        type: "cart/disableOverlay",
+    }
+};
+
+export const enableOverlay = () => {
+    return {
+        type: "cart/enableOverlay",
+    }
+};
+
 
 export const delayOrder = () => {
     return {
@@ -32,13 +44,11 @@ export const delayOrder = () => {
 
 export const delayOrderAsync = () => {
     return dispatch => {
-        let timer = setTimeout(() => {
+        setTimeout(() => {
             dispatch(delayOrder());
         }, 1500)
     }
 };
-
-
 
 
 export const addItem = (evt, id, category) => {
@@ -50,10 +60,11 @@ export const addItem = (evt, id, category) => {
     }
 };
 
+
 export const addItemAsync = (evt, id, category) => {
     return dispatch => {
         setTimeout(() => {
-            dispatch(addItem(evt, id, category))
+            dispatch(addItem(evt, id, category));
         }, 1000)
     }
 };
