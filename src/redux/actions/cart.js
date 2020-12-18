@@ -23,6 +23,23 @@ export const toggleOverlay = () => {
 };
 
 
+export const delayOrder = () => {
+    return {
+        type: "cart/delayOrder",
+    }
+};
+
+
+export const delayOrderAsync = () => {
+    return dispatch => {
+        let timer = setTimeout(() => {
+            dispatch(delayOrder());
+        }, 1500)
+    }
+};
+
+
+
 
 export const addItem = (evt, id, category) => {
     return {
