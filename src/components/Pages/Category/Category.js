@@ -10,7 +10,24 @@ import actions from "../../../redux/actions";
 import SortPorducts from "../../Core/SortProducts/SortProducts";
 import LazyLoad from "../../Core/LazyLoad/LazyLoad";
 
+
+class Columns extends React.Component {
+    render() {
+        return (
+            <li>
+                <p>Hello</p>
+            </li>
+        );
+    }
+}
+
+
 class Category extends Component {
+    constructor(props) {
+        super(props);
+        this.list = React.createRef();
+        this.elements = [1, 2, 3, 4, 5];
+    }
 
     // always on top of page, without smooth scroll
     componentDidMount() {
@@ -19,8 +36,11 @@ class Category extends Component {
 
     isProductInCart = (products, id) => products.find(item => item.id === id);
 
+
     render() {
         const category = this.props.category.find(category => category.categoryAlias === this.props.match.params.type);
+
+        console.log(this.props);
 
         return (
             <Layout>
@@ -39,7 +59,7 @@ class Category extends Component {
 
                     <div className={`${common.wrapper} ${styles.list_wrapper}`}>
                         <LazyLoad>
-                            <ul className={styles.list}>
+                            <ul className={styles.list} ref={this.list}>
                                 {Array.from(Array(2), (e, i) => {
                                     return (
                                         <React.Fragment key={i}>
@@ -90,6 +110,18 @@ class Category extends Component {
                                         </React.Fragment>
                                     )
                                 })}
+
+                                {
+                                    this.props.serverData.length > 0
+                                    &&
+                                    this.elements.map((item, i) => {
+                                        return (
+                                            <React.Fragment key={i}>
+                                                <Columns/>
+                                            </React.Fragment>
+                                        )
+                                    })
+                                }
                             </ul>
                         </LazyLoad>
                     </div>
@@ -99,8 +131,10 @@ class Category extends Component {
     }
 }
 
+
 const getState = (state) => {
     return {
+        serverData: state.lazyload.serverStorageData,
         category: state.db.category,
         cart: state.cart
     }

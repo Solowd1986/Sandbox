@@ -182,7 +182,7 @@ class OrderSummary extends Component {
     };
 
     render() {
-        console.log(this.props);
+        //console.log(this.props);
         //console.log(this.state);
         return (
             <section className={styles.summary}>
@@ -277,15 +277,9 @@ function setDispatch(dispatch) {
         onDeleteProductFromCart: (evt, id) => {
             dispatch(actions.cart.removeItem(evt, id))
         },
-        delayOrder: () => {
-            dispatch(actions.cart.delayOrder());
-        },
         enableOverlay: () => {
             dispatch(actions.cart.enableOverlay());
         },
-        disableOverlay: () => {
-            dispatch(actions.cart.disableOverlay());
-        }
     }
 }
 

@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import styles from "./lazy-load.module.scss"
 import Overlay from "../Overlay/Overlay";
+import actions from "../../../redux/actions";
+import {connect} from "react-redux";
 
 
 class LazyLoad extends Component {
@@ -18,6 +20,10 @@ class LazyLoad extends Component {
         const controller = new AbortController();
         const signal = controller.signal;
 
+        /**
+         * timeoutExceeded переводится в true по истечении таймера, так как controller.abort() приведет б лок catch
+         * Там, если время истекло, а не просто пользователь отменил, то выведем ошибку об ответе сервера
+         */
         setTimeout(() => {
             timeoutExceeded = true;
             controller.abort()
@@ -40,6 +46,14 @@ class LazyLoad extends Component {
             div.classList.add(styles.data_block);
             const parentElement = document.querySelector(`.${styles.data_wrapper}`);
             parentElement.append(div);
+
+            //const serverDataStorage = responce;
+            //this.props.setServerDataStorage(serverDataStorage);
+
+            const res = [1, 2, 3, 4];
+            this.props.setServerData(res);
+
+
         })).catch(err => {
             overlay.destroy();
             getDataBtn.classList.remove(styles.active);
@@ -56,6 +70,8 @@ class LazyLoad extends Component {
     };
 
     render() {
+        console.log(this.props);
+
         return (
             <div className={styles.data_wrapper}>
                 {this.props.children}
@@ -79,7 +95,18 @@ class LazyLoad extends Component {
 }
 
 
-export default LazyLoad;
+function setDispatch(dispatch) {
+    return {
+        setServerData: (data) => {
+            dispatch(actions.lazyload.setServerData(data));
+        },
+    }
+}
+
+
+export default connect(null, setDispatch)(LazyLoad);
+
+
 
 
 

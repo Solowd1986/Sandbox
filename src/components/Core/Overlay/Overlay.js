@@ -80,9 +80,7 @@ class Overlay {
         elements.forEach(item => {
             const elementWidth = parseInt(getComputedStyle(item).getPropertyValue("width"));
             const parent = parseInt(getComputedStyle(item.parentElement).getPropertyValue("width"));
-            //item.style.cssText = `width: ${elementWidth}px;`;
-            console.log('fixed', elementWidth);
-            console.log('parent', item.parentElement.clientWidth);
+
 
             if (item.parentElement.clientWidth < item.clientWidth) {
                 item.style.cssText = `width: ${elementWidth}px;`;

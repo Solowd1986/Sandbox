@@ -18,7 +18,7 @@ class OverlayComp extends Component {
         if (this.props.delay) {
             this.timer = setTimeout(() => {
                 this.props.delayOrder()
-            }, 1500);
+            }, 1000);
         }
     };
 
