@@ -13,7 +13,7 @@ export default (state = initialState, action) => {
                 ...state,
                 categoryTitle: action.data.cat,
                 indexOfLastAddedElement: action.data.lastIndex,
-                serverStorageData: action.data.arrayOfElements,
+                serverStorageData: [...state.serverStorageData, ...action.data.arrayOfElements],
             }
         }
 

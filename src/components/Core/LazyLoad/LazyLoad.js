@@ -38,7 +38,9 @@ class LazyLoad extends Component {
         fetch(
             `api/${this.props.categoryName}/id/${this.props.lastIndex}/amount/${this.props.amountOfElements}`,
             { signal })
+
             .then((res) => res.json().then(responce => {
+
                 getDataBtn.classList.remove(styles.active);
                 overlay.destroy();
 
@@ -54,28 +56,46 @@ class LazyLoad extends Component {
 
                 const category = this.props.db.find(category => category.categoryAlias === this.props.categoryName);
 
+                //console.log('cat from props', category);
+
 
                 // длина массива не больше максимума, так как если максимальное количество элементов равно 4, то длина
                 // результирующего массива не 4, а 3, из-за индексации, то есть проверка length пойдет как:
                 // 0 -> add el1 -> 1 -> add el2 -> 2 -> add el3 -> 3 -> add el4 -> exit
-
+                // JSON.parse(JSON.stringify - защита от обращения по ссылке, иначе key добавлялся к одному и тому же обьекту
                 function getRandom(array, maxAmount) {
                     const result = [];
                     while (result.length < maxAmount) {
                         const index = Math.trunc(Math.random() * array.length);
-                        !result.includes(array[index]) && result.push(array[index]);
+                        if (!result.includes(array[index])) {
+                            result.push(JSON.parse(JSON.stringify(array[index])));
+                            //result.push(array[index]);
+                        }
                     }
                     return result;
                 }
 
-                const result = getRandom(category.productList, this.props.amountOfElements);
-                result.forEach(item => item.key = Math.floor(Math.random() * 10000));
-                //console.log(result);
+
+                const resultCat = getRandom(category.productList, this.props.amountOfElements);
+                //console.log('result from rand foo', resultCat);
+
+
+                // resultCat.forEach(item => {
+                //     //console.log(item);
+                //     item.key = Math.floor(Math.random() * 100000000)
+                // });
+
+                //console.log(resultCat);
+
+
+                // resultCat.forEach(item => {
+                //    console.log(item.key);
+                // });
 
 
                 const lastIndex = Math.floor(Math.random() * 10);
                 const cat = this.props.categoryName;
-                this.props.setServerData({ arrayOfElements: result, cat, lastIndex });
+                this.props.setServerData({ arrayOfElements: resultCat, cat, lastIndex });
 
             })).catch(err => {
             overlay.destroy();

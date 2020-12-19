@@ -116,7 +116,7 @@ class Category extends Component {
                                     &&
                                     this.props.serverData.map((item, i) => {
                                         return (
-                                            <React.Fragment key={item.key}>
+                                            <React.Fragment key={i}>
                                                 <li>{item.title}</li>
                                             </React.Fragment>
                                         )
