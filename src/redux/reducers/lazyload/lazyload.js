@@ -1,5 +1,8 @@
 const initialState = {
-    serverStorageData: []
+    numberOfRequestedElements: 4,
+    serverStorageData: [],
+    categoryTitle: "",
+    indexOfLastAddedElement: 0
 };
 
 
@@ -8,9 +11,12 @@ export default (state = initialState, action) => {
         case "lazyLoad/setServerData" : {
             return {
                 ...state,
-                serverStorageData: action.data
+                categoryTitle: action.data.cat,
+                indexOfLastAddedElement: action.data.lastIndex,
+                serverStorageData: action.data.arrayOfElements,
             }
         }
+
 
         default:
             return state;

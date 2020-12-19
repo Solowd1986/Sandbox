@@ -62,25 +62,6 @@ class Promo extends Component {
             <section className={`${common.container} ${styles.promo_wrapper}`}>
                 <main className={`${common.wrapper} ${styles.promo}`}>
 
-                    {/*{*/}
-                    {/*    this.props.cart.modals.showCheckoutModal*/}
-                    {/*    &&*/}
-                    {/*    <OverlayComp*/}
-                    {/*        toggleOverlay={this.props.toggleOverlay}*/}
-                    {/*        orderIsProcessed={this.props.cart.orderIsProcessed}*/}
-                    {/*        delay={false}*/}
-                    {/*        coloredBg={true}>*/}
-
-                    {/*        <div className={styles.go_cart_modal}>*/}
-                    {/*            <NavLink to={`/order`}>*/}
-                    {/*                <h3 onClick={this.goToCart}>Перейти в корзину</h3>*/}
-                    {/*            </NavLink>*/}
-                    {/*        </div>*/}
-                    {/*    </OverlayComp>*/}
-                    {/*}*/}
-
-
-
                     <h2 className={styles.promo_section_title}>Рекомендуем</h2>
                     <ul className={styles.promo_list}>
                         {/*ограничиваем вывод четырьмя элементами на странице promo*/}

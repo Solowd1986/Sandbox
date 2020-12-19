@@ -4,6 +4,9 @@
 // timeout 4 sec maximun, else - error msg
 sleep(1);
 
+// тут данные запроса от lazyload, с категорией и индексом
+//$uri = $_SERVER["REQUEST_URI"];
+
 $data = ["first", "second", "third"];
 
 print json_encode($data);

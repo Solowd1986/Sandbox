@@ -3,6 +3,7 @@ import styles from "./lazy-load.module.scss"
 import Overlay from "../Overlay/Overlay";
 import actions from "../../../redux/actions";
 import {connect} from "react-redux";
+import {func} from "prop-types";
 
 
 class LazyLoad extends Component {
@@ -34,27 +35,49 @@ class LazyLoad extends Component {
             controller.abort();
         });
 
-        fetch("api/loadMoreData", { signal }).then((res) => res.json().then(responce => {
-            getDataBtn.classList.remove(styles.active);
-            overlay.destroy();
+        fetch(
+            `api/${this.props.categoryName}/id/${this.props.lastIndex}/amount/${this.props.amountOfElements}`,
+            { signal })
+            .then((res) => res.json().then(responce => {
+                getDataBtn.classList.remove(styles.active);
+                overlay.destroy();
 
-            if (responce.length === 0) {
-                getDataBtn.remove();
-            }
-            const div = document.createElement("div");
-            div.innerHTML = "Block";
-            div.classList.add(styles.data_block);
-            const parentElement = document.querySelector(`.${styles.data_wrapper}`);
-            parentElement.append(div);
-
-            //const serverDataStorage = responce;
-            //this.props.setServerDataStorage(serverDataStorage);
-
-            const res = [1, 2, 3, 4];
-            this.props.setServerData(res);
+                if (responce.length === 0) {
+                    getDataBtn.remove();
+                }
+                const div = document.createElement("div");
+                div.innerHTML = "Block";
+                div.classList.add(styles.data_block);
+                const parentElement = document.querySelector(`.${styles.data_wrapper}`);
+                parentElement.append(div);
 
 
-        })).catch(err => {
+                const category = this.props.db.find(category => category.categoryAlias === this.props.categoryName);
+
+
+                // длина массива не больше максимума, так как если максимальное количество элементов равно 4, то длина
+                // результирующего массива не 4, а 3, из-за индексации, то есть проверка length пойдет как:
+                // 0 -> add el1 -> 1 -> add el2 -> 2 -> add el3 -> 3 -> add el4 -> exit
+
+                function getRandom(array, maxAmount) {
+                    const result = [];
+                    while (result.length < maxAmount) {
+                        const index = Math.trunc(Math.random() * array.length);
+                        !result.includes(array[index]) && result.push(array[index]);
+                    }
+                    return result;
+                }
+
+                const result = getRandom(category.productList, this.props.amountOfElements);
+                result.forEach(item => item.key = Math.floor(Math.random() * 10000));
+                //console.log(result);
+
+
+                const lastIndex = Math.floor(Math.random() * 10);
+                const cat = this.props.categoryName;
+                this.props.setServerData({ arrayOfElements: result, cat, lastIndex });
+
+            })).catch(err => {
             overlay.destroy();
             getDataBtn.classList.remove(styles.active);
             timeoutExceeded && getDataBtn.classList.add(styles.error);
@@ -70,7 +93,7 @@ class LazyLoad extends Component {
     };
 
     render() {
-        console.log(this.props);
+        //console.log(this.props);
 
         return (
             <div className={styles.data_wrapper}>
@@ -94,6 +117,14 @@ class LazyLoad extends Component {
     }
 }
 
+function getProps(state) {
+    return {
+        lastIndex: state.lazyload.indexOfLastAddedElement,
+        amountOfElements: state.lazyload.numberOfRequestedElements,
+        db: state.db.category
+    }
+}
+
 
 function setDispatch(dispatch) {
     return {
@@ -104,7 +135,7 @@ function setDispatch(dispatch) {
 }
 
 
-export default connect(null, setDispatch)(LazyLoad);
+export default connect(getProps, setDispatch)(LazyLoad);
 
 
 

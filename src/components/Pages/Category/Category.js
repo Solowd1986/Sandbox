@@ -40,7 +40,7 @@ class Category extends Component {
     render() {
         const category = this.props.category.find(category => category.categoryAlias === this.props.match.params.type);
 
-        console.log(this.props);
+        //console.log(this.props);
 
         return (
             <Layout>
@@ -58,7 +58,7 @@ class Category extends Component {
                     </div>
 
                     <div className={`${common.wrapper} ${styles.list_wrapper}`}>
-                        <LazyLoad>
+                        <LazyLoad categoryName={category.categoryAlias}>
                             <ul className={styles.list} ref={this.list}>
                                 {Array.from(Array(2), (e, i) => {
                                     return (
@@ -114,10 +114,10 @@ class Category extends Component {
                                 {
                                     this.props.serverData.length > 0
                                     &&
-                                    this.elements.map((item, i) => {
+                                    this.props.serverData.map((item, i) => {
                                         return (
-                                            <React.Fragment key={i}>
-                                                <Columns/>
+                                            <React.Fragment key={item.key}>
+                                                <li>{item.title}</li>
                                             </React.Fragment>
                                         )
                                     })
@@ -138,8 +138,8 @@ const getState = (state) => {
         category: state.db.category,
         cart: state.cart
     }
-
 };
+
 
 function setDispatch(dispatch) {
     return {
@@ -150,7 +150,7 @@ function setDispatch(dispatch) {
         onDeleteFromCart: (evt, id) => {
             dispatch(actions.cart.disableButton(evt));
             dispatch(actions.cart.removeItemAsync(evt, id))
-        },
+        }
     }
 }
 
