@@ -9,46 +9,28 @@ import OrderButton from "../../Core/OrderButton/OrderButton";
 import actions from "../../../redux/actions";
 import SortPorducts from "../../Core/SortProducts/SortProducts";
 import LazyLoad from "../../Core/LazyLoad/LazyLoad";
-
-
-class Columns extends React.Component {
-    render() {
-        return (
-            <li>
-                <p>Hello</p>
-            </li>
-        );
-    }
-}
+import ProductCard from "../ProductCart/ProductCard";
 
 
 class Category extends Component {
-    constructor(props) {
-        super(props);
-        this.list = React.createRef();
-        this.elements = [1, 2, 3, 4, 5];
-    }
 
     // always on top of page, without smooth scroll
     componentDidMount() {
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 0);
     }
-
-    isProductInCart = (products, id) => products.find(item => item.id === id);
 
 
     render() {
         const category = this.props.category.find(category => category.categoryAlias === this.props.match.params.type);
 
-        //console.log(this.props);
-
         return (
+
             <Layout>
                 <div className={styles.category_wrapper}>
                     <div className={styles.sign_bg}>
                         <img
                             className={styles.sign_bg__img}
-                            src={`${category.imgPrefix}/${category.categoryAlias}/${category.categoryTitleImg}`}
+                            src={`${category.imgPrefix}/${category.categoryTitleImg}`}
                             alt="Категории"/>
                         <h3 className={styles.sign_bg__title}>{category.categoryTitle}</h3>
                     </div>
@@ -59,52 +41,15 @@ class Category extends Component {
 
                     <div className={`${common.wrapper} ${styles.list_wrapper}`}>
                         <LazyLoad categoryName={category.categoryAlias}>
-                            <ul className={styles.list} ref={this.list}>
+                            <ul className={styles.list}>
                                 {Array.from(Array(2), (e, i) => {
                                     return (
                                         <React.Fragment key={i}>
-                                            {category.productList.map(item => {
+                                            {category.productList.map((item, i) => {
                                                 return (
-                                                    <li key={item.id} className={styles.item}>
-                                                        <span className={
-                                                            item.rest > 0
-                                                                ? `${styles.tag}`
-                                                                : `${styles.tag} ${styles.tag__not_in_stock}`}>
-                                                            В наличии
-                                                        </span>
 
-                                                        <NavLink to={`/product/${category.categoryAlias}/${item.id}`} className={styles.list_link}>
-                                                            <img
-                                                                className={styles.img_centered}
-                                                                src={`${category.imgPrefix}/${category.categoryAlias}/${item.imgPath.md}`}
-                                                                //src="/img/categories/accessoires-categorie/oneplus_7t_silicone_red_380_380-crop.png"
-                                                                alt="image"
-                                                            />
-                                                            <div className={styles.item_desc}>
-                                                                <span>{item.title}</span>
-                                                                {category.categoryAlias === "phones" && <span>Цвет: {item.specifications.color}</span>}
-                                                            </div>
-                                                        </NavLink>
+                                                    <ProductCard key={i} item={item} category={category}/>
 
-                                                        <ProductPrice product={item} classList={{ main: `${styles.price}`, discount: `${styles.price__discount}` }}/>
-
-                                                        {
-                                                            this.isProductInCart(this.props.cart.products, item.id)
-                                                                ?
-                                                                <OrderButton
-                                                                    product={item}
-                                                                    onClick={(evt) => this.props.onDeleteFromCart(evt, item.id)}>
-                                                                    Убрать из заказа
-                                                                </OrderButton>
-                                                                :
-                                                                <OrderButton
-                                                                    product={item}
-                                                                    onClick={(evt) => this.props.onAddToCart(evt, item.id, category)}>
-                                                                    {item.rest === 0 ? "Нет в наличии" : "Добавить в заказ"}
-                                                                </OrderButton>
-                                                        }
-
-                                                    </li>
                                                 )
                                             })}
                                         </React.Fragment>
@@ -117,7 +62,7 @@ class Category extends Component {
                                     this.props.serverData.map((item, i) => {
                                         return (
                                             <React.Fragment key={i}>
-                                                <li>{item.title}</li>
+                                                <ProductCard key={i} item={item} category={category}/>
                                             </React.Fragment>
                                         )
                                     })
@@ -150,6 +95,9 @@ function setDispatch(dispatch) {
         onDeleteFromCart: (evt, id) => {
             dispatch(actions.cart.disableButton(evt));
             dispatch(actions.cart.removeItemAsync(evt, id))
+        },
+        clearDataStorage: () => {
+            dispatch(actions.lazyload.clearDataStorage());
         }
     }
 }

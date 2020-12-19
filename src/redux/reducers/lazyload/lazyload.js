@@ -17,6 +17,16 @@ export default (state = initialState, action) => {
             }
         }
 
+        case "lazyLoad/clearDataStorage" : {
+            console.log('clear');
+
+            return {
+                ...state,
+                serverStorageData: [],
+                categoryTitle: "",
+                indexOfLastAddedElement: 0
+            }
+        }
 
         default:
             return state;

@@ -43,7 +43,6 @@ class Order extends Component {
 
     render() {
         //console.log('state', this.props);
-
         return (
             <Layout>
                 {this.props.cart.amountOfProductsInCart > 0

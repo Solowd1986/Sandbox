@@ -5,5 +5,8 @@ export const setServerData = (data) => {
     }
 };
 
-
-
+export const clearDataStorage = () => {
+    return {
+        type: "lazyLoad/clearDataStorage",
+    }
+};

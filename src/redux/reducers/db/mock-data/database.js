@@ -13,7 +13,7 @@ export default {
         {
             categoryTitle: "Смартфоны",
             categoryAlias: "phones",
-            imgPrefix,
+            imgPrefix: imgPrefix + "/phones",
             categoryTitleImg: "_phones-banner.jpg",
 
             productList: [
@@ -573,7 +573,7 @@ export default {
         {
             categoryTitle: "Аксессуары",
             categoryAlias: "accessoires",
-            imgPrefix,
+            imgPrefix: imgPrefix + "/accessoires",
             categoryTitleImg: "_accessoires-banner.jpg",
 
             productList: [
@@ -739,7 +739,7 @@ export default {
         {
             categoryTitle: "Гаджеты",
             categoryAlias: "gadgets",
-            imgPrefix,
+            imgPrefix: imgPrefix + "/gadgets",
             categoryTitleImg: "_gadgets-banner.jpg",
 
             productList: [

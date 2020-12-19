@@ -80,24 +80,24 @@ class Product extends Component {
                             <img
                                 className={styles.order__img}
                                 data-img={"lg"}
-                                src={`${category.imgPrefix}/${category.categoryAlias}/${product.imgPath.lg[0]}`}
+                                src={`${category.imgPrefix}/${product.imgPath.lg[0]}`}
                                 alt={product.imgAlt}
                             />
                             <div className={styles.order__slider}>
                                 <img className="" width="60" height="60"
                                      onClick={this.slider}
                                      data-active={true}
-                                     src={`${category.imgPrefix}/${category.categoryAlias}/${product.imgPath.lg[0]}`}
+                                     src={`${category.imgPrefix}/${product.imgPath.lg[0]}`}
                                      alt={product.imgAlt}
                                 />
                                 <img className="" width="60" height="60"
                                      onClick={this.slider}
-                                     src={`${category.imgPrefix}/${category.categoryAlias}/${product.imgPath.lg[1]}`}
+                                     src={`${category.imgPrefix}/${product.imgPath.lg[1]}`}
                                      alt={product.imgAlt}
                                 />
                                 <img className="" width="60" height="60"
                                      onClick={this.slider}
-                                     src={`${category.imgPrefix}/${category.categoryAlias}/${product.imgPath.lg[2]}`}
+                                     src={`${category.imgPrefix}/${product.imgPath.lg[2]}`}
                                      alt={product.imgAlt}
                                 />
                             </div>

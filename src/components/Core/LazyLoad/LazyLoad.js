@@ -9,6 +9,7 @@ import {func} from "prop-types";
 class LazyLoad extends Component {
     constructor(props) {
         super(props);
+
         //this.uri = "";
         //this.numberOfElements = 3;
         //this.parentElement = this.props.parent;
@@ -47,11 +48,11 @@ class LazyLoad extends Component {
                 if (responce.length === 0) {
                     getDataBtn.remove();
                 }
-                const div = document.createElement("div");
-                div.innerHTML = "Block";
-                div.classList.add(styles.data_block);
-                const parentElement = document.querySelector(`.${styles.data_wrapper}`);
-                parentElement.append(div);
+                //const div = document.createElement("div");
+                //div.innerHTML = "Block";
+                //div.classList.add(styles.data_block);
+                //const parentElement = document.querySelector(`.${styles.data_wrapper}`);
+                //parentElement.append(div);
 
 
                 const category = this.props.db.find(category => category.categoryAlias === this.props.categoryName);
@@ -69,7 +70,6 @@ class LazyLoad extends Component {
                         const index = Math.trunc(Math.random() * array.length);
                         if (!result.includes(array[index])) {
                             result.push(JSON.parse(JSON.stringify(array[index])));
-                            //result.push(array[index]);
                         }
                     }
                     return result;
@@ -77,26 +77,15 @@ class LazyLoad extends Component {
 
 
                 const resultCat = getRandom(category.productList, this.props.amountOfElements);
-                //console.log('result from rand foo', resultCat);
 
-
-                // resultCat.forEach(item => {
-                //     //console.log(item);
-                //     item.key = Math.floor(Math.random() * 100000000)
+                // window.scrollBy({
+                //     top: window.innerHeight,
+                //     behavior: 'smooth'
                 // });
-
-                //console.log(resultCat);
-
-
-                // resultCat.forEach(item => {
-                //    console.log(item.key);
-                // });
-
 
                 const lastIndex = Math.floor(Math.random() * 10);
                 const cat = this.props.categoryName;
                 this.props.setServerData({ arrayOfElements: resultCat, cat, lastIndex });
-
             })).catch(err => {
             overlay.destroy();
             getDataBtn.classList.remove(styles.active);

@@ -206,6 +206,7 @@ class OrderSummary extends Component {
                             <div className={styles.info}>
                                 <img
                                     width={82} height={82} className={styles.img_sm}
+                                    // that from reducer addItemToCart
                                     src={item.imgFullPath}
                                     alt={item.imgAlt}
                                 />
