@@ -17,7 +17,7 @@ class ProductCard extends Component {
 
     render() {
         return (
-            <li key={this.props.item.id} className={styles.item}>
+            <li key={this.props.item.id} className={`animate__animated animate__fadeIn ${styles.item}`}>
                 <span className={this.props.item.rest > 0 ? `${styles.tag}` : `${styles.tag} ${styles.tag__not_in_stock}`}>
                     В наличии
                 </span>
