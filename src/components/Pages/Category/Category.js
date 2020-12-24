@@ -3,9 +3,7 @@ import common from "~scss/common.module.scss";
 import styles from "./category.module.scss";
 import Layout from "~components/Core/Layout/Layout";
 import {connect} from "react-redux";
-import {NavLink} from "react-router-dom";
-import ProductPrice from "../../Core/ProductPrice/ProductPrice";
-import OrderButton from "../../Core/OrderButton/OrderButton";
+
 import actions from "../../../redux/actions";
 import SortPorducts from "../../Core/SortProducts/SortProducts";
 import LazyLoad from "../../Core/LazyLoad/LazyLoad";
@@ -13,7 +11,6 @@ import ProductCard from "../ProductCart/ProductCard";
 
 
 class Category extends Component {
-
     // always on top of page, without smooth scroll
     componentDidMount() {
         window.scrollTo(0, 0);
