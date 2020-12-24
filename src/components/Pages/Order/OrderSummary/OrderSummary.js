@@ -3,7 +3,6 @@ import styles from "./order-summary.module.scss";
 import {connect} from "react-redux";
 import actions from "../../../../redux/actions";
 import OverlayComp from "../../../Core/OverlayComp/OverlayComp";
-
 import img from "./img/thankssir.png";
 
 class OrderSummary extends Component {
@@ -186,13 +185,12 @@ class OrderSummary extends Component {
         //console.log(this.state);
         return (
             <section className={styles.summary}>
-
                 {
                     this.props.state.cart.modals.showModal
                     &&
                     <OverlayComp coloredBg={true} delay={true}>
                         <div className={styles.checkout_modal}>
-                            <img src={img} alt="image"/>
+                            <img src={img} alt="image-checkout"/>
                             <h3>Спасибо за заказ</h3>
                             <p>Наш менеджер свяжется с вами в ближайшее время</p>
                         </div>

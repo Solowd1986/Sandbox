@@ -6,25 +6,14 @@ export default function addItemToCart(state, evt, id, category) {
     evt.target.classList.remove(evt.target.dataset.disabled);
 
     const products = [...state.products];
-
-    // emulate request to database
-    const currentProduct = category.productList.find(item => item.id === id);
+    // emulate request to database, prevent acceess via link
+    const currentProduct = JSON.parse(JSON.stringify(category.productList.find(item => item.id === id)));
 
     //add some fields
     currentProduct.quantity = 1;
-    console.log(category.imgPrefix);
+    //console.log(category.imgPrefix);
 
     currentProduct.imgFullPath = `${category.imgPrefix}/${currentProduct.imgPath.md}`;
-
-    // if (products.find(item => item.id === currentProduct.id)) {
-    //     return {
-    //         ...state,
-    //         defaultSettings: {
-    //             buttonsDisabled: false
-    //         }
-    //     };
-    // }
-
     products.push(currentProduct);
     localStorage.setItem("cart", JSON.stringify(products));
 

@@ -16,12 +16,10 @@ class Category extends Component {
         window.scrollTo(0, 0);
     }
 
-
     render() {
         const category = this.props.category.find(category => category.categoryAlias === this.props.match.params.type);
 
         return (
-
             <Layout>
                 <div className={styles.category_wrapper}>
                     <div className={styles.sign_bg}>

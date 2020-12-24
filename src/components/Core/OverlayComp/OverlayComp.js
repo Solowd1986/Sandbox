@@ -23,6 +23,7 @@ class OverlayComp extends Component {
     };
 
     componentWillUnmount = () => {
+        this.destroy();
         clearTimeout(this.timer);
     };
 
@@ -79,6 +80,7 @@ class OverlayComp extends Component {
         //const documentWidth = document.documentElement.clientWidth;
         elements.forEach(item => {
             const elementWidth = parseInt(getComputedStyle(item).getPropertyValue("width"));
+            // определяем, задана ли этому элементу width: 100%, условно работает сравнение с родителем, который не fixed
             if (item.parentElement.clientWidth < item.clientWidth) {
                 item.style.cssText = `width: ${elementWidth}px;`;
             } else {
@@ -123,7 +125,7 @@ class OverlayComp extends Component {
      * 8. Таймер запускается при монтировании компонента и удаляется при уничтожении компонента, так таймеры не накапливаются
      */
     render() {
-        console.log(this.props);
+        //console.log(this.props);
         return (
             <div onClick={this.destroy} className={`${styles.overlay} ${this.coloredBg && styles.overlay_bg}`}>
                 <div>

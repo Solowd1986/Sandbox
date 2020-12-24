@@ -8,19 +8,10 @@ import {connect} from "react-redux";
 
 
 class Order extends Component {
-
     // always on top of page, without smooth scroll
     componentDidMount() {
         window.scrollTo(0, 0)
     }
-
-    /**
-     * Опиши логику работы с залержаки от сервера, чтобы кнопки блокировались, нельзя было мультикликать
-     */
-
-    blockBtn = () => {
-
-    };
 
     submit = (evt) => {
         if (!evt.currentTarget.checkValidity()) {

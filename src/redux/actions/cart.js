@@ -16,12 +16,6 @@ export const disableButton = (evt) => {
 };
 
 
-export const toggleOverlay = () => {
-    return {
-        type: "cart/toggleOverlay",
-    }
-};
-
 export const disableOverlay = () => {
     return {
         type: "cart/disableOverlay",

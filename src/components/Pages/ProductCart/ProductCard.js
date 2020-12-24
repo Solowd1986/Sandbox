@@ -38,6 +38,24 @@ class ProductCard extends Component {
                 <PromoProductCard item={this.props.item} category={this.props.category}/>
                 <ProductPrice product={this.props.item} classList={{ main: `${styles.price}`, discount: `${styles.price__discount}` }}/>
 
+                {/*
+                    Вид кнопки зависит от isProductInCart: если такой товар есть - то можно убрать. Иначе - добавить.
+                    Передаваемый в компонент текст кнопки (props.children) зависит от количества товара: "Нет в наличии"/"Добавить в заказ"
+                    Если же товар уже в корзине, то текст один: "Убрать"
+                    При клике выполняется метод onAddToCart. Он состоит из двух action: disableButton и addItemAsync
+                    Суть такова:
+                    1. При клике на кнопку в cart ставится buttonsDisabled = true и кнопки зависящие от этого - отключаются
+                    2. Это можно увидеть в блоке OrderButton - атрибут disabled (не путать с data-disabled) зависит от:
+                       состояния buttonsDisabled, от остатка товара - чтоб нельзя добавить в корзину, если товара нет, или
+                       просто от передачи disabled={true} конкретному компоненту кнопки.
+                    3. Также, нужно дать кнопке класс визуализирующий ее отключение и визуализацию запроса к серверу.
+                    4. Имя этого класса передается в атрибуте data-disabled. В action disableButton этот класс добавляется
+                    5. Кому добавлять понятно из evt - обращаемся к evt.target, так класс получит только кнопка, по которой был клик
+                    6. Этот процесс продолжается, пока buttonsDisabled не перейдет в false, это происходит в функции addItem
+                    7. Эта функция вызывается не сразу, через 1 секунду, для имитации запроса, она обернута в addItemAsync для этого
+                    8. Когда секунда проходит, в числе прочего buttonsDisabled переводится в false, и важно: в addItem удаляется
+                       класс из атрибута data-disabled, чтобы пропал спиннер и стили "ожидания овтета от сервера".
+                */}
                 {
                     this.isProductInCart(this.props.cart.products, this.props.item.id)
                         ?
@@ -50,6 +68,7 @@ class ProductCard extends Component {
                         <OrderButton
                             product={this.props.item}
                             onClick={(evt) => {
+                                this.props.enableOverlay();
                                 this.props.onAddToCart(evt, this.props.item.id, this.props.category);
                             }}>
                             {this.props.item.rest === 0 ? "Нет в наличии" : "Добавить в заказ"}
@@ -77,6 +96,9 @@ function setDispatch(dispatch) {
         onDeleteFromCart: (evt, id) => {
             dispatch(actions.cart.disableButton(evt));
             dispatch(actions.cart.removeItemAsync(evt, id))
+        },
+        enableOverlay: () => {
+            dispatch(actions.cart.enableOverlay());
         },
     }
 }

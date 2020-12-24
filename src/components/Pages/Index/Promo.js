@@ -3,6 +3,11 @@ import common from "~scss/common.module.scss";
 import styles from "./promo.module.scss";
 import {connect} from "react-redux";
 import ProductCard from "../ProductCart/ProductCard";
+import OverlayComp from "../../Core/OverlayComp/OverlayComp";
+import {NavLink, useHistory} from "react-router-dom";
+import actions from "../../../redux/actions";
+import img from "../Order/OrderSummary/img/thankssir.png";
+
 
 class Promo extends Component {
 
@@ -20,12 +25,40 @@ class Promo extends Component {
         }
         return result;
     };
+
     render() {
         //console.log(this.props);
         const [phones, accessoires, gadgets] = this.props.db.category;
         return (
             <section className={`${common.container} ${styles.promo_wrapper}`}>
                 <main className={`${common.wrapper} ${styles.promo}`}>
+
+                    {
+                        this.props.cart.modals.showModal && !this.props.cart.defaultSettings.buttonsDisabled
+                        &&
+                        <OverlayComp coloredBg={true} delay={false}>
+                            <div className={styles.cart}>
+                                <h3>Ваш заказ</h3>
+                                <ul>
+                                    {
+                                        this.props.cart.products.map((item, i) => {
+                                            return (
+                                                <li key={i}>
+                                                    <img width={82} height={82} src={`${item.imgFullPath}`} alt="image-cart"/>
+                                                    <p>{item.title}</p>
+                                                    <span>{new Intl.NumberFormat().format(item.price)} р.</span>
+                                                </li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                                <NavLink className={styles.link} to={"/order"}>Перейти в корзину</NavLink>
+                                <span className={styles.continue} onClick={this.props.disableOverlay}>Продолжить покупки</span>
+                            </div>
+                        </OverlayComp>
+                    }
+
+
                     <h2 className={styles.promo_section_title}>Рекомендуем</h2>
                     <ul className={styles.promo_list}>
                         {/*ограничиваем вывод четырьмя элементами на странице promo*/}
@@ -69,5 +102,14 @@ function getProps(state) {
     }
 }
 
-export default connect(getProps)(Promo);
+
+function setDispatch(dispatch) {
+    return {
+        disableOverlay: () => {
+            dispatch(actions.cart.disableOverlay());
+        },
+    }
+}
+
+export default connect(getProps, setDispatch)(Promo);
 
