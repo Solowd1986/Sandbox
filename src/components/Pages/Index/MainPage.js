@@ -11,7 +11,11 @@ import Evaluate from "../../test/Evaluate";
 import Layout from "../../Core/Layout/Layout";
 import LazyLoad from "../../Core/LazyLoad/LazyLoad";
 
+
 export default class MainPage extends Component {
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
     render() {
         return (
             <Layout>

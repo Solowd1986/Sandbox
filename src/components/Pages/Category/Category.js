@@ -8,6 +8,8 @@ import actions from "../../../redux/actions";
 import SortPorducts from "../../Core/SortProducts/SortProducts";
 import LazyLoad from "../../Core/LazyLoad/LazyLoad";
 import ProductCard from "../ProductCart/ProductCard";
+import OverlayComp from "../../Core/OverlayComp/OverlayComp";
+import CartModal from "../../CartModal/CartModal";
 
 
 class Category extends Component {
@@ -22,6 +24,13 @@ class Category extends Component {
         return (
             <Layout>
                 <div className={styles.category_wrapper}>
+                    {
+                        this.props.cart.modals.showModal && !this.props.cart.defaultSettings.buttonsDisabled
+                        &&
+                        <OverlayComp coloredBg={true} delay={false}>
+                            <CartModal products={this.props.cart.products}/>
+                        </OverlayComp>
+                    }
                     <div className={styles.sign_bg}>
                         <img
                             className={styles.sign_bg__img}

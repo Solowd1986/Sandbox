@@ -7,6 +7,7 @@ import OverlayComp from "../../Core/OverlayComp/OverlayComp";
 import {NavLink, useHistory} from "react-router-dom";
 import actions from "../../../redux/actions";
 import img from "../Order/OrderSummary/img/thankssir.png";
+import CartModal from "../../CartModal/CartModal";
 
 
 class Promo extends Component {
@@ -37,24 +38,7 @@ class Promo extends Component {
                         this.props.cart.modals.showModal && !this.props.cart.defaultSettings.buttonsDisabled
                         &&
                         <OverlayComp coloredBg={true} delay={false}>
-                            <div className={styles.cart}>
-                                <h3>Ваш заказ</h3>
-                                <ul>
-                                    {
-                                        this.props.cart.products.map((item, i) => {
-                                            return (
-                                                <li key={i}>
-                                                    <img width={82} height={82} src={`${item.imgFullPath}`} alt="image-cart"/>
-                                                    <p>{item.title}</p>
-                                                    <span>{new Intl.NumberFormat().format(item.price)} р.</span>
-                                                </li>
-                                            )
-                                        })
-                                    }
-                                </ul>
-                                <NavLink className={styles.link} to={"/order"}>Перейти в корзину</NavLink>
-                                <span className={styles.continue} onClick={this.props.disableOverlay}>Продолжить покупки</span>
-                            </div>
+                            <CartModal products={this.props.cart.products}/>
                         </OverlayComp>
                     }
 
@@ -103,13 +87,5 @@ function getProps(state) {
 }
 
 
-function setDispatch(dispatch) {
-    return {
-        disableOverlay: () => {
-            dispatch(actions.cart.disableOverlay());
-        },
-    }
-}
-
-export default connect(getProps, setDispatch)(Promo);
+export default connect(getProps)(Promo);
 
