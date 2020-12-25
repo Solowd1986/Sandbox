@@ -169,7 +169,7 @@ class Product extends Component {
                     </nav>
 
                     <div className={common.container}>
-                        <Features imgPrefix={`${category.imgPrefix}/${category.categoryAlias}`} promo={product.promoBlock}/>
+                        <Features imgPrefix={`${category.imgPrefix}`} promo={product.promoBlock}/>
                         {category.categoryAlias === "phones" && <Specification specs={product.specifications}/>}
                         <ProductDelivery/>
                     </div>

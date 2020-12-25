@@ -48,7 +48,7 @@ const Delivery = props => {
                 <h2 className={styles.title}>Оплата</h2>
 
                 <h3>Возможна оплата следующими способами:</h3>
-                <ul>
+                <ul className={styles.payment_methods}>
                     <li>Наличными</li>
                     <li>Банковской картой</li>
                     <li>Электронными деньгами: WebMoney, Яндекс.Деньги, QIWI</li>

@@ -28,6 +28,16 @@
 }
 
 
+.payment_methods {
+  margin: 0;
+  list-style-position: inside;
+  list-style-type: disc;
+
+  & > li {
+    margin: 10px 0;
+  }
+}
+
 .delivery_wrapper h3:not(:last-of-type) {
   padding-left: 25px;
   background: url("./img/check.png") no-repeat left center;
