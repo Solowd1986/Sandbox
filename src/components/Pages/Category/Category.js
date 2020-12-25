@@ -13,6 +13,7 @@ import CartModal from "../../CartModal/CartModal";
 
 
 class Category extends Component {
+
     // always on top of page, without smooth scroll
     componentDidMount() {
         window.scrollTo(0, 0);
@@ -51,9 +52,7 @@ class Category extends Component {
                                         <React.Fragment key={i}>
                                             {category.productList.map((item, i) => {
                                                 return (
-
                                                     <ProductCard key={i} item={item} category={category}/>
-
                                                 )
                                             })}
                                         </React.Fragment>
@@ -66,7 +65,7 @@ class Category extends Component {
                                     this.props.serverData.map((item, i) => {
                                         return (
                                             <React.Fragment key={i}>
-                                                <ProductCard key={i} item={item} category={category}/>
+                                                <ProductCard key={i} item={item} category={category} classList={"animate__animated animate__fadeIn"}/>
                                             </React.Fragment>
                                         )
                                     })

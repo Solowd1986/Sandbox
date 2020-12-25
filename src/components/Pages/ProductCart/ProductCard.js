@@ -17,7 +17,7 @@ class ProductCard extends Component {
 
     render() {
         return (
-            <li key={this.props.item.id} className={`animate__animated animate__fadeIn ${styles.item}`}>
+            <li key={this.props.item.id} className={`${styles.item} ${this.props.classList ? this.props.classList : ''}`}>
                 <span className={this.props.item.rest > 0 ? `${styles.tag}` : `${styles.tag} ${styles.tag__not_in_stock}`}>
                     В наличии
                 </span>
@@ -68,6 +68,8 @@ class ProductCard extends Component {
                         <OrderButton
                             product={this.props.item}
                             onClick={(evt) => {
+                                // данная связка методов используется только в компонентах Promo/Category. В Product - нет,
+                                // модалка с корзиной не нужна
                                 this.props.enableOverlay();
                                 this.props.onAddToCart(evt, this.props.item.id, this.props.category);
                             }}>

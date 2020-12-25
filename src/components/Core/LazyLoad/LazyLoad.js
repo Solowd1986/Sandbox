@@ -103,7 +103,6 @@ class LazyLoad extends Component {
 
     render() {
         //console.log(this.props);
-
         return (
             <div className={styles.data_wrapper}>
                 {this.props.children}
