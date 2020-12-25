@@ -43,7 +43,7 @@ class OrderSummary extends Component {
 
     transitionalValueHandler = (evt, id) => {
 
-        console.log(1);
+        //console.log(1);
         const value = evt.target.value;
 
         const temporary = [...this.state.orderedItems];
@@ -230,7 +230,8 @@ class OrderSummary extends Component {
                                               className={`${styles.counter} ${styles.counter_plus}`}/>
                                     </div>
                                 </div>
-                                <span className={styles.price__sm}>{item.price * item.quantity} р.</span>
+                                <span className={styles.price__sm}>
+                                    {new Intl.NumberFormat().format(item.price * item.quantity)} р.</span>
                                 <div>
                                     <span className={styles.delete} onClick={(evt) => this.props.onDeleteProductFromCart(evt, item.id)}>&times;</span>
                                 </div>
@@ -241,12 +242,15 @@ class OrderSummary extends Component {
 
                 <div className={styles.delivery_fieldset}>
                     <span className={styles.delivery_item}>Доставка по Москве:</span>
-                    <span className={styles.delivery_item}>{this.calcTotal() > 100000 ? 0 : 400} р.</span>
+                    <span className={styles.delivery_item}>
+                     {new Intl.NumberFormat().format(this.calcTotal() > 100000 ? 0 : 400)} р.</span>
                 </div>
 
                 <div className={styles.checkout}>
                     <span className={styles.delivery_item}>Итого:</span>
-                    <span className={styles.price__lg}>{this.calcTotal() > 100000 ? this.calcTotal() : this.calcTotal() + 400} р.</span>
+                    <span className={styles.price__lg}>
+                        {new Intl.NumberFormat().format(this.calcTotal() > 100000 ? this.calcTotal() : this.calcTotal() + 400)} р.
+                    </span>
                 </div>
                 <button onClick={this.checkout} className={`${styles.order_btn}`} disabled={false}>Оформить заказ</button>
             </section>

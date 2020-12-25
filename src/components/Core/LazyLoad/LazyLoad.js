@@ -3,19 +3,9 @@ import styles from "./lazy-load.module.scss"
 import Overlay from "../Overlay/Overlay";
 import actions from "../../../redux/actions";
 import {connect} from "react-redux";
-import {func} from "prop-types";
 
 
 class LazyLoad extends Component {
-    constructor(props) {
-        super(props);
-
-        //this.uri = "";
-        //this.numberOfElements = 3;
-        //this.parentElement = this.props.parent;
-        //this.innerElementType = this.props.element || "li";
-        //this.innerElementClassList = this.props.classList || [];
-    }
 
     initRequest = (getDataBtn) => {
         let timeoutExceeded = false;
@@ -48,17 +38,8 @@ class LazyLoad extends Component {
                 if (responce.length === 0) {
                     getDataBtn.remove();
                 }
-                //const div = document.createElement("div");
-                //div.innerHTML = "Block";
-                //div.classList.add(styles.data_block);
-                //const parentElement = document.querySelector(`.${styles.data_wrapper}`);
-                //parentElement.append(div);
-
 
                 const category = this.props.db.find(category => category.categoryAlias === this.props.categoryName);
-
-                //console.log('cat from props', category);
-
 
                 // длина массива не больше максимума, так как если максимальное количество элементов равно 4, то длина
                 // результирующего массива не 4, а 3, из-за индексации, то есть проверка length пойдет как:
@@ -78,15 +59,11 @@ class LazyLoad extends Component {
 
                 const resultCat = getRandom(category.productList, this.props.amountOfElements);
 
-                // window.scrollBy({
-                //     top: window.innerHeight,
-                //     behavior: 'smooth'
-                // });
-
                 const lastIndex = Math.floor(Math.random() * 10);
                 const cat = this.props.categoryName;
                 this.props.setServerData({ arrayOfElements: resultCat, cat, lastIndex });
             })).catch(err => {
+
             overlay.destroy();
             getDataBtn.classList.remove(styles.active);
             timeoutExceeded && getDataBtn.classList.add(styles.error);
@@ -99,12 +76,14 @@ class LazyLoad extends Component {
         getDataBtn.classList.add(styles.active);
         getDataBtn.classList.remove(styles.error);
         this.initRequest(getDataBtn);
+
     };
 
     render() {
         //console.log(this.props);
         return (
             <div className={styles.data_wrapper}>
+
                 {this.props.children}
                 <button onClick={this.loadHandler} className={styles.more}>
                     <svg

@@ -11,7 +11,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 class Slider extends Component {
 
-    // Инициализация слайдера после отрисовки компонента. Была ошибка "cant' call add", это из-за
+    // Инициализация слайдера после отрисовки компонента. Была ошибка "cant't call add", это из-за
     // двойной инициализации, поэтому тут проверка - not('.slick-initialized'), и только потом инициализация
     componentDidMount() {
         $(document).ready(function () {
@@ -20,8 +20,9 @@ class Slider extends Component {
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 infinite: true,
-                variableWidth: true,
-                variableHeight: true
+
+                // autoplay: true,
+                // autoplaySpeed: 2000,
             });
         });
     }

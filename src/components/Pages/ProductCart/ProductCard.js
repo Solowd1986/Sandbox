@@ -32,7 +32,9 @@ class ProductCard extends Component {
 
                 <div className={styles.title}>
                     <span>{this.props.item.title}</span>
-                    <span>{this.props.item.specifications && (this.props.item.specifications.color)}</span>
+                    <span className={styles.color}>
+                        {this.props.item.specifications && `"${(this.props.item.specifications.color)}"`}
+                    </span>
                 </div>
 
                 <PromoProductCard item={this.props.item} category={this.props.category}/>

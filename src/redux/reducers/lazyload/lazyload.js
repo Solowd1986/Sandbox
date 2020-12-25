@@ -1,4 +1,5 @@
 const initialState = {
+    modalShow: false,
     numberOfRequestedElements: 4,
     serverStorageData: [],
     categoryTitle: "",

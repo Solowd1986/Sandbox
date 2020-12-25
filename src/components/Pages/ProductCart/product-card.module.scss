@@ -72,6 +72,10 @@
 
   & > span {
     display: inline-block;
+
+    &.color {
+      font-weight: 400;
+    }
   }
 }
 
