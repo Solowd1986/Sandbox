@@ -3,7 +3,7 @@ import common from "~scss/common.module.scss";
 import styles from "./promo.module.scss";
 import {connect} from "react-redux";
 import ProductCard from "../ProductCart/ProductCard";
-import OverlayComp from "../../Core/OverlayComp/OverlayComp";
+import Overlay from "../../Core/Overlay/Overlay";
 import {NavLink, useHistory} from "react-router-dom";
 import actions from "../../../redux/actions";
 import img from "../Order/OrderSummary/img/thankssir.png";
@@ -37,9 +37,9 @@ class Promo extends Component {
                     {
                         this.props.cart.modals.showModal && !this.props.cart.defaultSettings.buttonsDisabled
                         &&
-                        <OverlayComp coloredBg={true} delay={false}>
+                        <Overlay coloredBg={true} delay={false}>
                             <CartModal products={this.props.cart.products}/>
-                        </OverlayComp>
+                        </Overlay>
                     }
 
 

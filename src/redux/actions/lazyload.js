@@ -10,3 +10,16 @@ export const clearDataStorage = () => {
         type: "lazyLoad/clearDataStorage",
     }
 };
+
+export const disableOverlay = (callback) => {
+    return {
+        type: "lazyLoad/disableOverlay",
+    }
+};
+
+
+export const enableOverlay = () => {
+    return {
+        type: "lazyLoad/enableOverlay",
+    }
+};

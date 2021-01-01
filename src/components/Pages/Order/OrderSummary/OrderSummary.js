@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import styles from "./order-summary.module.scss";
 import {connect} from "react-redux";
 import actions from "../../../../redux/actions";
-import OverlayComp from "../../../Core/OverlayComp/OverlayComp";
+import Overlay from "../../../Core/Overlay/Overlay";
 import img from "./img/thankssir.png";
 
 class OrderSummary extends Component {
@@ -107,8 +107,6 @@ class OrderSummary extends Component {
             });
 
             this.props.onChangeAmountOfProduct(evt, id, value);
-
-
         }
 
 
@@ -188,13 +186,13 @@ class OrderSummary extends Component {
                 {
                     this.props.state.cart.modals.showModal
                     &&
-                    <OverlayComp coloredBg={true} delay={true}>
+                    <Overlay coloredBg={true} delay={true}>
                         <div className={styles.checkout_modal}>
                             <img src={img} alt="image-checkout"/>
                             <h3>Спасибо за заказ</h3>
                             <p>Наш менеджер свяжется с вами в ближайшее время</p>
                         </div>
-                    </OverlayComp>
+                    </Overlay>
                 }
 
                 <h2 className={styles.caption}>Ваш заказ</h2>

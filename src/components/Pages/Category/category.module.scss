@@ -10,11 +10,15 @@
 */
 .sign_bg {
   position: relative;
+  height: 430px;
   margin-bottom: 30px;
+  overflow: hidden;
 }
 
 .sign_bg__img {
   width: 100%;
+  height: 430px; // for slider simmetry
+
 }
 
 

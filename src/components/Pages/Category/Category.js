@@ -8,7 +8,7 @@ import actions from "../../../redux/actions";
 import SortPorducts from "../../Core/SortProducts/SortProducts";
 import LazyLoad from "../../Core/LazyLoad/LazyLoad";
 import ProductCard from "../ProductCart/ProductCard";
-import OverlayComp from "../../Core/OverlayComp/OverlayComp";
+import Overlay from "../../Core/Overlay/Overlay";
 import CartModal from "../../CartModal/CartModal";
 
 
@@ -19,19 +19,27 @@ class Category extends Component {
         window.scrollTo(0, 0);
     }
 
-    render() {
-        const category = this.props.category.find(category => category.categoryAlias === this.props.match.params.type);
+    state = { value: 1 };
 
+    change = (evt) => {
+        this.setState({ value: evt.target.value });
+    };
+
+    render() {
+
+
+        const category = this.props.category.find(category => category.categoryAlias === this.props.match.params.type);
         return (
             <Layout>
                 <div className={styles.category_wrapper}>
                     {
                         this.props.cart.modals.showModal && !this.props.cart.defaultSettings.buttonsDisabled
                         &&
-                        <OverlayComp coloredBg={true} delay={false}>
+                        <Overlay coloredBg={true} delay={false}>
                             <CartModal products={this.props.cart.products}/>
-                        </OverlayComp>
+                        </Overlay>
                     }
+
                     <div className={styles.sign_bg}>
                         <img
                             className={styles.sign_bg__img}

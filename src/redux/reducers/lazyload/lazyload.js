@@ -19,12 +19,30 @@ export default (state = initialState, action) => {
         }
 
         case "lazyLoad/clearDataStorage" : {
-            //console.log('clear');
             return {
                 ...state,
                 serverStorageData: [],
                 categoryTitle: "",
                 indexOfLastAddedElement: 0
+            }
+        }
+
+
+        case "lazyLoad/disableOverlay" : {
+            if (action.callback) {
+                action.callback();
+            }
+            return {
+                ...state,
+                modalShow: false
+            }
+        }
+
+        case "lazyLoad/enableOverlay" : {
+            return {
+                ...state,
+                modalShow: true
+
             }
         }
 
