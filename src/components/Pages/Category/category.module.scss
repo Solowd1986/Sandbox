@@ -18,9 +18,11 @@
 .sign_bg__img {
   width: 100%;
   height: 430px; // for slider simmetry
-
 }
 
+.img_fit {
+  object-fit: cover;
+}
 
 .sign_bg__title {
   position: absolute;

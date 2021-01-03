@@ -12,6 +12,7 @@ import Overlay from "../../Core/Overlay/Overlay";
 import CartModal from "../../CartModal/CartModal";
 
 
+
 class Category extends Component {
 
     // always on top of page, without smooth scroll
@@ -19,38 +20,58 @@ class Category extends Component {
         window.scrollTo(0, 0);
     }
 
-    state = { value: 1 };
+    // компонент один, поэтому скролл верх срабатывает при имплементации, а вот просы приходят на каждый клик
+    // поэтому всегда происходит скролл вниз при переходе между категориями
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     window.scrollTo(0, window.pageYOffset + document.documentElement.clientHeight);
+    // }
 
-    change = (evt) => {
-        this.setState({ value: evt.target.value });
+    createOverlay = () => {
+
+        let OverlayElement = null;
+        if (this.props.cart.modals.showModal && !this.props.cart.defaultSettings.buttonsDisabled) {
+            OverlayElement = <Overlay coloredBg={true} delay={false}>
+                <CartModal products={this.props.cart.products}/>
+            </Overlay>
+        }
+        return OverlayElement;
+
     };
 
+    lazyLoadPanel = (category) => {
+        let lazyLoadData = null;
+        if (this.props.serverData.length > 0) {
+            lazyLoadData = this.props.serverData.map((item, i) => {
+                return (
+                    <React.Fragment key={i}>
+                        <ProductCard key={i} item={item} category={category} classList={"animate__animated animate__fadeIn"}/>
+                    </React.Fragment>
+                )
+            })
+        }
+        return lazyLoadData;
+    };
+
+
     render() {
-
-
         const category = this.props.category.find(category => category.categoryAlias === this.props.match.params.type);
+        let OverlayElement = this.createOverlay();
+        let lazyLoadPanel = this.lazyLoadPanel(category);
+
         return (
             <Layout>
-                <div className={styles.category_wrapper}>
-                    {
-                        this.props.cart.modals.showModal && !this.props.cart.defaultSettings.buttonsDisabled
-                        &&
-                        <Overlay coloredBg={true} delay={false}>
-                            <CartModal products={this.props.cart.products}/>
-                        </Overlay>
-                    }
+                {OverlayElement}
 
+                <div className={styles.category_wrapper}>
                     <div className={styles.sign_bg}>
                         <img
-                            className={styles.sign_bg__img}
+                            className={`${styles.sign_bg__img} ${category.categoryAlias === "gadgets" && styles.img_fit}`}
                             src={`${category.imgPrefix}/${category.categoryTitleImg}`}
                             alt="Категории"/>
                         <h3 className={styles.sign_bg__title}>{category.categoryTitle}</h3>
                     </div>
 
-                    <div className={common.wrapper}>
-                        <SortPorducts/>
-                    </div>
+                    <div className={common.wrapper}><SortPorducts/></div>
 
                     <div className={`${common.wrapper} ${styles.list_wrapper}`}>
                         <LazyLoad categoryName={category.categoryAlias}>
@@ -67,17 +88,8 @@ class Category extends Component {
                                     )
                                 })}
 
-                                {
-                                    this.props.serverData.length > 0
-                                    &&
-                                    this.props.serverData.map((item, i) => {
-                                        return (
-                                            <React.Fragment key={i}>
-                                                <ProductCard key={i} item={item} category={category} classList={"animate__animated animate__fadeIn"}/>
-                                            </React.Fragment>
-                                        )
-                                    })
-                                }
+                                {/*блок подгружаемых с сервера товаров*/}
+                                {lazyLoadPanel}
                             </ul>
                         </LazyLoad>
                     </div>

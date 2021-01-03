@@ -2,14 +2,7 @@ import React from "react";
 import common from "~scss/common.module.scss";
 import styles from "./delivery.module.scss";
 import Layout from "../../Core/Layout/Layout";
-
 import deliveryBanner from "./img/_delivery-banner.png";
-import check from "./img/check.png";
-
-
-
-
-
 
 const Delivery = props => {
     return (
