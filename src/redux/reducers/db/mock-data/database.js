@@ -24,6 +24,7 @@ export default {
                     desc: "Смартфон, Android 10, OxygenOS 10.0 Четыре камеры 48 МП/8 МП/48 МП/5 МП, автофокус Количество SIM: 2, Режим работы: Попеременный Диагональ: 6.78, 3168x1440 (AMOLED)",
                     price: 76000,
                     rest: 12,
+                    adsType: 1,
 
                     promoBlock: [
                         {
@@ -112,6 +113,7 @@ export default {
                     desc: "Смартфон, Android 10, OxygenOS 10.0 Четыре камеры 48 МП/8 МП/48 МП/5 МП, автофокус Количество SIM: 2, Режим работы: Попеременный Диагональ: 6.78, 3168x1440 (AMOLED)",
                     price: 81000,
                     rest: 52,
+                    adsType: 0,
 
                     promoBlock: [
                         {
@@ -204,6 +206,7 @@ export default {
                         " 2168x1440 (AMOLED)",
                     price: 51000,
                     rest: 34,
+                    adsType: 2,
 
 
                     promoBlock: [
@@ -294,6 +297,7 @@ export default {
                         " 2168x1440 (AMOLED)",
                     price: 76000,
                     rest: 32,
+                    adsType: 3,
 
 
                     promoBlock: [
@@ -386,6 +390,8 @@ export default {
                         " 1268x1140 (LED)",
                     price: 44500,
                     rest: 100,
+                    adsType: 0,
+
 
                     promoBlock: [
                         {
@@ -478,6 +484,7 @@ export default {
                         " 1268x1140 (LED)",
                     price: 61000,
                     rest: 0,
+                    adsType: 2,
 
 
                     promoBlock: [
@@ -584,6 +591,8 @@ export default {
                     price: 12000,
                     rest: 12,
                     color: "красный",
+                    adsType: 1,
+
 
                     promoBlock: [
                         {
@@ -624,7 +633,7 @@ export default {
                     price: 6000,
                     rest: 0,
                     color: "синий",
-
+                    adsType: 2,
 
                     promoBlock: [
                         {
@@ -660,6 +669,8 @@ export default {
                     price: 9800,
                     rest: 17,
                     color: "черный",
+                    adsType: 0,
+
                     promoBlock: [
                         {
                             title: "Лучшие дизайнерские решения",
@@ -698,6 +709,8 @@ export default {
                     price: 2000,
                     rest: 52,
                     color: "серый",
+                    adsType: 3,
+
 
                     promoBlock: [
                         {
@@ -750,6 +763,8 @@ export default {
                     price: 17900,
                     rest: 32,
                     color: "черный",
+                    adsType: 2,
+
 
                     promoBlock: [
                         {
@@ -788,6 +803,7 @@ export default {
                     price: 18200,
                     rest: 52,
                     color: "черный",
+                    adsType: 1,
 
                     promoBlock: [
                         {
@@ -824,6 +840,7 @@ export default {
                     price: 11500,
                     rest: 78,
                     color: "черный",
+                    adsType: 0,
 
                     promoBlock: [
                         {
@@ -862,7 +879,7 @@ export default {
                     price: 27600,
                     rest: 7,
                     color: "черный",
-
+                    adsType: 3,
 
                     promoBlock: [
                         {

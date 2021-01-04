@@ -13,6 +13,8 @@ import actions from "../../../redux/actions";
 
 
 class ProductCard extends Component {
+
+
     isProductInCart = (products, id) => products.find(item => item.id === id);
 
     render() {
