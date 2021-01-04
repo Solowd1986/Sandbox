@@ -62,6 +62,7 @@ class LazyLoad extends Component {
 
                 const resultCat = getRandom(category.productList, this.props.amountOfElements);
 
+                // случайно азадем последний индекс добавленного элемента, это уже для нормального запроса к серверу
                 const lastIndex = Math.floor(Math.random() * 10);
                 const cat = this.props.categoryName;
                 this.props.setServerData({ arrayOfElements: resultCat, cat, lastIndex });

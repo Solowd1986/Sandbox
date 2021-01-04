@@ -4,7 +4,8 @@ import styles from "./sort-products.module.scss";
 const SortPorducts = props => {
     return (
         <div className={styles.sort_wrapper}>
-            <button className={styles.sort_btn_default}>
+
+            <button onClick={() => props.changeFilter("popularity")} className={styles.sort_btn_default}>
                 По популярности
                 <svg
                     viewBox="0 0 12 12"
@@ -22,9 +23,9 @@ const SortPorducts = props => {
             </button>
 
             <ul className={styles.list}>
-                <li>По новизне</li>
-                <li>Сначала дорогие</li>
-                <li>Сначала дешевые</li>
+
+                <li onClick={() => props.changeFilter("priceHigh")}>Сначала дорогие</li>
+                <li onClick={() => props.changeFilter("priceLow")}>Сначала дешевые</li>
             </ul>
         </div>
 

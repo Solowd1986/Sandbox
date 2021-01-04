@@ -27,6 +27,35 @@ class Promo extends Component {
         return result;
     };
 
+
+    // ДОПИШИ ЭТО КАК УНВИЕРСАЛЬНУЮ ФУНЦИЮ ДЛЯ СМЕНЫ ОБЬЕКТА ИЗ МАССИВА STATE
+    // вернет массив и уже его можно использовать в setSate
+    // пример:
+    /**
+     * this.setState(({ users }) => {
+     *     users: this.togglePropert(users, 1, name, "stan 2")
+     * });
+     *
+     *
+     * */
+
+        // допиши тут смену value
+    togglePropert = (array, id, prop, value) => {
+
+        const index = users.find(user => user.id === id);
+        const name = users[index].name + " 2";
+        const user = { ...users[index], name };
+
+
+        const result = [
+            ...users.slice(0, index),
+            user,
+            ...users.slice(index + 1)
+        ];
+
+        return result;
+    };
+
     render() {
         //console.log(this.props);
         const [phones, accessoires, gadgets] = this.props.db.category;

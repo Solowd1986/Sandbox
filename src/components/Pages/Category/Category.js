@@ -15,6 +15,10 @@ import CartModal from "../../CartModal/CartModal";
 
 class Category extends Component {
 
+    state = {
+        filterType: ""
+    };
+
     // always on top of page, without smooth scroll
     componentDidMount() {
         window.scrollTo(0, 0);
@@ -41,11 +45,10 @@ class Category extends Component {
     lazyLoadPanel = (category) => {
         let lazyLoadData = null;
         if (this.props.serverData.length > 0) {
-            lazyLoadData = this.props.serverData.map((item, i) => {
+            lazyLoadData = this.props.serverData.map((item) => {
+                const key = Math.floor(Math.random() * 645665767812435);
                 return (
-                    <React.Fragment key={i}>
-                        <ProductCard key={i} item={item} category={category} classList={"animate__animated animate__fadeIn"}/>
-                    </React.Fragment>
+                    <ProductCard key={key} item={item} category={category} classList={"animate__animated animate__fadeIn"}/>
                 )
             })
         }
@@ -53,10 +56,63 @@ class Category extends Component {
     };
 
 
+    changeFilter = (type) => {
+        this.setState({
+            filterType: type
+        })
+    };
+
+
+    getProductsList = (category, additionalElements = []) => {
+        const cloneDeep = require('lodash.clonedeep');
+        const classListAnimation = "animate__animated animate__fadeIn";
+        let list = cloneDeep([...category.productList, ...additionalElements]);
+
+        switch (this.state.filterType) {
+            case "popularity": {
+                break;
+            }
+            case "priceLow": {
+                list.sort((a, b) => a.price - b.price);
+                break;
+            }
+            case "priceHigh": {
+                list.sort((a, b) => b.price - a.price);
+                break;
+            }
+            case "newest": {
+                break;
+            }
+        }
+
+
+        /**
+         * Начальный набор элементов фиксирован, сейчас - 4 штуки. Дальнейшее расширение идет за счет разрастающегося
+         * за счет lazyLoad массива serverData, он же additionalElements и его длина растет при каждом клике на кнопку.
+         * Начальных элементов 4, и мы всегда прибавляем по 4 к добавочному массиву: +4, +8, +12 и так далее.
+         * Ход такой: 4 элемента есть, 0 пришло - 4 элемента анимированы. 4 есть, 4 пришло, их длина 4 - с 4 индекса анимация,
+         * 4 есть, 8 пришло, длина 8: с 8 индекса анимация. Из-за этих четверок и исходных имеющихся мы всегда имеем больше на
+         * 4 элемента, чем пришло от lazyLoad, поэтому, отправная точка для анимации всегда максимальная длина list - 4
+         */
+
+        return list.map((item, i) => {
+            const key = Math.floor(Math.random() * 56123473446);
+            let classList = null;
+            if (i >= additionalElements.length) {
+                classList = classListAnimation;
+            }
+            return (
+                <ProductCard key={key} item={item} category={category} classList={classList}/>
+            )
+        });
+    };
+
+
     render() {
+        // учти отсутвие значения в категории, если в URI пришли некорретнеы данные
         const category = this.props.category.find(category => category.categoryAlias === this.props.match.params.type);
         let OverlayElement = this.createOverlay();
-        let lazyLoadPanel = this.lazyLoadPanel(category);
+        const productsList = this.getProductsList(category, this.props.serverData);
 
         return (
             <Layout>
@@ -71,25 +127,12 @@ class Category extends Component {
                         <h3 className={styles.sign_bg__title}>{category.categoryTitle}</h3>
                     </div>
 
-                    <div className={common.wrapper}><SortPorducts/></div>
+                    <div className={common.wrapper}><SortPorducts changeFilter={this.changeFilter}/></div>
 
                     <div className={`${common.wrapper} ${styles.list_wrapper}`}>
                         <LazyLoad categoryName={category.categoryAlias}>
                             <ul className={styles.list}>
-                                {Array.from(Array(2), (e, i) => {
-                                    return (
-                                        <React.Fragment key={i}>
-                                            {category.productList.map((item, i) => {
-                                                return (
-                                                    <ProductCard key={i} item={item} category={category}/>
-                                                )
-                                            })}
-                                        </React.Fragment>
-                                    )
-                                })}
-
-                                {/*блок подгружаемых с сервера товаров*/}
-                                {lazyLoadPanel}
+                                {productsList}
                             </ul>
                         </LazyLoad>
                     </div>
