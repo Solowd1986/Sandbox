@@ -130,7 +130,7 @@ class Category extends Component {
                         <h3 className={styles.sign_bg__title}>{category.categoryTitle}</h3>
                     </div>
 
-                    <div className={common.wrapper}><SortPorducts changeFilter={this.changeFilter}/></div>
+                    <div className={`${common.wrapper} ${styles.filters_wrapper}`}><SortPorducts changeFilter={this.changeFilter}/></div>
 
                     <div className={`${common.wrapper} ${styles.list_wrapper}`}>
                         <LazyLoad categoryName={category.categoryAlias}>

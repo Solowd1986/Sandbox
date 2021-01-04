@@ -1,18 +1,40 @@
 @import "~scss/common.module";
 
-.sort_wrapper {
-  position: relative;
-  width: 250px;
-  margin-bottom: 30px;
 
-  &:hover .list {
-    display: flex;
-    height: initial;
+.filters_list {
+  display: flex;
+  align-items: center;
+
+
+  & > *:not(:last-child) {
+    margin-right: 25px;
   }
 
-  &:hover svg {
-    transform: rotate(180deg);
+  & > span {
+    min-width: 140px;
+
   }
+
+  & > button {
+    min-width: 200px;
+    padding: 10px 15px;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 10px;
+    background-color: $grey-400;
+    transition: background-color .2s linear;
+
+    &:hover {
+      background-color: darken($grey-400, 10%);
+
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+  }
+
 }
 
 
