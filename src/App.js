@@ -6,6 +6,12 @@ import {Provider} from "react-redux";
 import store from "./redux/storeInit";
 
 
+/**
+ *
+ * @param url
+ * @returns {Promise<Response>}
+ */
+
 function apiRequest(url) {
     return fetch(url).then((responce, reject) => {
         if (responce.status !== 200) {
@@ -55,6 +61,11 @@ axios.get('/api/get/id/1')
 }).then(function () {
     // always executed
 });
+
+/*********************
+ *
+ */
+
 
 
 /**

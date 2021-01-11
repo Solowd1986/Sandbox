@@ -5,6 +5,21 @@ import increaseProductsAmount from "./increaseProductsAmount";
 import decreaseeProductsAmount from "./decreaseeProductsAmount";
 import changeAmountOfProduct from "./changeAmountOfProduct";
 
+
+const cart = {
+    getAmount: () => {
+        const products = JSON.parse(decodeURIComponent(localStorage.getItem("store"))).cart.products;
+        if (products) {
+            return products.length
+        } else {
+            return []
+        }
+    },
+    getProductsList: () => {
+
+    }
+
+};
 const initialState = {
     modals: {
         isdelayModalProcessCompleted: false,
@@ -15,7 +30,16 @@ const initialState = {
     },
     amountOfProductsInCart: JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")).length : 0,
     minAmountOfProduct: 1,
-    products: JSON.parse(localStorage.getItem("cart")) || []
+
+    products: JSON.parse(localStorage.getItem("cart")) || [],
+
+    productsFromCartDecoded:
+
+        JSON.parse(decodeURIComponent(localStorage.getItem("store")))
+            ?
+            JSON.parse(decodeURIComponent(localStorage.getItem("store"))).cart.products
+            :
+            [],
 };
 
 

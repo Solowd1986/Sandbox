@@ -20,12 +20,13 @@
     padding: 10px 15px;
     font-size: 18px;
     font-weight: 500;
-    border-radius: 10px;
-    background-color: $grey-400;
+    color: $white;
+    border-radius: 20px;
+    background-color: $red-100;
     transition: background-color .2s linear;
 
     &:hover {
-      background-color: darken($grey-400, 10%);
+      background-color: darken($red-500, 15%);
 
     }
 

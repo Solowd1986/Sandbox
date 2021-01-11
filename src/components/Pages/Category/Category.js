@@ -12,7 +12,6 @@ import Overlay from "../../Core/Overlay/Overlay";
 import CartModal from "../../CartModal/CartModal";
 
 
-
 class Category extends Component {
 
     state = {
