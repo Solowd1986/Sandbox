@@ -24,8 +24,6 @@ export default function addItemToCart(state, evt, id, category) {
         },
         amountOfProductsInCart: state.amountOfProductsInCart + 1,
         products,
-
-        productsFromCartDecoded: products
     };
 }
 

@@ -4,29 +4,10 @@ import styles from "./promo.module.scss";
 import {connect} from "react-redux";
 import ProductCard from "../ProductCart/ProductCard";
 import Overlay from "../../Core/Overlay/Overlay";
-import {NavLink, useHistory} from "react-router-dom";
-import actions from "../../../redux/actions";
-import img from "../Order/OrderSummary/img/thankssir.png";
 import CartModal from "../../CartModal/CartModal";
 
 
 class Promo extends Component {
-
-    isProductInCart = (products, id) => products.find(item => item.id === id);
-    getRandomProducts = (list, amount = 4) => {
-        const result = [];
-        while (result.length < 4) {
-            const index = Math.trunc(Math.random() * list.length);
-            !result.includes(list[index]) && result.push(list[index]);
-        }
-        if (!result.some(item => item.rest === 0) && list.some(item => item.rest === 0)) {
-            const itemWithDiscount = list.find(item => item.rest === 0);
-            const index = Math.trunc(Math.random() * result.length);
-            result.splice(index, 1, itemWithDiscount);
-        }
-        return result;
-    };
-
 
     // ДОПИШИ ЭТО КАК УНВИЕРСАЛЬНУЮ ФУНЦИЮ ДЛЯ СМЕНЫ ОБЬЕКТА ИЗ МАССИВА STATE
     // вернет массив и уже его можно использовать в setSate
@@ -59,12 +40,17 @@ class Promo extends Component {
     render() {
         //console.log(this.props);
         const [phones, accessoires, gadgets] = this.props.db.category;
+
         return (
             <section className={`${common.container} ${styles.promo_wrapper}`}>
                 <main className={`${common.wrapper} ${styles.promo}`}>
 
                     {
-                        this.props.cart.modals.showModal && !this.props.cart.defaultSettings.buttonsDisabled
+                        this.props.cart.modals.showModal
+                        &&
+                        !this.props.cart.defaultSettings.buttonsDisabled
+                        &&
+                        !this.props.cart.modals.isOfferGoToCartBeenShown
                         &&
                         <Overlay coloredBg={true} delay={false}>
                             <CartModal products={this.props.cart.products}/>

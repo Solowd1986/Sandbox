@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore } from "redux";
 import composeEnhancers from "./middlware/composeEnhancers";
 import reduxLogger from "./middlware/reduxLogger"
-import reducer from "./reducers/reducer";
+import reducer from "./entities/rootReducer";
 
 /**
  * With a plain basic Redux store, you can only do simple synchronous updates by dispatching an action.
@@ -33,7 +33,9 @@ const store = preloadedState ? createStore(reducer, preloadedState, enhancedStor
  * Каждый раз, когда меняется store - происходит внесение всего обьекта (кодированного предварительно) в localStorage
  */
 store.subscribe(() => {
-        localStorage.setItem("state", encodeURIComponent(JSON.stringify(store.getState())));
+    localStorage.setItem("state", encodeURIComponent(JSON.stringify(store.getState())));
 });
 
 export default store;
+
+

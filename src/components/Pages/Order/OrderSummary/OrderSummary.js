@@ -14,16 +14,23 @@ class OrderSummary extends Component {
     /**
      *
      * 1. Ход работы такой:
-     * 1. Заходим в компонент, в пропсах пришли данные, записываем их в стейт, но выводим пропсы, стейт для промежуточных значений
-     * 2. Вывоим все в просах, кроме поля ввода, оно осовано на стейте, чтобы пропускать любой ввод, даже некорректный.
+     * 1. Заходим в компонент, в пропсах пришли данные, записываем их в стейт, но выводим пропсы, стейт для
+     *    промежуточных значений
+     *
+     * 2. Вывоим все данные для полей из пропсов, кроме поля ввода, оно основано на стейте,
+     *    чтобы пропускать любой ввод, даже некорректный.
+     *
      * 3. На каждом действии, то есть клик +/- или блюр поля ввода мы синхронизируем оба хранилища
      * 4. То есть, выполняется првоверка и на блюре оба хранилища получаюь одно, верное значение или откат к предыдущему.
      *
-     * 5. Как я понял, свой стейт заполняется просами при создании компонента, а при ререндере код ние уже не выполняется
-     * 6. Видимо, именно поэтому нужно всегда явно апдейтить стейт, иначе пропсы изменятся и то, что опиарется на пропсы тоже, но
-     * вот код на стейтахъ сохрант то, что был ов стейте, а если стейт не апдейтить, то он не поменяется.
+     * 5. Как я понял, свой стейт заполняется просами при создании компонента, а при ререндере код ние уже не
+     *    выполняется
      *
-     * То есть, твоя задача узнать, когда стейт заполняется данными, и повторяется ли это.
+     * 6. Видимо, именно поэтому нужно всегда явно апдейтить стейт, иначе пропсы изменятся и то, что опиарется на
+     *    пропсы тоже, но
+     *    вот код на стейтахъ сохрант то, что был ов стейте, а если стейт не апдейтить, то он не поменяется.
+     *
+     *    То есть, твоя задача узнать, когда стейт заполняется данными, и повторяется ли это.
      *
      * Каждый метод, кроме transitionalValueHandler просто берет значение, и записывает его в оба обьекта, стейт и пропс.
      * Так они синхронны, корретны и всегда при рендере выводятся свойства для нужных комопнетов, так ка у нас используются оба
@@ -36,7 +43,6 @@ class OrderSummary extends Component {
      * */
 
     state = {
-        show: false,
         orderedItems: [...this.props.orderedItems]
     };
 
@@ -150,19 +156,24 @@ class OrderSummary extends Component {
 
 
     inc = (evt, id, value) => {
-        const temporary = [...this.state.orderedItems];
-        const currentProduct = { ...temporary.find(item => item.id === id) };
-
-
-        currentProduct.quantity = value;
-        temporary[temporary.indexOf(temporary.find(item => item.id === id))] = currentProduct;
-
+        const cloneDeep = require('lodash.clonedeep');
+        const orderedItems = cloneDeep(this.state.orderedItems);
+        orderedItems.find(item => item.id === id).quantity = value;
         this.setState({
-            orderedItems: [...temporary]
+            orderedItems
         });
+        this.props.onChangeAmountOfProduct(evt, id, value);
+    };
 
+
+    changeAmountWithClick = (evt, id, value) => {
 
         this.props.onChangeAmountOfProduct(evt, id, value);
+    };
+
+
+    changeAmountWithEdit = () => {
+
     };
 
 
@@ -181,6 +192,7 @@ class OrderSummary extends Component {
     render() {
         //console.log(this.props);
         //console.log(this.state);
+
         return (
             <section className={styles.summary}>
                 {
@@ -212,7 +224,7 @@ class OrderSummary extends Component {
                                         {item.specifications !== undefined && <span>({item.specifications.color})</span>}
                                     </p>
                                     <div className={styles.counter_block}>
-                                        <span onClick={(evt) => this.dec(evt, item.id, item.quantity - 1)}
+                                        <span onClick={(evt) => this.changeAmountWithClick(evt, item.id, item.quantity - 1)}
                                               className={`${styles.counter} ${styles.counter_minus}`}/>
 
                                         <label>
@@ -224,7 +236,7 @@ class OrderSummary extends Component {
                                             />
                                         </label>
 
-                                        <span onClick={(evt) => this.inc(evt, item.id, item.quantity + 1)}
+                                        <span onClick={(evt) => this.changeAmountWithClick(evt, item.id, item.quantity + 1)}
                                               className={`${styles.counter} ${styles.counter_plus}`}/>
                                     </div>
                                 </div>

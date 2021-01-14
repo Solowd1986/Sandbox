@@ -1,8 +1,8 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import common from "~scss/common.module.scss";
 import styles from "./category.module.scss";
 import Layout from "~components/Core/Layout/Layout";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
 import actions from "../../../redux/actions";
 import SortPorducts from "../../Core/SortProducts/SortProducts";
@@ -12,10 +12,12 @@ import Overlay from "../../Core/Overlay/Overlay";
 import CartModal from "../../CartModal/CartModal";
 
 
+
 class Category extends Component {
 
     state = {
-        filterType: ""
+        filterType: "",
+        name: "",
     };
 
     // always on top of page, without smooth scroll
@@ -29,16 +31,20 @@ class Category extends Component {
     //     window.scrollTo(0, window.pageYOffset + document.documentElement.clientHeight);
     // }
 
+
     createOverlay = () => {
 
         let OverlayElement = null;
-        if (this.props.cart.modals.showModal && !this.props.cart.defaultSettings.buttonsDisabled) {
+        if (this.props.cart.modals.showModal
+            &&
+            !this.props.cart.defaultSettings.buttonsDisabled
+            &&
+            !this.props.cart.modals.isOfferGoToCartBeenShown) {
             OverlayElement = <Overlay coloredBg={true} delay={false}>
                 <CartModal products={this.props.cart.products}/>
             </Overlay>
         }
         return OverlayElement;
-
     };
 
     lazyLoadPanel = (category) => {
@@ -56,6 +62,7 @@ class Category extends Component {
 
 
     changeFilter = (type) => {
+        this.state.name = "as";
         this.setState({
             filterType: type
         })
@@ -113,8 +120,9 @@ class Category extends Component {
     render() {
         // учти отсутвие значения в категории, если в URI пришли некорретнеы данные
         const category = this.props.category.find(category => category.categoryAlias === this.props.match.params.type);
-        let OverlayElement = this.createOverlay();
+        const OverlayElement = this.createOverlay();
         const productsList = this.getProductsList(category, this.props.serverData);
+
 
         return (
             <Layout>
@@ -145,7 +153,7 @@ class Category extends Component {
 }
 
 
-const getState = (state) => {
+const mapStateToProps = (state) => {
     return {
         serverData: state.lazyload.serverStorageData,
         category: state.db.category,
@@ -154,7 +162,7 @@ const getState = (state) => {
 };
 
 
-function setDispatch(dispatch) {
+function mapDispatchToProps(dispatch) {
     return {
         onAddToCart: (evt, id, category) => {
             dispatch(actions.cart.disableButton(evt));
@@ -171,7 +179,7 @@ function setDispatch(dispatch) {
 }
 
 
-export default connect(getState, setDispatch)(Category);
+export default connect(mapStateToProps, mapDispatchToProps)(Category);
 
 
 

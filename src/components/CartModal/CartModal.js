@@ -1,11 +1,16 @@
-import React, {Component} from "react";
-import styles from "./cart-modal.module.scss";
-import img from "../Pages/Order/OrderSummary/img/thankssir.png";
-import {NavLink} from "react-router-dom";
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 import actions from "../../redux/actions";
-import {connect} from "react-redux";
+import styles from "./cart-modal.module.scss";
 
 class CartModal extends Component {
+
+    disableCartModal = () => {
+        this.props.toggleOfferGoToCartBeenShown();
+        this.props.disableOverlay();
+    };
+
     render() {
         return (
             <div className={styles.cart}>
@@ -24,18 +29,21 @@ class CartModal extends Component {
                     }
                 </ul>
                 <NavLink className={styles.link} to={"/order"}>Перейти в корзину</NavLink>
-                <span className={styles.continue} onClick={this.props.disableOverlay}>Продолжить покупки</span>
+                <span className={styles.continue} onClick={this.disableCartModal}>Продолжить покупки</span>
             </div>
         )
     }
 }
 
-function setDispatch(dispatch) {
+function mapDispatchToProps(dispatch) {
     return {
         disableOverlay: () => {
             dispatch(actions.cart.disableOverlay());
         },
+        toggleOfferGoToCartBeenShown: () => {
+            dispatch(actions.cart.toggleOfferGoToCartBeenShown());
+        },
     }
 }
 
-export default connect(null, setDispatch)(CartModal);
+export default connect(null, mapDispatchToProps)(CartModal);

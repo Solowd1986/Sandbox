@@ -6,47 +6,34 @@ import decreaseeProductsAmount from "./decreaseeProductsAmount";
 import changeAmountOfProduct from "./changeAmountOfProduct";
 
 
-const cart = {
-    getAmount: () => {
-        const products = JSON.parse(decodeURIComponent(localStorage.getItem("store"))).cart.products;
-        if (products) {
-            return products.length
-        } else {
-            return []
-        }
-    },
-    getProductsList: () => {
-
-    }
-
-};
+/**
+ * Благодаря подписке на store, из-за чего при любом изменении state записывается в localStorage, нам не нужны никакие
+ * данные, кроме инициирующих, то есть то, что работает при первом запуске приложения. Например, пользователь, заказал
+ * продукт, это отразилось в state, и тут же записалось в localStorage, далее прочие действия и перезагрузка страницы.
+ * Вследствие чего initialState сбрасывается до изначальных значений, и данные теряются в данном контексте.
+ *
+ * Но, в этом случае при новом выполнении скрипта идет проверка наличия данных в locaStorage и если они там есть,
+ * то весь state принимает тот вид, каким он был на момент последних меняющих его действий пользователя, такой вот бэкап
+ */
 const initialState = {
     modals: {
         isdelayModalProcessCompleted: false,
         showModal: false,
+        isOfferGoToCartBeenShown: false,
     },
     defaultSettings: {
         buttonsDisabled: false
     },
-    amountOfProductsInCart: JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")).length : 0,
+    amountOfProductsInCart: 0,
     minAmountOfProduct: 1,
-
-    products: JSON.parse(localStorage.getItem("cart")) || [],
-
-    productsFromCartDecoded:
-
-        JSON.parse(decodeURIComponent(localStorage.getItem("store")))
-            ?
-            JSON.parse(decodeURIComponent(localStorage.getItem("store"))).cart.products
-            :
-            [],
+    products: [],
 };
 
 
 export default (state = initialState, action) => {
     //console.log('state', state);
-
     switch (action.type) {
+
         case "cart/addItemToCart" : {
             return addItemToCart(state, action.evt, action.id, action.category);
         }
@@ -60,8 +47,19 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 modals: {
+                    ...state.modals,
                     isdelayModalProcessCompleted: false,
                     showModal: true,
+                },
+            }
+        }
+
+        case "cart/toggleOfferGoToCartBeenShown" : {
+            return {
+                ...state,
+                modals: {
+                    ...state.modals,
+                    isOfferGoToCartBeenShown: true,
                 },
             }
         }
@@ -70,6 +68,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 modals: {
+                    ...state.modals,
                     isdelayModalProcessCompleted: false,
                     showModal: false,
                 },
@@ -81,6 +80,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 modals: {
+                    ...state.modals,
                     isdelayModalProcessCompleted: true,
                     showModal: true,
                 },

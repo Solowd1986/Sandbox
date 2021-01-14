@@ -1,7 +1,7 @@
 export default function changeAmountOfProduct(state, evt, id, quantity) {
     //console.log(id);
     //console.log(state);
-    
+
     if (isNaN(Math.abs(parseInt(quantity)))) return state;
 
     const products = [...state.products];
@@ -13,7 +13,7 @@ export default function changeAmountOfProduct(state, evt, id, quantity) {
     currentProduct.quantity = Math.max(min, Math.min(max, quantity));
     products[products.indexOf(products.find(item => item.id === id))] = currentProduct;
 
-    localStorage.setItem("cart", JSON.stringify(products));
+    //localStorage.setItem("cart", JSON.stringify(products));
 
     return {
         ...state,
