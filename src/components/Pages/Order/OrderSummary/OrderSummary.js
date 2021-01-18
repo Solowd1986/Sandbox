@@ -5,6 +5,35 @@ import actions from "../../../../redux/actions";
 import Overlay from "../../../Core/Overlay/Overlay";
 import img from "./img/thankssir.png";
 
+
+function changeState(id, property, value, storage) {
+    const elem = storage.find(item => item.id === id);
+    const list = [...storage];
+    const cloneDeep = require('lodash.clonedeep');
+    const tempElem = cloneDeep(elem);
+    tempElem[property] = value;
+    list[list.indexOf(elem)] = tempElem;
+    return list;
+}
+
+
+const users1 = [
+    { id: 1, name: "bob" },
+    { id: 2, name: "glen" },
+    { id: 3, name: "john" },
+];
+
+const users2 = changeState(2, "name", "stan", users1);
+// console.dir(users1);
+// console.dir(users2);
+// console.log(users1[0] === users2[0]);
+// console.log(users1[1] === users2[1]);
+// console.log(users1[2] === users2[2]);
+
+
+
+
+
 class OrderSummary extends Component {
 
     static defaultProps = {
@@ -48,10 +77,7 @@ class OrderSummary extends Component {
 
 
     transitionalValueHandler = (evt, id) => {
-
-        //console.log(1);
         const value = evt.target.value;
-
         const temporary = [...this.state.orderedItems];
         const currentProduct = { ...temporary.find(item => item.id === id) };
         currentProduct.quantity = value;
@@ -60,38 +86,10 @@ class OrderSummary extends Component {
         this.setState({
             orderedItems: [...temporary]
         });
-
-
-        // const temporary = [...this.state.transitionalValue];
-        // const currentProduct = temporary.find(item => item.id === id);
-        // console.log('curr', currentProduct);
-        //
-        // currentProduct.value = evt.target.value;
-        // temporary[temporary.indexOf(temporary.find(item => item.id === id))] = currentProduct;
-        //
-        //
-        // this.setState({
-        //     transitionalValue: [...temporary]
-        // })
-
-
-        // const temporary = [...this.state.temporary];
-        // const currentProduct = {...this.state.temporary.find(item => item.id === id)};
-        // currentProduct.quantity = evt.target.value;
-        // temporary[temporary.indexOf(temporary.find(item => item.id === id))] = currentProduct;
-        //
-        // this.setState({
-        //     temporary
-        // })
-
-
-        //this.props.onChangeAmountOfProduct(evt, id, value);
     };
 
 
     onBlurHandler = (evt, id, quantity) => {
-
-
         const value = Math.abs(parseInt(quantity));
 
         if (isNaN(value)) {
@@ -114,29 +112,6 @@ class OrderSummary extends Component {
 
             this.props.onChangeAmountOfProduct(evt, id, value);
         }
-
-
-        //this.props.onChangeAmountOfProduct(evt, id, quantity);
-
-
-        // if (isNaN(Math.abs(parseInt(quantity)))) {
-        //
-        //     const temporary = [...this.state.orderedItems];
-        //     this.setState({
-        //         orderedItems: [...temporary]
-        //     });
-        // }
-
-        // const temporary = [...this.state.orderedItems];
-        // const currentProduct = temporary.find(item => item.id === id);
-        // currentProduct.quantity = value;
-        // temporary[temporary.indexOf(temporary.find(item => item.id === id))] = currentProduct;
-        //
-        // this.setState({
-        //     orderedItems: [...temporary]
-        // });
-
-
     };
 
 
@@ -166,8 +141,8 @@ class OrderSummary extends Component {
     };
 
 
+    // проблема - при получении новых пропсов переписывать state локалный
     changeAmountWithClick = (evt, id, value) => {
-
         this.props.onChangeAmountOfProduct(evt, id, value);
     };
 
@@ -175,7 +150,6 @@ class OrderSummary extends Component {
     changeAmountWithEdit = () => {
 
     };
-
 
 
     calcTotal = () => {

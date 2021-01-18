@@ -15,10 +15,14 @@ export default function addItemToCart(state, evt, id, category) {
 
     currentProduct.imgFullPath = `${category.imgPrefix}/${currentProduct.imgPath.md}`;
     products.push(currentProduct);
-    localStorage.setItem("cart", JSON.stringify(products));
+    // localStorage.setItem("cart", JSON.stringify(products));
 
     return {
         ...state,
+        modals: {
+            ...state.modals,
+            showModal: false
+        },
         defaultSettings: {
             buttonsDisabled: false
         },

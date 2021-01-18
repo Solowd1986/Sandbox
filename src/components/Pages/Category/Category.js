@@ -10,7 +10,32 @@ import LazyLoad from "../../Core/LazyLoad/LazyLoad";
 import ProductCard from "../ProductCart/ProductCard";
 import Overlay from "../../Core/Overlay/Overlay";
 import CartModal from "../../CartModal/CartModal";
+import PropTypes from "prop-types";
 
+
+class PropgressBar extends React.Component {
+
+    state = {
+        stage: 0
+    };
+
+    getIt = () => {
+        this.setState({
+            stage: 100
+        })
+    };
+
+    render() {
+        return (
+            <>
+                <div className={styles.progressBarWrapper}>
+                    <div style={{ width: [this.state.stage] + "%" }}/>
+                </div>
+                <button onClick={this.getIt}>Get IT</button>
+            </>
+        )
+    }
+}
 
 
 class Category extends Component {
@@ -127,6 +152,9 @@ class Category extends Component {
         return (
             <Layout>
                 {OverlayElement}
+
+                <PropgressBar/>
+
 
                 <div className={styles.category_wrapper}>
                     <div className={styles.sign_bg}>

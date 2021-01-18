@@ -10,7 +10,7 @@ export default function deleteItemFromCart(state, evt, id) {
 
         const currentProductIndex = products.indexOf(products.find(item => item.id === id));
         products.splice(currentProductIndex, 1);
-        localStorage.setItem("cart", JSON.stringify(products));
+        //localStorage.setItem("cart", JSON.stringify(products));
 
         return {
             ...state,

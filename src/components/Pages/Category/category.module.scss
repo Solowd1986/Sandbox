@@ -42,6 +42,23 @@
 
 /*  ================================*/
 
+.tab {
+  background-color: red;
+}
+
+.progressBarWrapper {
+  width: 100%;
+  margin: 10px 0;
+  border: 2px solid grey;
+  border-radius: 10px;
+
+  & > div {
+    height: 60px;
+    background-color: red;
+    transition: width .5s linear;
+  }
+
+}
 
 /*  Category Title
 ================================

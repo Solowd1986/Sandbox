@@ -90,14 +90,14 @@ class ProductCard extends Component {
 }
 
 
-function getProps(state) {
+function mapStateToProps(state) {
     return {
         db: state.db,
         cart: state.cart
     }
 }
 
-function setDispatch(dispatch) {
+function mapDispatchToProps(dispatch) {
     return {
         onAddToCart: (evt, id, category) => {
             dispatch(actions.cart.disableButton(evt));
@@ -113,7 +113,7 @@ function setDispatch(dispatch) {
     }
 }
 
-export default connect(getProps, setDispatch)(ProductCard);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);
 
 
 

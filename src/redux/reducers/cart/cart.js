@@ -17,10 +17,12 @@ import changeAmountOfProduct from "./changeAmountOfProduct";
  */
 const initialState = {
     modals: {
+        orderSubmitModalShow: false,
         isdelayModalProcessCompleted: false,
         showModal: false,
         isOfferGoToCartBeenShown: false,
     },
+
     defaultSettings: {
         buttonsDisabled: false
     },
@@ -59,6 +61,7 @@ export default (state = initialState, action) => {
                 ...state,
                 modals: {
                     ...state.modals,
+                    showModal: false,
                     isOfferGoToCartBeenShown: true,
                 },
             }
