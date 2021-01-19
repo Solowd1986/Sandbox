@@ -13,16 +13,16 @@ import CartModal from "../../CartModal/CartModal";
 import PropTypes from "prop-types";
 
 
-class PropgressBar extends React.Component {
+class ProgressBar extends React.Component {
 
     state = {
         stage: 0
     };
 
-    getIt = () => {
+    getIt = (amount = 100) => {
         this.setState({
-            stage: 100
-        })
+            stage: amount
+        });
     };
 
     render() {
@@ -31,7 +31,7 @@ class PropgressBar extends React.Component {
                 <div className={styles.progressBarWrapper}>
                     <div style={{ width: [this.state.stage] + "%" }}/>
                 </div>
-                <button onClick={this.getIt}>Get IT</button>
+                <button onClick={() => this.getIt()}>Get IT</button>
             </>
         )
     }
@@ -153,7 +153,7 @@ class Category extends Component {
             <Layout>
                 {OverlayElement}
 
-                <PropgressBar/>
+                <ProgressBar/>
 
 
                 <div className={styles.category_wrapper}>

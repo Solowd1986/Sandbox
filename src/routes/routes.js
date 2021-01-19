@@ -4,6 +4,7 @@ import Product from "~components/Pages/Product/Product";
 import Order from "~components/Pages/Order/Order";
 import Error404 from "../components/Core/Error404/Error404";
 import Delivery from "../components/Pages/Delivery/Delivery";
+import Admin from "../components/Admin/Admin";
 
 
 const routes = [
@@ -12,6 +13,7 @@ const routes = [
     { url: "/product/:category/:id", component: Product, exact: true },
     { url: "/order", component: Order, exact: true },
     { url: "/delivery", component: Delivery, exact: true },
+    { url: "/admin", component: Admin, exact: true },
     { url: "/404", component: Error404, exact: true }
 ];
 

@@ -2,12 +2,6 @@ const imgPrefix = "/static/media";
 
 export default {
 
-    defaultSettings: {},
-
-    modals: {
-        showCheckoutModal: false,
-    },
-
     category: [
 
         {
@@ -573,7 +567,6 @@ export default {
 
             ],
         },
-
 
 
         {
