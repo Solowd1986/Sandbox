@@ -7,74 +7,100 @@ use php\db\DbConnect as Connect;
 
 class RequestHandler extends DbConnect
 {
-    public static function getAll()
+    public static function getIndexPageData()
     {
-        $data['phones'][] = "";
-        $data['gadgets'][] = "";
-        $data['accessoires'][] = "";
+        $data['phones'] = self::getCategoryItems("phones", 4);
+        $data['gadgets'] = self::getCategoryItems("gadgets", 4);;
+        $data['accessoires'] = self::getCategoryItems("accessoires", 4);
+        return $data;
+    }
 
+    public static function getCategoryItems($category, $limit = null)
+    {
+        $list = $category . "_list";
+        $promo_table = substr($category, 0, strlen($category) - 1) . "_promo";
+        $img_table = substr($category, 0, strlen($category) - 1) . "_img";
+
+        $query = $limit ? "SELECT * FROM {$list} LIMIT {$limit}" : "SELECT * FROM {$list}";
+        $pdo = Connect::exec()->prepare($query);
+        $pdo->execute();
+        $list_result = $pdo->fetchAll();
+
+        foreach ($list_result as $item) {
+            $id = $item["id"];
+            $id_field = substr($category, 0, strlen($category) - 1) . "_id";
+            $key = array_search($item, $list_result);
+
+            $list_result[$key]["img"] = self::getImg($id, $id_field, $img_table);
+            $list_result[$key]["promo"] = self::getPromo($id, $id_field, $promo_table);
+            if ($category === "phones") {
+                $spec_table = substr($category, 0, strlen($category) - 1) . "_specifications";
+                $list_result[$key]["specifications"] = self::getSpecifications($id, $id_field, $spec_table);
+            }
+        }
+        return $list_result;
+    }
+
+    public static function getOneItem($id, $category)
+    {
+        $list = $category . "_list";
+        $promo_table = substr($category, 0, strlen($category) - 1) . "_promo";
+        $img_table = substr($category, 0, strlen($category) - 1) . "_img";
+
+        $query = "SELECT * FROM {$list} WHERE id={$id}";
+        $pdo = Connect::exec()->prepare($query);
+        $pdo->execute();
+        $result = $pdo->fetch();
+
+        $id_field = substr($category, 0, strlen($category) - 1) . "_id";
+        $result["img"] = self::getImg($id, $id_field, $img_table);
+        $result["promo"] = self::getPromo($id, $id_field, $promo_table);
+        if ($category === "phones") {
+            $spec_table = substr($category, 0, strlen($category) - 1) . "_specifications";
+            $result["specifications"] = self::getSpecifications($id, $id_field, $spec_table);
+        }
+        return $result;
+    }
+
+
+    public static function getLazyLoadItems($category)
+    {
+        $res = self::getCategoryItems($category);
+        shuffle($res);
+        return $res;
+    }
+
+
+    public static function getImg($id, $field, $tablename)
+    {
         try {
-            $pdo = Connect::exec()->prepare("SELECT * FROM category");
+            $pdo = Connect::exec()->prepare("SELECT * FROM {$tablename} WHERE {$field}={$id}");
             $pdo->execute();
-            return $pdo->fetchAll();
+            return $pdo->fetch();
         } catch (\Exception $e) {
-            return "Ошибка при операции getItem " . $e->getMessage();
+            return "Ошибка при операции " . $e->getMessage();
         }
     }
 
-    public static function getIndexList($category)
+    public static function getPromo($id, $field, $tablename)
     {
-        if ($category === "phones") {
-            $list = "phones_list";
-            $spec = "phone_specifications";
-            $promo = "phone_promo";
-            $img = "phone_img";
-
-            try {
-                $pdo = Connect::exec()->prepare("SELECT * FROM {$list} LIMIT 4");
-                $pdo->execute();
-                $list_result = $pdo->fetchAll();
-
-                foreach ($list_result as $item) {
-                    $id = $item["id"];
-
-                    $pdo_spec = Connect::exec()->prepare("SELECT * FROM {$spec} WHERE phone_id={$id}");
-                    $pdo_spec->execute();
-                    $list_spec = $pdo_spec->fetchAll();
-                    var_dump($list_spec);
-
-
-                }
-                return $list_result;
-            } catch (\Exception $e) {
-                return \php\helpers\Output::show("Ошибка при операции getItem " . $e->getMessage());
-            }
-        } else {
-            $list = $category . "_list";
-            $promo = $category . "_promo";
-            $img = $category . "_img";
-
-            return true;
+        try {
+            $pdo = Connect::exec()->prepare("SELECT * FROM {$tablename} WHERE {$field}={$id}");
+            $pdo->execute();
+            return $pdo->fetchAll();
+        } catch (\Exception $e) {
+            return "Ошибка при операции " . $e->getMessage();
         }
+    }
 
-//        $itemList = "SELECT * FROM {$category} LIMIT 4";
-//        try {
-//            $pdo = \php\db\DbConnect::exec()->prepare("SELECT * FROM {$category} LIMIT 4");
-//            $pdo->execute();
-//            $list = $pdo->fetchAll();
-//            foreach ($list as $item) {
-//                $id = $item["id"];
-//
-//                $pdo = \php\db\DbConnect::exec()->prepare("SELECT * FROM {$category} LIMIT 4");
-//                $pdo->execute();
-//                $list = $pdo->fetchAll();
-//                print $id;
-//            }
-//            return "";
-//        } catch (\Exception $e) {
-//            return \php\helpers\Output::show("Ошибка при операции getItem " . $e->getMessage());
-//        }
-
-
+    public static function getSpecifications($id, $field, $tablename)
+    {
+        try {
+            $pdo = Connect::exec()->prepare("SELECT * FROM {$tablename} WHERE {$field}={$id}");
+            $pdo->execute();
+            return $pdo->fetch();
+        } catch (\Exception $e) {
+            return "Ошибка при операции " . $e->getMessage();
+        }
     }
 }

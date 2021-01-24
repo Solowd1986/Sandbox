@@ -1,6 +1,9 @@
 <?php
 
 require_once "./php/functions/functions.php";
+require_once "./php/db/RequestHandler.php";
+
+use php\db\RequestHandler as Request;
 
 spl_autoload_register(function ($class) {
     $path = __DIR__ . DIRECTORY_SEPARATOR . str_replace('\\', '/', $class . '.php');
@@ -11,88 +14,41 @@ spl_autoload_register(function ($class) {
     }
 });
 
-// timeout 4 sec maximun, else - error msg
-//sleep(1);
-
-// тут данные запроса от lazyload, с категорией и индексом
-//$uri = $_SERVER["REQUEST_URI"];
-
-
-require_once "./php/db/RequestHandler.php";
-
-
-//$uri = trim(filter_var($_SERVER["REQUEST_URI"], FILTER_SANITIZE_STRING));
-$uri = "api/product/phones/3";
+$uri = trim(filter_var($_SERVER["REQUEST_URI"], FILTER_SANITIZE_STRING));
+//$uri = "api/product/gadgets/3";
 $prefix = "api/";
 $cnt = strpos($uri, $prefix) + strlen($prefix);
 $res = mb_substr($uri, $cnt, strlen($uri));
 
-$req = \php\db\RequestHandler::getIndexList("phones");
-var_dump_pre($req);
-
-
 if ($res === "index") {
-    print 1;
+    //var_dump_pre(Request::getIndexPageData());
+    //print json_encode(Request::getIndexPageData());
 } elseif (strpos($res, "category") !== false) {
     $category_title = substr($res, strpos($res, "/") + 1);
-    print $category_title;
+    //var_dump_pre(Request::getCategoryItems($category_title));
+    //print $category_title;
 } elseif (strpos($res, "product") !== false) {
     $list = explode("/", substr($res, strpos($res, "/") + 1));
     $category_title = $list[0];
     $product_id = $list[1];
-    print $category_title;
-    print $product_id;
+    $result = Request::getOneItem($product_id, $category_title);
 
+    //print $category_title;
+    //print $product_id;
     //$data = "";
     //print json_encode($data);
+} elseif (strpos($res, "lazyload") !== false) {
+    // timeout 4 sec maximun, else - error msg
+    //sleep(1);
+
+    $category_title = substr($res, strpos($res, "/") + 1);
+    //var_dump_pre(Request::getLazyLoadItems($category_title));
 } else {
-    print "encorrect";
+    print false;
 }
 
 
-//print $res;
-
-
-$reauest_list = "
-        Request from site
-    1. /api/index - 
-    2. /api/category/\<name\>
-    3. /api/product/category_name/id
-
-";
-/*
-$sql_phone = "SELECT *
-FROM phones_list
-         JOIN phone_promo
-              ON
-                  phones_list.id = phone_promo.phone_id
-         JOIN phone_specifications
-              ON
-                  phones_list.id = phone_specifications.phone_id
-         JOIN phone_img
-              ON
-                  phones_list.id = phone_img.phone_id
-WHERE phones_list.id = 1";
-*/
-
-
-//$data = ["first", "second", "third"];
-
-//print json_encode($data);
-
-
-
-//$uri = $_SERVER["REQUEST_URI"];
-//$prefix = "api/";
-//$cnt = strpos($uri, $prefix) + strlen($prefix);
-//$res = mb_substr($uri, $cnt, strlen($uri));
-
-//print json_encode($res);
-
-
 die();
-
-
 
 
 
@@ -102,7 +58,7 @@ die();
  */
 //require_once realpath('vendor/autoload.php');
 
-require_once "./php/functions/functions.php";
+//require_once "./php/functions/functions.php";
 
 
 /*

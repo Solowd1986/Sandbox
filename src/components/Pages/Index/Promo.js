@@ -8,6 +8,27 @@ import CartModal from "../../CartModal/CartModal";
 
 
 class Promo extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    getIndexItems = () => {
+        const axios = require('axios').default;
+
+        if (!this.data) {
+            axios.get('/api/index')
+                .then((response) => {
+                    // handle success
+                    this.data = response;
+                    //console.log("responce", response);
+                }).catch((error) => {
+                //console.log("Axios Error - ", error);
+            }).then(function () {
+                // always executed
+            });
+        }
+    };
+
     render() {
         //console.log(this.props);
         const [phones, accessoires, gadgets] = this.props.db.category;

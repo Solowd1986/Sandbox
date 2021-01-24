@@ -21,14 +21,14 @@ function apiRequest(url) {
     })
 }
 
-apiRequest("api.php").then((res) => {
-    //console.log(res);
-}).catch((error) => console.log("error", error));
+// apiRequest("api.php").then((res) => {
+//     //console.log(res);
+// }).catch((error) => console.log("error", error));
 
 
 const axios = require('axios').default;
 
-axios.get('/api/get/all')
+axios.get('/api/index')
     .then(function (response) {
         // handle success
         //console.log("responce", response);
