@@ -13,8 +13,6 @@ const Table = () => (
 class Admin extends Component {
     constructor(props) {
         super(props);
-        this.sm = 12;
-        this.getTables();
     }
 
 
@@ -32,13 +30,6 @@ class Admin extends Component {
         });
     };
 
-    createTable = () => {
-
-    };
-
-    componentDidMount() {
-        this.sm = 14;
-    }
 
     render() {
         return (
@@ -50,7 +41,7 @@ class Admin extends Component {
                 </nav>
                 <div className={styles.main}>
                     <h1>Admin</h1>
-                    <button onClick={this.createTable}>Создать таблицу</button>
+                    <button>Создать таблицу</button>
                     <div className={styles.contentRoot}/>
                 </div>
             </>

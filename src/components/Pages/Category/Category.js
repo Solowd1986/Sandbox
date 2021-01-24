@@ -13,30 +13,6 @@ import CartModal from "../../CartModal/CartModal";
 import PropTypes from "prop-types";
 
 
-class ProgressBar extends React.Component {
-
-    state = {
-        stage: 0
-    };
-
-    getIt = (amount = 100) => {
-        this.setState({
-            stage: amount
-        });
-    };
-
-    render() {
-        return (
-            <>
-                <div className={styles.progressBarWrapper}>
-                    <div style={{ width: [this.state.stage] + "%" }}/>
-                </div>
-                <button onClick={() => this.getIt()}>Get IT</button>
-            </>
-        )
-    }
-}
-
 
 class Category extends Component {
 
@@ -152,8 +128,6 @@ class Category extends Component {
         return (
             <Layout>
                 {OverlayElement}
-
-                <ProgressBar/>
 
 
                 <div className={styles.category_wrapper}>

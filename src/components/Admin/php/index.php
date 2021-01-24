@@ -1,15 +1,85 @@
 <?php
 
+require_once "./php/functions/functions.php";
+
+spl_autoload_register(function ($class) {
+    $path = __DIR__ . DIRECTORY_SEPARATOR . str_replace('\\', '/', $class . '.php');
+    if (file_exists($path)) {
+        include $path;
+    } else {
+        echo 'Такой файл не найден по пути : ' . $path . '</br>';
+    }
+});
 
 // timeout 4 sec maximun, else - error msg
-sleep(1);
+//sleep(1);
 
 // тут данные запроса от lazyload, с категорией и индексом
 //$uri = $_SERVER["REQUEST_URI"];
 
-$data = ["first", "second", "third"];
 
-print json_encode($data);
+require_once "./php/db/RequestHandler.php";
+
+
+//$uri = trim(filter_var($_SERVER["REQUEST_URI"], FILTER_SANITIZE_STRING));
+$uri = "api/product/phones/3";
+$prefix = "api/";
+$cnt = strpos($uri, $prefix) + strlen($prefix);
+$res = mb_substr($uri, $cnt, strlen($uri));
+
+$req = \php\db\RequestHandler::getIndexList("phones");
+var_dump_pre($req);
+
+
+if ($res === "index") {
+    print 1;
+} elseif (strpos($res, "category") !== false) {
+    $category_title = substr($res, strpos($res, "/") + 1);
+    print $category_title;
+} elseif (strpos($res, "product") !== false) {
+    $list = explode("/", substr($res, strpos($res, "/") + 1));
+    $category_title = $list[0];
+    $product_id = $list[1];
+    print $category_title;
+    print $product_id;
+
+    //$data = "";
+    //print json_encode($data);
+} else {
+    print "encorrect";
+}
+
+
+//print $res;
+
+
+$reauest_list = "
+        Request from site
+    1. /api/index - 
+    2. /api/category/\<name\>
+    3. /api/product/category_name/id
+
+";
+/*
+$sql_phone = "SELECT *
+FROM phones_list
+         JOIN phone_promo
+              ON
+                  phones_list.id = phone_promo.phone_id
+         JOIN phone_specifications
+              ON
+                  phones_list.id = phone_specifications.phone_id
+         JOIN phone_img
+              ON
+                  phones_list.id = phone_img.phone_id
+WHERE phones_list.id = 1";
+*/
+
+
+//$data = ["first", "second", "third"];
+
+//print json_encode($data);
+
 
 
 //$uri = $_SERVER["REQUEST_URI"];
@@ -22,14 +92,7 @@ print json_encode($data);
 
 die();
 
-spl_autoload_register(function ($class) {
-    $path = __DIR__ . DIRECTORY_SEPARATOR . str_replace('\\', '/', $class . '.php');
-    if (file_exists($path)) {
-        include $path;
-    } else {
-        echo 'Такой файл не найден по пути : ' . $path . '</br>';
-    }
-});
+
 
 
 
@@ -76,6 +139,7 @@ use \php\auth\helpers\UserToken as UserToken;
 use \php\auth\UserRegistration as UserRegistration;
 use \php\auth\helpers\DataSanitizeHelper as DataSanitizeHelper;
 use \php\db\DbQueryCore;
+use php\db\RequestHandler;
 
 
 $passedData = [

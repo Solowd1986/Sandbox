@@ -480,7 +480,6 @@ export default {
                     rest: 0,
                     adsType: 2,
 
-
                     promoBlock: [
                         {
                             title: "Основная камера на два модуля",
@@ -726,11 +725,11 @@ export default {
                     ],
 
                     imgPath: {
-                        md: "OnePlus_Travel_Backpack_Morandi_Gray_380_1.png",
+                        md: "onePlus_Travel_Backpack_Morandi_Gray_380_1.png",
                         lg: [
-                            "OnePlus_Travel_Backpack_Morandi_Gray_600_1.png",
-                            "OnePlus_Travel_Backpack_Morandi_Gray_600_2.png",
-                            "OnePlus_Travel_Backpack_Morandi_Gray_600_3.png",
+                            "onePlus_Travel_Backpack_Morandi_Gray_600_1.png",
+                            "onePlus_Travel_Backpack_Morandi_Gray_600_2.png",
+                            "onePlus_Travel_Backpack_Morandi_Gray_600_3.png",
                         ],
                     },
 
