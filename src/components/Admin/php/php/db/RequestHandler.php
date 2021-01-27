@@ -15,6 +15,14 @@ class RequestHandler extends DbConnect
         return $data;
     }
 
+
+    /**
+     * 1. Приходит категория, например, phones - из этого слова создаются имена таблиц БД, к котормы будут запросы.
+     * 2. Количество результатов выдачи можно ограничить через limit
+     * @param $category
+     * @param null $limit
+     * @return array
+     */
     public static function getCategoryItems($category, $limit = null)
     {
         $list = $category . "_list";
@@ -41,8 +49,10 @@ class RequestHandler extends DbConnect
         return $list_result;
     }
 
+
     public static function getOneItem($id, $category)
     {
+
         $list = $category . "_list";
         $promo_table = substr($category, 0, strlen($category) - 1) . "_promo";
         $img_table = substr($category, 0, strlen($category) - 1) . "_img";
@@ -70,7 +80,6 @@ class RequestHandler extends DbConnect
         return $res;
     }
 
-
     public static function getImg($id, $field, $tablename)
     {
         try {
@@ -81,7 +90,6 @@ class RequestHandler extends DbConnect
             return "Ошибка при операции " . $e->getMessage();
         }
     }
-
     public static function getPromo($id, $field, $tablename)
     {
         try {
@@ -92,7 +100,6 @@ class RequestHandler extends DbConnect
             return "Ошибка при операции " . $e->getMessage();
         }
     }
-
     public static function getSpecifications($id, $field, $tablename)
     {
         try {

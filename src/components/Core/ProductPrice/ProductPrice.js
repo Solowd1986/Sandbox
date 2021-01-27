@@ -25,13 +25,13 @@ const ProductPrice = props => {
 };
 
 
-function setStateToProps(state) {
+function mapStateToProps(state) {
     return {
         state
     }
 }
 
-export default connect(setStateToProps)(ProductPrice);
+export default connect(mapStateToProps)(ProductPrice);
 
 
 

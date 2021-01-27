@@ -182,7 +182,7 @@ class Product extends Component {
 
 
 // wrap in obj give you double invoke
-function getProps(state) {
+function mapStateToProps(state) {
     return {
         db: state.db,
         cart: state.cart
@@ -190,7 +190,7 @@ function getProps(state) {
 }
 
 
-function setDispatch(dispatch) {
+function mapDispatchToProps(dispatch) {
     return {
         onAddToCart: (evt, id, category) => {
             dispatch(actions.cart.disableButton(evt));
@@ -204,4 +204,4 @@ function setDispatch(dispatch) {
 }
 
 
-export default connect(getProps, setDispatch)(Product);
+export default connect(mapStateToProps, mapDispatchToProps)(Product);

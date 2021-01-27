@@ -11,6 +11,7 @@ import ProductCard from "../ProductCart/ProductCard";
 import Overlay from "../../Core/Overlay/Overlay";
 import CartModal from "../../CartModal/CartModal";
 import PropTypes from "prop-types";
+import { Transition, TransitionGroup } from "react-transition-group";
 
 
 
@@ -25,6 +26,7 @@ class Category extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);
     }
+
 
     // компонент один, поэтому скролл верх срабатывает при имплементации, а вот просы приходят на каждый клик
     // поэтому всегда происходит скролл вниз при переходе между категориями
@@ -120,15 +122,19 @@ class Category extends Component {
 
     render() {
         // учти отсутвие значения в категории, если в URI пришли некорретнеы данные
+        const categoryAlias = this.props.match.params.type;
         const category = this.props.category.find(category => category.categoryAlias === this.props.match.params.type);
+
+        if (!category) {
+            // redirect if undefined
+        }
+
         const OverlayElement = this.createOverlay();
         const productsList = this.getProductsList(category, this.props.serverData);
-
 
         return (
             <Layout>
                 {OverlayElement}
-
 
                 <div className={styles.category_wrapper}>
                     <div className={styles.sign_bg}>
@@ -176,7 +182,7 @@ function mapDispatchToProps(dispatch) {
         },
         clearDataStorage: () => {
             dispatch(actions.lazyload.clearDataStorage());
-        }
+        },
     }
 }
 

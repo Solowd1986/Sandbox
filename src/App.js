@@ -78,7 +78,14 @@ export default class App extends Component {
                 <Provider store={store}>
                     <Router>
                         <Switch>
-                            {routes.map((route) => <Route key={route.url} path={route.url} component={route.component} exact={route.exact}/>)}
+                            {routes.map((route) =>
+                                <Route
+                                    key={route.url}
+                                    path={route.url}
+                                    component={route.component}
+                                    exact={route.exact}/>
+                            )
+                            }
                             <Redirect to={"/404"}/> // редирект, если рута не нашлось
                         </Switch>
                     </Router>

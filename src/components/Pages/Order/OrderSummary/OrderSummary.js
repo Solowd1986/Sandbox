@@ -243,14 +243,14 @@ class OrderSummary extends Component {
 }
 
 
-function getProps(state) {
+function mapStateToProps(state) {
     return {
         state
     }
 }
 
 
-function setDispatch(dispatch) {
+function mapDispatchToProps(dispatch) {
     return {
         onDecreaseeProductsAmount: (evt, id) => {
             dispatch(actions.cart.decreaseeProductsAmount(evt, id));
@@ -271,4 +271,4 @@ function setDispatch(dispatch) {
 }
 
 
-export default connect(getProps, setDispatch)(OrderSummary);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderSummary);

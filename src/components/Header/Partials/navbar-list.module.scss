@@ -14,7 +14,6 @@
   flex-grow: 1;
   text-align: center;
 
-
   // Вращение стрелки при наведнии на пункт меню
   &:hover .header__nav_link__arrow::after {
     border-top-color: $red-500;
@@ -30,7 +29,9 @@
 
 .header__nav_link {
   display: block;
+  position: relative;
   padding: 10px 15px 10px 0;
+
   font-size: 16px;
 
   font-weight: 600;
@@ -60,6 +61,11 @@
     font-size: 14px;
     transition: .2s;
   }
+}
+
+.link_active_class {
+  border-radius: 10px;
+  background-color: lighten($grey-700, 15%);
 }
 
 

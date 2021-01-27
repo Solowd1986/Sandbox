@@ -1,7 +1,7 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import styles from "./lazy-load.module.scss"
 import actions from "../../../redux/actions";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import Overlay from "../Overlay/Overlay";
 import CartModal from "../../CartModal/CartModal";
 
@@ -34,6 +34,7 @@ class LazyLoad extends Component {
             { signal: this.signal })
 
             .then((res) => res.json().then(responce => {
+                //console.log(responce);
 
                 getDataBtn.classList.remove(styles.active);
                 disableOverlay();
@@ -67,14 +68,21 @@ class LazyLoad extends Component {
                 const cat = this.props.categoryName;
                 this.props.setServerData({ arrayOfElements: resultCat, cat, lastIndex });
             })).catch(err => {
-
+            console.dir(err);
 
             disableOverlay();
             getDataBtn.classList.remove(styles.active);
-            // елси таймер истек, значит сервер не ответил вовремя, а значит - покажем сообщение об ошибке
-            timeoutExceeded && getDataBtn.classList.add(styles.error);
+            // таймер истек, значит сервер не ответил вовремя, а значит - покажем сообщение об ошибке
+            if (timeoutExceeded) {
+                getDataBtn.classList.add(styles.error);
+                console.log("abort from catch in lazyload component - timer exceeded");
+            }
+
+            if (err.message !== "The user aborted a request.") {
+                getDataBtn.classList.add(styles.error);
+                console.log("abort from catch in lazyload component - error from server");
+            }
             clearTimeout(this.timer);
-            //console.log("abort from catch in lazyload component");
         });
     };
 
@@ -126,7 +134,7 @@ class LazyLoad extends Component {
     }
 }
 
-function getProps(state) {
+function mapStateToProps(state) {
     return {
         lastIndex: state.lazyload.indexOfLastAddedElement,
         amountOfElements: state.lazyload.numberOfRequestedElements,
@@ -136,7 +144,7 @@ function getProps(state) {
 }
 
 
-function setDispatch(dispatch) {
+function mapDispatchToProps(dispatch) {
     return {
         setServerData: (data) => {
             dispatch(actions.lazyload.setServerData(data));
@@ -151,7 +159,7 @@ function setDispatch(dispatch) {
 }
 
 
-export default connect(getProps, setDispatch)(LazyLoad);
+export default connect(mapStateToProps, mapDispatchToProps)(LazyLoad);
 
 
 

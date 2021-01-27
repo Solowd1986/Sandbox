@@ -22,7 +22,6 @@ const initialState = {
         showModal: false,
         isOfferGoToCartBeenShown: false,
     },
-
     defaultSettings: {
         buttonsDisabled: false
     },

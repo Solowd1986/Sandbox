@@ -7,10 +7,6 @@ import {connect} from "react-redux";
 class NavbarList extends React.Component {
 
     clear = () => {
-
-
-        //console.log(window.pageYOffset);
-
         const check = () => {
             if (window.pageYOffset === 0) {
                 this.props.clearDataStorage();
@@ -26,15 +22,20 @@ class NavbarList extends React.Component {
         });
 
         // this.props.clearDataStorage();
-
-
     };
 
     render() {
         return (
             <ul className={styles.header__nav_list}>
+
+                {/*Смартфоны*/}
                 <li className={styles.header__nav_item}>
-                    <NavLink onClick={this.clear} to={"/category/phones"} className={styles.header__nav_link}>Смартфоны
+                    <NavLink
+                        onClick={this.clear}
+                        to={"/category/phones"}
+                        className={styles.header__nav_link}
+                        activeClassName={styles.link_active_class}>
+                        Смартфоны
                         <span className={styles.header__nav_link__arrow}/>
                     </NavLink>
 
@@ -93,8 +94,13 @@ class NavbarList extends React.Component {
                         </li>
                     </ul>
                 </li>
+                {/*Аксессуары*/}
                 <li className={styles.header__nav_item}>
-                    <NavLink onClick={this.clear} to={"/category/accessoires"} className={styles.header__nav_link}>Аксессуары
+                    <NavLink onClick={this.clear}
+                             to={"/category/accessoires"}
+                             className={styles.header__nav_link}
+                             activeClassName={styles.link_active_class}>
+                        Аксессуары
                         <span className={styles.header__nav_link__arrow}/>
                     </NavLink>
                     <ul className={`${styles.header__inner_list} animate__animated animate__fadeIn animate__fast`}>
@@ -183,9 +189,14 @@ class NavbarList extends React.Component {
                     </ul>
                 </li>
 
-                {/*Gadgerts*/}
+                {/*Гаджеты*/}
                 <li className={styles.header__nav_item}>
-                    <NavLink onClick={this.clear} to={"/category/gadgets"} className={styles.header__nav_link}>Гаджеты
+                    <NavLink
+                        onClick={this.clear}
+                        to={"/category/gadgets"}
+                        className={styles.header__nav_link}
+                        activeClassName={styles.link_active_class}>
+                        Гаджеты
                         <span className={styles.header__nav_link__arrow}/>
                     </NavLink>
                     <ul className={`${styles.header__inner_list} animate__animated animate__fadeIn animate__fast`}>
@@ -280,7 +291,7 @@ class NavbarList extends React.Component {
 }
 
 
-function setDispatch(dispatch) {
+function mapDispatchToProps(dispatch) {
     return {
         clearDataStorage: () => {
             dispatch(actions.lazyload.clearDataStorage());
@@ -289,6 +300,6 @@ function setDispatch(dispatch) {
 }
 
 
-export default connect(null, setDispatch)(NavbarList);
+export default connect(null, mapDispatchToProps)(NavbarList);
 
 

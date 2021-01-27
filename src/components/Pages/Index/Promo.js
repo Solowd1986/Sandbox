@@ -5,12 +5,19 @@ import {connect} from "react-redux";
 import ProductCard from "../ProductCart/ProductCard";
 import Overlay from "../../Core/Overlay/Overlay";
 import CartModal from "../../CartModal/CartModal";
+import PropTypes from "prop-types";
 
 
 class Promo extends Component {
     constructor(props) {
         super(props);
+        this.data = this.props.getData();
     }
+
+
+    // static propTypes = {
+    //     category: PropTypes.array,
+    // };
 
     getIndexItems = () => {
         const axios = require('axios').default;
@@ -33,17 +40,21 @@ class Promo extends Component {
         //console.log(this.props);
         const [phones, accessoires, gadgets] = this.props.db.category;
 
+
+        //console.log('res', this.props.db.loader);
+
+        const modalToggle =
+            this.props.cart.modals.showModal &&
+            !this.props.cart.defaultSettings.buttonsDisabled &&
+            !this.props.cart.modals.isOfferGoToCartBeenShown;
+
+
+
         return (
             <section className={`${common.container} ${styles.promo_wrapper}`}>
                 <main className={`${common.wrapper} ${styles.promo}`}>
-
                     {
-                        this.props.cart.modals.showModal
-                        &&
-                        !this.props.cart.defaultSettings.buttonsDisabled
-                        &&
-                        !this.props.cart.modals.isOfferGoToCartBeenShown
-                        &&
+                        modalToggle &&
                         <Overlay coloredBg={true} delay={false}>
                             <CartModal products={this.props.cart.products}/>
                         </Overlay>
@@ -70,6 +81,7 @@ class Promo extends Component {
                         })}
                     </ul>
 
+
                     <h2 className={styles.promo_section_title}>Аксессуары</h2>
                     <ul className={styles.promo_list}>
                         {accessoires.productList.slice(0, 4).map((item, i) => {
@@ -85,6 +97,8 @@ class Promo extends Component {
 }
 
 
+import { requestIndexData } from "../../../redux/middlware/requestToServer";
+
 // wrap in obj give you double invoke
 function mapStateToProps(state) {
     return {
@@ -93,6 +107,14 @@ function mapStateToProps(state) {
     }
 }
 
+function mapDispatchToProps(dispatch) {
+    return {
+        getData: () => {
+            dispatch(requestIndexData());
+        }
+    }
+}
 
-export default connect(mapStateToProps)(Promo);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Promo);
 

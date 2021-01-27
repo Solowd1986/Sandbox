@@ -6,7 +6,7 @@ import MobileNavbar from "./Partials/MobileNavbar";
 import Logo from "./Partials/Logo";
 import NavbarList from "./Partials/NavbarList";
 import Userbar from "./Partials/Userbar";
-import { NavLink } from "react-router-dom";
+
 
 class Header extends Component {
     constructor(props) {
@@ -40,9 +40,6 @@ class Header extends Component {
     render() {
         return (
             <header className={`${this.state.isPageScrolled ? styles.header_fixed : ''}`} data-fs={true}>
-                <NavLink to={"/admin"}>
-                    <span className={`${styles.portfolio_controls} ${styles.portfolio_controls__left}`}>admin</span>
-                </NavLink>
                 <a className={`${styles.portfolio_controls} ${styles.portfolio_controls__right}`} href="#">перейти на GitHub проекта</a>
                 <nav className={`${common.wrapper} ${styles.header}`}>
                     <MobileNavbar/>
@@ -50,12 +47,10 @@ class Header extends Component {
                     <NavbarList/>
                     <Userbar/>
                 </nav>
-
             </header>
         )
     }
 }
-
 
 export default Header;
 

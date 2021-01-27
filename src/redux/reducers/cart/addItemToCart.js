@@ -21,7 +21,7 @@ export default function addItemToCart(state, evt, id, category) {
         ...state,
         modals: {
             ...state.modals,
-            showModal: false
+            showModal: true
         },
         defaultSettings: {
             buttonsDisabled: false

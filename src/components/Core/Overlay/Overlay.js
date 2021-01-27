@@ -13,6 +13,10 @@ class Overlay extends Component {
         this.timer = null;
     }
 
+    // static state = {
+    //     isModalShow: false,
+    // };
+
 
     componentDidMount = () => {
         if (this.props.delay) {
@@ -130,6 +134,11 @@ class Overlay extends Component {
     render() {
         //console.log(this.props);
 
+        /**
+         * ОПИЩИ ЛОИКУ РАБОТЫ МОДАЛКИ ЧЕРЕЗ СВОЙ СТЭЙТ ЧТОБЫ КЛИК ПО НЕЙ ИКО КРЕТИКУ ЕЕ УНЧТОЖАЛ
+         * БЕЗ РИВЯЗКИ КО ВНЕШНЕМУ ЫЕФЕУ
+         * */
+
         return (
             <div onClick={this.destroy} className={`${styles.overlay} ${this.coloredBg && styles.overlay_bg}`}>
                 <div>
@@ -164,14 +173,14 @@ class Overlay extends Component {
     }
 }
 
-function getProps(state) {
+function mapStateToProps(state) {
     return {
         isdelayModalProcessCompleted: state.cart.modals.isdelayModalProcessCompleted
     }
 }
 
 
-function setDispatch(dispatch) {
+function mapDispatchToProps(dispatch) {
     return {
         disableOverlay: () => {
             dispatch(actions.cart.disableOverlay());
@@ -184,7 +193,7 @@ function setDispatch(dispatch) {
 }
 
 
-export default connect(getProps, setDispatch)(Overlay);
+export default connect(mapStateToProps, mapDispatchToProps)(Overlay);
 
 
 

@@ -54,13 +54,13 @@ const OrderButton = props => {
 };
 
 
-function setStateToProps(state) {
+function mapStateToProps(state) {
     return {
         state
     }
 }
 
-export default connect(setStateToProps)(OrderButton);
+export default connect(mapStateToProps)(OrderButton);
 
 
 

@@ -39,12 +39,12 @@ class Userbar extends React.Component {
 }
 
 
-function getProps(state) {
+function mapStateToProps(state) {
     return {
         amountOfProductsInCart: state.cart.amountOfProductsInCart
     };
 }
 
-export default connect(getProps)(Userbar);
+export default connect(mapStateToProps)(Userbar);
 
 

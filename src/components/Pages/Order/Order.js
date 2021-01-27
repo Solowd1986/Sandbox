@@ -76,9 +76,9 @@ class Order extends Component {
 }
 
 
-function getProps(state) {
+function mapStateToProps(state) {
     return { ...state }
 }
 
 
-export default connect(getProps)(Order);
+export default connect(mapStateToProps)(Order);
