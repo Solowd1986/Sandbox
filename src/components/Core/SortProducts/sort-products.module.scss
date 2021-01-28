@@ -1,124 +1,52 @@
 @import "~scss/common.module";
 
 
-.filters_list {
-  display: flex;
-  align-items: center;
-
-
-  & > *:not(:last-child) {
-    margin-right: 25px;
-  }
-
-  & > span {
-    min-width: 140px;
-
-  }
-
-  & > button {
-    min-width: 200px;
-    padding: 10px 15px;
-    font-size: 18px;
-    font-weight: 500;
-    color: $white;
-    border-radius: 20px;
-    background-color: $red-100;
-    transition: background-color .2s linear;
-
-    &:hover {
-      background-color: darken($red-500, 15%);
-
-    }
-
-    &:focus {
-      outline: none;
-    }
-
-  }
-
-}
-
-
-.sort_btn_default {
-  display: flex;
-  box-sizing: border-box;
-  width: 100%;
-  height: 44px;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 16px;
-  font-size: .875rem;
-  line-height: 1.25rem;
-  border: 2px solid #e6e8f0;
-  border-radius: 4px;
-  background: #fff;
-
-
-
-  & > svg {
-    transition: transform .2s linear;
-  }
-
-
-}
-
-.list {
+.panel_hide {
   display: none;
-  position: absolute;
-  width: 100%;
-  height: 0;
-  z-index: 10;
-  flex-direction: column;
-  background-color: $white;
-  -webkit-box-shadow: inset -1px 3px 8px 5px #1F87FF, 2px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(0, 0, 0, 0);
-  box-shadow: inset -1px 3px 8px 5px #1F87FF, 2px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(0, 0, 0, 0);
-  transition: .3s linear;
-
-  & > li {
-    width: 100%;
-    padding: 12px 16px;
-    font-size: 16px;
-    line-height: 20px;
-    color: $black;
-    text-align: left;
-    background-color: $white;
-    cursor: pointer;
-    transition: background-color .2s linear;
-
-    &:hover {
-      background-color: darken($white, 15%);
-    }
-  }
 }
 
-.sort_btn {
-  padding: 12px 16px;
-  font-size: 16px;
-  line-height: 20px;
-  color: $black;
-  text-align: left;
-  background-color: $white;
-  cursor: pointer;
+.panel_show {
+  display: block;
+}
+
+.sort_wrapper {
+  position: relative;
+  width: 340px;
 }
 
 
 .sort_title {
   margin-right: 15px;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 400;
   line-height: 1.5;
   color: #818489;
   background-color: #fff;
+
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .sort_type {
-  font-family: "Open Sans", sans-serif
+  font-family: "Open Sans", sans-serif;
   font-size: 15px;
   font-weight: 600;
   color: #262626;
   letter-spacing: 0;
   text-transform: inherit;
   cursor: pointer;
+
+  // Запрещаем выделение текста, так как при клике вся строка окрашивается
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .sort_icon {
@@ -127,6 +55,42 @@
   margin-left: 4px;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+}
+
+.sort_list_panel {
+  position: absolute;
+  right: 25px;
+  z-index: 9;
+  margin-top: 10px;
+  padding: 15px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  border-radius: 10px;
+  background-color: $white;
+  -webkit-box-shadow: 5px 5px 15px -5px #000000;
+  box-shadow: 5px 5px 15px -5px #000000;
+
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+
+  & > li {
+    color: #818489;
+    cursor: pointer;
+
+    &:hover {
+      color: $black;
+    }
+  }
+
+  & > li:not(:last-child) {
+    margin-bottom: 12px;
+  }
+
 }
 
 
