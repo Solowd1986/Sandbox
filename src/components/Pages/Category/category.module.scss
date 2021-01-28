@@ -13,11 +13,24 @@
   height: 430px;
   margin-bottom: 30px;
   overflow: hidden;
+  @media (max-width: 1160px) {
+    height: 330px;
+  }
+  @media (max-width: 600px) {
+    height: 200px;
+  }
 }
 
 .sign_bg__img {
   width: 100%;
   height: 430px; // for slider simmetry
+  @media (max-width: 1160px) {
+    height: 330px;
+    object-fit: cover;
+  }
+  @media (max-width: 600px) {
+    height: 200px;
+  }
 }
 
 .img_fit {
@@ -82,6 +95,12 @@
 
 .filters_wrapper {
   margin-bottom: 70px;
+  @media (max-width: 1165px) {
+    margin-bottom: 40px;
+  }
+  @media (max-width: 600px) {
+    margin-bottom: 20px;
+  }
 }
 
 

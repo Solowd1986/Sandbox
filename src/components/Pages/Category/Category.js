@@ -106,7 +106,6 @@ class Category extends Component {
          * это last index + 1, но тут общее количество всегда на 4 больше, чем пришло от lazyLoad, а значит, длина приходящего
          * массива служит отправной точкой для анимации последних 4-х элементов.
          */
-
         return list.map((item, i) => {
             const key = Math.floor(Math.random() * 56123473446);
             let classList = null;
@@ -123,6 +122,7 @@ class Category extends Component {
     render() {
         // учти отсутвие значения в категории, если в URI пришли некорретнеы данные
         const categoryAlias = this.props.match.params.type;
+
         const category = this.props.category.find(category => category.categoryAlias === this.props.match.params.type);
 
         if (!category) {

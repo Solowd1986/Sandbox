@@ -12,6 +12,10 @@
 .sort_wrapper {
   position: relative;
   width: 340px;
+  @media (max-width: 665px) {
+    width: initial;
+    text-align: center;
+  }
 }
 
 
@@ -20,8 +24,8 @@
   font-size: 18px;
   font-weight: 400;
   line-height: 1.5;
-  color: #818489;
-  background-color: #fff;
+  color: $grey-800;
+  background-color: $white;
 
   -khtml-user-select: none;
   -moz-user-select: none;
@@ -33,9 +37,9 @@
 
 .sort_type {
   font-family: "Open Sans", sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
-  color: #262626;
+  color: $black-350;
   letter-spacing: 0;
   text-transform: inherit;
   cursor: pointer;
@@ -59,7 +63,7 @@
 
 .sort_list_panel {
   position: absolute;
-  right: 25px;
+  right: 18px;
   z-index: 9;
   margin-top: 10px;
   padding: 15px;
@@ -68,8 +72,8 @@
   line-height: 1.5;
   border-radius: 10px;
   background-color: $white;
-  -webkit-box-shadow: 5px 5px 15px -5px #000000;
-  box-shadow: 5px 5px 15px -5px #000000;
+  -webkit-box-shadow: 5px 5px 15px -5px $black;
+  box-shadow: 5px 5px 15px -5px $black;
 
   -khtml-user-select: none;
   -moz-user-select: none;
@@ -79,7 +83,8 @@
   -webkit-touch-callout: none;
 
   & > li {
-    color: #818489;
+    font-size: 16px;
+    color: $grey-800;
     cursor: pointer;
 
     &:hover {

@@ -36,6 +36,7 @@ class SortPorducts extends Component {
                 }
             })
         }
+
     };
 
     closeSortPanelOnClickByWindow = () => {
@@ -45,6 +46,37 @@ class SortPorducts extends Component {
                     showSortPanel: false
                 }
         })
+    };
+
+    /**
+     * Методу сортировки как свойство передается сортируемый массив, через redux достпен методы изменения массива,
+     * данных, например, всей категории товаров, например и тут из метода таким сеттером устаналивается
+     * новый отсортированный массив
+     */
+    sortDataList = (dataList, sortType = this.state.sortType) => {
+        const cloneDeep = require('lodash.clonedeep');
+        let list = cloneDeep(dataList);
+
+        switch (sortType) {
+            case "по популярности": {
+                break;
+            }
+            case "по возрастанию цены": {
+                list.sort((a, b) => a.price - b.price);
+                break;
+            }
+            case "по убыванию цены": {
+                list.sort((a, b) => b.price - a.price);
+                break;
+            }
+            case "по новизне": {
+                break;
+            }
+            case "по скидкам": {
+                break;
+            }
+        }
+        return list;
     };
 
 
