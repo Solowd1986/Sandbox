@@ -23,28 +23,28 @@ class ProductCard extends Component {
         const { cart, category, item, classList } = this.props;
 
         return (
-            <li key={this.props.item.id} className={`${styles.item} ${this.props.classList ? this.props.classList : ''}`}>
-                <span className={this.props.item.rest > 0 ? `${styles.tag}` : `${styles.tag} ${styles.tag__not_in_stock}`}>
+            <li key={item.id} className={`${styles.item} ${classList ? classList : ''}`}>
+                <span className={item.rest > 0 ? `${styles.tag}` : `${styles.tag} ${styles.tag__not_in_stock}`}>
                     В наличии
                 </span>
 
-                <NavLink to={`/product/${this.props.category.categoryAlias}/${this.props.item.id}`} className={styles.link}>
+                <NavLink to={`/product/${category.categoryAlias}/${item.id}`} className={styles.link}>
                     <img className={styles.img}
                         // path from public folder
-                         src={`${this.props.category.imgPrefix}/${this.props.item.imgPath.md}`}
-                         alt={this.props.item.imgAlt}
+                         src={`${category.imgPrefix}/${item.imgPath.md}`}
+                         alt={item.imgAlt}
                     />
                 </NavLink>
 
                 <div className={styles.title}>
-                    <span>{this.props.item.title}</span>
+                    <span>{item.title}</span>
                     <span className={styles.color}>
-                        {this.props.item.specifications && `"${(this.props.item.specifications.color)}"`}
+                        {item.specifications && `"${(item.specifications.color)}"`}
                     </span>
                 </div>
 
-                <PromoProductCard item={this.props.item} category={this.props.category}/>
-                <ProductPrice product={this.props.item} classList={{ main: `${styles.price}`, discount: `${styles.price__discount}` }}/>
+                <PromoProductCard item={item} category={category}/>
+                <ProductPrice product={item} classList={{ main: `${styles.price}`, discount: `${styles.price__discount}` }}/>
 
                 {/*
                     Вид кнопки зависит от isProductInCart: если такой товар есть - то можно убрать. Иначе - добавить.
@@ -65,23 +65,23 @@ class ProductCard extends Component {
                        класс из атрибута data-disabled, чтобы пропал спиннер и стили "ожидания овтета от сервера".
                 */}
                 {
-                    this.isProductInCart(this.props.cart.products, this.props.item.id)
+                    this.isProductInCart(cart.products, item.id)
                         ?
                         <OrderButton
-                            product={this.props.item}
-                            onClick={(evt) => this.props.onDeleteFromCart(evt, this.props.item.id)}>
+                            product={item}
+                            onClick={(evt) => this.props.onDeleteFromCart(evt, item.id)}>
                             Убрать из заказа
                         </OrderButton>
                         :
                         <OrderButton
-                            product={this.props.item}
+                            product={item}
                             onClick={(evt) => {
                                 // данная связка методов используется только в компонентах Promo/Category. В Product - нет,
                                 // модалка с корзиной не нужна
                                 this.props.enableOverlay();
-                                this.props.onAddToCart(evt, this.props.item.id, this.props.category);
+                                this.props.onAddToCart(evt, item.id, category);
                             }}>
-                            {this.props.item.rest === 0 ? "Нет в наличии" : "Добавить в заказ"}
+                            {item.rest === 0 ? "Нет в наличии" : "Добавить в заказ"}
                         </OrderButton>
                 }
             </li>
@@ -99,14 +99,27 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+
+        // onAddToCart: (evt, id, category) => {
+        //     dispatch(actions.cart.disableButton(evt));
+        //     dispatch(actions.cart.addItemAsync(evt, id, category));
+        // },
+        //
+        // onDeleteFromCart: (evt, id) => {
+        //     dispatch(actions.cart.disableButton(evt));
+        //     dispatch(actions.cart.removeItemAsync(evt, id))
+        // },
+
+
+
+
         onAddToCart: (evt, id, category) => {
-            dispatch(actions.cart.disableButton(evt));
-            dispatch(actions.cart.addItemAsync(evt, id, category));
+            dispatch(actions.cart.addItem(evt, id, category));
         },
         onDeleteFromCart: (evt, id) => {
-            dispatch(actions.cart.disableButton(evt));
-            dispatch(actions.cart.removeItemAsync(evt, id))
+            dispatch(actions.cart.removeItem(evt, id))
         },
+
         enableOverlay: () => {
             dispatch(actions.cart.enableOverlay());
         },

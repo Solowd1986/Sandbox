@@ -99,6 +99,7 @@ export default (state = initialState, action) => {
         }
 
         case "cart/disableButton" : {
+
             action.evt.target.classList.add(action.evt.target.dataset.disabled);
 
             return {

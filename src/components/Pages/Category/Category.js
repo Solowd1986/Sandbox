@@ -22,6 +22,7 @@ class Category extends Component {
         name: "",
     };
 
+
     // always on top of page, without smooth scroll
     componentDidMount() {
         window.scrollTo(0, 0);
@@ -131,6 +132,7 @@ class Category extends Component {
 
         const OverlayElement = this.createOverlay();
         const productsList = this.getProductsList(category, this.props.serverData);
+
 
         return (
             <Layout>

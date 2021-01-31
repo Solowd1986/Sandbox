@@ -1,3 +1,5 @@
+// import * as cartActions from "../../../redux/actions/cart";
+
 export const buyItemByOneClick = (evt, id, category) => {
     return {
         type: "cart/buyItemByOneClick",

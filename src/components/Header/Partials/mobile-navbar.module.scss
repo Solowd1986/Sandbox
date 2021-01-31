@@ -40,6 +40,9 @@
   transform: scale(0);
 }
 
+.mobile_menu__icon__active + .header__mobile_menu_wrapper {
+  left: 0;
+}
 
 .header__mobile_menu_wrapper {
   position: absolute;
@@ -48,7 +51,7 @@
   top: 100%;
   right: 0;
   left: -100%;
-  z-index: 2;
+  z-index: 100;
   background-color: $white;
   transition: .3s linear;
 

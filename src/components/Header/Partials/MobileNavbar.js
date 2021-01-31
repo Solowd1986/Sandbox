@@ -1,39 +1,57 @@
 import React from "react";
 import styles from "./mobile-navbar.module.scss";
 import {NavLink} from "react-router-dom";
+import classNames from "classnames";
 
 export default class MobileNavbar extends React.Component {
 
+    state = {
+        isMobileMenuVisible: false
+    };
+
     toggleMobileMenu = (evt) => {
-        evt.currentTarget.classList.toggle(`${styles.mobile_menu__icon__active}`);
-        evt.currentTarget.nextSibling.classList.toggle(`${styles.header__mobile_menu_wrapper__active}`);
+        this.setState((state) => {
+            // проверка на false, так как факт вызова метода указывает, что дальше станет true и фикс body понадобится
+            if (!this.state.isMobileMenuVisible) {
+                document.body.classList.add(styles.mobile_menu_body_fixed);
+            } else {
+                document.body.classList.remove(styles.mobile_menu_body_fixed);
+            }
+            return {
+                isMobileMenuVisible: !this.state.isMobileMenuVisible
+            }
+        });
     };
 
     linkClickHandler = () => {
-        const parent = document.querySelector("div[data-type=menu]");
-        const icon = document.querySelector("div[data-type=icon]");
-
-        parent.classList.remove(`${styles.header__mobile_menu_wrapper__active}`);
-        icon.classList.remove(`${styles.mobile_menu__icon__active}`);
+        this.setState((state) => {
+            return {
+                isMobileMenuVisible: false
+            }
+        });
+        document.body.classList.remove(styles.mobile_menu_body_fixed);
     };
 
 
     render() {
+        const classList = classNames(styles.mobile_menu__icon, {
+            [styles.mobile_menu__icon__active]: this.state.isMobileMenuVisible === true,
+        });
         return (
             <>
-                <div onClick={this.toggleMobileMenu} className={styles.mobile_menu__icon} data-type={"icon"}>
+                <div onClick={this.toggleMobileMenu} className={classList}>
                     <span/>
                 </div>
-                <div className={styles.header__mobile_menu_wrapper} data-type={"menu"}>
+                <div className={styles.header__mobile_menu_wrapper}>
                     <ul className={styles.header__mobile_menu_list}>
                         <li>
                             <NavLink onClick={this.linkClickHandler} to={"/category/phones"}> Смартфоны</NavLink>
                         </li>
                         <li>
-                            <NavLink onClick={this.linkClickHandler} to={"/category/other/accessoires"}> Аксессуары</NavLink>
+                            <NavLink onClick={this.linkClickHandler} to={"/category/accessoires"}> Аксессуары</NavLink>
                         </li>
                         <li>
-                            <NavLink onClick={this.linkClickHandler} to={"/category/other/gadgets"}> Гаджеты</NavLink>
+                            <NavLink onClick={this.linkClickHandler} to={"/category/gadgets"}> Гаджеты</NavLink>
                         </li>
                         <li>
                             <NavLink onClick={this.linkClickHandler} to={"/delivery"}> Доставка</NavLink>

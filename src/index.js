@@ -7,7 +7,6 @@ import "normalize.css";
 import "~scss/custom-reset.scss"
 import "~scss/fonts.css"
 
-
 ReactDOM.render(
     <App/>,
     document.getElementById('root')

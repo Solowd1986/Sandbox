@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import ReactDom from "react-dom";
 import styles from "./sort-products.module.scss";
 import classNames from "classnames";
+
 
 class SortPorducts extends Component {
 

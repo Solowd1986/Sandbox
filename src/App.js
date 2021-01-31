@@ -4,6 +4,7 @@ import routes from "./routes/routes";
 
 import {Provider} from "react-redux";
 import store from "./redux/storeInit";
+import "./utils/whyDidYouRender";
 
 
 /**
@@ -83,8 +84,7 @@ export default class App extends Component {
                                     key={route.url}
                                     path={route.url}
                                     component={route.component}
-                                    exact={route.exact}/>
-                            )
+                                    exact={route.exact}/>)
                             }
                             <Redirect to={"/404"}/> // редирект, если рута не нашлось
                         </Switch>

@@ -12,8 +12,10 @@
 .sort_wrapper {
   position: relative;
   width: 340px;
+  margin-left: 15px;
   @media (max-width: 665px) {
     width: initial;
+    margin-left: 0;
     text-align: center;
   }
 }
@@ -81,6 +83,10 @@
   -webkit-user-select: none;
   user-select: none;
   -webkit-touch-callout: none;
+
+  @media (max-width: 665px) {
+    right: 90px;
+  }
 
   & > li {
     font-size: 16px;
