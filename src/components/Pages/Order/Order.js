@@ -8,6 +8,10 @@ import {connect} from "react-redux";
 
 
 class Order extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     // always on top of page, without smooth scroll
     componentDidMount() {
         window.scrollTo(0, 0)
@@ -34,6 +38,7 @@ class Order extends Component {
 
     render() {
         //console.log('state', this.props);
+        this.isCartEmpty = this.props.cart.amountOfProductsInCart === 0;
         return (
             <Layout>
                 {this.props.cart.amountOfProductsInCart > 0

@@ -51,6 +51,7 @@ class Category extends Component {
         return OverlayElement;
     };
 
+
     lazyLoadPanel = (category) => {
         let lazyLoadData = null;
         if (this.props.serverData.length > 0) {
@@ -130,13 +131,13 @@ class Category extends Component {
             // redirect if undefined
         }
 
-        const OverlayElement = this.createOverlay();
+        //const OverlayElement = this.createOverlay();
         const productsList = this.getProductsList(category, this.props.serverData);
 
 
         return (
             <Layout>
-                {OverlayElement}
+                {/*{OverlayElement}*/}
 
                 <div className={styles.category_wrapper}>
                     <div className={styles.sign_bg}>
@@ -167,7 +168,7 @@ const mapStateToProps = (state) => {
     return {
         serverData: state.lazyload.serverStorageData,
         category: state.db.category,
-        cart: state.cart
+        // cart: state.cart
     }
 };
 

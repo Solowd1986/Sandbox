@@ -3,6 +3,7 @@ import common from "~scss/common.module.scss";
 import styles from "./order-button.module.scss";
 import classNames from "classnames";
 import actions from "../../../redux/actions/index"
+import { connect } from "react-redux";
 
 
 class OrderButton extends Component {
@@ -26,7 +27,16 @@ class OrderButton extends Component {
     }
 
     render() {
-        //console.log(this.props.onClick);
+
+        //console.log(this.props);
+
+        const isProductInCart = this.props.cart.find((item) => item.title === this.props.product.title);
+        const isProductInStock = this.props.product.rest !== 0;
+        const isButtonStatusInactive = isProductInCart || !isProductInStock;
+        const isButtonDisabled = this.props.disabled === true;
+
+        //console.log(isProductinCart);
+
 
         /**
          *  1. Записываем стандартные классы кнопки: база + кнопка заказа (уточнение)
@@ -34,7 +44,7 @@ class OrderButton extends Component {
          *  3. Если пришли доп. классы  и свойство classList не undefined - ставим их.
          */
         const classList = classNames(common.btn, styles.order__btn, {
-            [styles.btn_remove_item]: this.props.product.rest === 0 || this.props.children === "Убрать из заказа",
+            [styles.btn_remove_item]: isButtonStatusInactive,
             [this.props.classList]: this.props.classList !== undefined,
         });
 
@@ -42,7 +52,7 @@ class OrderButton extends Component {
         // Проверяем, нужно ли показывать иконку корзины, ведь она не нужна при исключения товара из заказа, и в случае
         // его отсутствия в целом
         let svg = null;
-        if (this.props.product.rest !== 0 && this.props.children !== "Убрать из заказа") {
+        if (!isButtonStatusInactive) {
             svg =
                 <svg className={styles.btn_img} xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 1000 1000">
                     <path
@@ -50,25 +60,31 @@ class OrderButton extends Component {
                 </svg>
         }
 
-        // данный атрибут уже отвечает за фактическое отключение кнопки. Учитываются три случая:
-        // 1. Из props получен обьект товара, и его количество равно 0 - заказать товар нельзя
-        // 2. Из props получено свойство disabled равное true, это можно передать для любой выбранной кнопки
-        const disabled = this.props.product.rest === 0 || this.props.disabled;
 
         return (
-            <button className={classList} onClick={this.onClick} disabled={disabled}>
-                {/*Иконка корзины*/}
+            <button className={classList} onClick={this.onClick} disabled={isButtonDisabled}>
+                {/*Иконка корзины, появление по условию*/}
                 {svg}
                 {/*Спиннер ожидании ответа от сервера, появится при состоянии :disabled у кнопки*/}
                 <span className={styles.loader}/>
-                {/*Текстовое содержимое кнопки кнопки*/}
+                {/*Текстовое содержимое кнопки*/}
                 {this.props.children}
             </button>
         )
     }
 }
 
-export default OrderButton;
+const mapStateToProps = (state) => {
+    return {
+        cart: state.cart.products
+    }
+};
+
+
+export default connect(mapStateToProps)(OrderButton);
+
+
+
 
 
 
