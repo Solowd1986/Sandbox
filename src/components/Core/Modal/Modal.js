@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styles from "./overlay.module.scss";
+import styles from "./modal.module.scss";
 import classNames from "classnames";
 
 import * as util from "./helpers/functions";
@@ -9,7 +9,7 @@ import * as modalActions from "../../../redux/entities/modal/actions";
 import { connect } from "react-redux";
 import ModalContent from "./ModalContent/ModalContent";
 
-class Overlay extends Component {
+class Modal extends Component {
     state = {
         isDelayEnded: false
     };
@@ -55,7 +55,7 @@ class Overlay extends Component {
     };
 
     render() {
-        const { bg = false, delay = false, children = null } = this.props;
+        const { bg = true, delay = false, children = null } = this.props;
         const classList = classNames(styles.overlay, {
             [styles.overlay_bg]: bg === true
         });
@@ -65,17 +65,6 @@ class Overlay extends Component {
             modalContent = <Spinner/>;
         } else {
             modalContent = <ModalContent children={children}/>
-            //
-            // <div className={"animate__animated animate__bounceInRight"}>
-            // {this.props.children && <span className={styles.close}/>}
-            //
-            //
-            // {/*тут div нужен для перехвата кликов, чтобы любой модальный элемент не вызывал закрытие окна*/}
-            // {/*практика общая, поэтому вынесено сюда*/}
-            //     <div onClick={(evt) => evt.stopPropagation()}>
-            //         {children}
-            //     </div>
-            // </div>
         }
 
         return (
@@ -94,7 +83,7 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Overlay);
+export default connect(null, mapDispatchToProps)(Modal);
 
 
 

@@ -8,7 +8,7 @@ import actions from "../../../redux/actions";
 import SortPorducts from "../../Core/SortProducts/SortProducts";
 import LazyLoad from "../../Core/LazyLoad/LazyLoad";
 import ProductCard from "../ProductCard/ProductCard";
-import Overlay from "../../Core/Overlay/Overlay";
+import Modal from "../../Core/Modal/Modal";
 import CartModal from "../../CartModal/CartModal";
 import PropTypes from "prop-types";
 import { Transition, TransitionGroup } from "react-transition-group";
@@ -43,7 +43,6 @@ class Category extends Component {
         }
         return OverlayElement;
     };
-
 
     lazyLoadPanel = (category) => {
         let lazyLoadData = null;

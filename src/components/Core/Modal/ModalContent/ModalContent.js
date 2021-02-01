@@ -8,6 +8,7 @@ class ModalContent extends Component {
         const classList = classNames("animate__animated animate__bounceInRight");
         return (
             <div className={classList}>
+                <span className={styles.close}/>
                 <div onClick={(evt) => evt.stopPropagation()}>
                     {children}
                 </div>

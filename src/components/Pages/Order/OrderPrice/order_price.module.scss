@@ -1,0 +1,30 @@
+@import "~scss/common.module";
+
+.fieldset {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 2px solid $white-500;
+}
+
+.item {
+  font-size: 16px;
+  font-weight: 400;
+  color: $grey;
+}
+
+
+.checkout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  padding: 20px 0;
+}
+
+
+.lg {
+  font-size: 30px;
+  font-weight: 400;
+  color: $black-400;
+}

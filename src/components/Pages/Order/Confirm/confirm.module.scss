@@ -1,55 +1,37 @@
-@import "~scss/common";
+@import "~scss/common.module";
 
-.modal_confirm {
-  position: fixed;
-  width: 100%;
-  max-width: 600px;
-  top: 50%;
-  left: 50%;
-
-  z-index: 15;
-  margin: 15px auto 15px;
-  border: 2px solid $grey-400;
+.checkout_modal {
+  display: flex;
+  min-width: 290px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+  padding: 15px 10px;
   border-radius: 10px;
   background-color: $white;
-  transform: translate(-50%, -50%);
 
-  h2 {
-    font-size: 30px;
-    font-weight: 300;
+  & > img {
+    width: 400px;
+  }
+
+  & > h3 {
+    margin: 10px 0 0;
+    font-size: 24px;
+    font-weight: 400;
+    @media (max-width: 670px) {
+      text-align: center;
+    }
+  }
+
+  & > p {
+    max-width: 85%;
+    margin-bottom: 0;
+    font-size: 19px;
+    font-weight: 400;
     text-align: center;
-  }
-
-  p {
-    font-size: 22px;
-    font-weight: 300;
-    text-align: center;
-  }
-}
-
-.modal_confirm__wrapper {
-  margin: auto;
-  padding: 30px;
-  text-align: center;
-}
-
-.confirm_order_redirect_link {
-  position: relative;
-  font-size: 18px;
-  transition: .3s linear;
-
-  &:hover::after {
-    width: 100%;
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background-color: $red;
-    transition: .3s linear;
+    @media (max-width: 670px) {
+      line-height: 1.3;
+    }
   }
 }

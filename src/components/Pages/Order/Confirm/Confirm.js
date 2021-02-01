@@ -1,15 +1,14 @@
 import React, {Component} from "react";
 import styles from "./confirm.module.scss";
+import img from "./img/thanks_sir.png";
 
 export default class extends Component {
     render() {
         return (
-            <div className={styles.modal_confirm}>
-                <div className={styles.modal_confirm__wrapper}>
-                    <h2>Ваш заказ оформлен!</h2>
-                    <p>Наш менеджер свяжется с вами в ближайшее время.</p>
-                    <a className={styles.confirm_order_redirect_link} href="/">Продолжить покупки</a>
-                </div>
+            <div className={styles.checkout_modal}>
+                <img src={img} alt="image-checkout"/>
+                <h3>Спасибо за заказ</h3>
+                <p>Наш менеджер свяжется с вами в ближайшее время</p>
             </div>
         )
     }

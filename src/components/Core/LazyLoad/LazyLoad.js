@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styles from "./lazy-load.module.scss"
 import actions from "../../../redux/actions";
 import { connect } from "react-redux";
-import Overlay from "../Overlay/Overlay";
+import Modal from "../Modal/Modal";
 import CartModal from "../../CartModal/CartModal";
 
 

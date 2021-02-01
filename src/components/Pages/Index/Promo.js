@@ -3,7 +3,7 @@ import common from "~scss/common.module.scss";
 import styles from "./promo.module.scss";
 import {connect} from "react-redux";
 import ProductCard from "../ProductCard/ProductCard";
-import Overlay from "../../Core/Overlay/Overlay";
+import Modal from "../../Core/Modal/Modal";
 import CartModal from "../../CartModal/CartModal";
 import PropTypes from "prop-types";
 
@@ -44,17 +44,7 @@ class Promo extends Component {
     };
 
     render() {
-        //console.log(this.props);
         const [phones, accessoires, gadgets] = this.props.db.category;
-
-
-        //console.log('res', this.props.db.loader);
-
-        const modalToggle =
-            this.props.cart.modals.showModal &&
-            !this.props.cart.defaultSettings.buttonsDisabled &&
-            !this.props.cart.modals.isOfferGoToCartBeenShown;
-
 
         return (
             <section className={`${common.container} ${styles.promo_wrapper}`}>
@@ -63,18 +53,11 @@ class Promo extends Component {
                     <button onClick={this.toggle}>Active</button>
 
                     {
-                        modalToggle &&
-                        <Overlay bg={true} delay={false}>
-                            <CartModal products={this.props.cart.products}/>
-                        </Overlay>
-                    }
-
-                    {
                         this.props.isModalActive
                         &&
-                        <Overlay bg={true} delay={true}>
+                        <Modal delay={true}>
                             <CartModal products={this.props.cart.products}/>
-                        </Overlay>
+                        </Modal>
                     }
 
                     <h2 className={styles.promo_section_title}>Рекомендуем</h2>

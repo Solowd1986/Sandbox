@@ -2,10 +2,14 @@ import React, {Component} from "react";
 import styles from "./order-summary.module.scss";
 import {connect} from "react-redux";
 import actions from "../../../../redux/actions";
-import Overlay from "../../../Core/Overlay/Overlay";
-import img from "./img/thankssir.png";
+import Modal from "../../../Core/Modal/Modal";
+import Confirm from "../Confirm/Confirm";
+import * as modalActions from "../../../../redux/entities/modal/actions";
+import OrderPrice from "../OrderPrice/OrderPrice";
+import OrderItem from "../OrderItem/OrderItem";
 
 
+// пример метода для смены state нормальной
 function changeState(id, property, value, storage) {
     const elem = storage.find(item => item.id === id);
     const list = [...storage];
@@ -29,7 +33,6 @@ const users2 = changeState(2, "name", "stan", users1);
 // console.log(users1[0] === users2[0]);
 // console.log(users1[1] === users2[1]);
 // console.log(users1[2] === users2[2]);
-
 
 
 
@@ -151,7 +154,6 @@ class OrderSummary extends Component {
 
     };
 
-
     calcTotal = () => {
         return this.props.orderedItems.reduce((total, item) => {
             total += (item.price * item.quantity);
@@ -159,29 +161,23 @@ class OrderSummary extends Component {
         }, 0);
     };
 
-    checkout = () => {
-        this.props.enableOverlay();
+    confirmOrder = () => {
+        this.props.enableModal();
     };
 
     render() {
         //console.log(this.props);
         //console.log(this.state);
 
+        const { isModalActive, listOfProducts } = this.props;
+        const confirmOrderModal = isModalActive ? <Modal delay={true}><Confirm/></Modal> : null;
+
         return (
             <section className={styles.summary}>
-                {
-                    this.props.state.cart.modals.showModal
-                    &&
-                    <Overlay coloredBg={true} delay={true}>
-                        <div className={styles.checkout_modal}>
-                            <img src={img} alt="image-checkout"/>
-                            <h3>Спасибо за заказ</h3>
-                            <p>Наш менеджер свяжется с вами в ближайшее время</p>
-                        </div>
-                    </Overlay>
-                }
+                {confirmOrderModal}
 
                 <h2 className={styles.caption}>Ваш заказ</h2>
+
                 {this.props.orderedItems.map(item => {
                     return (
                         <div key={item.title} className={styles.item}>
@@ -224,19 +220,11 @@ class OrderSummary extends Component {
                     )
                 })}
 
-                <div className={styles.delivery_fieldset}>
-                    <span className={styles.delivery_item}>Доставка по Москве:</span>
-                    <span className={styles.delivery_item}>
-                     {new Intl.NumberFormat().format(this.calcTotal() > 100000 ? 0 : 400)} р.</span>
-                </div>
+                <OrderPrice listOfProducts={listOfProducts}/>
 
-                <div className={styles.checkout}>
-                    <span className={styles.delivery_item}>Итого:</span>
-                    <span className={styles.price__lg}>
-                        {new Intl.NumberFormat().format(this.calcTotal() > 100000 ? this.calcTotal() : this.calcTotal() + 400)} р.
-                    </span>
-                </div>
-                <button onClick={this.checkout} className={`${styles.order_btn}`} disabled={false}>Оформить заказ</button>
+                <button onClick={this.confirmOrder} className={`${styles.order_btn}`} disabled={false}>
+                    Оформить заказ
+                </button>
             </section>
         )
     }
@@ -245,7 +233,8 @@ class OrderSummary extends Component {
 
 function mapStateToProps(state) {
     return {
-        state
+        isModalActive: state.modal.isModalActive,
+        listOfProducts: state.cart.products
     }
 }
 
@@ -267,6 +256,9 @@ function mapDispatchToProps(dispatch) {
         enableOverlay: () => {
             dispatch(actions.cart.enableOverlay());
         },
+        enableModal: () => {
+            dispatch(modalActions.enableModal());
+        }
     }
 }
 

@@ -1,20 +1,20 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import common from "~scss/common.module.scss";
 import styles from "./order.module.scss";
 import OrderInfo from "./OrderInfo/OrderInfo";
 import OrderSummary from "./OrderSummary/OrderSummary";
 import Layout from "~components/Core/Layout/Layout";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
+import Modal from "../../Core/Modal/Modal";
+import Confirm from "./Confirm/Confirm";
+import { requestIndexData } from "../../../redux/middlware/requestToServer";
+import * as modalActions from "../../../redux/entities/modal/actions";
 
 
 class Order extends Component {
-    constructor(props) {
-        super(props);
-    }
 
-    // always on top of page, without smooth scroll
     componentDidMount() {
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 0)     // always on top of page, without smooth scroll
     }
 
     submit = (evt) => {
@@ -35,13 +35,15 @@ class Order extends Component {
         evt.preventDefault();
     };
 
-
     render() {
         //console.log('state', this.props);
-        this.isCartEmpty = this.props.cart.amountOfProductsInCart === 0;
+        const isCartEmpty = this.props.amountOfProductsInCart;
+        this.isCartEmpty = this.props.amountOfProductsInCart === 0;
+
         return (
             <Layout>
-                {this.props.cart.amountOfProductsInCart > 0
+
+                {this.props.amountOfProductsInCart > 0
                     ?
                     <div className={`${common.container} ${styles.container_checkout_bg}`}>
                         <div className={`${common.wrapper} ${styles.order}`}>
@@ -60,7 +62,7 @@ class Order extends Component {
                                 noValidate={true}
                             >
                                 <OrderInfo/>
-                                <OrderSummary orderedItems={this.props.cart.products}/>
+                                <OrderSummary orderedItems={this.props.products}/>
                             </form>
 
                         </div>
@@ -82,8 +84,10 @@ class Order extends Component {
 
 
 function mapStateToProps(state) {
-    return { ...state }
+    return {
+        products: state.cart.products,
+        amountOfProductsInCart: state.cart.amountOfProductsInCart,
+    }
 }
-
 
 export default connect(mapStateToProps)(Order);
