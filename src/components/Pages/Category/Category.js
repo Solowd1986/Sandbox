@@ -14,7 +14,6 @@ import PropTypes from "prop-types";
 import { Transition, TransitionGroup } from "react-transition-group";
 
 
-
 class Category extends Component {
 
 

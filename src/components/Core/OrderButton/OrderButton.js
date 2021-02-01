@@ -28,7 +28,7 @@ class OrderButton extends Component {
         const isProductInCart = this.props.cart.find((item) => item.title === this.props.product.title);
         const isProductInStock = this.props.product.rest !== 0;
         const isButtonStatusInactive = isProductInCart || !isProductInStock;
-        const isButtonDisabled = this.props.disabled === true;
+        const isButtonDisabled = this.props.disabled === true || !isProductInStock;
 
         /**
          *  1. Записываем стандартные классы кнопки: база + кнопка заказа (уточнение)
