@@ -31,7 +31,7 @@ class ProductSlider extends Component {
             mainImg.classList.remove("animate__fadeOutLeft", "animate__animated", "animate__faster");
             mainImg.classList.add("animate__fadeIn", "animate__animated", "animate__faster");
             this.slideTransitionEnabled = false;
-        });
+        }, { once: true });
     };
 
     render() {
