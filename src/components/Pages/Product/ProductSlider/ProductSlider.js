@@ -37,18 +37,18 @@ class ProductSlider extends Component {
     };
 
     render() {
-        const { prefix, imgList, alt } = this.props;
+        const { prefix, list, alt } = this.props;
         return (
             <div className={styles.order__img_wrapper}>
                 <img
                     ref={this.mainImgRef}
                     className={styles.order__img}
-                    src={`${prefix}/${imgList[0]}`}
+                    src={`${prefix}/${list[0]}`}
                     alt={alt}
                 />
 
                 <div className={styles.slider} ref={this.listSmallImgRef}>
-                    {imgList.map(item => (
+                    {list.map(item => (
                         <img key={item} width="60" height="60"
                              onClick={this.toggleSlide}
                              className={styles.img}

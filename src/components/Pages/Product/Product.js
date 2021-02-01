@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import common from "~scss/common.module.scss";
 import styles from "./product.module.scss";
+import classNames from "classnames";
 
 import Layout from "~components/Core/Layout/Layout";
 import PromoBadge from "../../Core/PromoBadge/PromoBadge";
@@ -26,6 +27,10 @@ class Product extends Component {
         const category = this.props.db.category.find(item => item.categoryAlias === this.props.match.params.category);
         const product = this.props.db.category.find(item => item.categoryAlias === category.categoryAlias).productList.find(item => item.id === id);
 
+        const prefix = category.imgPrefix;
+        const list = product.imgPath.lg;
+        const alt = product.imgAlt;
+
         const productPriceClassList = { main: `${styles.price}`, discount: `${styles.discount}` };
         const productAvailability = "Наличие: " + (product.rest === 0 ? "нет в наличии" : "в наличии");
 
@@ -47,11 +52,15 @@ class Product extends Component {
                     </OrderButton>
                 </div>;
         } else {
+            const isButtonDisabled = product.rest === 0;
+            const classList = classNames(styles.add_to_cart, {
+                [styles.remove_from_cart]: product.rest === 0
+            });
             orderButton =
                 <div className={styles.btn_block}>
                     <OrderButton
                         product={product}
-                        classList={styles.add_to_cart}
+                        classList={classList}
                         onClick={onAddToCart}>
                         Добавить в заказ
                     </OrderButton>
@@ -62,11 +71,7 @@ class Product extends Component {
             <Layout>
                 <section className={`${common.container} ${styles.item_bg}`}>
                     <div className={`${common.wrapper} ${styles.order}`}>
-                        <ProductSlider
-                            prefix={category.imgPrefix}
-                            imgList={product.imgPath.lg}
-                            alt={product.imgAlt}
-                        />
+                        <ProductSlider prefix={prefix} list={list} alt={alt}/>
 
                         <div className={styles.order__info_wrapper}>
                             <h1 className={styles.order__title}>{product.title}</h1>
