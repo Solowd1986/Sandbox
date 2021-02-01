@@ -1,37 +1,36 @@
 import React from "react";
-import common from "~scss/common.module.scss";
 import styles from "./product-price.module.scss";
-import {connect} from "react-redux";
+import classNames from "classnames";
 
+const ProductPrice = ({ product: { price, discount, rest }, classList = null }) => {
+    let previousPrice = null;
+    let finalPrice = null;
 
-const ProductPrice = props => {
+    let previousPriceClassList = classNames(styles.discount);
+    let finalPriceClassList = classNames(styles.price);
+
+    if (classList) {
+        previousPriceClassList = classNames(styles.discount, classList.discount);
+        finalPriceClassList = classNames(styles.price, classList.main);
+    }
+
+    if (rest === 0 || !discount) {
+        finalPrice = new Intl.NumberFormat().format(price) + "р.";
+    } else {
+        previousPrice = <span className={previousPriceClassList}>{new Intl.NumberFormat().format(price)} р.</span>;
+        finalPrice = new Intl.NumberFormat().format(price - (price * 10 / 100)) + "р.";
+    }
+
     return (
-        <span className={props.classList.main}>
-            {
-                props.product.rest === 0 || !props.product.discount
-                    ?
-                    <>
-                        {new Intl.NumberFormat().format(props.product.price)} р.
-                    </>
-                    :
-                    <>
-                        <span className={props.classList.discount}>{new Intl.NumberFormat().format(props.product.price)} р.</span>
-                        {new Intl.NumberFormat().format(props.product.price - (props.product.price * 10 / 100))} р.
-                    </>
-            }
+        <span className={finalPriceClassList}>
+            {previousPrice}
+            {finalPrice}
         </span>
-
     )
 };
 
 
-function mapStateToProps(state) {
-    return {
-        state
-    }
-}
-
-export default connect(mapStateToProps)(ProductPrice);
+export default ProductPrice;
 
 
 

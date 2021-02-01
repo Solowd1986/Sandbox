@@ -3,16 +3,6 @@ import styles from "./product-card.module.scss";
 
 
 class PromoProductCard extends Component {
-    constructor(props) {
-        super(props);
-        this.random = this.init();
-    }
-
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        return false;
-    }
-
-    init = () => Math.floor(Math.random() * 4);
 
     render() {
         const { item, category } = this.props;

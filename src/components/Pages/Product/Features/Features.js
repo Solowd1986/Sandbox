@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./product.module.scss";
+import styles from "./features.module.scss";
 
 const Features = props => {
     //console.log(props);

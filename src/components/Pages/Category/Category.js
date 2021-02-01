@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import actions from "../../../redux/actions";
 import SortPorducts from "../../Core/SortProducts/SortProducts";
 import LazyLoad from "../../Core/LazyLoad/LazyLoad";
-import ProductCard from "../ProductCart/ProductCard";
+import ProductCard from "../ProductCard/ProductCard";
 import Overlay from "../../Core/Overlay/Overlay";
 import CartModal from "../../CartModal/CartModal";
 import PropTypes from "prop-types";
@@ -16,11 +16,6 @@ import { Transition, TransitionGroup } from "react-transition-group";
 
 
 class Category extends Component {
-
-    state = {
-        filterType: "",
-        name: "",
-    };
 
 
     // always on top of page, without smooth scroll
@@ -34,7 +29,6 @@ class Category extends Component {
     // componentDidUpdate(prevProps, prevState, snapshot) {
     //     window.scrollTo(0, window.pageYOffset + document.documentElement.clientHeight);
     // }
-
 
     createOverlay = () => {
 
@@ -66,36 +60,11 @@ class Category extends Component {
     };
 
 
-    changeFilter = (type) => {
-        this.state.name = "as";
-        this.setState({
-            filterType: type
-        })
-    };
-
 
     getProductsList = (category, additionalElements = []) => {
         const cloneDeep = require('lodash.clonedeep');
         const classListAnimation = "animate__animated animate__fadeIn";
         let list = cloneDeep([...category.productList, ...additionalElements]);
-
-        switch (this.state.filterType) {
-            case "popularity": {
-                break;
-            }
-            case "priceLow": {
-                list.sort((a, b) => a.price - b.price);
-                break;
-            }
-            case "priceHigh": {
-                list.sort((a, b) => b.price - a.price);
-                break;
-            }
-            case "newest": {
-                break;
-            }
-        }
-
 
         /**
          * Начальный набор элементов фиксирован, сейчас - 4 штуки. Дальнейшее расширение идет за счет разрастающегося

@@ -14,12 +14,8 @@ import actions from "../../../redux/actions";
 
 class ProductCard extends Component {
 
-
     isProductInCart = (products, id) => products.find(item => item.id === id);
-
     render() {
-
-        // use it
         const { cart, category, item, classList } = this.props;
 
         return (
@@ -44,7 +40,8 @@ class ProductCard extends Component {
                 </div>
 
                 <PromoProductCard item={item} category={category}/>
-                <ProductPrice product={item} classList={{ main: `${styles.price}`, discount: `${styles.price__discount}` }}/>
+                <ProductPrice product={item}/>
+
 
                 {/*
                     Вид кнопки зависит от isProductInCart: если такой товар есть - то можно убрать. Иначе - добавить.

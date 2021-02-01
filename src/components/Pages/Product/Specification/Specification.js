@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./product.module.scss";
+import styles from "./specification.module.scss";
 
 const Specification = props => {
     const specs = props.specs;

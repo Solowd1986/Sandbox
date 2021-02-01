@@ -4,7 +4,7 @@ import Promo from "./Promo";
 import BrandStory from "./BrandStory";
 import Announcements from "./Announcements";
 import About from "./About";
-import PromoBadge from "../../PromoBadge/PromoBadge";
+import PromoBadge from "../../Core/PromoBadge/PromoBadge";
 import Layout from "../../Core/Layout/Layout";
 
 export default class MainPage extends Component {

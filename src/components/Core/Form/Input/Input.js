@@ -6,7 +6,6 @@ export default class Input extends Component {
     render() {
 
         // <Input options={label: {...}, input: {...}}> Login </Input>
-
         const randomLabelId = `${this.props.options.input.type || "text"}-id-${Math.random().toString(34).slice(2)}`;
 
         return (

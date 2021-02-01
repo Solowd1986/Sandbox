@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import common from "~scss/common.module.scss";
 import styles from "./promo.module.scss";
 import {connect} from "react-redux";
-import ProductCard from "../ProductCart/ProductCard";
+import ProductCard from "../ProductCard/ProductCard";
 import Overlay from "../../Core/Overlay/Overlay";
 import CartModal from "../../CartModal/CartModal";
 import PropTypes from "prop-types";
@@ -59,7 +59,6 @@ class Promo extends Component {
                             <CartModal products={this.props.cart.products}/>
                         </Overlay>
                     }
-
 
                     <h2 className={styles.promo_section_title}>Рекомендуем</h2>
                     <ul className={styles.promo_list}>

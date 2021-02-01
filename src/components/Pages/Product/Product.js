@@ -5,20 +5,20 @@ import styles from "./product.module.scss";
 import {NavLink} from "react-router-dom";
 import Layout from "~components/Core/Layout/Layout";
 
-import PromoBadge from "../../PromoBadge/PromoBadge";
-import Features from "./Features";
-import Specification from "./Specification";
-import ProductDelivery from "./ProductDelivery";
+import PromoBadge from "../../Core/PromoBadge/PromoBadge";
+import Features from "./Features/Features";
+import Specification from "./Specification/Specification";
+import ProductDelivery from "./ProductDelivery/ProductDelivery";
 import actions from "../../../redux/actions";
 import {connect} from "react-redux";
 import OrderButton from "../../Core/OrderButton/OrderButton";
 import ProductPrice from "../../Core/ProductPrice/ProductPrice";
+import ProductSlider from "./ProductSlider/ProductSlider";
 
 
 class Product extends Component {
     constructor(props) {
         super(props);
-        this.slideTransitionEnabled = false;
     }
 
     // always on top of page, without smooth scroll
@@ -40,34 +40,9 @@ class Product extends Component {
     };
 
 
-    slider = (evt) => {
-        const target = evt.target;
-        //console.dir(target);
-
-        if (target.dataset.active === "true" || this.slideTransitionEnabled) return;
-
-        this.slideTransitionEnabled = true;
-        const activeDataset = document.querySelector("[data-active='true']");
-        activeDataset.removeAttribute('data-active');
-
-        target.dataset.active = "true";
-        const activeSlide = document.querySelector("[data-img='lg']");
-
-        activeSlide.classList.add("animate__fadeOutLeft", "animate__animated");
-        activeSlide.addEventListener("animationend", () => {
-            activeSlide.src = target.src;
-            activeSlide.classList.remove("animate__fadeOutLeft", "animate__animated");
-            activeSlide.classList.add("animate__fadeIn", "animate__animated");
-            this.slideTransitionEnabled = false;
-            //console.log(activeSlide.src);
-        });
-    };
-
-
     isProductInCart = (products, id) => products.find(item => item.id === id);
 
     render() {
-        //console.log(this.props);
         const id = parseInt(this.props.match.params.id);
         const category = this.props.db.category.find(item => item.categoryAlias === this.props.match.params.category);
         const product = this.props.db.category.find(item => item.categoryAlias === category.categoryAlias).productList.find(item => item.id === id);
@@ -76,32 +51,14 @@ class Product extends Component {
             <Layout>
                 <section className={`${common.container} ${styles.item_bg}`}>
                     <div className={`${common.wrapper} ${styles.order}`}>
-                        <div className={styles.order__img_wrapper}>
-                            <img
-                                className={styles.order__img}
-                                data-img={"lg"}
-                                src={`${category.imgPrefix}/${product.imgPath.lg[0]}`}
-                                alt={product.imgAlt}
-                            />
-                            <div className={styles.order__slider}>
-                                <img className="" width="60" height="60"
-                                     onClick={this.slider}
-                                     data-active={true}
-                                     src={`${category.imgPrefix}/${product.imgPath.lg[0]}`}
-                                     alt={product.imgAlt}
-                                />
-                                <img className="" width="60" height="60"
-                                     onClick={this.slider}
-                                     src={`${category.imgPrefix}/${product.imgPath.lg[1]}`}
-                                     alt={product.imgAlt}
-                                />
-                                <img className="" width="60" height="60"
-                                     onClick={this.slider}
-                                     src={`${category.imgPrefix}/${product.imgPath.lg[2]}`}
-                                     alt={product.imgAlt}
-                                />
-                            </div>
-                        </div>
+
+                        <ProductSlider
+                            prefix={category.imgPrefix}
+                            imgList={product.imgPath.lg}
+                            alt={product.imgAlt}
+                        />
+
+
 
                         <div className={styles.order__info_wrapper}>
                             <h1 className={styles.order__title}>{product.title}</h1>
@@ -109,7 +66,10 @@ class Product extends Component {
                                 {product.desc && product.desc}
                             </p>
 
-                            <ProductPrice product={product} classList={{ main: `${styles.order__price}`, discount: `${styles.order__price__discount}` }}/>
+                            <ProductPrice
+                                product={product}
+                                classList={{ main: `${styles.price}`, discount: `${styles.discount}` }}
+                            />
 
                             <div className={styles.order__btn_block}>
                                 {
@@ -132,6 +92,7 @@ class Product extends Component {
                                                 {product.rest === 0 ? "Нет в наличии" : "Купить в один клик"}
                                             </OrderButton>
                                         </>
+
 
                                         // Если товар не внесен в корзину:
                                         :
@@ -174,6 +135,7 @@ class Product extends Component {
                         <ProductDelivery/>
                     </div>
                 </section>
+
                 <PromoBadge/>
             </Layout>
         )

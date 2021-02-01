@@ -2,7 +2,7 @@ import MainPage from "~components/Pages/Index/MainPage";
 import Category from "~components/Pages/Category/Category";
 import Product from "~components/Pages/Product/Product";
 import Order from "~components/Pages/Order/Order";
-import Error404 from "../components/Core/Error404/Error404";
+import Error404 from "../components/Pages/Error404/Error404";
 import Delivery from "../components/Pages/Delivery/Delivery";
 
 /**
