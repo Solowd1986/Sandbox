@@ -14,10 +14,17 @@ class Promo extends Component {
         this.data = this.props.getData();
     }
 
-
     // static propTypes = {
     //     category: PropTypes.array,
     // };
+
+    state = {
+        toggle: false
+    };
+
+    toggle = () => {
+        this.props.enableModal();
+    };
 
     getIndexItems = () => {
         const axios = require('axios').default;
@@ -49,13 +56,23 @@ class Promo extends Component {
             !this.props.cart.modals.isOfferGoToCartBeenShown;
 
 
-
         return (
             <section className={`${common.container} ${styles.promo_wrapper}`}>
                 <main className={`${common.wrapper} ${styles.promo}`}>
+
+                    <button onClick={this.toggle}>Active</button>
+
                     {
                         modalToggle &&
-                        <Overlay coloredBg={true} delay={false}>
+                        <Overlay bg={true} delay={false}>
+                            <CartModal products={this.props.cart.products}/>
+                        </Overlay>
+                    }
+
+                    {
+                        this.props.isModalActive
+                        &&
+                        <Overlay bg={true} delay={true}>
                             <CartModal products={this.props.cart.products}/>
                         </Overlay>
                     }
@@ -97,12 +114,14 @@ class Promo extends Component {
 
 
 import { requestIndexData } from "../../../redux/middlware/requestToServer";
+import * as modalActions from "../../../redux/entities/modal/actions";
 
 // wrap in obj give you double invoke
 function mapStateToProps(state) {
     return {
         db: state.db,
-        cart: state.cart
+        cart: state.cart,
+        isModalActive: state.modal.isModalActive
     }
 }
 
@@ -110,6 +129,9 @@ function mapDispatchToProps(dispatch) {
     return {
         getData: () => {
             dispatch(requestIndexData());
+        },
+        enableModal: () => {
+            dispatch(modalActions.enableModal());
         }
     }
 }

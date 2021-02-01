@@ -7,6 +7,7 @@ const Footer = props => {
     return (
         <div className={styles.footer_bg}>
             <div className={common.wrapper}>
+
                 <footer className={styles.footer}>
                     <p className={styles.copyright}>Copyright © 2017 - 2021 OnePlus Store. Все права защищены.</p>
                     {/*<span className={styles.working_hours}>10:00 – 21:00 пн-вс</span>*/}

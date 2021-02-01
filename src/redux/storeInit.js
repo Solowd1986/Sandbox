@@ -14,7 +14,10 @@ import reduxThunk from "redux-thunk"
  * Проверяем наличие данных в localStorage при первом запуке скрипта.
  */
 const preloadedState = JSON.parse(decodeURIComponent(localStorage.getItem("state")));
-const enhancedStore = composeEnhancers(applyMiddleware(reduxThunk, reduxLogger));
+
+//const enhancedStore = composeEnhancers(applyMiddleware(reduxThunk, reduxLogger));
+const enhancedStore = composeEnhancers(applyMiddleware(reduxThunk));
+
 
 /**
  * Обычно на данном этапе задается общий reducer, но у нас над ниместь обертка в виде Middleare и компонента отладки,

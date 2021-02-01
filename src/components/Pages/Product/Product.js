@@ -4,11 +4,11 @@ import styles from "./product.module.scss";
 import classNames from "classnames";
 
 import Layout from "~components/Core/Layout/Layout";
-import PromoBadge from "../../Core/PromoBadge/PromoBadge";
+import ProductSlider from "./ProductSlider/ProductSlider";
 import OrderButton from "../../Core/OrderButton/OrderButton";
 import ProductPrice from "../../Core/ProductPrice/ProductPrice";
-import ProductSlider from "./ProductSlider/ProductSlider";
 import ProductTabs from "./ProductTabs/ProductTabs";
+import PromoBadge from "../../Core/PromoBadge/PromoBadge";
 
 import actions from "../../../redux/actions";
 import { connect } from "react-redux";
