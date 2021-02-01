@@ -148,59 +148,58 @@ class OrderItem extends Component {
 
     };
 
+    deleteFromOrder = (evt) => {
+        this.props.onDeleteProductFromCart(evt, this.props.item.id)
+    };
+
 
     render() {
-        const { item } = this.props;
+        const { item, item: { imgAlt: alt, imgFullPath: path } } = this.props;
+
+        item.quantity = 1;
+        const price = new Intl.NumberFormat().format(item.price * item.quantity) + " р.";
+        const color = item.color || item.specifications.color;
+
         return (
-            <div key={item.title} className={styles.item}>
-                <div className={styles.info}>
-                    <img
-                        width={82} height={82} className={styles.img_sm}
-                        // that from reducer addItemToCart
-                        src={item.imgFullPath}
-                        alt={item.imgAlt}
-                    />
-                    <div className={styles.info_inner_wrapper}>
-                        <p className={styles.product_title}>
-                            <span>{item.title}</span>
-                            {item.specifications !== undefined && <span>({item.specifications.color})</span>}
-                        </p>
-                        <div className={styles.counter_block}>
-                                        <span onClick={(evt) => this.changeAmountWithClick(evt, item.id, item.quantity - 1)}
-                                              className={`${styles.counter} ${styles.counter_minus}`}/>
+            <div className={styles.info}>
+                <img width={82} height={82} className={styles.img_sm} src={path} alt={alt}/>
+                <div className={styles.info_inner_wrapper}>
+                    <p className={styles.product_title}>
+                        <span>{item.title}</span>
+                        <span>({color})</span>
+                    </p>
 
-                            <label>
-                                <input
-                                    type="text" name="customer-product-count"
-                                    onChange={(evt) => this.transitionalValueHandler(evt, item.id)}
-                                    onBlur={(evt) => this.onBlurHandler(evt, item.id, evt.target.value)}
-                                    value={this.state.orderedItems.find(citem => citem.id === item.id).quantity}
-                                />
-                            </label>
+                    {/*<div className={styles.counter_block}>*/}
+                    {/*                    <span onClick={(evt) => this.changeAmountWithClick(evt, item.id, item.quantity - 1)}*/}
+                    {/*                          className={`${styles.counter} ${styles.counter_minus}`}/>*/}
 
-                            <span onClick={(evt) => this.changeAmountWithClick(evt, item.id, item.quantity + 1)}
-                                  className={`${styles.counter} ${styles.counter_plus}`}/>
-                        </div>
-                    </div>
-                    <span className={styles.price__sm}>
-                                    {new Intl.NumberFormat().format(item.price * item.quantity)} р.</span>
-                    <div>
-                        <span className={styles.delete} onClick={(evt) => this.props.onDeleteProductFromCart(evt, item.id)}>&times;</span>
-                    </div>
+                    {/*    <label>*/}
+                    {/*        <input*/}
+                    {/*            type="text" name="customer-product-count"*/}
+                    {/*            onChange={(evt) => this.transitionalValueHandler(evt, item.id)}*/}
+                    {/*            onBlur={(evt) => this.onBlurHandler(evt, item.id, evt.target.value)}*/}
+                    {/*            value={this.state.orderedItems.find(citem => citem.id === item.id).quantity}*/}
+                    {/*        />*/}
+                    {/*    </label>*/}
+
+                    {/*    <span onClick={(evt) => this.changeAmountWithClick(evt, item.id, item.quantity + 1)}*/}
+                    {/*          className={`${styles.counter} ${styles.counter_plus}`}/>*/}
+                    {/*</div>*/}
+
                 </div>
+
+                <span className={styles.price__sm}>{price}</span>
+                <span className={styles.delete} onClick={this.deleteFromOrder}>&times;</span>
             </div>
         )
     }
 }
 
-
 function mapStateToProps(state) {
     return {
-        isModalActive: state.modal.isModalActive,
         listOfProducts: state.cart.products
     }
 }
-
 
 function mapDispatchToProps(dispatch) {
     return {

@@ -23,7 +23,7 @@ class OrderSummary extends Component {
             <section className={styles.summary}>
                 {confirmOrderModal}
                 <h2 className={styles.caption}>Ваш заказ</h2>
-                {listOfProducts.map(item => <OrderItem item={item}/>)}
+                {listOfProducts.map(item => <OrderItem key={item.title} item={item}/>)}
                 <OrderPrice listOfProducts={listOfProducts}/>
                 <button onClick={this.confirmOrder} className={`${styles.order_btn}`}>
                     Оформить заказ
@@ -32,7 +32,6 @@ class OrderSummary extends Component {
         )
     }
 }
-
 
 function mapStateToProps(state) {
     return {
@@ -48,6 +47,5 @@ function mapDispatchToProps(dispatch) {
         }
     }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderSummary);
