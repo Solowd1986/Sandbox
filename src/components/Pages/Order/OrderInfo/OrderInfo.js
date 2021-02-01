@@ -13,6 +13,7 @@ export default class OrderInfo extends Component {
                     <h2 className={styles.order_title}>1. Доставка</h2>
                     <div className={styles.cards_wrapper}>
 
+                        {/*checked={true} */}
                         <input id={"moscow"} type="radio" name={"shipping"} value={"moscow"} data-delivery={true}/>
                         <label htmlFor="moscow" className={styles.card}>
                             <div className={styles.card__info}>

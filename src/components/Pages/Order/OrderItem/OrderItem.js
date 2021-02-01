@@ -32,13 +32,39 @@ const users2 = changeState(2, "name", "stan", users1);
 
 
 class OrderItem extends Component {
+    constructor(props) {
+        super(props);
+        this.blur = false;
+    }
+
     state = {
         item: this.props.item
     };
 
-    constructor(props) {
-        super(props);
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('prevProps_q - ', prevProps.item.quantity);
+        console.log('currentProps_q - ', this.props.item.quantity);
+        console.log('prevState_q - ', prevState.item.quantity);
+        console.log('currentState_q - ', this.state.item.quantity);
+
+        if (this.props.item.quantity !== prevProps.item.quantity) {
+            this.setState(() => {
+                return {
+                    item: this.props.item
+                }
+            })
+        }
+        if (this.props.item.quantity === prevProps.item.quantity && this.blur) {
+            this.setState(() => {
+                return {
+                    item: { ...this.props.item }
+                }
+            });
+            this.blur = false;
+        }
     }
+
 
     onChangeInput = (evt) => {
         let quantity = Math.abs(parseInt(evt.target.value));
@@ -53,10 +79,13 @@ class OrderItem extends Component {
 
     onBlurInput = (evt) => {
         this.props.onChangeAmountOfProduct(evt, this.props.item.id, evt.target.value);
-        this.setState({
-            item: { ...this.state.item, quantity: this.normalizeValue(evt.target.value) }
-        });
+        this.blur = true;
+        // this.setState({
+        //     item: { ...this.state.item, quantity: this.normalizeValue(evt.target.value) }
+        // });
+
     };
+
 
     changeAmount = (evt, id, quantity) => {
         this.props.onChangeAmountOfProduct(evt, id, quantity);
