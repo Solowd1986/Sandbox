@@ -1,14 +1,12 @@
 import React from "react";
 import styles from "./specification.module.scss";
 
-const Specification = props => {
-    const specs = props.specs;
+const Specification = ({ specs }) => {
     return (
         <>
-            {/*Блок характеристик*/}
-            <div className={`${styles.attributes} ${styles.tab}`} id="tab-attributes">
-                <h2 className={styles.attributes__table_title}>Общие характеристики</h2>
-                <table className={styles.attributes__table_data}>
+            <div className={styles.attributes}>
+                <h2 className={styles.table_title}>Общие характеристики</h2>
+                <table className={styles.table_data}>
                     <tbody>
                     <tr>
                         <td>Тип</td>
@@ -45,8 +43,8 @@ const Specification = props => {
                     </tbody>
                 </table>
 
-                <h2 className={styles.attributes__table_title}>Экран</h2>
-                <table className={styles.attributes__table_data}>
+                <h2 className={styles.table_title}>Экран</h2>
+                <table className={styles.table_data}>
                     <tbody>
                     <tr>
                         <td>Тип экрана</td>
@@ -67,8 +65,8 @@ const Specification = props => {
                     </tbody>
                 </table>
 
-                <h2 className={styles.attributes__table_title}>Мультимедийные возможности</h2>
-                <table className={styles.attributes__table_data}>
+                <h2 className={styles.table_title}>Мультимедийные возможности</h2>
+                <table className={styles.table_data}>
                     <tbody>
                     <tr>
                         <td>Тыловая фотокамера</td>
@@ -101,9 +99,8 @@ const Specification = props => {
                     </tbody>
                 </table>
 
-
-                <h2 className={styles.attributes__table_title}>Связь</h2>
-                <table className={styles.attributes__table_data}>
+                <h2 className={styles.table_title}>Связь</h2>
+                <table className={styles.table_data}>
                     <tbody>
                     <tr>
                         <td>Стандарт</td>
@@ -124,8 +121,8 @@ const Specification = props => {
                     </tbody>
                 </table>
 
-                <h2 className={styles.attributes__table_title}>Память и процессор</h2>
-                <table className={styles.attributes__table_data}>
+                <h2 className={styles.table_title}>Память и процессор</h2>
+                <table className={styles.table_data}>
                     <tbody>
                     <tr>
                         <td>Процессор</td>
@@ -150,8 +147,8 @@ const Specification = props => {
                     </tbody>
                 </table>
 
-                <h2 className={styles.attributes__table_title}>Питание</h2>
-                <table className={styles.attributes__table_data}>
+                <h2 className={styles.table_title}>Питание</h2>
+                <table className={styles.table_data}>
                     <tbody>
                     <tr>
                         <td>Емкость аккумулятора</td>
@@ -168,8 +165,8 @@ const Specification = props => {
                     </tbody>
                 </table>
 
-                <h2 className={styles.attributes__table_title}>Дополнительная информация</h2>
-                <table className={styles.attributes__table_data}>
+                <h2 className={styles.table_title}>Дополнительная информация</h2>
+                <table className={styles.table_data}>
                     <tbody>
                     <tr>
                         <td>Комплектация</td>

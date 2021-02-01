@@ -7,6 +7,8 @@ class ProductSlider extends Component {
         this.slideTransitionEnabled = false;
         this.mainImgRef = React.createRef();
         this.listSmallImgRef = React.createRef();
+        this.slideLeftClassList = ["animate__fadeOutLeft", "animate__animated", "animate__faster"];
+        this.fadeInClassList = ["animate__fadeIn", "animate__animated", "animate__faster"];
     }
 
     componentDidMount() {
@@ -16,7 +18,7 @@ class ProductSlider extends Component {
     }
 
 
-    slider = (evt) => {
+    toggleSlide = (evt) => {
         const target = evt.target;
         const mainImg = this.mainImgRef.current;
         if (mainImg.src === target.src || this.slideTransitionEnabled) return;
@@ -25,11 +27,11 @@ class ProductSlider extends Component {
         Array.from(this.listSmallImgRef.current.children).forEach(item => item.classList.remove(styles.active));
         target.classList.add(styles.active);
 
-        mainImg.classList.add("animate__fadeOutLeft", "animate__animated", "animate__faster");
+        mainImg.classList.add(...this.slideLeftClassList);
         mainImg.addEventListener("animationend", () => {
             mainImg.src = target.src;
-            mainImg.classList.remove("animate__fadeOutLeft", "animate__animated", "animate__faster");
-            mainImg.classList.add("animate__fadeIn", "animate__animated", "animate__faster");
+            mainImg.classList.remove(...this.slideLeftClassList);
+            mainImg.classList.add(...this.fadeInClassList);
             this.slideTransitionEnabled = false;
         }, { once: true });
     };
@@ -48,7 +50,7 @@ class ProductSlider extends Component {
                 <div className={styles.slider} ref={this.listSmallImgRef}>
                     {imgList.map(item => (
                         <img key={item} width="60" height="60"
-                             onClick={this.slider}
+                             onClick={this.toggleSlide}
                              className={styles.img}
                              src={`${prefix}/${item}`}
                              alt={alt}
