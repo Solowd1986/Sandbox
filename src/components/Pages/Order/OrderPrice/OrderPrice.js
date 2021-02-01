@@ -5,7 +5,12 @@ const OrderPrice = ({ listOfProducts }) => {
 
     const calcTotal = () => {
         return listOfProducts.reduce((total, item) => {
-            total += (item.price * item.quantity);
+            if (item.discount) {
+                let discount = item.price - (item.price * 10 / 100);
+                total += (discount * item.quantity);
+            } else {
+                total += (item.price * item.quantity);
+            }
             return total;
         }, 0);
     };

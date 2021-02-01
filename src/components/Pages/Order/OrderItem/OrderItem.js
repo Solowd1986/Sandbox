@@ -32,132 +32,51 @@ const users2 = changeState(2, "name", "stan", users1);
 
 
 class OrderItem extends Component {
-
-    static defaultProps = {
-        orderedItems: []
-    };
-
-    /**
-     *
-     * 1. Ход работы такой:
-     * 1. Заходим в компонент, в пропсах пришли данные, записываем их в стейт, но выводим пропсы, стейт для
-     *    промежуточных значений
-     *
-     * 2. Вывоим все данные для полей из пропсов, кроме поля ввода, оно основано на стейте,
-     *    чтобы пропускать любой ввод, даже некорректный.
-     *
-     * 3. На каждом действии, то есть клик +/- или блюр поля ввода мы синхронизируем оба хранилища
-     * 4. То есть, выполняется првоверка и на блюре оба хранилища получаюь одно, верное значение или откат к предыдущему.
-     *
-     * 5. Как я понял, свой стейт заполняется просами при создании компонента, а при ререндере код ние уже не
-     *    выполняется
-     *
-     * 6. Видимо, именно поэтому нужно всегда явно апдейтить стейт, иначе пропсы изменятся и то, что опиарется на
-     *    пропсы тоже, но
-     *    вот код на стейтахъ сохрант то, что был ов стейте, а если стейт не апдейтить, то он не поменяется.
-     *
-     *    То есть, твоя задача узнать, когда стейт заполняется данными, и повторяется ли это.
-     *
-     * Каждый метод, кроме transitionalValueHandler просто берет значение, и записывает его в оба обьекта, стейт и пропс.
-     * Так они синхронны, корретны и всегда при рендере выводятся свойства для нужных комопнетов, так ка у нас используются оба
-     *, часть от пропсов, часть отейта, ну, чтобы получать значение от свободного ввода и хранить его где-то. На этапе transitionalValueHandler
-     * корретность не провертся а просто пишется как ест ьв стейт. А вот при блюре - проверятся и результат пишется уже нормальный
-     * в оба зранилища. Аналогично при inc/dec - апдейтим оба, так как нужно отражать плюс/минус и в поел ввода, а за это у нас
-     * отвечает кусок данных в стейте. Доступ мы к ним получаем просто по айди из пропсов, поскольку в стейте копия массива из пропосв,
-     * то по этому айди и есть нужные данные. Еще раз - именно поле ввода мы и храним в стейте, вместе с прочей инфой, что может пригодиться.
-     * Это нужно, чтобы можно было где-то хранить некорреткную инфу до блюра.
-     * */
-
     state = {
-        orderedItems: [...this.props.orderedItems]
+        item: this.props.item
     };
 
+    constructor(props) {
+        super(props);
+    }
 
-    transitionalValueHandler = (evt, id) => {
-        const value = evt.target.value;
-        const temporary = [...this.state.orderedItems];
-        const currentProduct = { ...temporary.find(item => item.id === id) };
-        currentProduct.quantity = value;
-        temporary[temporary.indexOf(temporary.find(item => item.id === id))] = currentProduct;
+    onChangeInput = (evt) => {
+        let quantity = Math.abs(parseInt(evt.target.value));
+        if (isNaN(quantity)) return;
 
+        this.setState(() => {
+            return {
+                item: { ...this.state.item, quantity }
+            }
+        })
+    };
+
+    onBlurInput = (evt) => {
+        this.props.onChangeAmountOfProduct(evt, this.props.item.id, evt.target.value);
         this.setState({
-            orderedItems: [...temporary]
+            item: { ...this.state.item, quantity: this.normalizeValue(evt.target.value) }
         });
     };
 
-
-    onBlurHandler = (evt, id, quantity) => {
-        const value = Math.abs(parseInt(quantity));
-
-        if (isNaN(value)) {
-            const temporary = [...this.props.orderedItems];
-            this.setState({
-                orderedItems: [...temporary]
-            });
-        } else {
-
-            const temporary = [...this.state.orderedItems];
-            const currentProduct = { ...temporary.find(item => item.id === id) };
-
-            currentProduct.quantity = Math.max(1, Math.min(currentProduct.rest, value));
-
-            temporary[temporary.indexOf(temporary.find(item => item.id === id))] = currentProduct;
-
-            this.setState({
-                orderedItems: [...temporary]
-            });
-
-            this.props.onChangeAmountOfProduct(evt, id, value);
-        }
-    };
-
-
-    dec = (evt, id, value) => {
-        const temporary = [...this.state.orderedItems];
-        const currentProduct = { ...temporary.find(item => item.id === id) };
-
-        currentProduct.quantity = Math.max(1, Math.min(currentProduct.rest, value));
-        temporary[temporary.indexOf(temporary.find(item => item.id === id))] = currentProduct;
-
+    changeAmount = (evt, id, quantity) => {
+        this.props.onChangeAmountOfProduct(evt, id, quantity);
         this.setState({
-            orderedItems: [...temporary]
-        });
-
-        this.props.onChangeAmountOfProduct(evt, id, value);
-    };
-
-
-    inc = (evt, id, value) => {
-        const cloneDeep = require('lodash.clonedeep');
-        const orderedItems = cloneDeep(this.state.orderedItems);
-        orderedItems.find(item => item.id === id).quantity = value;
-        this.setState({
-            orderedItems
-        });
-        this.props.onChangeAmountOfProduct(evt, id, value);
-    };
-
-
-    // проблема - при получении новых пропсов переписывать state локалный
-    changeAmountWithClick = (evt, id, value) => {
-        this.props.onChangeAmountOfProduct(evt, id, value);
-    };
-
-
-    changeAmountWithEdit = () => {
-
+            item: { ...this.state.item, quantity: this.normalizeValue(quantity) }
+        })
     };
 
     deleteFromOrder = (evt) => {
         this.props.onDeleteProductFromCart(evt, this.props.item.id)
     };
 
+    normalizeValue = (value) => {
+        return Math.max(1, Math.min(this.props.item.rest, Math.abs(parseInt(value))));
+    };
 
     render() {
         const { item, item: { imgAlt: alt, imgFullPath: path } } = this.props;
-
-        item.quantity = 1;
-        const price = new Intl.NumberFormat().format(item.price * item.quantity) + " р.";
+        const discount = item.discount ? item.price - (item.price * 10 / 100) : item.price;
+        const price = new Intl.NumberFormat().format(discount * item.quantity) + " р.";
         const color = item.color || item.specifications.color;
 
         return (
@@ -169,25 +88,28 @@ class OrderItem extends Component {
                         <span>({color})</span>
                     </p>
 
-                    {/*<div className={styles.counter_block}>*/}
-                    {/*                    <span onClick={(evt) => this.changeAmountWithClick(evt, item.id, item.quantity - 1)}*/}
-                    {/*                          className={`${styles.counter} ${styles.counter_minus}`}/>*/}
+                    <div className={styles.counter_block}>
 
-                    {/*    <label>*/}
-                    {/*        <input*/}
-                    {/*            type="text" name="customer-product-count"*/}
-                    {/*            onChange={(evt) => this.transitionalValueHandler(evt, item.id)}*/}
-                    {/*            onBlur={(evt) => this.onBlurHandler(evt, item.id, evt.target.value)}*/}
-                    {/*            value={this.state.orderedItems.find(citem => citem.id === item.id).quantity}*/}
-                    {/*        />*/}
-                    {/*    </label>*/}
+                        <span
+                            onClick={(evt) => this.changeAmount(evt, item.id, item.quantity - 1)}
+                            className={`${styles.counter} ${styles.counter_minus}`}
+                        />
 
-                    {/*    <span onClick={(evt) => this.changeAmountWithClick(evt, item.id, item.quantity + 1)}*/}
-                    {/*          className={`${styles.counter} ${styles.counter_plus}`}/>*/}
-                    {/*</div>*/}
+                        <label>
+                            <input
+                                type="text" name="customer-product-count"
+                                onChange={this.onChangeInput}
+                                onBlur={this.onBlurInput}
+                                value={this.state.item.quantity}
+                            />
+                        </label>
 
+                        <span
+                            onClick={(evt) => this.changeAmount(evt, item.id, item.quantity + 1)}
+                            className={`${styles.counter} ${styles.counter_plus}`}
+                        />
+                    </div>
                 </div>
-
                 <span className={styles.price__sm}>{price}</span>
                 <span className={styles.delete} onClick={this.deleteFromOrder}>&times;</span>
             </div>
@@ -195,20 +117,8 @@ class OrderItem extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        listOfProducts: state.cart.products
-    }
-}
-
 function mapDispatchToProps(dispatch) {
     return {
-        onDecreaseeProductsAmount: (evt, id) => {
-            dispatch(actions.cart.decreaseeProductsAmount(evt, id));
-        },
-        onIncreaseProductsAmount: (evt, id) => {
-            dispatch(actions.cart.increaseProductsAmount(evt, id))
-        },
         onChangeAmountOfProduct: (evt, id, quantity) => {
             dispatch(actions.cart.changeAmountOfProduct(evt, id, quantity))
         },
@@ -219,7 +129,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderItem);
+export default connect(null, mapDispatchToProps)(OrderItem);
 
 
 
