@@ -24,34 +24,31 @@ spl_autoload_register(function ($class) {
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
     $uri = trim(filter_var($_SERVER["REQUEST_URI"], FILTER_SANITIZE_STRING));
     //$uri = "api/product/gadgets/3";
+    //$uri = "api/category/gadgets";
     $prefix = "api/";
     $cnt = strpos($uri, $prefix) + strlen($prefix);
     $res = mb_substr($uri, $cnt, strlen($uri));
 
     try {
         if ($res === "index") {
-            //var_dump_pre(Request::getIndexPageData());
-            //var_dump_pre(12);
             print json_encode(Request::getIndexPageData());
+
         } elseif (strpos($res, "category") !== false) {
             $category_title = substr($res, strpos($res, "/") + 1);
-            //var_dump_pre(Request::getCategoryItems($category_title));
-            //print $category_title;
+            print json_encode(Request::getCategoryItems($category_title));
+
         } elseif (strpos($res, "product") !== false) {
             $list = explode("/", substr($res, strpos($res, "/") + 1));
             $category_title = $list[0];
             $product_id = $list[1];
             $result = Request::getOneItem($product_id, $category_title);
 
-            //print $category_title;
-            //print $product_id;
-            //$data = "";
-            //print json_encode($data);
         } elseif (strpos($res, "lazyload") !== false) {
             // timeout 4 sec maximun, else - error msg
             //sleep(1);
             $category_title = substr($res, strpos($res, "/") + 1);
             //var_dump_pre(Request::getLazyLoadItems($category_title));
+
         } else {
             return false;
         }

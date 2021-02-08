@@ -13,14 +13,22 @@ import CartModal from "../../CartModal/CartModal";
 import PropTypes from "prop-types";
 import { Transition, TransitionGroup } from "react-transition-group";
 
+import api from "../../../redux/api/axios/init";
+import { requestIndexData } from "../../../redux/middlware/requestToServer";
+import * as modalActions from "../../../redux/entities/modal/actions";
 
 class Category extends Component {
 
 
-    // always on top of page, without smooth scroll
-    componentDidMount() {
-        window.scrollTo(0, 0);
-    }
+    static defaultProps = {
+        category: {
+            main: {
+                img: {}
+            },
+            data: [],
+        },
+
+    };
 
 
     // компонент один, поэтому скролл верх срабатывает при имплементации, а вот просы приходят на каждый клик
@@ -87,20 +95,18 @@ class Category extends Component {
         });
     };
 
+    // always on top of page, without smooth scroll
+    componentDidMount() {
+        window.scrollTo(0, 0);
+        this.props.getData(this.props.match.params.type = "phones");
+
+        //console.log('rr', this.props.match.params.type);
+    }
 
     render() {
-        // учти отсутвие значения в категории, если в URI пришли некорретнеы данные
-        const categoryAlias = this.props.match.params.type;
+        //console.log(this.props);
 
-        const category = this.props.category.find(category => category.categoryAlias === this.props.match.params.type);
-
-        if (!category) {
-            // redirect if undefined
-        }
-
-        //const OverlayElement = this.createOverlay();
-        const productsList = this.getProductsList(category, this.props.serverData);
-
+        const { main: category, data: products } = this.props.category;
 
         return (
             <Layout>
@@ -109,21 +115,34 @@ class Category extends Component {
                 <div className={styles.category_wrapper}>
                     <div className={styles.sign_bg}>
                         <img
-                            className={`${styles.sign_bg__img} ${category.categoryAlias === "gadgets" && styles.img_fit}`}
-                            src={`${category.imgPrefix}/${category.categoryTitleImg}`}
-                            alt="Категории"/>
-                        <h3 className={styles.sign_bg__title}>{category.categoryTitle}</h3>
+                            className={`${styles.sign_bg__img} ${category.alias === "gadgets" && styles.img_fit}`}
+                            src={category.img.path}
+                            alt={category.img.alt}/>
+                        <h3 className={styles.sign_bg__title}>{category.title}</h3>
                     </div>
 
-                    <div className={`${common.wrapper} ${styles.filters_wrapper}`}><SortPorducts changeFilter={this.changeFilter}/></div>
+                    <div className={`${common.wrapper} ${styles.filters_wrapper}`}>
+                        <SortPorducts changeFilter={this.changeFilter}/>
+                    </div>
 
                     <div className={`${common.wrapper} ${styles.list_wrapper}`}>
                         <LazyLoad categoryName={category.categoryAlias}>
                             <ul className={styles.list}>
-                                {productsList}
+
+                                {/*{productsList}*/}
+
+                                {
+                                    products.map((item, i) => {
+                                        return (<div key={i}>
+                                            {item.title}
+                                        </div>)
+                                    })
+                                }
+
                             </ul>
                         </LazyLoad>
                     </div>
+
                 </div>
             </Layout>
         )
@@ -137,7 +156,23 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps)(Category);
+
+const loadAxios = (category) => (dispatch) => {
+    api.get(`category/${category}`)
+        .then(responce => dispatch({ type: "server/getCategoryData", payload: responce.data }))
+        .catch(error => dispatch({ type: "server/serverError", payload: error }))
+};
+
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getData: (category) => {
+            dispatch(loadAxios(category));
+        },
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Category);
 
 
 

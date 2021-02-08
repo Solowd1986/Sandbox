@@ -1,7 +1,7 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import common from "~scss/common.module.scss";
 import styles from "./promo.module.scss";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import ProductCard from "../ProductCard/ProductCard";
 import Modal from "../../Core/Modal/Modal";
 import CartModal from "../../CartModal/CartModal";
@@ -15,11 +15,19 @@ import PropTypes from "prop-types";
 class Promo extends Component {
 
     static propTypes = {
-        category: PropTypes.array,
+        index: PropTypes.object,
     };
 
     toggle = () => {
         this.props.enableModal();
+    };
+
+    static defaultProps = {
+        index: {
+            phones: [],
+            accessoires: [],
+            gadgets: [],
+        }
     };
 
     render() {
@@ -28,6 +36,7 @@ class Promo extends Component {
         return (
             <section className={`${common.container} ${styles.promo_wrapper}`}>
                 <main className={`${common.wrapper} ${styles.promo}`}>
+
                     <button onClick={this.toggle}>Active</button>
 
                     {
@@ -41,27 +50,25 @@ class Promo extends Component {
                     <h2 className={styles.promo_section_title}>Рекомендуем</h2>
                     <ul className={styles.promo_list}>
                         {/*ограничиваем вывод четырьмя элементами на странице promo*/}
-                        {phones.slice(0, 4).map((item, i) => {
+                        {phones.data.map((item, i) => {
                             return (
                                 <ProductCard key={i} item={item} category={phones}/>
                             )
                         })}
                     </ul>
 
-
                     <h2 className={styles.promo_section_title}>Популярные гаджеты</h2>
                     <ul className={styles.promo_list}>
-                        {gadgets.slice(0, 4).map((item, i) => {
+                        {gadgets.data.map((item, i) => {
                             return (
                                 <ProductCard key={i} item={item} category={gadgets}/>
                             )
                         })}
                     </ul>
 
-
                     <h2 className={styles.promo_section_title}>Аксессуары</h2>
                     <ul className={styles.promo_list}>
-                        {accessoires.slice(0, 4).map((item, i) => {
+                        {accessoires.data.map((item, i) => {
                             return (
                                 <ProductCard key={i} item={item} category={accessoires}/>
                             )
@@ -74,12 +81,9 @@ class Promo extends Component {
 }
 
 
-
 // wrap in obj give you double invoke
 function mapStateToProps(state) {
     return {
-        state,
-        // index: state.db.indexPageProducts,
         index: state.db.index,
         cart: state.cart,
         isModalActive: state.modal.isModalActive

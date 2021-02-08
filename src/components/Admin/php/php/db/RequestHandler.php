@@ -35,12 +35,17 @@ class RequestHandler extends DbConnect
         $pdo->execute();
         $list_result = $pdo->fetchAll();
 
+
+        $queryCategory = "SELECT * FROM category WHERE category_alias='{$category}'";
+        $pdo = Connect::exec()->prepare($queryCategory);
+        $pdo->execute();
+        $list_main = $pdo->fetch();
+
+
         foreach ($list_result as $item) {
             $id = $item["id"];
             $id_field = substr($category, 0, strlen($category) - 1) . "_id";
             $key = array_search($item, $list_result);
-
-            $list_result[$key]["alias"] = $category;
 
             $img_list = [];
             foreach (self::getImg($id, $id_field, $img_table) as $k => $v) {
@@ -56,7 +61,17 @@ class RequestHandler extends DbConnect
                 $list_result[$key]["specifications"] = self::getSpecifications($id, $id_field, $spec_table);
             }
         }
-        return $list_result;
+
+        $list_main = [
+            "alias" => $list_main["category_title"],
+            "title" => $list_main["category_alias"],
+            "img" => [
+                "path" => $list_main["img_prefix"] . "/" . $list_main["category_title_img"],
+                "alt" => $list_main["category_title"],
+            ],
+        ];
+
+        return ["main" => $list_main, "data" => $list_result];
     }
 
 

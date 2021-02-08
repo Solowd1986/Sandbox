@@ -6,6 +6,17 @@ const api = axios.create({
     withCredentials: true
 });
 
+const onSuccess = (success) => success;
+
+const onFail = (error) => {
+    if (error.response.status === 403) {
+
+    }
+    return error;
+};
+
+api.interceptors.response.use(onSuccess, onFail);
+
 export default api;
 
 
