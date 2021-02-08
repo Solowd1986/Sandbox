@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./lazy-load.module.scss"
-import actions from "../../../redux/actions";
+
 import { connect } from "react-redux";
 import Modal from "../Modal/Modal";
 import CartModal from "../../CartModal/CartModal";
@@ -144,22 +144,7 @@ function mapStateToProps(state) {
 }
 
 
-function mapDispatchToProps(dispatch) {
-    return {
-        setServerData: (data) => {
-            dispatch(actions.lazyload.setServerData(data));
-        },
-        enableOverlay: () => {
-            dispatch(actions.lazyload.enableOverlay());
-        },
-        disableOverlay: (callback = null) => {
-            dispatch(actions.lazyload.disableOverlay(callback));
-        },
-    }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(LazyLoad);
+export default connect(mapStateToProps)(LazyLoad);
 
 
 

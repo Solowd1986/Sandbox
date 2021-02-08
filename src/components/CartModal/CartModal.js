@@ -1,15 +1,10 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import actions from "../../redux/actions";
 import styles from "./cart-modal.module.scss";
 
 class CartModal extends Component {
 
-    disableCartModal = () => {
-        this.props.toggleOfferGoToCartBeenShown();
-        this.props.disableOverlay();
-    };
 
     render() {
         return (
@@ -29,21 +24,10 @@ class CartModal extends Component {
                     }
                 </ul>
                 <NavLink className={styles.link} to={"/order"}>Перейти в корзину</NavLink>
-                <span className={styles.continue} onClick={this.disableCartModal}>Продолжить покупки</span>
+                <span className={styles.continue}>Продолжить покупки</span>
             </div>
         )
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        disableOverlay: () => {
-            dispatch(actions.cart.disableOverlay());
-        },
-        toggleOfferGoToCartBeenShown: () => {
-            dispatch(actions.cart.toggleOfferGoToCartBeenShown());
-        },
-    }
-}
-
-export default connect(null, mapDispatchToProps)(CartModal);
+export default CartModal;

@@ -14,7 +14,7 @@ import * as modalActions from "../../../redux/entities/modal/actions";
 class Order extends Component {
 
     componentDidMount() {
-        window.scrollTo(0, 0)     // always on top of page, without smooth scroll
+        window.scrollTo(0, 0) // always on top of page, without smooth scroll
     }
 
     submit = (evt) => {
@@ -36,9 +36,9 @@ class Order extends Component {
     };
 
     render() {
-        //console.log('state', this.props);
         const isCartEmpty = this.props.amountOfProductsInCart;
         this.isCartEmpty = this.props.amountOfProductsInCart === 0;
+
 
         return (
             <Layout>
@@ -57,7 +57,7 @@ class Order extends Component {
                                 onSubmit={this.submit}
                                 className={styles.form}
                                 action=""
-                                name="basket-form"
+                                name="order-form"
                                 method="POST"
                                 noValidate={true}
                             >

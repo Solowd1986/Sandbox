@@ -3,7 +3,7 @@ import styles from "./mobile-navbar.module.scss";
 import {NavLink} from "react-router-dom";
 import classNames from "classnames";
 
-export default class MobileNavbar extends React.Component {
+class MobileNavbar extends React.Component {
 
     state = {
         isMobileMenuVisible: false
@@ -64,5 +64,5 @@ export default class MobileNavbar extends React.Component {
 }
 
 
-
+export default MobileNavbar;
 

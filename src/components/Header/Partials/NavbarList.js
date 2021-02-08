@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./navbar-list.module.scss";
-import {NavLink} from "react-router-dom";
-import actions from "../../../redux/actions";
-import {connect} from "react-redux";
+import { NavLink } from "react-router-dom";
+
+import { connect } from "react-redux";
 
 class NavbarList extends React.Component {
 
@@ -294,7 +294,7 @@ class NavbarList extends React.Component {
 function mapDispatchToProps(dispatch) {
     return {
         clearDataStorage: () => {
-            dispatch(actions.lazyload.clearDataStorage());
+            //dispatch(actions.lazyload.clearDataStorage());
         }
     }
 }

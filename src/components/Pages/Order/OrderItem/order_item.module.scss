@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .img_sm {
@@ -117,8 +117,6 @@
 }
 
 .delete {
-  top: 20px;
-  margin-top: -10px;
   font-size: 40px;
   font-weight: 700;
   color: $grey-200;

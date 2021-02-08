@@ -1,13 +1,23 @@
 import db from "./mock-data/database"
 
 
+// const initialState = {
+//     indexPageProducts: [
+//         {id: 1},
+//         {id: 2},
+//     ],
+//     mock,
+//
+//     categoryPageProducts: [],
+// };
+
 export default (state = db, action) => {
     switch (action.type) {
         case "server/getIndexData": {
             //console.log("request proccess");
             return {
                 ...state,
-                loader: action.payload
+                index: action.payload
             };
         }
 

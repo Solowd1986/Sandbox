@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import styles from "./order_item.module.scss"
-import actions from "../../../../redux/actions";
-import * as modalActions from "../../../../redux/entities/modal/actions";
+
+import * as cart from "../../../../redux/entities/cart/actions";
+import * as modal from "../../../../redux/entities/modal/actions";
 import { connect } from "react-redux";
 
 
@@ -34,37 +35,11 @@ const users2 = changeState(2, "name", "stan", users1);
 class OrderItem extends Component {
     constructor(props) {
         super(props);
-        this.blur = false;
     }
 
     state = {
         item: this.props.item
     };
-
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('prevProps_q - ', prevProps.item.quantity);
-        console.log('currentProps_q - ', this.props.item.quantity);
-        console.log('prevState_q - ', prevState.item.quantity);
-        console.log('currentState_q - ', this.state.item.quantity);
-
-        if (this.props.item.quantity !== prevProps.item.quantity) {
-            this.setState(() => {
-                return {
-                    item: this.props.item
-                }
-            })
-        }
-        if (this.props.item.quantity === prevProps.item.quantity && this.blur) {
-            this.setState(() => {
-                return {
-                    item: { ...this.props.item }
-                }
-            });
-            this.blur = false;
-        }
-    }
-
 
     onChangeInput = (evt) => {
         let quantity = Math.abs(parseInt(evt.target.value));
@@ -80,10 +55,9 @@ class OrderItem extends Component {
     onBlurInput = (evt) => {
         this.props.onChangeAmountOfProduct(evt, this.props.item.id, evt.target.value);
         this.blur = true;
-        // this.setState({
-        //     item: { ...this.state.item, quantity: this.normalizeValue(evt.target.value) }
-        // });
-
+        this.setState({
+            item: { ...this.state.item, quantity: this.normalizeValue(evt.target.value) }
+        });
     };
 
 
@@ -104,6 +78,7 @@ class OrderItem extends Component {
 
     render() {
         const { item, item: { imgAlt: alt, imgFullPath: path } } = this.props;
+
         const discount = item.discount ? item.price - (item.price * 10 / 100) : item.price;
         const price = new Intl.NumberFormat().format(discount * item.quantity) + " р.";
         const color = item.color || item.specifications.color;
@@ -149,10 +124,10 @@ class OrderItem extends Component {
 function mapDispatchToProps(dispatch) {
     return {
         onChangeAmountOfProduct: (evt, id, quantity) => {
-            dispatch(actions.cart.changeAmountOfProduct(evt, id, quantity))
+            dispatch(cart.changeAmountOfProduct(evt, id, quantity))
         },
         onDeleteProductFromCart: (evt, id) => {
-            dispatch(actions.cart.removeItem(evt, id))
+            dispatch(cart.removeItemFromCart(evt, id))
         }
     }
 }

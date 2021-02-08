@@ -1,45 +1,32 @@
-
-
-export const addItem = (evt, id, category) => {
+export const addItemToCart = (evt, item) => {
     return {
         type: "cart/addItemToCart",
-        evt,
-        id,
-        category
+        payload: {
+            evt,
+            item
+        }
     }
 };
 
 
-export const removeItem = (evt, id) => {
+export const removeItemFromCart = (evt, id) => {
     return {
         type: "cart/removeItemFromCart",
-        evt,
-        id
-    }
-};
-
-
-export const decreaseeProductsAmount = (evt, id) => {
-    return {
-        type: "cart/decreaseeProductsAmount",
-        id,
-        evt
-    }
-};
-export const increaseProductsAmount = (evt, id) => {
-    return {
-        type: "cart/increaseProductsAmount",
-        id,
-        evt
+        payload: {
+            evt,
+            id
+        }
     }
 };
 
 export const changeAmountOfProduct = (evt, id, quantity) => {
     return {
         type: "cart/changeAmountOfProduct",
-        evt,
-        id,
-        quantity
+        payload: {
+            evt,
+            id,
+            quantity
+        }
     }
 };
 

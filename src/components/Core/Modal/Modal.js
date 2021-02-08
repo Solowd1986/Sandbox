@@ -5,20 +5,21 @@ import classNames from "classnames";
 import * as util from "./helpers/functions";
 import Spinner from "./Spinner/Spinner";
 
-import * as modalActions from "../../../redux/entities/modal/actions";
+import * as modal from "../../../redux/entities/modal/actions";
 import { connect } from "react-redux";
 import ModalContent from "./ModalContent/ModalContent";
 
 class Modal extends Component {
-    state = {
-        isDelayEnded: false
-    };
 
     constructor(props) {
         super(props);
         this.addScrollbarOffset();
         this.delayModalTimer = null;
     }
+
+    state = {
+        isDelayEnded: false
+    };
 
     componentDidMount = () => {
         if (this.props.delay) {
@@ -31,6 +32,7 @@ class Modal extends Component {
             }, 1500);
         }
     };
+
     componentWillUnmount = () => {
         this.disableModal();
         clearTimeout(this.delayModalTimer);
@@ -78,7 +80,7 @@ class Modal extends Component {
 function mapDispatchToProps(dispatch) {
     return {
         disableModal: () => {
-            dispatch(modalActions.disableModal());
+            dispatch(modal.disableModal());
         }
     }
 }

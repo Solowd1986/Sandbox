@@ -3,69 +3,38 @@ import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom
 import routes from "./routes/routes";
 
 import {Provider} from "react-redux";
-import store from "./redux/storeInit";
+import store from "./redux/store";
 import "./utils/whyDidYouRender";
 
 
-/**
- *
- * @param url
- * @returns {Promise<Response>}
- */
+import api from "./redux/api/axios/init";
 
-function apiRequest(url) {
-    return fetch(url).then((responce, reject) => {
-        if (responce.status !== 200) {
-            return responce.text().then((text) => reject(text));
-        }
-        return responce.json();
-    })
-}
-
-// apiRequest("api.php").then((res) => {
-//     //console.log(res);
-// }).catch((error) => console.log("error", error));
+const loadAxios = () => (dispatch) => {
+    api.get("index")
+        .then(responce => dispatch({ type: "server/getIndexData", payload: responce.data }))
+        .catch(error => dispatch({ type: "server/serverError", payload: error }))
+};
 
 
-const axios = require('axios').default;
+// store.dispatch((dispatch) => {
+//     fetch("api/index", { method: "GET" }).then((result) => result.json()).then((result) => {
+//         dispatch({ type: "server/getIndexData", payload: result })
+//     }).catch(error => dispatch({ type: "server/serverError", payload: error }));
+// });
 
-axios.get('/api/index')
-    .then(function (response) {
-        // handle success
-        //console.log("responce", response);
-    }).catch(function (error) {
-    //console.log("Axios Error - ", error);
-}).then(function () {
-    // always executed
-});
+store.dispatch(loadAxios());
 
 
-function asyncAction(action) {
-    return new Promise(async (resolve, reject) => {
-        try {
-            let res = await action();
-            resolve(true);
-        } catch (e) {
-            console.log(e);
-        }
-    })
-}
-
-
-axios.get('/api/get/id/1')
-    .then(function (response) {
-        // handle success
-        //console.log("responce", response);
-    }).catch(function (error) {
-    //
-    // console.log("Axios Error - ", error);
-}).then(function () {
-    // always executed
-});
-
-/*********************
- *
- */
+// axios.get('/api/index')
+//     .then(function (response) {
+//         // handle success
+//         //console.log("responce", response);
+//         //store.dispatch(() => ({type: ""}))
+//     }).catch(function (error) {
+//     //console.log("Axios Error - ", error);
+// }).then(function () {
+//     // always executed
+// });
 
 
 
@@ -79,6 +48,7 @@ export default class App extends Component {
                 <Provider store={store}>
                     <Router>
                         <Switch>
+
                             {routes.map((route) =>
                                 <Route
                                     key={route.url}
@@ -87,6 +57,7 @@ export default class App extends Component {
                                     exact={route.exact}/>)
                             }
                             <Redirect to={"/404"}/> // редирект, если рута не нашлось
+
                         </Switch>
                     </Router>
                 </Provider>

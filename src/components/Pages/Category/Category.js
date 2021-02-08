@@ -4,7 +4,7 @@ import styles from "./category.module.scss";
 import Layout from "~components/Core/Layout/Layout";
 import { connect } from "react-redux";
 
-import actions from "../../../redux/actions";
+
 import SortPorducts from "../../Core/SortProducts/SortProducts";
 import LazyLoad from "../../Core/LazyLoad/LazyLoad";
 import ProductCard from "../ProductCard/ProductCard";
@@ -133,31 +133,11 @@ class Category extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        serverData: state.lazyload.serverStorageData,
         category: state.db.category,
-        // cart: state.cart
     }
 };
 
-
-function mapDispatchToProps(dispatch) {
-    return {
-        onAddToCart: (evt, id, category) => {
-            dispatch(actions.cart.disableButton(evt));
-            dispatch(actions.cart.addItemAsync(evt, id, category))
-        },
-        onDeleteFromCart: (evt, id) => {
-            dispatch(actions.cart.disableButton(evt));
-            dispatch(actions.cart.removeItemAsync(evt, id))
-        },
-        clearDataStorage: () => {
-            dispatch(actions.lazyload.clearDataStorage());
-        },
-    }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Category);
+export default connect(mapStateToProps)(Category);
 
 
 

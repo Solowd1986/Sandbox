@@ -17,7 +17,8 @@ class RequestHandler extends DbConnect
 
 
     /**
-     * 1. Приходит категория, например, phones - из этого слова создаются имена таблиц БД, к котормы будут запросы.
+     * 1. Приходит категория, например, phones - из этого слова создаются имена таблиц БД,
+     *    к котормы будут запросы.
      * 2. Количество результатов выдачи можно ограничить через limit
      * @param $category
      * @param null $limit
@@ -39,7 +40,16 @@ class RequestHandler extends DbConnect
             $id_field = substr($category, 0, strlen($category) - 1) . "_id";
             $key = array_search($item, $list_result);
 
-            $list_result[$key]["img"] = self::getImg($id, $id_field, $img_table);
+            $list_result[$key]["alias"] = $category;
+
+            $img_list = [];
+            foreach (self::getImg($id, $id_field, $img_table) as $k => $v) {
+                if (!in_array($k, ["id", $id_field])) {
+                    $img_list[$k] = "/static/media/" . $category . "/" . $v;
+                }
+            }
+            $list_result[$key]["img"] = $img_list;
+
             $list_result[$key]["promo"] = self::getPromo($id, $id_field, $promo_table);
             if ($category === "phones") {
                 $spec_table = substr($category, 0, strlen($category) - 1) . "_specifications";

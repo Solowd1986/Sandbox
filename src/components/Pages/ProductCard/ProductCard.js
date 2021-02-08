@@ -9,7 +9,7 @@ import ProductPrice from "../../Core/ProductPrice/ProductPrice";
 import OrderButton from "../../Core/OrderButton/OrderButton";
 import PromoProductCard from "./PromoProductCard";
 
-import actions from "../../../redux/actions";
+import * as actions from "../../../redux/entities/cart/actions";
 
 
 class ProductCard extends Component {
@@ -24,11 +24,12 @@ class ProductCard extends Component {
                     В наличии
                 </span>
 
-                <NavLink to={`/product/${category.categoryAlias}/${item.id}`} className={styles.link}>
+                <NavLink to={`/product/${item.alias}/${item.id}`} className={styles.link}>
                     <img className={styles.img}
                         // path from public folder
-                         src={`${category.imgPrefix}/${item.imgPath.md}`}
-                         alt={item.imgAlt}
+                         src={item.img.md}
+                        //src={`${category.imgPrefix}/${item.img.md}`}
+                         alt={item.img_alt}
                     />
                 </NavLink>
 
@@ -75,8 +76,7 @@ class ProductCard extends Component {
                             onClick={(evt) => {
                                 // данная связка методов используется только в компонентах Promo/Category. В Product - нет,
                                 // модалка с корзиной не нужна
-                                this.props.enableOverlay();
-                                this.props.onAddToCart(evt, item.id, category);
+                                this.props.onAddToCart(evt, item);
                             }}>
                             {item.rest === 0 ? "Нет в наличии" : "Добавить в заказ"}
                         </OrderButton>
@@ -96,29 +96,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-
-        // onAddToCart: (evt, id, category) => {
-        //     dispatch(actions.cart.disableButton(evt));
-        //     dispatch(actions.cart.addItemAsync(evt, id, category));
-        // },
-        //
-        // onDeleteFromCart: (evt, id) => {
-        //     dispatch(actions.cart.disableButton(evt));
-        //     dispatch(actions.cart.removeItemAsync(evt, id))
-        // },
-
-
-
-
-        onAddToCart: (evt, id, category) => {
-            dispatch(actions.cart.addItem(evt, id, category));
+        onAddToCart: (evt, item) => {
+            dispatch(actions.addItemToCart(evt, item))
         },
         onDeleteFromCart: (evt, id) => {
-            dispatch(actions.cart.removeItem(evt, id))
-        },
-
-        enableOverlay: () => {
-            dispatch(actions.cart.enableOverlay());
+            dispatch(actions.removeItemFromCart(evt, id))
         },
     }
 }

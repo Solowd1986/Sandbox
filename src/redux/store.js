@@ -9,12 +9,15 @@ import reducer from "./entities/rootReducer";
  */
 import reduxThunk from "redux-thunk"
 
+const activeMiddlewareList = [
+    reduxThunk,
+];
 
 /**
  * Проверяем наличие данных в localStorage при первом запуке скрипта.
  */
 const preloadedState = JSON.parse(decodeURIComponent(localStorage.getItem("state")));
-const enhancedStore = composeEnhancers(applyMiddleware(reduxThunk, reduxLogger));
+const enhancedStore = composeEnhancers(applyMiddleware(...activeMiddlewareList));
 
 /**
  * Обычно на данном этапе задается общий reducer, но у нас над ниместь обертка в виде Middleare и компонента отладки,
@@ -27,7 +30,13 @@ const enhancedStore = composeEnhancers(applyMiddleware(reduxThunk, reduxLogger))
  * Также проверяем, если нашли данные в localStorage, то их внесем как начальный initialState, если же ничего не было
  * найдено, то будет использован initialState указанный в reducer
  */
-const store = preloadedState ? createStore(reducer, preloadedState, enhancedStore) : createStore(reducer, enhancedStore);
+const store =
+    preloadedState
+        ?
+        createStore(reducer, preloadedState, enhancedStore)
+        :
+        createStore(reducer, enhancedStore)
+;
 
 /**
  * Каждый раз, когда меняется store - происходит внесение всего обьекта (кодированного предварительно) в localStorage

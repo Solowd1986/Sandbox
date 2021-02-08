@@ -3,8 +3,9 @@
 
 //sleep(1);
 
-print json_encode("true");
-die();
+//print json_encode("true");
+//die();
+
 
 require_once "./php/functions/functions.php";
 require_once "./php/db/RequestHandler.php";

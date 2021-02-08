@@ -9,8 +9,8 @@ import OrderButton from "../../Core/OrderButton/OrderButton";
 import ProductPrice from "../../Core/ProductPrice/ProductPrice";
 import ProductTabs from "./ProductTabs/ProductTabs";
 import PromoBadge from "../../Core/PromoBadge/PromoBadge";
+import * as cart from "../../../redux/entities/cart/actions";
 
-import actions from "../../../redux/actions";
 import { connect } from "react-redux";
 
 
@@ -101,10 +101,10 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         onAddToCart: (evt, id, category) => {
-            dispatch(actions.cart.addItem(evt, id, category))
+            dispatch(cart.addItemToCart(evt, id, category))
         },
         onDeleteFromCart: (evt, id) => {
-            dispatch(actions.cart.removeItem(evt, id))
+            dispatch(cart.removeItemFromCart(evt, id))
         },
     }
 }
