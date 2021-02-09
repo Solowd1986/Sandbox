@@ -52,7 +52,7 @@ class Promo extends Component {
                         {/*ограничиваем вывод четырьмя элементами на странице promo*/}
                         {phones.data.map((item, i) => {
                             return (
-                                <ProductCard key={i} item={item} category={phones}/>
+                                <ProductCard key={i} item={item} category={phones.main}/>
                             )
                         })}
                     </ul>
@@ -61,7 +61,7 @@ class Promo extends Component {
                     <ul className={styles.promo_list}>
                         {gadgets.data.map((item, i) => {
                             return (
-                                <ProductCard key={i} item={item} category={gadgets}/>
+                                <ProductCard key={i} item={item} category={gadgets.main}/>
                             )
                         })}
                     </ul>

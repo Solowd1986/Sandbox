@@ -16,96 +16,114 @@ class RequestHandler extends DbConnect
     }
 
 
-    /**
-     * 1. Приходит категория, например, phones - из этого слова создаются имена таблиц БД,
-     *    к котормы будут запросы.
-     * 2. Количество результатов выдачи можно ограничить через limit
-     * @param $category
-     * @param null $limit
-     * @return array
-     */
     public static function getCategoryItems($category, $limit = null)
     {
-        $list = $category . "_list";
-        $promo_table = substr($category, 0, strlen($category) - 1) . "_promo";
-        $img_table = substr($category, 0, strlen($category) - 1) . "_img";
+        // Получаем имена таблиц для картинок, промо и основного списка продуктов, основываясь на переданном значении
+        $category_products_table = $category . "_list";
+        $category_promo_table = substr($category, 0, strlen($category) - 1) . "_promo";
+        $category_img_table = substr($category, 0, strlen($category) - 1) . "_img";
 
-        $query = $limit ? "SELECT * FROM {$list} LIMIT {$limit}" : "SELECT * FROM {$list}";
-        $pdo = Connect::exec()->prepare($query);
+        $products_query = $limit
+            ? "SELECT * FROM {$category_products_table} LIMIT {$limit}"
+            : "SELECT * FROM {$category_products_table}";
+
+        $pdo = Connect::exec()->prepare($products_query);
         $pdo->execute();
-        $list_result = $pdo->fetchAll();
+        $list_of_products = $pdo->fetchAll();
 
+        // После получения списка продуктов выбранной категории, нужно добавить к каждому продукту
+        // поля img/promo, а для телефонов - поле specifications, поэтому нам нужно получить для каждого продукта
+        // в цикле соответствующие ему записи из таблиц img/promo/spec, у каждой из этих табдиц есть поле-внешний ключ,
+        // по которому и определяется, к какому именно продукту приписана запись. Название поля это название категории
+        // в единственном числе плюс "_id", поэтому ниже мы преобразуем название категории к такому виду.
+        // Далее, нужно на текущей итерации получить индекс продукта $product в массиве $list_of_products,
+        // чтобы именно текущий продукт получил доп. поля, ему соответствующие, ориентиром будет id продукта,
+        // эквивалентный внешнему ключу, о котором было выше.
 
-        $queryCategory = "SELECT * FROM category WHERE category_alias='{$category}'";
-        $pdo = Connect::exec()->prepare($queryCategory);
-        $pdo->execute();
-        $list_main = $pdo->fetch();
+        foreach ($list_of_products as $product) {
+            $product_foreign_key_name = substr($category, 0, strlen($category) - 1) . "_id";
+            $product_index = array_search($product, $list_of_products);
 
-
-        foreach ($list_result as $item) {
-            $id = $item["id"];
-            $id_field = substr($category, 0, strlen($category) - 1) . "_id";
-            $key = array_search($item, $list_result);
-
+            // Создаем массив изображений, не включая в него служебные поля типа id, на клиенте они не нужны
             $img_list = [];
-            foreach (self::getImg($id, $id_field, $img_table) as $k => $v) {
-                if (!in_array($k, ["id", $id_field])) {
+            foreach (self::getImg($product["id"], $product_foreign_key_name, $category_img_table) as $k => $v) {
+                if (!in_array($k, ["id", $product_foreign_key_name])) {
                     $img_list[$k] = "/static/media/" . $category . "/" . $v;
                 }
             }
-            $list_result[$key]["img"] = $img_list;
+            $list_of_products[$product_index]["img"] = $img_list;
 
-            $list_result[$key]["promo"] = self::getPromo($id, $id_field, $promo_table);
+            // Создаем блок промо
+            $list_of_products[$product_index]["promo"] = self::getPromo($product["id"], $product_foreign_key_name, $category_promo_table);
+
+            // Только для телефонов добавляем блок спецификаций
             if ($category === "phones") {
                 $spec_table = substr($category, 0, strlen($category) - 1) . "_specifications";
-                $list_result[$key]["specifications"] = self::getSpecifications($id, $id_field, $spec_table);
+                $list_of_products[$product_index]["specifications"] =
+                    self::getSpecifications($product["id"], $product_foreign_key_name, $spec_table);
             }
         }
 
-        $list_main = [
-            "alias" => $list_main["category_title"],
-            "title" => $list_main["category_alias"],
-            "img" => [
-                "path" => $list_main["img_prefix"] . "/" . $list_main["category_title_img"],
-                "alt" => $list_main["category_title"],
-            ],
-        ];
-
-        return ["main" => $list_main, "data" => $list_result];
+        // Отдаем массив из двух полей: список продуктов, со всеми данными и блок служебной информации для категории
+        return ["main" => self::getCategoryInfo($category), "data" => $list_of_products];
     }
 
 
     public static function getOneItem($id, $category)
     {
+        $category_products_table = $category . "_list";
+        $category_promo_table = substr($category, 0, strlen($category) - 1) . "_promo";
+        $category_img_table = substr($category, 0, strlen($category) - 1) . "_img";
 
-        $list = $category . "_list";
-        $promo_table = substr($category, 0, strlen($category) - 1) . "_promo";
-        $img_table = substr($category, 0, strlen($category) - 1) . "_img";
-
-        $query = "SELECT * FROM {$list} WHERE id={$id}";
-        $pdo = Connect::exec()->prepare($query);
+        $product_query = "SELECT * FROM {$category_products_table} WHERE id={$id}";
+        $pdo = Connect::exec()->prepare($product_query);
         $pdo->execute();
-        $result = $pdo->fetch();
+        $product = $pdo->fetch();
 
-        $id_field = substr($category, 0, strlen($category) - 1) . "_id";
-        $result["img"] = self::getImg($id, $id_field, $img_table);
-        $result["promo"] = self::getPromo($id, $id_field, $promo_table);
+        $product_foreign_key_name = substr($category, 0, strlen($category) - 1) . "_id";
+
+        $img_list = [];
+        foreach (self::getImg($product["id"], $product_foreign_key_name, $category_img_table) as $k => $v) {
+            if (!in_array($k, ["id", $product_foreign_key_name])) {
+                $img_list[$k] = "/static/media/" . $category . "/" . $v;
+            }
+        }
+
+        $product["img"] = $img_list;
+        $product["promo"] = self::getPromo($product["id"], $product_foreign_key_name, $category_promo_table);
         if ($category === "phones") {
             $spec_table = substr($category, 0, strlen($category) - 1) . "_specifications";
-            $result["specifications"] = self::getSpecifications($id, $id_field, $spec_table);
+            $product["specifications"] =
+                self::getSpecifications($product["id"], $product_foreign_key_name, $spec_table);
         }
-        return $result;
+
+        return ["main" => self::getCategoryInfo($category), "data" => $product];
     }
 
 
-    public static function getLazyLoadItems($category)
+    // Получить общие данные по выбранной категории: ее название, alias, фоновое изображение страницы
+    private static function getCategoryInfo($category)
     {
-        $res = self::getCategoryItems($category);
-        shuffle($res);
-        return $res;
+        // Создаем блок служебной информации для всей категории, то есть название, alias и так далее.
+        $category_query = "SELECT * FROM category WHERE category_alias='{$category}'";
+        $pdo = Connect::exec()->prepare($category_query);
+        $pdo->execute();
+        $category_table_fields = $pdo->fetch();
+
+        $category_info = [
+            "alias" => $category_table_fields["category_alias"],
+            "title" => $category_table_fields["category_title"],
+            "img" => [
+                "path" => $category_table_fields["img_prefix"] . "/" . $category_table_fields["category_title_img"],
+                "alt" => $category_table_fields["category_title"],
+            ],
+        ];
+
+        return $category_info;
     }
 
-    public static function getImg($id, $field, $tablename)
+
+    private static function getImg($id, $field, $tablename)
     {
         try {
             $pdo = Connect::exec()->prepare("SELECT * FROM {$tablename} WHERE {$field}={$id}");
@@ -115,7 +133,8 @@ class RequestHandler extends DbConnect
             return "Ошибка при операции " . $e->getMessage();
         }
     }
-    public static function getPromo($id, $field, $tablename)
+
+    private static function getPromo($id, $field, $tablename)
     {
         try {
             $pdo = Connect::exec()->prepare("SELECT * FROM {$tablename} WHERE {$field}={$id}");
@@ -125,7 +144,8 @@ class RequestHandler extends DbConnect
             return "Ошибка при операции " . $e->getMessage();
         }
     }
-    public static function getSpecifications($id, $field, $tablename)
+
+    private static function getSpecifications($id, $field, $tablename)
     {
         try {
             $pdo = Connect::exec()->prepare("SELECT * FROM {$tablename} WHERE {$field}={$id}");

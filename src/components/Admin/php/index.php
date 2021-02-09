@@ -6,7 +6,6 @@
 //print json_encode("true");
 //die();
 
-
 require_once "./php/functions/functions.php";
 require_once "./php/db/RequestHandler.php";
 use php\db\RequestHandler as Request;
@@ -21,10 +20,15 @@ spl_autoload_register(function ($class) {
 });
 
 
+//$result = Request::getOneItem(1, "gadgets");
+//var_dump_pre($result);
+//die;
+//$uri = "api/product/gadgets/3";
+//$uri = "api/category/gadgets";
+
+
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
-    $uri = trim(filter_var($_SERVER["REQUEST_URI"], FILTER_SANITIZE_STRING));
-    //$uri = "api/product/gadgets/3";
-    //$uri = "api/category/gadgets";
+    $uri = trim(filter_var($_SERVER["REQUEST_URI"], FILTER_SANITIZE_URL));
     $prefix = "api/";
     $cnt = strpos($uri, $prefix) + strlen($prefix);
     $res = mb_substr($uri, $cnt, strlen($uri));
@@ -34,14 +38,14 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             print json_encode(Request::getIndexPageData());
 
         } elseif (strpos($res, "category") !== false) {
-            $category_title = substr($res, strpos($res, "/") + 1);
+            $category_title = trim(filter_var(substr($res, strpos($res, "/") + 1), FILTER_SANITIZE_STRING));
             print json_encode(Request::getCategoryItems($category_title));
 
         } elseif (strpos($res, "product") !== false) {
             $list = explode("/", substr($res, strpos($res, "/") + 1));
-            $category_title = $list[0];
-            $product_id = $list[1];
-            $result = Request::getOneItem($product_id, $category_title);
+            $category_title = trim(filter_var($list[0], FILTER_SANITIZE_STRING));
+            $product_id = trim(filter_var($list[1], FILTER_SANITIZE_STRING));
+            print json_encode(Request::getOneItem($product_id, $category_title));
 
         } elseif (strpos($res, "lazyload") !== false) {
             // timeout 4 sec maximun, else - error msg
@@ -54,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         }
     } catch (\Exception $e) {
         //print "Error with your request" . $e->getMessage();
-        print "В ваш запрос беззастенчиво закралась ошибка.";
+        print "В ваш запрос беззастенчиво вкралась ошибка.";
     }
 }
 

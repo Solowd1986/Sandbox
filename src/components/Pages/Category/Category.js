@@ -18,17 +18,28 @@ import { requestIndexData } from "../../../redux/middlware/requestToServer";
 import * as modalActions from "../../../redux/entities/modal/actions";
 
 class Category extends Component {
-
-
     static defaultProps = {
         category: {
             main: {
+                alias: "",
                 img: {}
             },
             data: [],
         },
 
     };
+    // Именно тут лежат данные для категории, они не нужны в общем store
+    state = {
+        categoryProductsList: {
+            main: {},
+        }
+    };
+
+    constructor(props) {
+        super(props);
+        const route = this.props.match.params.type;
+        this.props.getData(route);
+    }
 
 
     // компонент один, поэтому скролл верх срабатывает при имплементации, а вот просы приходят на каждый клик
@@ -98,13 +109,58 @@ class Category extends Component {
     // always on top of page, without smooth scroll
     componentDidMount() {
         window.scrollTo(0, 0);
-        this.props.getData(this.props.match.params.type = "phones");
+        //console.log(this.props);
+
+
+        //this.props.getData(this.props.match.params.type);
 
         //console.log('rr', this.props.match.params.type);
     }
 
-    render() {
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
         //console.log(this.props);
+        // const currentRoute = this.props.match.params.type;
+        // const nextRoute = nextProps.match.params.type;
+        //
+        // if (currentRoute === nextRoute) {
+        //     return false;
+        // }
+        // this.props.getData(nextRoute);
+        //console.log('should block next props- ', nextProps.match.params.type);
+
+        if (nextProps.match.params.type === this.state.categoryProductsList.main.alias) {
+            console.log('equal');
+            return false;
+        }
+
+        return true;
+    }
+
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        //console.log('prev-props did upd block - ', prevProps.match.params.type);
+        //console.log('next-props did upd block -', this.props.match.params.type);
+        //this.props.getData(this.props.match.params.type);
+
+        console.log(this.props.match.params.type);
+        console.log(this.state.categoryProductsList.main.alias);
+
+        //this.state.categoryProductsList.main.alias;
+        if (prevState.categoryProductsList.main.alias === undefined
+        //|| this.props.match.params.type !== this.state.categoryProductsList.main.alias
+        ) {
+            this.setState((state) => {
+                return {
+                    categoryProductsList: this.props.category
+                }
+            })
+        }
+    }
+
+
+    render() {
+
+        console.log(this.state);
 
         const { main: category, data: products } = this.props.category;
 
@@ -164,13 +220,14 @@ const loadAxios = (category) => (dispatch) => {
 };
 
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
         getData: (category) => {
             dispatch(loadAxios(category));
         },
     }
-}
+};
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Category);
 

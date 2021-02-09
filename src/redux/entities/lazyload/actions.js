@@ -1,7 +1,9 @@
 export const setServerData = (data) => {
     return {
         type: "lazyLoad/setServerData",
-        data
+        payload: {
+            data
+        }
     }
 };
 
@@ -11,15 +13,4 @@ export const clearDataStorage = () => {
     }
 };
 
-export const disableOverlay = (callback) => {
-    return {
-        type: "lazyLoad/disableOverlay",
-    }
-};
 
-
-export const enableOverlay = () => {
-    return {
-        type: "lazyLoad/enableOverlay",
-    }
-};

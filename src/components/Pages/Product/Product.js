@@ -18,18 +18,24 @@ class Product extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0); // always on top of page
+
     }
 
     isProductInCart = (products, id) => products.find(item => item.id === id);
 
     render() {
-        const id = parseInt(this.props.match.params.id);
-        const category = this.props.db.category.find(item => item.categoryAlias === this.props.match.params.category);
-        const product = this.props.db.category.find(item => item.categoryAlias === category.categoryAlias).productList.find(item => item.id === id);
+        //console.log(this.props);
 
-        const prefix = category.imgPrefix;
-        const list = product.imgPath.lg;
-        const alt = product.imgAlt;
+        const { category, id } = this.props.match.params;
+
+
+        // const id = parseInt(this.props.match.params.id);
+        // const category = this.props.db.category.find(item => item.categoryAlias === this.props.match.params.category);
+        // const product = this.props.db.category.find(item => item.categoryAlias === category.categoryAlias).productList.find(item => item.id === id);
+        //
+        // const prefix = category.imgPrefix;
+        // const list = product.imgPath.lg;
+        // const alt = product.imgAlt;
 
         const productPriceClassList = { main: `${styles.price}`, discount: `${styles.discount}` };
         const productAvailability = "Наличие: " + (product.rest === 0 ? "нет в наличии" : "в наличии");
@@ -41,6 +47,7 @@ class Product extends Component {
         const onAddToCart = (evt) => {
             this.props.onAddToCart(evt, product.id, category);
         };
+
         if (this.isProductInCart(this.props.cart.products, product.id)) {
             orderButton =
                 <div className={styles.btn_block}>

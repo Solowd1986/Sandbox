@@ -24,7 +24,7 @@ class ProductCard extends Component {
                     В наличии
                 </span>
 
-                <NavLink to={`/product/${item.alias}/${item.id}`} className={styles.link}>
+                <NavLink to={`/product/${category.alias}/${item.id}`} className={styles.link}>
                     <img className={styles.img}
                         // path from public folder
                          src={item.img.md}
