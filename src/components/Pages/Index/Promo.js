@@ -22,6 +22,7 @@ class Promo extends Component {
         this.props.enableModal();
     };
 
+
     static defaultProps = {
         index: {
             phones: [],
@@ -31,6 +32,7 @@ class Promo extends Component {
     };
 
     render() {
+
         const { phones, accessoires, gadgets } = this.props.index;
 
         return (

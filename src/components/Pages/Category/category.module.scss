@@ -1,6 +1,23 @@
 @import "~scss/common.module";
 
 
+.op {
+  position: relative;
+
+}
+
+.op2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 12;
+  background-color: lightgrey;
+  opacity: .9;
+}
+
+
 .category_wrapper {
   margin-bottom: 70px;
 }

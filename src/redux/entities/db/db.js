@@ -35,6 +35,8 @@ const initialState = {
             imgAlt: "slider-image"
         }
     ],
+    category: {},
+    index: {}
 
 };
 
@@ -50,7 +52,6 @@ export default (state = initialState, action) => {
         }
 
         case "server/getCategoryData": {
-
             return {
                 ...state,
                 category: action.payload
