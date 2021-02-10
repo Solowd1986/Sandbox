@@ -4,18 +4,7 @@ import styles from "./category.module.scss";
 import Layout from "~components/Core/Layout/Layout";
 import { connect } from "react-redux";
 
-
-import SortPorducts from "../../Core/SortProducts/SortProducts";
-import LazyLoad from "../../Core/LazyLoad/LazyLoad";
-import ProductCard from "../ProductCard/ProductCard";
-import Modal from "../../Core/Modal/Modal";
-import CartModal from "../../CartModal/CartModal";
-import PropTypes from "prop-types";
-import { Transition, TransitionGroup } from "react-transition-group";
-
-import api from "../../../redux/api/axios/init";
-import { requestIndexData } from "../../../redux/middlware/requestToServer";
-import * as modalActions from "../../../redux/entities/modal/actions";
+import * as server from "../../../redux/entities/db/actions";
 import CategoryProductsList from "./CategoryProductsList";
 
 
@@ -27,21 +16,12 @@ class Category extends Component {
         this.state = {
             categoryProductsList: {}
         };
-        this.props.getData(this.props.match.params.type);
+        this.props.fetchCategoryProducts(this.props.match.params.type);
     }
 
     componentDidMount() {
         window.scrollTo(0, 0); // always on top of page, without smooth scroll
     }
-
-
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        const currentRoute = this.state.categoryProductsList.main && this.state.categoryProductsList.main.alias;
-        const nextRoute = nextProps.match.params.type;
-
-        return currentRoute !== nextRoute;
-    }
-
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         const isThisInitialSetState = Object.keys(prevState.categoryProductsList).length === 0;
@@ -65,7 +45,7 @@ class Category extends Component {
         }
 
         if (currentRoute !== nextRoute) {
-            this.props.getData(this.props.match.params.type);
+            this.props.fetchCategoryProducts(this.props.match.params.type);
         }
     }
 
@@ -91,19 +71,10 @@ const mapStateToProps = (state) => {
     }
 };
 
-
-const loadAxios = (category) => (dispatch) => {
-    console.log('request');
-    api.get(`category/${category}`)
-        .then(responce => dispatch({ type: "server/getCategoryData", payload: responce.data }))
-        .catch(error => dispatch({ type: "server/serverError", payload: error }))
-};
-
-
 const mapDispatchToProps = (dispatch) => {
     return {
-        getData: (category) => {
-            dispatch(loadAxios(category));
+        fetchCategoryProducts: (category) => {
+            dispatch(server.fetchCategoryProducts(category));
         },
     }
 };

@@ -1,4 +1,5 @@
 import db from "./mock-data/database"
+import api from "../../api/axios/init";
 
 const imgPrefix = "/static/media";
 
@@ -57,6 +58,17 @@ export default (state = initialState, action) => {
                 category: action.payload
             };
         }
+
+
+        case "server/fetchCategoryProducts": {
+
+            return {
+                ...state,
+                category: action.payload
+            };
+        }
+
+
 
 
         case "server/startRequest": {
