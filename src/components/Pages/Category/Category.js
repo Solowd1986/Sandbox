@@ -6,13 +6,14 @@ import { connect } from "react-redux";
 
 import * as server from "../../../redux/entities/db/actions";
 import CategoryProductsList from "./CategoryProductsList";
+import BlockOverlay from "../../Core/Modal/BlockOverlay/BlockOverlay";
 
 
 class Category extends Component {
 
     constructor(props) {
         super(props);
-        this.categoryProducts = null;
+        this.categoryProducts = <BlockOverlay/>;
         this.state = {
             categoryProductsList: {}
         };
