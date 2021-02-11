@@ -6,23 +6,6 @@ import { connect } from "react-redux";
 
 class NavbarList extends React.Component {
 
-    clear = () => {
-        const check = () => {
-            if (window.pageYOffset === 0) {
-                this.props.clearDataStorage();
-                window.removeEventListener("scroll", check);
-            }
-        };
-
-        window.addEventListener("scroll", check);
-
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-
-        // this.props.clearDataStorage();
-    };
 
     render() {
         return (
@@ -31,7 +14,7 @@ class NavbarList extends React.Component {
                 {/*Смартфоны*/}
                 <li className={styles.header__nav_item}>
                     <NavLink
-                        onClick={this.clear}
+
                         to={"/category/phones"}
                         className={styles.header__nav_link}
                         activeClassName={styles.link_active_class}>
@@ -96,7 +79,8 @@ class NavbarList extends React.Component {
                 </li>
                 {/*Аксессуары*/}
                 <li className={styles.header__nav_item}>
-                    <NavLink onClick={this.clear}
+                    <NavLink
+
                              to={"/category/accessoires"}
                              className={styles.header__nav_link}
                              activeClassName={styles.link_active_class}>
@@ -192,7 +176,7 @@ class NavbarList extends React.Component {
                 {/*Гаджеты*/}
                 <li className={styles.header__nav_item}>
                     <NavLink
-                        onClick={this.clear}
+
                         to={"/category/gadgets"}
                         className={styles.header__nav_link}
                         activeClassName={styles.link_active_class}>
@@ -291,15 +275,6 @@ class NavbarList extends React.Component {
 }
 
 
-function mapDispatchToProps(dispatch) {
-    return {
-        clearDataStorage: () => {
-            //dispatch(actions.lazyload.clearDataStorage());
-        }
-    }
-}
-
-
-export default connect(null, mapDispatchToProps)(NavbarList);
+export default NavbarList;
 
 

@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "./features.module.scss";
 
-const Features = ({ prefix, promo }) => {
+const Features = ({ promo }) => {
+    console.log(promo);
+
     return (
         <>
             {promo.map(item => {
@@ -11,8 +13,8 @@ const Features = ({ prefix, promo }) => {
                         <p className={styles.desc}>{item.desc}</p>
                         <img
                             className={styles.img}
-                            src={`${prefix}/${item.imgPath}`}
-                            alt={item.imgAlt}
+                            src={`${item.img_path}`}
+                            alt={item.img_alt}
                         />
                     </div>
                 )

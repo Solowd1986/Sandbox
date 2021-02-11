@@ -39,7 +39,6 @@ class Order extends Component {
         const isCartEmpty = this.props.amountOfProductsInCart;
         this.isCartEmpty = this.props.amountOfProductsInCart === 0;
 
-
         return (
             <Layout>
 

@@ -19,7 +19,13 @@ class Category extends Component {
     }
 
     componentDidMount() {
-        window.scrollTo(0, 0); // always on top of page, without smooth scroll
+        //console.log(1155);
+        //window.scrollTo(0, 0); // always on top of page, without smooth scroll
+
+
+        document.body.style.cssText = `width: ${document.body.clientWidth}px; overflow: hidden; position: relative`;
+        document.querySelector("header").style.cssText = `width: ${document.body.clientWidth}px`;
+
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -65,6 +71,11 @@ class Category extends Component {
                 categoryProductsList: this.props.category
             })
         }
+    }
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+
+        return null
     }
 
 

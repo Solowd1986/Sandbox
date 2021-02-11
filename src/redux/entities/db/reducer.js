@@ -65,7 +65,13 @@ export default (state = initialState, action) => {
             };
         }
 
+        case "server/fetchProductData": {
 
+            return {
+                ...state,
+                product: action.payload
+            };
+        }
 
 
         case "server/startRequest": {
@@ -74,13 +80,13 @@ export default (state = initialState, action) => {
         }
         case "server/serverError": {
             console.log("error when request " + action.payload.message);
-            return {
-                ...state,
-                category: {
-                    main: {},
-                    error: true
-                }
-            };
+            // return {
+            //     ...state,
+            //     category: {
+            //         main: {},
+            //         error: true
+            //     }
+            // };
             break;
 
         }

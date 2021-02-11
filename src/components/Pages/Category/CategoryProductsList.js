@@ -26,12 +26,11 @@ export default class CategoryProductsList extends Component {
                 <div className={`${common.wrapper} ${styles.list_wrapper}`}>
                     <LazyLoad categoryName={category.categoryAlias}>
                         <ul className={styles.list}>
-
                             {
                                 products.map((item, i) => {
-                                    return (<div key={i}>
-                                        <ProductCard item={item} category={category}/>
-                                    </div>)
+                                    return (
+                                        <ProductCard key={i} item={item} category={category}/>
+                                    )
                                 })
                             }
 

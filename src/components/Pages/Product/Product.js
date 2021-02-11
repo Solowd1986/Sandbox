@@ -10,42 +10,49 @@ import ProductPrice from "../../Core/ProductPrice/ProductPrice";
 import ProductTabs from "./ProductTabs/ProductTabs";
 import PromoBadge from "../../Core/PromoBadge/PromoBadge";
 import * as cart from "../../../redux/entities/cart/actions";
+import * as server from "../../../redux/entities/db/actions";
 
 import { connect } from "react-redux";
 
 
 class Product extends Component {
 
-    componentDidMount() {
-        window.scrollTo(0, 0); // always on top of page
+    constructor(props) {
+        super(props);
+        this.state = {
+            products: {}
+        };
+        this.props.fetchProductData(this.props.match.params.category, this.props.match.params.id);
+    }
 
+    componentDidMount() {
+        //window.scrollTo(0, 0); // always on top of page
     }
 
     isProductInCart = (products, id) => products.find(item => item.id === id);
 
     render() {
-        //console.log(this.props);
 
-        const { category, id } = this.props.match.params;
+        console.log(this.props);
+        if (!this.props.product) return null;
 
+        const { main: category, data: product } = this.props.product;
 
-        // const id = parseInt(this.props.match.params.id);
-        // const category = this.props.db.category.find(item => item.categoryAlias === this.props.match.params.category);
-        // const product = this.props.db.category.find(item => item.categoryAlias === category.categoryAlias).productList.find(item => item.id === id);
-        //
-        // const prefix = category.imgPrefix;
-        // const list = product.imgPath.lg;
-        // const alt = product.imgAlt;
+        console.log(product);
+        console.log(category);
+
 
         const productPriceClassList = { main: `${styles.price}`, discount: `${styles.discount}` };
         const productAvailability = "Наличие: " + (product.rest === 0 ? "нет в наличии" : "в наличии");
 
         let orderButton = null;
+
         const onDeleteFromCart = (evt) => {
             this.props.onDeleteFromCart(evt, product.id);
         };
+
         const onAddToCart = (evt) => {
-            this.props.onAddToCart(evt, product.id, category);
+            this.props.onAddToCart(evt, product);
         };
 
         if (this.isProductInCart(this.props.cart.products, product.id)) {
@@ -78,7 +85,7 @@ class Product extends Component {
             <Layout>
                 <section className={`${common.container} ${styles.item_bg}`}>
                     <div className={`${common.wrapper} ${styles.order}`}>
-                        <ProductSlider prefix={prefix} list={list} alt={alt}/>
+                        <ProductSlider list={product.slider} alt={product.img_alt}/>
 
                         <div className={styles.order__info_wrapper}>
                             <h1 className={styles.order__title}>{product.title}</h1>
@@ -100,18 +107,30 @@ class Product extends Component {
 function mapStateToProps(state) {
     return {
         db: state.db,
-        cart: state.cart
+        cart: state.cart,
+        product: state.db.product
     }
 }
 
 
 function mapDispatchToProps(dispatch) {
     return {
-        onAddToCart: (evt, id, category) => {
-            dispatch(cart.addItemToCart(evt, id, category))
+
+        onAddToCart: (evt, item) => {
+            dispatch(cart.addItemToCart(evt, item))
         },
         onDeleteFromCart: (evt, id) => {
             dispatch(cart.removeItemFromCart(evt, id))
+        },
+
+        // onAddToCart: (evt, id, category) => {
+        //     dispatch(cart.addItemToCart(evt, id, category))
+        // },
+        // onDeleteFromCart: (evt, id) => {
+        //     dispatch(cart.removeItemFromCart(evt, id))
+        // },
+        fetchProductData: (category, id) => {
+            dispatch(server.fetchProductData(category, id))
         },
     }
 }

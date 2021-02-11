@@ -15,3 +15,10 @@ export const fetchCategoryProducts = (category) => (dispatch) => {
         .then(responce => dispatch({ type: "server/fetchCategoryProducts", payload: responce.data }))
         .catch(error => dispatch({ type: "server/serverError", payload: error }))
 };
+
+
+export const fetchProductData = (category, id) => (dispatch) => {
+    api.get(`product/${category}/${id}`)
+        .then(responce => dispatch({ type: "server/fetchProductData", payload: responce.data }))
+        .catch(error => dispatch({ type: "server/serverError", payload: error }))
+};

@@ -37,13 +37,15 @@ class ProductSlider extends Component {
     };
 
     render() {
-        const { prefix, list, alt } = this.props;
+        const { list, alt } = this.props;
+        console.log(list);
+
         return (
             <div className={styles.order__img_wrapper}>
                 <img
                     ref={this.mainImgRef}
                     className={styles.order__img}
-                    src={`${prefix}/${list[0]}`}
+                    src={`${list[0]}`}
                     alt={alt}
                 />
 
@@ -52,7 +54,7 @@ class ProductSlider extends Component {
                         <img key={item} width="60" height="60"
                              onClick={this.toggleSlide}
                              className={styles.img}
-                             src={`${prefix}/${item}`}
+                             src={`${item}`}
                              alt={alt}
                         />
                     ))}

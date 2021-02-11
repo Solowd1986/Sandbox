@@ -64,8 +64,12 @@ class RequestHandler extends DbConnect
             }
         }
 
+
+        $new_arr = array_merge($list_of_products, $list_of_products, $list_of_products);
+        shuffle($new_arr);
+
         // Отдаем массив из двух полей: список продуктов, со всеми данными и блок служебной информации для категории
-        return ["main" => self::getCategoryInfo($category), "data" => $list_of_products];
+        return ["main" => self::getCategoryInfo($category), "data" => $new_arr];
     }
 
 
@@ -83,14 +87,37 @@ class RequestHandler extends DbConnect
         $product_foreign_key_name = substr($category, 0, strlen($category) - 1) . "_id";
 
         $img_list = [];
+        $img_slider = [];
         foreach (self::getImg($product["id"], $product_foreign_key_name, $category_img_table) as $k => $v) {
             if (!in_array($k, ["id", $product_foreign_key_name])) {
                 $img_list[$k] = "/static/media/" . $category . "/" . $v;
+                if ($k !== "md" && $k !== "sm") $img_slider[] = "/static/media/" . $category . "/" . $v;
             }
         }
 
         $product["img"] = $img_list;
-        $product["promo"] = self::getPromo($product["id"], $product_foreign_key_name, $category_promo_table);
+        $product["slider"] = $img_slider;
+
+        //$product["promo"] = self::getPromo($product["id"], $product_foreign_key_name, $category_promo_table);
+
+        $promo_list = [];
+        foreach (self::getPromo($product["id"], $product_foreign_key_name, $category_promo_table) as $k => $v) {
+            $promo = [];
+            foreach ($v as $k2 => $v2) {
+                if (!in_array($k2, ["id", "phone_id"])) {
+                    if ($k2 === "img_path") {
+                        $promo[$k2] = "/static/media/" . $category . "/" . $v2;
+                    } else {
+                        $promo[$k2] = $v2;
+                    }
+                }
+            }
+            $promo_list[] = $promo;
+        }
+
+
+        $product["promo"] = $promo_list;
+
         if ($category === "phones") {
             $spec_table = substr($category, 0, strlen($category) - 1) . "_specifications";
             $product["specifications"] =
@@ -134,7 +161,7 @@ class RequestHandler extends DbConnect
         }
     }
 
-    private static function getPromo($id, $field, $tablename)
+    public static function getPromo($id, $field, $tablename)
     {
         try {
             $pdo = Connect::exec()->prepare("SELECT * FROM {$tablename} WHERE {$field}={$id}");

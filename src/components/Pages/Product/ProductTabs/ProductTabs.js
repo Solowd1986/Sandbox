@@ -37,9 +37,13 @@ class ProductTabs extends Component {
 
 
     render() {
+
+        console.log('ft', this.props);
+
+
         const {
-            category: { categoryAlias: alias, imgPrefix: prefix },
-            product: { promoBlock: promo, specifications = null }
+            category: { alias },
+            product: { promo, specifications = null }
         } = this.props;
 
         const tabLinkClassList = classNames(styles.info__nav_link);
@@ -69,7 +73,7 @@ class ProductTabs extends Component {
 
                 <div className={common.container}>
                     <ul ref={this.tabBodyList}>
-                        <li className={tabBodyClassList} id={"desc"}><Features prefix={prefix} promo={promo}/></li>
+                        <li className={tabBodyClassList} id={"desc"}><Features promo={promo}/></li>
                         {phoneSpecs}
                         <li className={tabBodyClassList} id={"shipping"}><ProductDelivery/></li>
                     </ul>
