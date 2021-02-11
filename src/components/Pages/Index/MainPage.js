@@ -6,12 +6,15 @@ import Announcements from "./Announcements";
 import About from "./About";
 import PromoBadge from "../../Core/PromoBadge/PromoBadge";
 import Layout from "../../Core/Layout/Layout";
+import { connect } from "react-redux";
 
-export default class MainPage extends Component {
+class MainPage extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);
     }
+
     render() {
+        if (!this.props.initialData) return null;
         return (
             <Layout>
                 <Slider/>
@@ -25,6 +28,14 @@ export default class MainPage extends Component {
     }
 }
 
+
+function mapStateToProps(state) {
+    return {
+        initialData: state.db.index,
+    }
+}
+
+export default connect(mapStateToProps)(MainPage);
 
 
 

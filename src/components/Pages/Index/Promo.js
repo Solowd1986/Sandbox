@@ -13,7 +13,6 @@ import PropTypes from "prop-types";
 
 
 class Promo extends Component {
-
     static propTypes = {
         index: PropTypes.object,
     };
@@ -22,17 +21,9 @@ class Promo extends Component {
         this.props.enableModal();
     };
 
-
-    static defaultProps = {
-        index: {
-            phones: [],
-            accessoires: [],
-            gadgets: [],
-        }
-    };
-
     render() {
 
+        if (!this.props.index) return null;
         const { phones, accessoires, gadgets } = this.props.index;
 
         return (
@@ -51,7 +42,6 @@ class Promo extends Component {
 
                     <h2 className={styles.promo_section_title}>Рекомендуем</h2>
                     <ul className={styles.promo_list}>
-                        {/*ограничиваем вывод четырьмя элементами на странице promo*/}
                         {phones.data.map((item, i) => {
                             return (
                                 <ProductCard key={i} item={item} category={phones.main}/>

@@ -12,15 +12,10 @@ import BlockOverlay from "../../Core/Modal/BlockOverlay/BlockOverlay";
 class Category extends Component {
     constructor(props) {
         super(props);
-        this.cnt = 0;
-        this.cnt2 = 0;
-
-        this.categoryProducts = <BlockOverlay/>;
         this.state = {
             categoryProductsList: {}
         };
         this.props.fetchCategoryProducts(this.props.match.params.type);
-        this.flag = false;
     }
 
     componentDidMount() {
@@ -28,7 +23,8 @@ class Category extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // проверяем текущий стейт, prev версию тут трогать нен уджно, для инициирующей првоерки она вредна
+        console.log('did update');
+
         const isThisInitialSetState = Object.keys(this.state.categoryProductsList).length === 0;
 
         const currentCategoryAlias = !isThisInitialSetState && this.state.categoryProductsList.main.alias;
@@ -38,29 +34,14 @@ class Category extends Component {
         const nextRoute = this.props.match.params.type;
 
 
-        //this.flag = false;
-
-        //document.body.style.cssText = `width: ${document.body.clientWidth}px; overflow: hidden`;
-        //document.querySelector("header").style.cssText = `width: ${document.body.clientWidth}px`;
-
-
         if (isThisInitialSetState) {
-            this.flag = true;
-            console.log('first upd', this.cnt++);
             this.setState({
                 categoryProductsList: this.props.category
             })
         }
 
-
         if (currentRoute !== nextRoute) {
-            console.log('start');
-            this.categoryProducts = <BlockOverlay/>;
-            this.flag = false;
-            // запрос не вызывает рендер, поэтому не показывается спиннер, тут мы посл запрсоа принуждаем рендер появиться
-            // ну а дальше после прихода данных овтета, уже спиннер замениться на пропсы
-            this.forceUpdate();
-            this.props.fetchCategoryProducts(this.props.match.params.type);
+            this.props.fetchCategoryProducts(nextRoute);
         }
 
 
@@ -78,23 +59,24 @@ class Category extends Component {
          *
          */
 
-        if (!isThisInitialSetState && currentCategoryAlias !== nextRoute && currentCategoryAlias !== nextCategoryAlias) {
-            this.flag = true;
-            console.log('end');
-
+        if (currentCategoryAlias !== nextRoute && currentCategoryAlias !== nextCategoryAlias) {
             this.setState({
                 categoryProductsList: this.props.category
             })
         }
     }
 
-
     render() {
         console.log('rend');
+        const isProductsListEmpty = Object.keys(this.state.categoryProductsList).length === 0;
 
-        if (this.state.categoryProductsList.main !== undefined && this.flag === true) {
+        const list = this.state.categoryProductsList;
+
+        if (isProductsListEmpty || list.main && list.main.alias !== this.props.match.params.type) {
+            this.categoryProducts = <BlockOverlay/>;
+        } else {
             const { main: category, data: products } = this.state.categoryProductsList;
-            this.categoryProducts = <CategoryProductsList category={category} products={products}/>
+            this.categoryProducts = <CategoryProductsList category={category} products={products}/>;
         }
 
         return (

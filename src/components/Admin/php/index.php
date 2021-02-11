@@ -1,7 +1,7 @@
 <?php
 
 
-//sleep(1);
+sleep(1);
 
 //print json_encode("true");
 //die();

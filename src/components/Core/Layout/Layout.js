@@ -6,6 +6,7 @@ import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
 
 export default class Layout extends Component {
+
     render() {
         return (
             <div className={styles.layout}>

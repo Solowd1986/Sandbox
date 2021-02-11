@@ -36,9 +36,6 @@ const initialState = {
             imgAlt: "slider-image"
         }
     ],
-    category: {},
-    index: {}
-
 };
 
 
