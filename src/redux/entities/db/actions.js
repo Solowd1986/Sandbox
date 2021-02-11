@@ -10,7 +10,11 @@ export const getIndexData = (responce) => {
 };
 
 export const fetchCategoryProducts = (category) => (dispatch) => {
-    api.get(`category/${category}`)
-        .then(responce => dispatch({ type: "server/fetchCategoryProducts", payload: responce.data }))
-        .catch(error => dispatch({ type: "server/serverError", payload: error }))
+    setTimeout(() => {
+        api.get(`category/${category}`)
+            .then(responce => dispatch({ type: "server/fetchCategoryProducts", payload: responce.data }))
+            .catch(error => dispatch({ type: "server/serverError", payload: error }))
+
+    }, 3000);
+
 };

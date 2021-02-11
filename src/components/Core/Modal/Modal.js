@@ -13,7 +13,7 @@ class Modal extends Component {
 
     constructor(props) {
         super(props);
-        this.addScrollbarOffset();
+        util.addScrollbarOffset();
         this.delayModalTimer = null;
     }
 
@@ -38,21 +38,9 @@ class Modal extends Component {
         clearTimeout(this.delayModalTimer);
     };
 
-    addScrollbarOffset = () => {
-        if (util.calcScrollBarWidth() > 0) {
-            document.body.style.cssText = `width: ${document.body.clientWidth}px; overflow: hidden`;
-            document.querySelector("header").style.cssText = `width: ${document.body.clientWidth}px`;
-        }
-    };
-
-    removeScrollbarOffset = () => {
-        document.body.style.removeProperty("width");
-        document.body.style.removeProperty("overflow");
-        document.querySelector("header").style.removeProperty("width");
-    };
 
     disableModal = () => {
-        this.removeScrollbarOffset();
+        util.removeScrollbarOffset();
         this.props.disableModal();
     };
 
