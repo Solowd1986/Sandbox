@@ -9,6 +9,12 @@ export const getIndexData = (responce) => {
     }
 };
 
+export const clearProduct = () => {
+    return {
+        type: "server/clearProduct",
+    }
+};
+
 
 export const fetchCategoryProducts = (category) => (dispatch) => {
     api.get(`category/${category}`)

@@ -29,12 +29,16 @@ class Product extends Component {
         //window.scrollTo(0, 0); // always on top of page
     }
 
+    componentWillUnmount() {
+        this.props.clearProduct();
+    }
+
     isProductInCart = (products, id) => products.find(item => item.id === id);
 
     render() {
 
         console.log(this.props);
-        if (!this.props.product) return null;
+        if (!this.props.product || Object.keys(this.props.product).length === 0) return null;
 
         const { main: category, data: product } = this.props.product;
 
@@ -122,13 +126,9 @@ function mapDispatchToProps(dispatch) {
         onDeleteFromCart: (evt, id) => {
             dispatch(cart.removeItemFromCart(evt, id))
         },
-
-        // onAddToCart: (evt, id, category) => {
-        //     dispatch(cart.addItemToCart(evt, id, category))
-        // },
-        // onDeleteFromCart: (evt, id) => {
-        //     dispatch(cart.removeItemFromCart(evt, id))
-        // },
+        clearProduct: (evt, id) => {
+            dispatch(server.clearProduct())
+        },
         fetchProductData: (category, id) => {
             dispatch(server.fetchProductData(category, id))
         },

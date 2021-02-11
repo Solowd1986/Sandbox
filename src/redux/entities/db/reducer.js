@@ -78,6 +78,16 @@ export default (state = initialState, action) => {
             //console.log("start request");
             break;
         }
+
+        case "server/clearProduct": {
+            //console.log("start request");
+            return {
+                ...state,
+                product: {}
+            };
+            break;
+        }
+
         case "server/serverError": {
             console.log("error when request " + action.payload.message);
             // return {
