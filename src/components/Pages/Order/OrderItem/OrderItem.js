@@ -77,15 +77,18 @@ class OrderItem extends Component {
     };
 
     render() {
-        const { item, item: { imgAlt: alt, imgFullPath: path } } = this.props;
+        console.log(this.props);
+
+        const { item, item: { img_alt: alt, img } } = this.props;
 
         const discount = item.discount ? item.price - (item.price * 10 / 100) : item.price;
         const price = new Intl.NumberFormat().format(discount * item.quantity) + " р.";
-        const color = item.color || item.specifications.color;
+        //const color = item.color || item.specifications.color;
+        const color = null;
 
         return (
             <div className={styles.info}>
-                <img width={82} height={82} className={styles.img_sm} src={path} alt={alt}/>
+                <img width={82} height={82} className={styles.img_sm} src={img.md} alt={alt}/>
                 <div className={styles.info_inner_wrapper}>
                     <p className={styles.product_title}>
                         <span>{item.title}</span>

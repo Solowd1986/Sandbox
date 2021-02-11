@@ -41,9 +41,9 @@ const store =
 /**
  * Каждый раз, когда меняется store - происходит внесение всего обьекта (кодированного предварительно) в localStorage
  */
-// store.subscribe(() => {
-//     localStorage.setItem("state", encodeURIComponent(JSON.stringify(store.getState())));
-// });
+store.subscribe(() => {
+    localStorage.setItem("state", encodeURIComponent(JSON.stringify(store.getState())));
+});
 
 export default store;
 
