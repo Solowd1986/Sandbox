@@ -16,11 +16,9 @@ class BlockOverlay extends Component {
 
     render() {
         return (
-            <div className={styles.overlay_wrapper}>
                 <div className={styles.overlay}>
                     <Spinner/>
                 </div>
-            </div>
         )
     }
 }

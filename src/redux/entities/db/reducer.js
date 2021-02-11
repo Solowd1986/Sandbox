@@ -73,8 +73,16 @@ export default (state = initialState, action) => {
             break;
         }
         case "server/serverError": {
-            //console.log("error when request " + action.payload.message);
+            console.log("error when request " + action.payload.message);
+            return {
+                ...state,
+                category: {
+                    main: {},
+                    error: true
+                }
+            };
             break;
+
         }
     }
 

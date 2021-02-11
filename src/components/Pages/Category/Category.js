@@ -23,7 +23,7 @@ class Category extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('did update');
+        //console.log('did update');
 
         const isThisInitialSetState = Object.keys(this.state.categoryProductsList).length === 0;
 
@@ -56,6 +56,7 @@ class Category extends Component {
          * это сработает когда свреху заданный запрос спровоцирует оотвт и он придет, и вот этих просах пришедних алиас
          * не будет равен текущшему алис из стейт и это вызовет смену. А потмо еще раз суюда придем и в это условие
          * уже не попадем
+         * ловим омент когда категория уже пришла, до тэого категория остается той же что была для текущей версии, той что видим
          *
          */
 
@@ -66,22 +67,62 @@ class Category extends Component {
         }
     }
 
+
     render() {
         console.log('rend');
+
+
+        /**
+         *
+         * 1. Как только пришли, конструктор создает запрос и формирует начальный state
+         * 2. В рендер стейт пуст, значит выводим спиннер.
+         * 3. Данные пришли, рендер, стейт все еще пуст, но в DidUpdate меняет стейт
+         *
+         *
+         * Тут выполняются три проверки:
+         * 1. Первый рендер компонента: спиннер показывает пока стейт пуст, а потом показывается категория
+         * 2. Второй рендер это получение свойств. Стейст уже есть.
+         * Человек нажал на ссылку, пришли пропсы, перед првоеркой забрали алиас стейста, например phones
+         * Сравниил: алисас стейста равен пропсам - нет, значит спиннер. А в дидапдейт вызвали запрос данных.
+         * Данные пришли, сравниваем: алисас стейста все еще не равен пропсам. Потому что новые данные покатегории пришли
+         * но еещ не записаны в стейст, опять спиннер. В дидапдейст ставим новый стейст и вызываем ре-рендер
+         * Приходитм опять сюда: алиас стейста равен пропсам пути (пута) - проверка пройдена, отрисовываем категоирю
+         *
+         */
+
+        let productsList = null;
         const isProductsListEmpty = Object.keys(this.state.categoryProductsList).length === 0;
+        const alias = isProductsListEmpty ? null : this.state.categoryProductsList.main.alias;
 
-        const list = this.state.categoryProductsList;
 
-        if (isProductsListEmpty || list.main && list.main.alias !== this.props.match.params.type) {
-            this.categoryProducts = <BlockOverlay/>;
+        //document.body.style.cssText = `width: ${document.body.clientWidth}px; overflow: hidden; position: relative`;
+
+        //console.log(document.body);
+        //console.log(document.querySelector("header"));
+
+        //if (document.querySelector("header"))
+        //document.querySelector("header").style.cssText = `width: ${document.body.clientWidth}px`;
+
+
+        // if (!isProductsListEmpty && this.props.category.error !== undefined) {
+        //     console.log(1888);
+        //
+        //     productsList = <div>ERROR</div> ;
+        // }
+
+        if (isProductsListEmpty || alias !== this.props.match.params.type) {
+            productsList = <BlockOverlay/>;
+            //productsList = <Overlay><Layout>{this.props.children}</Layout></Overlay>
+            //return null
         } else {
             const { main: category, data: products } = this.state.categoryProductsList;
-            this.categoryProducts = <CategoryProductsList category={category} products={products}/>;
+            productsList = <CategoryProductsList category={category} products={products}/>;
         }
+
 
         return (
             <Layout>
-                {this.categoryProducts}
+                {productsList}
             </Layout>
         )
     }
