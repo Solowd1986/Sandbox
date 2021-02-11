@@ -11,11 +11,18 @@ const Features = ({ promo }) => {
                     <div key={item.title} className={styles.wrapper}>
                         <h2 className={styles.title}>{item.title}</h2>
                         <p className={styles.desc}>{item.desc}</p>
-                        <img
-                            className={styles.img}
-                            src={`${item.img_path}`}
-                            alt={item.img_alt}
-                        />
+                        {
+                            item.img_path
+                                ?
+                                <img
+                                    className={styles.img}
+                                    src={`${item.img_path}`}
+                                    alt={item.img_alt}
+                                />
+                                :
+                                null
+                        }
+
                     </div>
                 )
             })}

@@ -36,6 +36,7 @@ const initialState = {
             imgAlt: "slider-image"
         }
     ],
+    product: {}
 };
 
 
