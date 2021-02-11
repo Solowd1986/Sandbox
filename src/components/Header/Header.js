@@ -18,6 +18,7 @@ class Header extends Component {
 
     componentDidMount() {
         window.addEventListener("scroll", this.handleScroll);
+
     }
 
     componentWillUnmount() {

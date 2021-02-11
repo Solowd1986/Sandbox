@@ -18,6 +18,8 @@ class ProductCard extends Component {
     render() {
         const { cart, category, item, classList } = this.props;
 
+        //console.log(item);
+
         return (
             <li key={item.id} className={`${styles.item} ${classList ? classList : ''}`}>
                 <span className={item.rest > 0 ? `${styles.tag}` : `${styles.tag} ${styles.tag__not_in_stock}`}>

@@ -90,7 +90,9 @@ export default (state = initialState, action) => {
         }
 
         case "server/serverError": {
-            console.log("error when request " + action.payload.message);
+            console.log('error', action);
+
+            console.log("error when request server/serverError -" + action.payload);
             // return {
             //     ...state,
             //     category: {

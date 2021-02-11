@@ -42,8 +42,8 @@ class Product extends Component {
 
         const { main: category, data: product } = this.props.product;
 
-        console.log(product);
-        console.log(category);
+        //console.log(product);
+        //console.log(category);
 
 
         const productPriceClassList = { main: `${styles.price}`, discount: `${styles.discount}` };
@@ -80,7 +80,7 @@ class Product extends Component {
                         product={product}
                         classList={classList}
                         onClick={onAddToCart}>
-                        Добавить в заказ
+                        {product.rest !== 0 ? "Добавить в заказ" : "Нет в наличии"}
                     </OrderButton>
                 </div>;
         }

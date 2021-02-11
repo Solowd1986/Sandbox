@@ -81,6 +81,7 @@ class Category extends Component {
 
     render() {
         console.log('rend');
+        console.log(this.props);
 
 
         /**
@@ -121,6 +122,7 @@ class Category extends Component {
         //     productsList = <div>ERROR</div> ;
         // }
 
+
         if (isProductsListEmpty || alias !== this.props.match.params.type) {
             productsList = <BlockOverlay/>;
             //productsList = <Overlay><Layout>{this.props.children}</Layout></Overlay>
@@ -130,7 +132,7 @@ class Category extends Component {
             productsList = <CategoryProductsList category={category} products={products}/>;
         }
 
-
+        //`width: ${document.body.clientWidth}px`;
         return (
             <Layout>
                 {productsList}

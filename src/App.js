@@ -37,7 +37,6 @@ store.dispatch(loadAxios());
 // });
 
 
-
 /**
  * Logic of first loading, get data from server
  */
@@ -48,7 +47,6 @@ export default class App extends Component {
                 <Provider store={store}>
                     <Router>
                         <Switch>
-
                             {routes.map((route) =>
                                 <Route
                                     key={route.url}
@@ -57,7 +55,6 @@ export default class App extends Component {
                                     exact={route.exact}/>)
                             }
                             <Redirect to={"/404"}/> // редирект, если рута не нашлось
-
                         </Switch>
                     </Router>
                 </Provider>
