@@ -73,11 +73,6 @@ class Category extends Component {
         }
     }
 
-    getSnapshotBeforeUpdate(prevProps, prevState) {
-
-        return null
-    }
-
 
     render() {
         console.log('rend');
@@ -105,7 +100,6 @@ class Category extends Component {
         let productsList = null;
         const isProductsListEmpty = Object.keys(this.state.categoryProductsList).length === 0;
         const alias = isProductsListEmpty ? null : this.state.categoryProductsList.main.alias;
-
 
         //document.body.style.cssText = `width: ${document.body.clientWidth}px; overflow: hidden; position: relative`;
 
