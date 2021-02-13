@@ -38,6 +38,7 @@
   color: $grey;
   transition: 0.2s;
 
+
   &:hover {
     color: $red-500;
   }
@@ -75,7 +76,7 @@
 
 .header__inner_list {
   display: none;
-  position: absolute;
+  position: fixed;
   right: 0;
   left: 0;
 

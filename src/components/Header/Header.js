@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import common from "~scss/common.module.scss";
 import styles from "./header.module.scss";
 import classNames from "classnames";
@@ -42,15 +42,22 @@ class Header extends Component {
             [styles.header_fixed]: this.state.isPageScrolled
         });
         return (
-            <header className={classList}>
-                <a className={`${styles.portfolio_controls} ${styles.portfolio_controls__right}`} href="#">перейти на GitHub проекта</a>
-                <nav className={`${common.wrapper} ${styles.header}`}>
-                    <MobileNavbar/>
-                    <Logo/>
-                    <NavbarList/>
-                    <Userbar/>
-                </nav>
-            </header>
+
+
+            <div className={styles.wrapper_2}>
+
+                <header className={classList}>
+                    <a className={`${styles.portfolio_controls} ${styles.portfolio_controls__right}`} href="#">перейти на GitHub проекта</a>
+                    <nav className={`${common.wrapper} ${styles.header}`}>
+                        <MobileNavbar/>
+                        <Logo/>
+                        <NavbarList/>
+                        <Userbar/>
+                    </nav>
+                </header>
+
+            </div>
+
         )
     }
 }

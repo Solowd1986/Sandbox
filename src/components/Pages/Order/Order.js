@@ -13,6 +13,31 @@ import * as modalActions from "../../../redux/entities/modal/actions";
 
 class Order extends Component {
 
+    constructor(props) {
+        super(props);
+
+        // if (this.props.amountOfProductsInCart === 0) {
+        //     document.body.style.cssText = `width: ${document.body.clientWidth}px; overflow: hidden; position: relative`;
+        //     //document.querySelector("header").style.cssText = `width: ${document.body.clientWidth}px`;
+        //     if (document.querySelector("header")) {
+        //         document.querySelector("header").style.removeProperty("width");
+        //     }
+        // }
+
+
+    }
+
+    componentWillUnmount() {
+        // document.body.style.removeProperty("width");
+        // document.body.style.removeProperty("overflow");
+        // document.body.style.removeProperty("position");
+        // if (document.querySelector("header")) {
+        //     document.querySelector("header").style.removeProperty("width");
+        // }
+    }
+
+
+
     componentDidMount() {
         window.scrollTo(0, 0) // always on top of page, without smooth scroll
     }
