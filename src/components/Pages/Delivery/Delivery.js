@@ -1,12 +1,11 @@
 import React from "react";
 import common from "~scss/common.module.scss";
 import styles from "./delivery.module.scss";
-import Layout from "../../Core/Layout/Layout";
 import deliveryBanner from "./img/_delivery-banner.png";
 
 const Delivery = props => {
     return (
-        <Layout>
+        <>
             <div className={styles.sign_bg}>
                 <img className={styles.sign_bg__img} src={deliveryBanner} alt="Доставка"/>
                 <h3 className={styles.sign_bg__title}>Доставка и оплата</h3>
@@ -47,7 +46,7 @@ const Delivery = props => {
                     <li>Электронными деньгами: WebMoney, Яндекс.Деньги, QIWI</li>
                 </ul>
             </div>
-        </Layout>
+        </>
     )
 };
 

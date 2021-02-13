@@ -29,46 +29,6 @@
   right: 20px;
 }
 
-header {
-  position: relative;
-  //max-width: 1663px;
-  //min-width: 1663px;
-  //margin: 0 auto;
-
-  @media (max-width: 1600px) {
-    min-width: initial;
-    margin: initial;
-  }
-}
-
-
-.op {
-  height: 10px;
-  background-color: red;
-}
-
-.wrapper_3 {
-  width: 100%;
-  min-height: 76px;
-  background-color: white;
-}
-
-.wrapper_2 {
-  //position: fixed;
-
-  //z-index: 99;
-  //background-color: white;
-  //width: 100% - 17px;
-  //@include wt();
-  //width: calc(100% - 17px);
-  //max-width: 1660px;
-
-  //margin-right: auto;
-  //margin-left: auto;
-}
-
-
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -80,7 +40,6 @@ header {
     position: relative;
   }
 }
-
 
 .header_fixed {
   position: fixed;

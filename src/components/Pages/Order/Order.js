@@ -3,7 +3,6 @@ import common from "~scss/common.module.scss";
 import styles from "./order.module.scss";
 import OrderInfo from "./OrderInfo/OrderInfo";
 import OrderSummary from "./OrderSummary/OrderSummary";
-import Layout from "~components/Core/Layout/Layout";
 import { connect } from "react-redux";
 import Modal from "../../Core/Modal/Modal";
 import Confirm from "./Confirm/Confirm";
@@ -65,8 +64,7 @@ class Order extends Component {
         this.isCartEmpty = this.props.amountOfProductsInCart === 0;
 
         return (
-            <Layout>
-
+            <>
                 {this.props.amountOfProductsInCart > 0
                     ?
                     <div className={`${common.container} ${styles.container_checkout_bg}`}>
@@ -101,7 +99,7 @@ class Order extends Component {
                         </div>
                     </>
                 }
-            </Layout>
+            </>
         )
     }
 }

@@ -3,7 +3,7 @@ import common from "~scss/common.module.scss";
 import styles from "./category.module.scss";
 import Layout from "~components/Core/Layout/Layout";
 import { connect } from "react-redux";
-
+import * as utils from "../../Core/Modal/helpers/functions";
 import * as server from "../../../redux/entities/db/actions";
 import CategoryProductsList from "./CategoryProductsList";
 import BlockOverlay from "../../Core/Modal/BlockOverlay/BlockOverlay";
@@ -15,6 +15,11 @@ class Category extends Component {
         this.state = {
             categoryProductsList: {}
         };
+
+        // это нужно чтобы при переходе по мольному скроллу как при создании компонента категории так и при обновлении
+        // при переходам по сссылкам, кажыдй раз сбрасывался отступ и запрет прокрутки.
+        utils.removeScrollbarOffset();
+
         this.props.fetchCategoryProducts(this.props.match.params.type);
     }
 
@@ -22,6 +27,8 @@ class Category extends Component {
         //console.log(1155);
         //window.scrollTo(0, 0); // always on top of page, without smooth scroll
 
+        // document.body.style.removeProperty("overflow");
+        // document.body.style.removeProperty("padding-right");
         window.scrollTo(0, 0);
         //document.body.style.cssText = `width: ${document.body.clientWidth}px; overflow: hidden; position: relative`;
         //document.querySelector("header").style.cssText = `width: ${document.body.clientWidth}px`;
@@ -40,6 +47,10 @@ class Category extends Component {
         const nextRoute = this.props.match.params.type;
 
 
+        // это нужно чтобы при переходе по мольному скроллу как при создании компонента категории так и при обновлении
+        // при переходам по сссылкам, кажыдй раз сбрасывался отступ и запрет прокрутки.
+        utils.removeScrollbarOffset();
+
         if (isThisInitialSetState) {
             this.setState({
                 categoryProductsList: this.props.category
@@ -47,6 +58,7 @@ class Category extends Component {
         }
 
         if (currentRoute !== nextRoute) {
+
             this.props.fetchCategoryProducts(nextRoute);
         }
 
@@ -74,9 +86,10 @@ class Category extends Component {
     }
 
 
+
     render() {
-        console.log('rend');
-        console.log(this.props);
+        //console.log('rend');
+        //console.log(this.props);
 
 
         /**
@@ -128,9 +141,7 @@ class Category extends Component {
 
         //`width: ${document.body.clientWidth}px`;
         return (
-            <Layout>
-                {productsList}
-            </Layout>
+            productsList
         )
     }
 }

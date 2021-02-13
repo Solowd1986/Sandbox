@@ -3,7 +3,6 @@ import common from "~scss/common.module.scss";
 import styles from "./product.module.scss";
 import classNames from "classnames";
 
-import Layout from "~components/Core/Layout/Layout";
 import ProductSlider from "./ProductSlider/ProductSlider";
 import OrderButton from "../../Core/OrderButton/OrderButton";
 import ProductPrice from "../../Core/ProductPrice/ProductPrice";
@@ -86,7 +85,7 @@ class Product extends Component {
         }
 
         return (
-            <Layout>
+            <>
                 <section className={`${common.container} ${styles.item_bg}`}>
                     <div className={`${common.wrapper} ${styles.order}`}>
                         <ProductSlider list={product.slider} alt={product.img_alt}/>
@@ -102,7 +101,7 @@ class Product extends Component {
                 </section>
                 <ProductTabs category={category} product={product}/>
                 <PromoBadge/>
-            </Layout>
+            </>
         )
     }
 }

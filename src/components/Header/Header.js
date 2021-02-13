@@ -42,22 +42,15 @@ class Header extends Component {
             [styles.header_fixed]: this.state.isPageScrolled
         });
         return (
-
-
-            <div className={styles.wrapper_2}>
-
-                <header className={classList}>
-                    <a className={`${styles.portfolio_controls} ${styles.portfolio_controls__right}`} href="#">перейти на GitHub проекта</a>
-                    <nav className={`${common.wrapper} ${styles.header}`}>
-                        <MobileNavbar/>
-                        <Logo/>
-                        <NavbarList/>
-                        <Userbar/>
-                    </nav>
-                </header>
-
-            </div>
-
+            <header className={classList}>
+                <a className={`${styles.portfolio_controls} ${styles.portfolio_controls__right}`} href="#">перейти на GitHub проекта</a>
+                <nav className={`${common.wrapper} ${styles.header}`}>
+                    <MobileNavbar/>
+                    <Logo/>
+                    <NavbarList/>
+                    <Userbar/>
+                </nav>
+            </header>
         )
     }
 }

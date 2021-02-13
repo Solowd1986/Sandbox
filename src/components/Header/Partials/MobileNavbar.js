@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./mobile-navbar.module.scss";
 import {NavLink} from "react-router-dom";
 import classNames from "classnames";
+import * as utils from "../../Core/Modal/helpers/functions";
 
 class MobileNavbar extends React.Component {
 
@@ -9,28 +10,15 @@ class MobileNavbar extends React.Component {
         isMobileMenuVisible: false
     };
 
-    toggleMobileMenu = (evt) => {
 
+    toggleMobileMenu = (evt) => {
         if (!this.state.isMobileMenuVisible) {
-            document.body.style.cssText = `width: ${document.body.clientWidth}px; overflow: hidden; position: relative`;
-            document.querySelector("header").style.cssText = `width: ${document.body.clientWidth}px`;
+            utils.addScrollbarOffset();
         } else {
-            document.body.style.removeProperty("width");
-            document.body.style.removeProperty("overflow");
-            document.body.style.removeProperty("position");
-            document.querySelector("header").style.removeProperty("width");
+            utils.removeScrollbarOffset();
         }
 
-
         this.setState((state) => {
-            // проверка на false, так как факт вызова метода указывает, что дальше станет true и фикс body понадобится
-            // if (!this.state.isMobileMenuVisible) {
-            //     document.body.classList.add(styles.mobile_menu_body_fixed);
-            //
-            // } else {
-            //     document.body.classList.remove(styles.mobile_menu_body_fixed);
-            //
-            // }
             return {
                 isMobileMenuVisible: !this.state.isMobileMenuVisible
             }
@@ -48,6 +36,10 @@ class MobileNavbar extends React.Component {
 
 
     render() {
+        console.log('state', this.state);
+
+        //console.log('rend nav');
+
         const classList = classNames(styles.mobile_menu__icon, {
             [styles.mobile_menu__icon__active]: this.state.isMobileMenuVisible === true,
         });

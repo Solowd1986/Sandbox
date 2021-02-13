@@ -1,13 +1,14 @@
-import React, {Component} from "react";
-import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
+import React, { Component } from "react";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import routes from "./routes/routes";
 
-import {Provider} from "react-redux";
+import { Provider } from "react-redux";
 import store from "./redux/store";
 import "./utils/whyDidYouRender";
 
 
 import api from "./redux/api/axios/init";
+import Layout from "./components/Core/Layout/Layout";
 
 const loadAxios = () => (dispatch) => {
     api.get("index")
@@ -46,16 +47,18 @@ export default class App extends Component {
             <React.StrictMode>
                 <Provider store={store}>
                     <Router>
-                        <Switch>
-                            {routes.map((route) =>
-                                <Route
-                                    key={route.url}
-                                    path={route.url}
-                                    component={route.component}
-                                    exact={route.exact}/>)
-                            }
-                            <Redirect to={"/404"}/> // редирект, если рута не нашлось
-                        </Switch>
+                        <Layout>
+                            <Switch>
+                                {routes.map((route) =>
+                                    <Route
+                                        key={route.url}
+                                        path={route.url}
+                                        component={route.component}
+                                        exact={route.exact}/>)
+                                }
+                                <Redirect to={"/404"}/> // редирект, если рута не нашлось
+                            </Switch>
+                        </Layout>
                     </Router>
                 </Provider>
             </React.StrictMode>
