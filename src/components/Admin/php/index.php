@@ -1,7 +1,7 @@
 <?php
 
 
-//sleep(120);
+//sleep(2);
 
 //print json_encode("true");
 //die();
@@ -18,39 +18,6 @@ spl_autoload_register(function ($class) {
         echo 'Такой файл не найден по пути : ' . $path . '</br>';
     }
 });
-
-
-//$promo_list = [];
-//
-//foreach (Request::getPromo(1, "phone_id", "phone_promo") as $k => $v) {
-//    $promo = [];
-//
-//    foreach ($v as $k2 => $v2) {
-//        if (!in_array($k2, ["id", "phone_id"])) {
-//            if ($k2 === "img_path") {
-//                $promo[$k2] = "/static/media/" . "/" . $v2;
-//            } else {
-//                $promo[$k2] = $v2;
-//            }
-//        }
-//
-//    }
-//    $promo_list[] = $promo;
-//}
-//
-//
-//var_dump_pre($promo_list);
-
-//$result = Request::getOneItem(1, "gadgets");
-//var_dump_pre($result);
-//die;
-//$uri = "api/product/gadgets/3";
-//$uri = "api/category/gadgets";
-
-
-//$arr = array_merge(Request::getCategoryItems("phones"));
-//var_dump_pre(shuffle($arr));
-
 
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {

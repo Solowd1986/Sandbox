@@ -14,7 +14,8 @@ class Category extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            categoryProductsList: {}
+            categoryProductsList: {},
+            lastIndex: 0
         };
         this.props.fetchCategoryProducts(this.props.match.params.type);
     }
@@ -83,6 +84,22 @@ class Category extends Component {
                 categoryProductsList: this.props.category
             })
         }
+
+
+        if (!isThisInitialSetState && this.props.lazy && this.state.lastIndex !== this.props.lastIndex) {
+            const cloneDeep = require('lodash.clonedeep');
+            let data = cloneDeep(this.props.lazy);
+
+            this.setState({
+                lastIndex: this.props.lastIndex,
+                categoryProductsList: {
+                    main: this.state.categoryProductsList.main,
+                    data: [...this.state.categoryProductsList.data, ...data]
+                }
+            })
+
+        }
+
 
         if (currentRoute !== nextRoute) {
 
@@ -154,7 +171,12 @@ class Category extends Component {
         if (isProductsListEmpty || alias !== this.props.match.params.type) {
             productsList = <BlockOverlay/>;
         } else {
+
             const { main: category, data: products } = this.state.categoryProductsList;
+            //console.log(this.state.categoryProductsList);
+
+            //console.log(products);
+
             productsList = <CategoryProductsList category={category} products={products}/>;
         }
 
@@ -171,9 +193,12 @@ const mapStateToProps = (state) => {
     return {
         category: state.db.category,
         data: state.db.data,
-        sortType: state.sort.sortType
+        sortType: state.sort.sortType,
+        lazy: state.db.lazy,
+        lastIndex: state.db.lastIndex
     }
 };
+
 
 const mapDispatchToProps = (dispatch) => {
     return {

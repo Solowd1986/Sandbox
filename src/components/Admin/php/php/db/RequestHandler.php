@@ -65,7 +65,7 @@ class RequestHandler extends DbConnect
         }
 
 
-        $new_arr = array_merge($list_of_products, $list_of_products, $list_of_products);
+        $new_arr = array_slice(array_merge($list_of_products, $list_of_products), 0, 8);
         shuffle($new_arr);
 
         // Отдаем массив из двух полей: список продуктов, со всеми данными и блок служебной информации для категории

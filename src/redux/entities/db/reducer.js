@@ -5,7 +5,7 @@ import { List } from "immutable";
 const imgPrefix = "/static/media";
 
 const initialState = {
-    data: new List([
+    listTestingData: new List([
             { id: 1, name: "Bob" },
             { id: 2, name: "Stan" },
             { id: 3, name: "Glen" },
@@ -45,7 +45,9 @@ const initialState = {
             imgAlt: "slider-image"
         }
     ],
-    product: {}
+    product: {},
+    lastIndex: 0,
+    fetchingLazyDataEnd: true
 };
 
 
@@ -59,6 +61,14 @@ export default (state = initialState, action) => {
             };
         }
 
+        case "server/fetchingLazy": {
+            return {
+                ...state,
+                fetchingLazyDataEnd: false,
+            };
+        }
+
+
         case "server/getCategoryData": {
             return {
                 ...state,
@@ -66,6 +76,18 @@ export default (state = initialState, action) => {
             };
         }
 
+
+        case "server/fetchLazyCategoryProducts": {
+            //console.log(action.payload);
+
+
+            return {
+                ...state,
+                fetchingLazyDataEnd: true,
+                lastIndex: state.lastIndex + action.payload.data.length,
+                lazy: action.payload.data
+            };
+        }
 
         case "server/fetchCategoryProducts": {
 

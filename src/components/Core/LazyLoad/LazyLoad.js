@@ -4,7 +4,8 @@ import styles from "./lazy-load.module.scss"
 import { connect } from "react-redux";
 import Modal from "../Modal/Modal";
 import CartModal from "../../CartModal/CartModal";
-
+import * as server from "../../../redux/entities/db/actions";
+import classNames from "classnames";
 
 class LazyLoad extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class LazyLoad extends Component {
         this.signal = null;
         this.timer = null;
     }
+
 
     initRequest = (getDataBtn, disableOverlay) => {
         let timeoutExceeded = false;
@@ -89,32 +91,33 @@ class LazyLoad extends Component {
     abortRequest = () => {
         this.controller.abort();
         clearTimeout(this.timer);
-        //console.log('abort');
     };
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
+        // if (this.props.fetchEnded) {
+        //     this.setState({
+        //         fetched: true
+        //     });
+        // }
+    }
 
     loadHandler = (evt) => {
         const getDataBtn = evt.currentTarget;
-        // добавляем стили для вращения спиннера
-        getDataBtn.classList.add(styles.active);
-        // если при запросе на сервер возникла ошибка, то при клике сбрасывается стиль кнопки для визуализации ошибки
-        getDataBtn.classList.remove(styles.error);
-
-        this.initRequest(getDataBtn, this.props.disableOverlay);
-        this.props.enableOverlay();
+        this.props.fetchButton();
+        this.props.fetchLazyCategoryProducts(this.props.categoryName);
     };
 
     render() {
         //console.log(this.props);
+        const classList = classNames(styles.more, {
+            [styles.active]: this.props.fetchEnded === false
+        });
         return (
             <>
-                {
-                    this.props.modalShow
-                    &&
-                    <Overlay coloredBg={false} delay={false} disableOverlayCallback={this.abortRequest}/>
-                }
                 <div className={styles.data_wrapper}>
                     {this.props.children}
-                    <button onClick={this.loadHandler} className={styles.more}>
+                    <button onClick={this.loadHandler} className={classList}>
                         <svg
                             className={styles.loader}
                             xmlns="http://www.w3.org/2000/svg"
@@ -139,12 +142,27 @@ function mapStateToProps(state) {
         lastIndex: state.lazyload.indexOfLastAddedElement,
         amountOfElements: state.lazyload.numberOfRequestedElements,
         db: state.db.category,
-        modalShow: state.lazyload.modalShow
+        modalShow: state.lazyload.modalShow,
+
+        category: state.db.category,
+        fetchEnded: state.db.fetchingLazyDataEnd
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchLazyCategoryProducts: (category) => {
+            dispatch(server.fetchLazyCategoryProducts(category));
+        },
+        fetchButton: (category) => {
+            dispatch(server.fetchingLazy());
+        },
+    }
+};
 
-export default connect(mapStateToProps)(LazyLoad);
+export default connect(mapStateToProps, mapDispatchToProps)(LazyLoad);
+
+
 
 
 

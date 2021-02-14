@@ -20,11 +20,11 @@ export default class CategoryProductsList extends Component {
                 </div>
 
                 <div className={`${common.wrapper} ${styles.filters_wrapper}`}>
-                    <SortPorducts changeFilter={this.changeFilter}/>
+                    <SortPorducts/>
                 </div>
 
                 <div className={`${common.wrapper} ${styles.list_wrapper}`}>
-                    <LazyLoad categoryName={category.categoryAlias}>
+                    <LazyLoad categoryName={category.alias}>
                         <ul className={styles.list}>
                             {
                                 products.map((item, i) => {

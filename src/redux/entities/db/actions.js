@@ -16,6 +16,31 @@ export const clearProduct = () => {
 };
 
 
+export const fetchingLazy = () => {
+    return {
+        type: "server/fetchingLazy",
+    }
+};
+
+
+export const fetchLazyCategoryProducts = (category) => (dispatch) => {
+    //console.log('start request to server from action db fetchCategoryProducts');
+
+    api.get(`category/${category}`)
+        .then(responce => {
+            //console.dir('success');
+
+            dispatch({ type: "server/fetchLazyCategoryProducts", payload: responce.data })
+        }).catch(error => {
+            console.log('error from server in action fetchLazyCategoryProducts: ', error);
+            dispatch({ type: "server/serverError", payload: error })
+        }
+    )
+};
+
+
+
+
 export const fetchCategoryProducts = (category) => (dispatch) => {
     //console.log('start request to server from action db fetchCategoryProducts');
 
