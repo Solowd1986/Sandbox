@@ -17,10 +17,8 @@ class Order extends Component {
 
         // if (this.props.amountOfProductsInCart === 0) {
         //     document.body.style.cssText = `width: ${document.body.clientWidth}px; overflow: hidden; position: relative`;
-        //     //document.querySelector("header").style.cssText = `width: ${document.body.clientWidth}px`;
-        //     if (document.querySelector("header")) {
-        //         document.querySelector("header").style.removeProperty("width");
-        //     }
+        //     document.querySelector("header").style.cssText = `width: ${document.body.clientWidth}px`;
+        //
         // }
 
 

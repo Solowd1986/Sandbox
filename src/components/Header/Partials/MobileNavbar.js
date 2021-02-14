@@ -5,19 +5,12 @@ import classNames from "classnames";
 import * as utils from "../../Core/Modal/helpers/functions";
 
 class MobileNavbar extends React.Component {
-
     state = {
         isMobileMenuVisible: false
     };
 
-
     toggleMobileMenu = (evt) => {
-        if (!this.state.isMobileMenuVisible) {
-            utils.addScrollbarOffset();
-        } else {
-            utils.removeScrollbarOffset();
-        }
-
+        this.state.isMobileMenuVisible ? utils.removeScrollbarOffset() : utils.addScrollbarOffset();
         this.setState((state) => {
             return {
                 isMobileMenuVisible: !this.state.isMobileMenuVisible
@@ -34,12 +27,7 @@ class MobileNavbar extends React.Component {
         document.body.classList.remove(styles.mobile_menu_body_fixed);
     };
 
-
     render() {
-        console.log('state', this.state);
-
-        //console.log('rend nav');
-
         const classList = classNames(styles.mobile_menu__icon, {
             [styles.mobile_menu__icon__active]: this.state.isMobileMenuVisible === true,
         });

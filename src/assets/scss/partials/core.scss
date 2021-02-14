@@ -1,13 +1,32 @@
 
 
 body {
-
   overflow-y: scroll;
   font-family: "Open Sans", "Arial", sans-serif;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
+
+  /* стилизация скролла с постоянной видимостью, но меньших размеров*/
   -moz-osx-font-smoothing: grayscale;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: lightgrey; /* color of the tracking area */
+  }
+
+  &::-webkit-scrollbar-thumb {
+
+    border: 5px solid darkgrey; /* creates padding around scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+  }
 }
+
+
+
+
 
 /*  Базовый контейнер для блоков, не центруется, тянется до краев экрана (максимум взят за 2133px), доавлен padding
     для того, чтобы не мобильных текст не прижимался к краям, до мобильных разрешений padding не влияет

@@ -1,9 +1,18 @@
 import db from "./mock-data/database"
 import api from "../../api/axios/init";
+import { List } from "immutable";
 
 const imgPrefix = "/static/media";
 
 const initialState = {
+    data: new List([
+            { id: 1, name: "Bob" },
+            { id: 2, name: "Stan" },
+            { id: 3, name: "Glen" },
+            { id: 4, name: "Mike" },
+        ]
+    ),
+
     slider: [
         {
             imgPrefix,
@@ -90,9 +99,9 @@ export default (state = initialState, action) => {
         }
 
         case "server/serverError": {
-            console.log('error', action);
+            //console.log('error', action);
 
-            console.log("error when request server/serverError -" + action.payload);
+            //console.log("error when request server/serverError -" + action.payload);
             // return {
             //     ...state,
             //     category: {

@@ -9,6 +9,7 @@
   display: block;
 }
 
+
 .sort_wrapper {
   position: relative;
   width: 340px;
@@ -93,7 +94,7 @@
     color: $grey-800;
     cursor: pointer;
 
-    &:hover {
+    &:hover:not(.active) {
       color: $black;
     }
   }
@@ -101,13 +102,12 @@
   & > li:not(:last-child) {
     margin-bottom: 12px;
   }
-
 }
 
-
-
-
-
+.sort_list_panel .active {
+  font-weight: bold;
+  cursor: not-allowed;
+}
 
 
 

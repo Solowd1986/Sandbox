@@ -7,6 +7,7 @@ import * as utils from "../../Core/Modal/helpers/functions";
 import * as server from "../../../redux/entities/db/actions";
 import CategoryProductsList from "./CategoryProductsList";
 import BlockOverlay from "../../Core/Modal/BlockOverlay/BlockOverlay";
+import { List } from "immutable";
 
 
 class Category extends Component {
@@ -15,28 +16,57 @@ class Category extends Component {
         this.state = {
             categoryProductsList: {}
         };
-
-        // это нужно чтобы при переходе по мольному скроллу как при создании компонента категории так и при обновлении
-        // при переходам по сссылкам, кажыдй раз сбрасывался отступ и запрет прокрутки.
-        utils.removeScrollbarOffset();
-
         this.props.fetchCategoryProducts(this.props.match.params.type);
     }
 
+
+    static getDerivedStateFromProps(props, state) {
+        // это нужно чтобы при переходе по мольному скроллу как при создании компонента категории так и при обновлении
+        // при переходам по сссылкам, кажыдй раз сбрасывался отступ и запрет прокрутки.
+        utils.removeScrollbarOffset();
+        return null
+    }
+
+
+    sortDataList = (evt, dataList = this.state.categoryProductsList.data, sortType = this.props.sortType) => {
+        if (!dataList) return;
+        const cloneDeep = require('lodash.clonedeep');
+        let data = cloneDeep(dataList);
+
+        switch (sortType) {
+            case "по популярности": {
+                break;
+            }
+            case "по возрастанию цены": {
+                data.sort((a, b) => a.price - b.price);
+                break;
+            }
+            case "по убыванию цены": {
+                data.sort((a, b) => b.price - a.price);
+                break;
+            }
+            case "по новизне": {
+                break;
+            }
+            case "по скидкам": {
+                break;
+            }
+        }
+        this.setState(state => ({ categoryProductsList: { ...this.state.categoryProductsList, data } }));
+    };
+
+
     componentDidMount() {
-        //console.log(1155);
-        //window.scrollTo(0, 0); // always on top of page, without smooth scroll
-
-        // document.body.style.removeProperty("overflow");
-        // document.body.style.removeProperty("padding-right");
         window.scrollTo(0, 0);
-        //document.body.style.cssText = `width: ${document.body.clientWidth}px; overflow: hidden; position: relative`;
-        //document.querySelector("header").style.cssText = `width: ${document.body.clientWidth}px`;
-
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        //console.log('did update');
+
+
+        if (prevProps.sortType !== this.props.sortType) {
+            this.sortDataList();
+        }
+
 
         const isThisInitialSetState = Object.keys(this.state.categoryProductsList).length === 0;
 
@@ -47,9 +77,6 @@ class Category extends Component {
         const nextRoute = this.props.match.params.type;
 
 
-        // это нужно чтобы при переходе по мольному скроллу как при создании компонента категории так и при обновлении
-        // при переходам по сссылкам, кажыдй раз сбрасывался отступ и запрет прокрутки.
-        utils.removeScrollbarOffset();
 
         if (isThisInitialSetState) {
             this.setState({
@@ -86,10 +113,19 @@ class Category extends Component {
     }
 
 
-
     render() {
         //console.log('rend');
         //console.log(this.props);
+
+        const list1 = new List();
+        //console.log(list1);
+
+
+        const data = this.props.data;
+        //const res = data.for
+        //console.log(data.get());
+
+
 
 
         /**
@@ -114,34 +150,18 @@ class Category extends Component {
         const isProductsListEmpty = Object.keys(this.state.categoryProductsList).length === 0;
         const alias = isProductsListEmpty ? null : this.state.categoryProductsList.main.alias;
 
-        //document.body.style.cssText = `width: ${document.body.clientWidth}px; overflow: hidden; position: relative`;
-
-        //console.log(document.body);
-        //console.log(document.querySelector("header"));
-
-        //if (document.querySelector("header"))
-        //document.querySelector("header").style.cssText = `width: ${document.body.clientWidth}px`;
-
-
-        // if (!isProductsListEmpty && this.props.category.error !== undefined) {
-        //     console.log(1888);
-        //
-        //     productsList = <div>ERROR</div> ;
-        // }
-
 
         if (isProductsListEmpty || alias !== this.props.match.params.type) {
             productsList = <BlockOverlay/>;
-            //productsList = <Overlay><Layout>{this.props.children}</Layout></Overlay>
-            //return null
         } else {
             const { main: category, data: products } = this.state.categoryProductsList;
             productsList = <CategoryProductsList category={category} products={products}/>;
         }
 
-        //`width: ${document.body.clientWidth}px`;
         return (
-            productsList
+            <>
+                {productsList}
+            </>
         )
     }
 }
@@ -150,6 +170,8 @@ class Category extends Component {
 const mapStateToProps = (state) => {
     return {
         category: state.db.category,
+        data: state.db.data,
+        sortType: state.sort.sortType
     }
 };
 

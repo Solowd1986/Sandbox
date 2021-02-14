@@ -17,9 +17,18 @@ export const clearProduct = () => {
 
 
 export const fetchCategoryProducts = (category) => (dispatch) => {
+    //console.log('start request to server from action db fetchCategoryProducts');
+
     api.get(`category/${category}`)
-        .then(responce => dispatch({ type: "server/fetchCategoryProducts", payload: responce.data }))
-        .catch(error => dispatch({ type: "server/serverError", payload: error }))
+        .then(responce => {
+            //console.dir('success');
+
+            dispatch({ type: "server/fetchCategoryProducts", payload: responce.data })
+        }).catch(error => {
+            console.log('error from server in action fetchCategoryProducts: ', error);
+            dispatch({ type: "server/serverError", payload: error })
+        }
+    )
 };
 
 

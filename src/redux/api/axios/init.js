@@ -8,11 +8,17 @@ const api = axios.create({
 
 const onSuccess = (success) => success;
 
-const onFail = (error) => {
-    if (error.response.status === 403) {
+const onFail = error => {
+    //console.log('fail');
 
-    }
-    return error;
+    // if (error.response.status === 403) {
+    //
+    // }
+
+    //console.dir('fail responce', error);
+    //console.log('fail responce', error);
+    throw new Error(error);
+    //return error;
 };
 
 api.interceptors.response.use(onSuccess, onFail);

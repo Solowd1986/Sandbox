@@ -1,14 +1,27 @@
 import React, { Component } from "react";
-import ReactDom from "react-dom";
 import styles from "./sort-products.module.scss";
 import classNames from "classnames";
+import * as sort from "../../../redux/entities/sort/actions";
+import { connect } from "react-redux";
 
+//<editor-fold desc="Description">
+
+/**
+ * Data
+ * Datdf33
+ * Datdfr4
+ */
+
+//</editor-fold>
 
 class SortPorducts extends Component {
+    constructor(props) {
+        super(props);
+        this.list = React.createRef();
+    }
 
     state = {
         showSortPanel: false,
-        sortType: "по популярности"
     };
 
     /**
@@ -21,6 +34,10 @@ class SortPorducts extends Component {
 
     toggleSortPanel = (evt) => {
         evt.stopPropagation();
+        if (!this.state.showSortPanel) {
+            Array.from(this.list.current.children).forEach(item => item.classList.remove(styles.active));
+            Array.from(this.list.current.children).find(item => item.innerText === this.props.sortType).classList.add(styles.active);
+        }
         this.setState((state) => {
             return {
                 showSortPanel: !this.state.showSortPanel
@@ -30,15 +47,14 @@ class SortPorducts extends Component {
 
     changeSortType = (evt) => {
         evt.stopPropagation();
-        if (evt.target.nodeName === "LI") {
+        if (evt.target.nodeName === "LI" && evt.target.innerText !== this.props.sortType) {
+            this.props.changeSortType(evt.target.innerText);
             this.setState((state) => {
                 return {
-                    sortType: evt.target.innerText,
                     showSortPanel: false
                 }
             })
         }
-
     };
 
     closeSortPanelOnClickByWindow = () => {
@@ -49,38 +65,6 @@ class SortPorducts extends Component {
                 }
         })
     };
-
-    /**
-     * Методу сортировки как свойство передается сортируемый массив, через redux достпен методы изменения массива,
-     * данных, например, всей категории товаров, например и тут из метода таким сеттером устаналивается
-     * новый отсортированный массив
-     */
-    sortDataList = (dataList, sortType = this.state.sortType) => {
-        const cloneDeep = require('lodash.clonedeep');
-        let list = cloneDeep(dataList);
-
-        switch (sortType) {
-            case "по популярности": {
-                break;
-            }
-            case "по возрастанию цены": {
-                list.sort((a, b) => a.price - b.price);
-                break;
-            }
-            case "по убыванию цены": {
-                list.sort((a, b) => b.price - a.price);
-                break;
-            }
-            case "по новизне": {
-                break;
-            }
-            case "по скидкам": {
-                break;
-            }
-        }
-        return list;
-    };
-
 
     componentDidMount() {
         window.addEventListener("click", this.closeSortPanelOnClickByWindow);
@@ -99,7 +83,7 @@ class SortPorducts extends Component {
             <>
                 <div className={styles.sort_wrapper}>
                     <span className={styles.sort_title}>Сортировать: </span>
-                    <span className={styles.sort_type} onClick={this.toggleSortPanel}>{this.state.sortType}
+                    <span className={styles.sort_type} onClick={this.toggleSortPanel}>{this.props.sortType}
                         <svg
                             width={"9px"}
                             height={"9px"}
@@ -108,8 +92,8 @@ class SortPorducts extends Component {
                         <path
                             d="M225.923 354.706c-8.098 0-16.195-3.092-22.369-9.263L9.27 151.157c-12.359-12.359-12.359-32.397 0-44.751 12.354-12.354 32.388-12.354 44.748 0l171.905 171.915 171.906-171.909c12.359-12.354 32.391-12.354 44.744 0 12.365 12.354 12.365 32.392 0 44.751L248.292 345.449c-6.177 6.172-14.274 9.257-22.369 9.257z"/>
                     </svg>
-                </span>
-                    <ul className={classList} onClick={this.changeSortType}>
+                    </span>
+                    <ul className={classList} onClick={this.changeSortType} ref={this.list}>
                         <li>по новинкам</li>
                         <li>по популярности</li>
                         <li>по возрастанию цены</li>
@@ -122,6 +106,22 @@ class SortPorducts extends Component {
     }
 }
 
-export default SortPorducts;
+const mapStateToProps = (state) => {
+    return {
+        sortType: state.sort.sortType,
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changeSortType: (sortType) => {
+            dispatch(sort.changeSortType(sortType));
+        },
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SortPorducts);
+
+
 
 
