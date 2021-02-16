@@ -1,13 +1,34 @@
 import api from "../../api/axios/init";
 
-export const getIndexData = (responce) => {
-    return {
-        type: "server/getIndexData",
-        payload: {
-            responce
-        }
-    }
+
+// const loadAxios = () => (dispatch) => {
+//     api.get("index")
+//         .then(responce => dispatch({ type: "server/getIndexData", payload: responce.data }))
+//         .catch(error => dispatch({ type: "server/serverError", payload: error }))
+// };
+// store.dispatch(loadAxios());
+
+
+export const getData = () => (dispatch) => {
+
+    fetch("/api/index").then(res => res.json()).then(res => {
+        console.log('fetch finished');
+        dispatch({ type: "server/getIndexData", payload: res })
+    }).catch(error => {
+        console.log('error from server in action getData: ', error);
+
+    });
+
+    // api.get(`/index`)
+    //     .then(responce => {
+    //         //console.dir('success');
+    //         dispatch({ type: "server/getIndexData", payload: responce.data })
+    //     }).catch(error => {
+    //     console.log('error from server in action getData: ', error);
+    //     //dispatch({ type: "server/serverError", payload: error })
+    // });
 };
+
 
 export const clearProduct = () => {
     return {
@@ -30,7 +51,6 @@ const getResource = async (uri) => {
     }
     return await responce.json();
 };
-
 
 
 export const fetchLazyCategoryProducts = (category) => (dispatch) => {
@@ -72,7 +92,6 @@ async function getter2(category) {
 }
 
 
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 
 
 export const fetchCategoryProducts = (category, history) => (dispatch) => {
@@ -108,9 +127,11 @@ export const fetchCategoryProducts = (category, history) => (dispatch) => {
         }).catch(error => {
         //document.location.href = 'http://localhost:3000/404'; // error lcoation redirect
         //console.dir(error);
-        history.push('/500');
+        console.log('error from server in action fetchCategoryProducts: ', error);
 
-        return;
+        //history.push('/500');
+
+        //return;
 
 
         //onst { isAxiosError, message, code } = error;

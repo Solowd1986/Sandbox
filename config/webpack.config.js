@@ -28,7 +28,6 @@ const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const postcssNormalize = require('postcss-normalize');
-
 const appPackageJson = require(paths.appPackageJson);
 
 
@@ -119,6 +118,7 @@ module.exports = function (webpackEnv) {
                 loader: require.resolve('css-loader'),
                 options: cssOptions,
             },
+
             {
                 // Options for PostCSS as we reference these options twice
                 // Adds vendor prefixing based on your specified browser support in
@@ -136,6 +136,7 @@ module.exports = function (webpackEnv) {
                             },
                             stage: 3,
                         }),
+
                         // Adds PostCSS Normalize as the reset css with default options,
                         // so that it honors browserslist config in package.json
                         // which in turn let's users customize the target behavior as per their needs.
@@ -543,7 +544,9 @@ module.exports = function (webpackEnv) {
                                 },
                                 'sass-loader',
                             ),
+
                         },
+
 
                         // "file" loader makes sure those assets get served by WebpackDevServer.
                         // When you `import` an asset, you get its (virtual) filename.
@@ -561,7 +564,6 @@ module.exports = function (webpackEnv) {
                                 name: 'static/media/[name].[hash:8].[ext]',
                             },
                         },
-
 
                         // ** STOP ** Are you adding a new loader?
                         // Make sure to add the new loader(s) before the "file" loader.

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./error-404.module.scss";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Error404 = props => {
     return (

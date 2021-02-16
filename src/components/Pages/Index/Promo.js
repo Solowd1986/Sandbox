@@ -7,15 +7,22 @@ import Modal from "../../Core/Modal/Modal";
 import CartModal from "../../Core/CartModal/CartModal";
 import * as modal from "../../../redux/entities/modal/actions";
 import * as PropTypes from "prop-types";
+import * as server from "../../../redux/entities/db/actions";
+import Spinner from "../../Core/Modal/Spinner/Spinner";
 
 class Promo extends Component {
     constructor(props) {
         super(props);
+        console.log('const');
+
+        this.props.getData();
     }
+
 
     static propTypes = {
         index: PropTypes.object,
     };
+
 
     toggle = () => {
         this.props.enableModal();
@@ -23,21 +30,14 @@ class Promo extends Component {
 
 
     render() {
-        if (!this.props.index) return null;
+        //console.log('no promo');
+
+        if (!this.props.index) return <div className={styles.spin_wrap}><Spinner/></div>;
+
         const { phones, accessoires, gadgets } = this.props.index;
 
-        // const request = require('postman-request');
-        //
-        // for (let i = 10; i--;) {
-        //     request('http://localhost:3000/api/category/phones', function (error, response, body) {
-        //         console.log('error:', error); // Print the error if one occurred
-        //         console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-        //         //console.log('body:', body); // Print the HTML for the Google homepage.
-        //     });
-        // }
-
-
         return (
+
             <section className={`container ${styles.wrapper}`}>
                 <main className={`wrapper ${styles.content}`}>
 
@@ -91,13 +91,18 @@ function mapStateToProps(state) {
     }
 }
 
+
 function mapDispatchToProps(dispatch) {
     return {
         enableModal: () => {
             dispatch(modal.enableModal());
-        }
+        },
+        getData: () => {
+            dispatch(server.getData());
+        },
     }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Promo);
 
