@@ -12,29 +12,6 @@ import * as modalActions from "../../../redux/entities/modal/actions";
 
 class Order extends Component {
 
-    constructor(props) {
-        super(props);
-
-        // if (this.props.amountOfProductsInCart === 0) {
-        //     document.body.style.cssText = `width: ${document.body.clientWidth}px; overflow: hidden; position: relative`;
-        //     document.querySelector("header").style.cssText = `width: ${document.body.clientWidth}px`;
-        //
-        // }
-
-
-    }
-
-    componentWillUnmount() {
-        // document.body.style.removeProperty("width");
-        // document.body.style.removeProperty("overflow");
-        // document.body.style.removeProperty("position");
-        // if (document.querySelector("header")) {
-        //     document.querySelector("header").style.removeProperty("width");
-        // }
-    }
-
-
-
     componentDidMount() {
         window.scrollTo(0, 0) // always on top of page, without smooth scroll
     }
@@ -58,9 +35,6 @@ class Order extends Component {
     };
 
     render() {
-        const isCartEmpty = this.props.amountOfProductsInCart;
-        this.isCartEmpty = this.props.amountOfProductsInCart === 0;
-
         return (
             <>
                 {this.props.amountOfProductsInCart > 0
@@ -72,19 +46,16 @@ class Order extends Component {
                                 <span className={styles.line_stage}>Оплата и доставка</span>
                                 <span className={`${styles.line_stage} ${styles.line_stage__unactive}`}>Успешное оформление</span>
                             </div>
-
                             <form
                                 onSubmit={this.submit}
                                 className={styles.form}
                                 action=""
                                 name="order-form"
                                 method="POST"
-                                noValidate={true}
-                            >
+                                noValidate={true}>
                                 <OrderInfo/>
-                                <OrderSummary orderedItems={this.props.products}/>
+                                <OrderSummary/>
                             </form>
-
                         </div>
                     </div>
                     :

@@ -1,18 +1,18 @@
 import React, { Component } from "react";
-import common from "~scss/common.module.scss";
+//import common from "~scss/common.module.scss";
 import styles from "./promo.module.scss";
 import { connect } from "react-redux";
 import ProductCard from "../ProductCard/ProductCard";
 import Modal from "../../Core/Modal/Modal";
-import CartModal from "../../CartModal/CartModal";
-
-import { requestIndexData } from "../../../redux/middlware/requestToServer";
-import * as modalActions from "../../../redux/entities/modal/actions";
-
-import PropTypes from "prop-types";
-
+import CartModal from "../../Core/CartModal/CartModal";
+import * as modal from "../../../redux/entities/modal/actions";
+import * as PropTypes from "prop-types";
 
 class Promo extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     static propTypes = {
         index: PropTypes.object,
     };
@@ -21,14 +21,25 @@ class Promo extends Component {
         this.props.enableModal();
     };
 
-    render() {
 
+    render() {
         if (!this.props.index) return null;
         const { phones, accessoires, gadgets } = this.props.index;
 
+        // const request = require('postman-request');
+        //
+        // for (let i = 10; i--;) {
+        //     request('http://localhost:3000/api/category/phones', function (error, response, body) {
+        //         console.log('error:', error); // Print the error if one occurred
+        //         console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+        //         //console.log('body:', body); // Print the HTML for the Google homepage.
+        //     });
+        // }
+
+
         return (
-            <section className={`${common.container} ${styles.promo_wrapper}`}>
-                <main className={`${common.wrapper} ${styles.promo}`}>
+            <section className={`container ${styles.wrapper}`}>
+                <main className={`wrapper ${styles.content}`}>
 
                     <button onClick={this.toggle}>Active</button>
 
@@ -40,8 +51,8 @@ class Promo extends Component {
                         </Modal>
                     }
 
-                    <h2 className={styles.promo_section_title}>Рекомендуем</h2>
-                    <ul className={styles.promo_list}>
+                    <h2 className={styles.section_title}>Рекомендуем</h2>
+                    <ul className={styles.list}>
                         {phones.data.map((item, i) => {
                             return (
                                 <ProductCard key={i} item={item} category={phones.main}/>
@@ -49,8 +60,8 @@ class Promo extends Component {
                         })}
                     </ul>
 
-                    <h2 className={styles.promo_section_title}>Популярные гаджеты</h2>
-                    <ul className={styles.promo_list}>
+                    <h2 className={styles.section_title}>Популярные гаджеты</h2>
+                    <ul className={styles.list}>
                         {gadgets.data.map((item, i) => {
                             return (
                                 <ProductCard key={i} item={item} category={gadgets.main}/>
@@ -58,11 +69,11 @@ class Promo extends Component {
                         })}
                     </ul>
 
-                    <h2 className={styles.promo_section_title}>Аксессуары</h2>
-                    <ul className={styles.promo_list}>
+                    <h2 className={styles.section_title}>Аксессуары</h2>
+                    <ul className={styles.list}>
                         {accessoires.data.map((item, i) => {
                             return (
-                                <ProductCard key={i} item={item} category={accessoires}/>
+                                <ProductCard key={i} item={item} category={accessoires.main}/>
                             )
                         })}
                     </ul>
@@ -72,8 +83,6 @@ class Promo extends Component {
     }
 }
 
-
-// wrap in obj give you double invoke
 function mapStateToProps(state) {
     return {
         index: state.db.index,
@@ -84,15 +93,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        getData: () => {
-            dispatch(requestIndexData());
-        },
         enableModal: () => {
-            dispatch(modalActions.enableModal());
+            dispatch(modal.enableModal());
         }
     }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Promo);
 

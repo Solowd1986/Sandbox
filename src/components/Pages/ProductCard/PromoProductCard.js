@@ -5,11 +5,11 @@ import styles from "./product-card.module.scss";
 class PromoProductCard extends Component {
 
     render() {
-        const { item, category } = this.props;
+        const { alias, rest, adsType } = this.props.item;
         let promo = [];
 
-        if (category.categoryAlias === "phones" && item.rest > 0) {
-            switch (item.adsType) {
+        if (alias === "phones" && rest > 0) {
+            switch (adsType) {
                 case 0: {
                     promo = [
                         <div className={styles.new}>Новинка</div>,
@@ -46,8 +46,8 @@ class PromoProductCard extends Component {
                 }
             }
 
-        } else if (item.rest > 0) {
-            switch (item.adsType) {
+        } else if (rest > 0) {
+            switch (adsType) {
                 case 0:
                     promo = [<div className={styles.gift}>
                         <span>Подарок </span>

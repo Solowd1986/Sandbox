@@ -3,7 +3,6 @@ import styles from "./lazy-load.module.scss"
 
 import { connect } from "react-redux";
 import Modal from "../Modal/Modal";
-import CartModal from "../../CartModal/CartModal";
 import * as server from "../../../redux/entities/db/actions";
 import classNames from "classnames";
 

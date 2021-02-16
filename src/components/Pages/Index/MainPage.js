@@ -8,6 +8,12 @@ import PromoBadge from "../../Core/PromoBadge/PromoBadge";
 import { connect } from "react-redux";
 
 class MainPage extends Component {
+    constructor(props) {
+        super(props);
+        //console.log('con');
+        //console.log(this.props);
+    }
+
     componentDidMount() {
         window.scrollTo(0, 0);
     }

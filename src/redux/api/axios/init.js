@@ -1,10 +1,13 @@
 const axios = require('axios').default;
+//import axiosRetry from 'axios-retry';
+
 
 const api = axios.create({
     baseURL: "/api/",
     timeout: 1000 * 5,
     withCredentials: true
 });
+
 
 const onSuccess = (success) => success;
 
@@ -15,13 +18,17 @@ const onFail = error => {
     //
     // }
 
-    //console.dir('fail responce', error);
+    console.dir(error);
+    console.log('----------------------');
+
+    console.dir('fail responce', error);
+
     //console.log('fail responce', error);
-    throw new Error(error);
+    //throw new Error(error);
     //return error;
 };
 
-api.interceptors.response.use(onSuccess, onFail);
+//api.interceptors.response.use(onSuccess, onFail);
 
 export default api;
 

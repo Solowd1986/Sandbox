@@ -117,22 +117,17 @@ export default (state = initialState, action) => {
                 ...state,
                 product: {}
             };
-            break;
         }
 
         case "server/serverError": {
             //console.log('error', action);
+            const error = action.payload.error;
+            //console.dir(error);
+            if (error && error.message) {
+                console.log('code - ' + error.code + '. Message - ' + error.message);
+            }
 
-            //console.log("error when request server/serverError -" + action.payload);
-            // return {
-            //     ...state,
-            //     category: {
-            //         main: {},
-            //         error: true
-            //     }
-            // };
-            break;
-
+            return state;
         }
     }
 

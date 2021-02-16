@@ -13,11 +13,14 @@ import { List } from "immutable";
 class Category extends Component {
     constructor(props) {
         super(props);
+        //console.log(this.props);
         this.state = {
             categoryProductsList: {},
             lastIndex: 0
         };
-        this.props.fetchCategoryProducts(this.props.match.params.type);
+        //console.log(this.props.history);
+
+        this.props.fetchCategoryProducts(this.props.match.params.type, this.props.history);
     }
 
 
@@ -27,6 +30,7 @@ class Category extends Component {
         utils.removeScrollbarOffset();
         return null
     }
+
 
 
     sortDataList = (evt, dataList = this.state.categoryProductsList.data, sortType = this.props.sortType) => {
@@ -61,8 +65,8 @@ class Category extends Component {
         window.scrollTo(0, 0);
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
 
         if (prevProps.sortType !== this.props.sortType) {
             this.sortDataList();
@@ -86,6 +90,14 @@ class Category extends Component {
         }
 
 
+        //ADD SMOOTH SCROLL BOTTOM
+        if (this.props.lastIndex > 0 && this.state.lastIndex !== this.props.lastIndex) {
+            //console.log(1);
+
+            //window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            //window.scrollTo(20000, 20000);
+        }
+
         if (!isThisInitialSetState && this.props.lazy && this.state.lastIndex !== this.props.lastIndex) {
             const cloneDeep = require('lodash.clonedeep');
             let data = cloneDeep(this.props.lazy);
@@ -97,7 +109,6 @@ class Category extends Component {
                     data: [...this.state.categoryProductsList.data, ...data]
                 }
             })
-
         }
 
 
@@ -129,22 +140,7 @@ class Category extends Component {
         }
     }
 
-
     render() {
-        //console.log('rend');
-        //console.log(this.props);
-
-        const list1 = new List();
-        //console.log(list1);
-
-
-        const data = this.props.data;
-        //const res = data.for
-        //console.log(data.get());
-
-
-
-
         /**
          *
          * 1. Как только пришли, конструктор создает запрос и формирует начальный state
@@ -163,28 +159,15 @@ class Category extends Component {
          *
          */
 
-        let productsList = null;
         const isProductsListEmpty = Object.keys(this.state.categoryProductsList).length === 0;
         const alias = isProductsListEmpty ? null : this.state.categoryProductsList.main.alias;
 
-
         if (isProductsListEmpty || alias !== this.props.match.params.type) {
-            productsList = <BlockOverlay/>;
+            return <BlockOverlay/>;
         } else {
-
             const { main: category, data: products } = this.state.categoryProductsList;
-            //console.log(this.state.categoryProductsList);
-
-            //console.log(products);
-
-            productsList = <CategoryProductsList category={category} products={products}/>;
+            return <CategoryProductsList category={category} products={products}/>;
         }
-
-        return (
-            <>
-                {productsList}
-            </>
-        )
     }
 }
 
@@ -202,8 +185,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchCategoryProducts: (category) => {
-            dispatch(server.fetchCategoryProducts(category));
+        fetchCategoryProducts: (category, history) => {
+            dispatch(server.fetchCategoryProducts(category, history));
         },
     }
 };

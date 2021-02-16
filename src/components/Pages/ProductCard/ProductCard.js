@@ -8,9 +8,7 @@ import {NavLink} from "react-router-dom";
 import ProductPrice from "../../Core/ProductPrice/ProductPrice";
 import OrderButton from "../../Core/OrderButton/OrderButton";
 import PromoProductCard from "./PromoProductCard";
-
-import * as actions from "../../../redux/entities/cart/actions";
-
+import * as cart from "../../../redux/entities/cart/actions";
 
 class ProductCard extends Component {
 
@@ -28,10 +26,8 @@ class ProductCard extends Component {
 
                 <NavLink to={`/product/${category.alias}/${item.id}`} className={styles.link}>
                     <img className={styles.img}
-                        // path from public folder
-                         src={item.img.md}
-                        //src={`${category.imgPrefix}/${item.img.md}`}
-                         alt={item.img_alt}
+                         src={item.img.md} // path from public folder
+                         alt={item["img_alt"]}
                     />
                 </NavLink>
 
@@ -42,7 +38,7 @@ class ProductCard extends Component {
                     </span>
                 </div>
 
-                <PromoProductCard item={item} category={category}/>
+                <PromoProductCard item={{ alias: category.alias, rest: item.rest, adsType: item["ads_type"] }}/>
                 <ProductPrice product={item}/>
 
 
@@ -99,10 +95,10 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         onAddToCart: (evt, item) => {
-            dispatch(actions.addItemToCart(evt, item))
+            dispatch(cart.addItemToCart(evt, item))
         },
         onDeleteFromCart: (evt, id) => {
-            dispatch(actions.removeItemFromCart(evt, id))
+            dispatch(cart.removeItemFromCart(evt, id))
         },
     }
 }

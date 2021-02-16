@@ -4,6 +4,7 @@ import Product from "~components/Pages/Product/Product";
 import Order from "~components/Pages/Order/Order";
 import Error404 from "../components/Pages/Error404/Error404";
 import Delivery from "../components/Pages/Delivery/Delivery";
+import Error500 from "../components/Pages/Error500/Error500";
 
 /**
  * Ход работы:
@@ -14,13 +15,16 @@ import Delivery from "../components/Pages/Delivery/Delivery";
  * @type {*[]}
  */
 
+export const listOfAllowedRoutes = ["/", "category", "product"];
+
 const routes = [
     { url: "/", component: MainPage, exact: true },
     { url: "/category/:type", component: Category, exact: true },
     { url: "/product/:category/:id", component: Product, exact: true },
     { url: "/order", component: Order, exact: true },
     { url: "/delivery", component: Delivery, exact: true },
-    { url: "/404", component: Error404, exact: true }
+    { url: "/404", component: Error404, exact: true },
+    { url: "/500", component: Error500, exact: true }
 ];
 
 export default routes;

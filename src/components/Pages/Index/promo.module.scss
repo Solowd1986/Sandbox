@@ -27,16 +27,16 @@
 }
 
 
-.promo_wrapper {
+.wrapper {
   padding-bottom: 20px;
   background-color: $white-500;
 }
 
-.promo {
+.content {
   padding-bottom: 15px;
 }
 
-.promo_section_title {
+.section_title {
   margin: 0;
   padding: 20px;
   font-size: 25px;
@@ -45,14 +45,14 @@
 }
 
 
-.promo_list {
+.list {
   display: flex;
   flex-wrap: wrap;
   @include wrapper-negative-margins();
 }
 
 
-.promo_list__item {
+.list__item {
   display: flex;
   @include generate-columns-for-item(3);
   min-width: 220px;
