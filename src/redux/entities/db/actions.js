@@ -12,9 +12,10 @@ import api from "../../api/axios/init";
 export const getData = () => (dispatch) => {
 
     fetch("/api/index").then(res => res.json()).then(res => {
-        console.log('fetch finished');
+        //console.log('fetch finished');
         dispatch({ type: "server/getIndexData", payload: res })
     }).catch(error => {
+        console.dir(error);
         console.log('error from server in action getData: ', error);
 
     });
@@ -28,6 +29,36 @@ export const getData = () => (dispatch) => {
     //     //dispatch({ type: "server/serverError", payload: error })
     // });
 };
+
+
+export const fetchPageData = (params) => (dispatch) => {
+
+    /**
+     \/([a-z]*)\/\:
+
+     */
+
+    fetch("/api/index").then(res => res.json()).then(res => {
+        console.log('fetch finished');
+        dispatch({ type: "server/getIndexData", payload: res })
+    }).catch(error => {
+        console.dir(error);
+        console.log('error from server in action getData: ', error);
+
+    });
+
+    // api.get(`/index`)
+    //     .then(responce => {
+    //         //console.dir('success');
+    //         dispatch({ type: "server/getIndexData", payload: responce.data })
+    //     }).catch(error => {
+    //     console.log('error from server in action getData: ', error);
+    //     //dispatch({ type: "server/serverError", payload: error })
+    // });
+};
+
+
+
 
 
 export const clearProduct = () => {
@@ -131,7 +162,7 @@ export const fetchCategoryProducts = (category, history) => (dispatch) => {
 
         //history.push('/500');
 
-        //return;
+        return;
 
 
         //onst { isAxiosError, message, code } = error;
