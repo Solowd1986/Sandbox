@@ -18,7 +18,13 @@ class Category extends Component {
             categoryProductsList: {},
             lastIndex: 0
         };
-        //console.log(this.props.history);
+
+        //const { match: {path: route, params: data}, history }  = this.props;
+        // console.log(route);
+        // console.log(data);
+        // console.log(history);
+
+        this.props.fetchPageData(this.props);
 
         this.props.fetchCategoryProducts(this.props.match.params.type, this.props.history);
     }
@@ -98,6 +104,7 @@ class Category extends Component {
             //window.scrollTo(20000, 20000);
         }
 
+        // lazy load
         if (!isThisInitialSetState && this.props.lazy && this.state.lastIndex !== this.props.lastIndex) {
             const cloneDeep = require('lodash.clonedeep');
             let data = cloneDeep(this.props.lazy);
@@ -112,7 +119,13 @@ class Category extends Component {
         }
 
 
+
         if (currentRoute !== nextRoute) {
+
+            const { match: { path: route, params: data }, history } = this.props;
+            console.log(route);
+            console.log(data);
+            console.log(history);
 
             this.props.fetchCategoryProducts(nextRoute);
         }
@@ -182,11 +195,13 @@ const mapStateToProps = (state) => {
     }
 };
 
-
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchCategoryProducts: (category, history) => {
             dispatch(server.fetchCategoryProducts(category, history));
+        },
+        fetchPageData: (params) => {
+            dispatch(server.fetchPageData(params));
         },
     }
 };

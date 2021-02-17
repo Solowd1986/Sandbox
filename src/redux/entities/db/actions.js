@@ -31,31 +31,78 @@ export const getData = () => (dispatch) => {
 };
 
 
-export const fetchPageData = (params) => (dispatch) => {
+export const fetchPageData = (params) => (dispatch, getState, api) => {
+    const { match: { path: route, params: data }, history } = params;
+    console.log(route);
+    console.log(data);
+    //console.log(history);
 
-    /**
-     \/([a-z]*)\/\:
+    const apiRoute =
+        !Object.keys(data).length
+            ? "index"
+            : route.match(/\/([a-z]*)\/\:/)[1] + "/" + Object.values(data).join("/");
 
-     */
 
-    fetch("/api/index").then(res => res.json()).then(res => {
-        console.log('fetch finished');
-        dispatch({ type: "server/getIndexData", payload: res })
-    }).catch(error => {
-        console.dir(error);
-        console.log('error from server in action getData: ', error);
+    // api.get(apiRoute)
+    //     .then(response => {
+    //         console.dir('success');
+    //         console.log(response.data);
+    //     }).catch(error => {
+    //         console.log('fail 1');
+    //         if (error.code === "ECONNABORTED") {
+    //             api.get(apiRoute)
+    //                 .then(response => {
+    //                 }).catch(error => {
+    //                 console.log('fail 2');
+    //                 if (error.code === "ECONNABORTED") {
+    //                     api.get(apiRoute)
+    //                         .then(response => {
+    //                             console.log('succ 3');
+    //                         }).catch(error => {
+    //                         console.log('fail 3');
+    //                         if (error.code === "ECONNABORTED") {
+    //                             console.log('fail 33');
+    //                         }
+    //                     })
+    //                 }
+    //             })
+    //         }
+    //     });
 
-    });
 
-    // api.get(`/index`)
+    //console.log(!!Object.keys(data).length);
+    //console.log(apiRoute);
+
+
+    //console.log(Object.values(data).join("/"));
+    //const r = route.match(/\/([a-z]*)\/\:/);
+    //console.log('res reg', r[1]);
+
+
+    //console.log(dispatch);
+    //console.log(getState());
+    //console.log(api);
+
+    // api.get(apiRoute)
     //     .then(responce => {
-    //         //console.dir('success');
-    //         dispatch({ type: "server/getIndexData", payload: responce.data })
+    //         console.dir('success');
+    //         console.log(responce.data);
+    //
+    //         //dispatch({ type: "server/getIndexData", payload: responce.data })
     //     }).catch(error => {
     //     console.log('error from server in action getData: ', error);
     //     //dispatch({ type: "server/serverError", payload: error })
     // });
+
+    // console.log(route);
+    // console.log(data);
+    // console.log(history);
+
+    console.log('page data');
+
 };
+
+
 
 
 

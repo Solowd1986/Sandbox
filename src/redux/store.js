@@ -2,16 +2,13 @@ import { applyMiddleware, createStore } from "redux";
 import composeEnhancers from "./middlware/composeEnhancers";
 import reduxLogger from "./middlware/reduxLogger"
 import reducer from "./entities/rootReducer";
-
-/**
- * With a plain basic Redux store, you can only do simple synchronous updates by dispatching an action.
- * Middleware extends the store's abilities, and lets you write async logic that interacts with the store.
- */
-import reduxThunk from "redux-thunk"
+import reduxThunk from "redux-thunk";
+import api from "./api/axios/init";
 
 const activeMiddlewareList = [
-    reduxThunk,
+    reduxThunk.withExtraArgument(api),
 ];
+
 
 /**
  * Проверяем наличие данных в localStorage при первом запуке скрипта.

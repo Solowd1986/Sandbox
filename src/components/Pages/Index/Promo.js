@@ -9,13 +9,19 @@ import * as modal from "../../../redux/entities/modal/actions";
 import * as PropTypes from "prop-types";
 import * as server from "../../../redux/entities/db/actions";
 import Spinner from "../../Core/Modal/Spinner/Spinner";
+import Tabs from "../../Core/Tabs/Tabs";
 
 class Promo extends Component {
     constructor(props) {
         super(props);
-        console.log('const');
+        //console.log('const');
+
+        //console.log(this.props);
+        //console.log(this.props.match.path);
 
         this.props.getData();
+
+        this.props.fetchPageData(this.props);
     }
 
 
@@ -41,6 +47,7 @@ class Promo extends Component {
             <section className={`container ${styles.wrapper}`}>
                 <main className={`wrapper ${styles.content}`}>
 
+                    <Tabs/>
                     <button onClick={this.toggle}>Active</button>
 
                     {
@@ -99,6 +106,9 @@ function mapDispatchToProps(dispatch) {
         },
         getData: () => {
             dispatch(server.getData());
+        },
+        fetchPageData: (params) => {
+            dispatch(server.fetchPageData(params));
         },
     }
 }

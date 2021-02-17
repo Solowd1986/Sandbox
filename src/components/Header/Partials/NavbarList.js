@@ -14,7 +14,6 @@ class NavbarList extends React.Component {
                 {/*Смартфоны*/}
                 <li className={styles.header__nav_item}>
                     <NavLink
-
                         to={"/category/phones"}
                         className={styles.header__nav_link}
                         activeClassName={styles.link_active_class}>

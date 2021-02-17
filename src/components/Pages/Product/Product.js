@@ -12,15 +12,19 @@ import * as cart from "../../../redux/entities/cart/actions";
 import * as server from "../../../redux/entities/db/actions";
 
 import { connect } from "react-redux";
+import Spinner from "../../Core/Modal/Spinner/Spinner";
 
 
 class Product extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
             products: {}
         };
+        //console.log(this.props);
+        //console.log(this.props.match.path);
+        this.props.fetchPageData(this.props);
+
         this.props.fetchProductData(this.props.match.params.category, this.props.match.params.id);
     }
 
@@ -36,8 +40,8 @@ class Product extends Component {
 
     render() {
 
-        console.log(this.props);
-        if (!this.props.product || Object.keys(this.props.product).length === 0) return null;
+        //console.log(this.props);
+        if (!this.props.product || Object.keys(this.props.product).length === 0) return <Spinner/>;
 
         const { main: category, data: product } = this.props.product;
 
@@ -130,6 +134,9 @@ function mapDispatchToProps(dispatch) {
         },
         fetchProductData: (category, id) => {
             dispatch(server.fetchProductData(category, id))
+        },
+        fetchPageData: (params) => {
+            dispatch(server.fetchPageData(params));
         },
     }
 }

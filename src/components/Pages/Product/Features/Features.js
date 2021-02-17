@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./features.module.scss";
 
 const Features = ({ promo }) => {
-    console.log(promo);
+    //console.log(promo);
 
     return (
         <>

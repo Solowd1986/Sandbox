@@ -38,11 +38,12 @@ class ProductSlider extends Component {
 
     render() {
         const { list, alt } = this.props;
-        console.log(list);
-
+        //console.log(list);
         return (
             <div className={styles.order__img_wrapper}>
                 <img
+                    width={480}
+                    height={480}
                     ref={this.mainImgRef}
                     className={styles.order__img}
                     src={`${list[0]}`}
