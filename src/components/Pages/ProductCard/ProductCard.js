@@ -12,7 +12,12 @@ import * as cart from "../../../redux/entities/cart/actions";
 
 class ProductCard extends Component {
 
-    isProductInCart = (products, id) => products.find(item => item.id === id);
+    isProductInCart = (products, id) => {
+        if (!products) return false;
+        return products.find(item => item.id === id);
+    };
+
+
     render() {
         const { cart, category, item, classList } = this.props;
 

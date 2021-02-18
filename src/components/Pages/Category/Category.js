@@ -31,7 +31,6 @@ class Category extends Component {
     }
 
 
-
     sortDataList = (evt, dataList = this.state.categoryProductsList.data, sortType = this.props.sortType) => {
         if (!dataList) return;
         const cloneDeep = require('lodash.clonedeep');
@@ -68,7 +67,6 @@ class Category extends Component {
         if (prevProps.sortType !== this.props.sortType) {
             this.sortDataList();
         }
-
 
         const isThisInitialSetState = !this.state.categoryProductsList;
 

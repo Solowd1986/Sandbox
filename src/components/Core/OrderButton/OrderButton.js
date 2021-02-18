@@ -24,8 +24,14 @@ class OrderButton extends Component {
         clearTimeout(this.delayAddingItem);
     }
 
+    isProductInCart = (products, title) => {
+        if (!products) return false;
+        return products.find(item => item.title === title);
+    };
+
     render() {
-        const isProductInCart = this.props.cart.find((item) => item.title === this.props.product.title);
+
+        const isProductInCart = this.isProductInCart(this.props.cart, this.props.product.title);
         const isProductInStock = this.props.product.rest !== 0;
         const isButtonStatusInactive = isProductInCart || !isProductInStock;
         const isButtonDisabled = this.props.disabled === true || !isProductInStock;

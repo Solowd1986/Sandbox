@@ -47,6 +47,7 @@ class Promo extends Component {
     }
 
     render() {
+
         if (!this.state.index) return <div className={styles.spin_wrap}><Spinner/></div>;
         const { phones, accessoires, gadgets } = this.state.index;
 

@@ -2,11 +2,12 @@ import addItemToCart from "./reducer_functions/addItemToCart";
 import removeItemFromCart from "./reducer_functions/removeItemFromCart";
 import changeAmountOfProduct from "./reducer_functions/changeAmountOfProduct";
 
-const initialState = {
-    amountOfProductsInCart: 0,
-    minAmountOfProduct: 1,
-    products: [],
+const cart = JSON.parse(decodeURIComponent(localStorage.getItem("cart")));
 
+const initialState = {
+    amountOfProductsInCart: cart ? cart.length : 0,
+    minAmountOfProduct: 1,
+    products: cart || null,
 };
 
 export default (state = initialState, action) => {
