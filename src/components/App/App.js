@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import routes from "./routes/routes";
+import routes from "../../routes/routes";
 
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import store from "../../redux/store";
 
-import Layout from "./components/Core/Layout/Layout";
-import ErrorBoundary from "./components/Core/ErrorBoundary/ErrorBoundary";
+import Layout from "../../components/Core/Layout/Layout";
+import ErrorBoundary from "../../components/Core/ErrorBoundary/ErrorBoundary";
 
 export default class App extends Component {
     render() {

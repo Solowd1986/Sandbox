@@ -1,8 +1,6 @@
 class ApiService {
-    constructor(retry = false) {
+    constructor() {
         this._axios = require('axios').default;
-        this.retryRequestCount = 0;
-        this.shouldRequestRetry = retry;
 
         this.api = this._axios.create({
             baseURL: "/api/",
@@ -10,13 +8,8 @@ class ApiService {
             withCredentials: true
         });
     }
-
-    get = async (uri) => await this.api.get(uri);
-    getIndex = async () => await this.api.get("index");
-    getCategory = async (category) => await this.api.get(`category/${category}`);
-    getProduct = async (category, id) => await this.api.get(`product/${category}/${id}`);
 }
 
-export default new ApiService();
+export default new ApiService().api;
 
 

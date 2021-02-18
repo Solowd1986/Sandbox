@@ -1,16 +1,13 @@
-
 import React from "react";
-import common from "~scss/common.module.scss";
 import styles from "./footer.module.scss";
+import classNames from "classnames";
 
 const Footer = props => {
     return (
         <div className={styles.footer_bg}>
-            <div className={common.wrapper}>
-
+            <div className={"wrapper"}>
                 <footer className={styles.footer}>
                     <p className={styles.copyright}>Copyright © 2017 - 2021 OnePlus Store. Все права защищены.</p>
-                    {/*<span className={styles.working_hours}>10:00 – 21:00 пн-вс</span>*/}
                     <ul className={styles.social_list}>
                         <li className={styles.social_list__item}>
                             <a href="" target="_blank">

@@ -16,13 +16,10 @@ import Spinner from "../../Core/Modal/Spinner/Spinner";
 
 
 class Product extends Component {
-    constructor(props) {
-        super(props);
-        this.props.fetchPageData(this.props);
-        this.state = {
-            product: null
-        }
-    }
+
+    state = {
+        product: null
+    };
 
     isProductInCart = (products, id) => products.find(item => item.id === id);
 
@@ -32,12 +29,17 @@ class Product extends Component {
         }
     }
 
+    componentDidMount() {
+        this.props.fetchPageData(this.props);
+    }
+
     componentWillUnmount() {
         this.setState({ product: null })
     }
 
     render() {
         if (!this.state.product) return <Spinner/>;
+
         const { main: category, data: product } = this.state.product;
 
 

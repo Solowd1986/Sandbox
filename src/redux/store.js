@@ -2,10 +2,10 @@ import { applyMiddleware, createStore } from "redux";
 import composeEnhancers from "./middlware/composeEnhancers";
 import reducer from "./entities/rootReducer";
 import reduxThunk from "redux-thunk";
-import api from "./api/axios/init";
+import ApiService from "./api/ApiService/ApiService";
 
 const activeMiddlewareList = [
-    reduxThunk.withExtraArgument(api),
+    reduxThunk.withExtraArgument(ApiService),
 ];
 
 const enhancedStore = composeEnhancers(applyMiddleware(...activeMiddlewareList));

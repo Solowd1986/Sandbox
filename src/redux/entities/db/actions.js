@@ -1,4 +1,4 @@
-import api from "../../api/axios/init";
+//import api from "../../api/axios/init";
 
 
 export const fetchPageData = (params) => (dispatch, getState, api) => {
@@ -6,6 +6,7 @@ export const fetchPageData = (params) => (dispatch, getState, api) => {
     //console.log(route);
     //console.log(data);
     //console.log(history);
+
 
     const pageType = !Object.keys(data).length ? "index" : route.match(/\/([a-z]*)\/\:/)[1];
     const apiRoute =

@@ -11,17 +11,11 @@ import { List } from "immutable";
 
 
 class Category extends Component {
-    constructor(props) {
-        super(props);
-        //console.log(this.props);
-        this.state = {
-            categoryProductsList: null,
-            lastIndex: 0
-        };
 
-        this.props.fetchPageData(this.props);
-    }
-
+    state = {
+        categoryProductsList: null,
+        lastIndex: 0
+    };
 
     static getDerivedStateFromProps(props, state) {
         // это нужно чтобы при переходе по мольному скроллу как при создании компонента категории так и при обновлении
@@ -58,7 +52,9 @@ class Category extends Component {
         this.setState(state => ({ categoryProductsList: { ...this.state.categoryProductsList, data } }));
     };
 
+
     componentDidMount() {
+        this.props.fetchPageData(this.props);
         window.scrollTo(0, 0);
     }
 

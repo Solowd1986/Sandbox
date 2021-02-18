@@ -1,5 +1,5 @@
 import db from "./mock-data/database"
-import api from "../../api/axios/init";
+
 import { List } from "immutable";
 
 const initialState = {

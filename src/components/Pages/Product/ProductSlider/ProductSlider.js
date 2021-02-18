@@ -41,6 +41,7 @@ class ProductSlider extends Component {
         //console.log(list);
         return (
             <div className={styles.order__img_wrapper}>
+
                 <img
                     width={480}
                     height={480}
@@ -50,7 +51,8 @@ class ProductSlider extends Component {
                     alt={alt}
                 />
 
-                <div className={styles.slider} ref={this.listSmallImgRef}>
+                <div className={styles.slider}
+                     ref={this.listSmallImgRef}>
                     {list.map(item => (
                         <img key={item} width="60" height="60"
                              onClick={this.toggleSlide}

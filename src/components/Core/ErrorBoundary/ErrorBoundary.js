@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Error500 from "../../Pages/Error500/Error500";
+
 
 class ErrorBoundary extends React.Component {
     constructor(props) {
@@ -14,14 +16,14 @@ class ErrorBoundary extends React.Component {
     componentDidCatch(error, errorInfo) {
         // You can also log the error to an error reporting service
         //logErrorToMyService(error, errorInfo);
-        console.log('Bound Error');
+        console.log('Catch Bound Error');
+
     }
 
     render() {
-
         if (this.state.hasError) {
             // You can render any custom fallback UI
-            return <h1>ErrorBoundary Component. Something went wrong.</h1>;
+            return <Error500/>
         }
         return this.props.children;
     }

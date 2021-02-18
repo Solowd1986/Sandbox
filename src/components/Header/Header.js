@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import common from "~scss/common.module.scss";
 import styles from "./header.module.scss";
 import classNames from "classnames";
 
@@ -44,7 +43,7 @@ class Header extends Component {
         return (
             <header className={classList}>
                 <a className={`${styles.portfolio_controls} ${styles.portfolio_controls__right}`} href="#">перейти на GitHub проекта</a>
-                <nav className={`${common.wrapper} ${styles.header}`}>
+                <nav className={classNames("wrapper", styles.common)}>
                     <MobileNavbar/>
                     <Logo/>
                     <NavbarList/>

@@ -9,24 +9,72 @@ import * as modal from "../../../redux/entities/modal/actions";
 import * as PropTypes from "prop-types";
 import * as server from "../../../redux/entities/db/actions";
 import Spinner from "../../Core/Modal/Spinner/Spinner";
-
-
 import classNames from "classnames";
 
+
+// class Bond extends Component {
+//
+//     constructor(props) {
+//         super(props);
+//         this.state = { hasError: false };
+//     }
+
+// static getDerivedStateFromError(error) {
+//     console.log('ee', error);
+//     // Update state so the next render will show the fallback UI.
+//     return { hasError: true };
+// }
+//
+// componentDidCatch(error, errorInfo) {
+//     // You can also log the error to an error reporting service
+//     //logErrorToMyService(error, errorInfo);
+//     //debugger;
+//     console.dir(error);
+//     console.dir(errorInfo);
+//     console.log('INNER Bound Error');
+// }
+
+
+//     render() {
+//         if (this.state.hasError) {
+//             // You can render any custom fallback UI
+//             return <h1>ERRRORRR</h1>
+//         }
+//         return this.props.children;
+//     }
+// }
+//
+//
+// class B2 extends Component {
+//
+//     componentDidMount() {
+//         this.setS1tate({name: 12});
+//     }
+//
+//
+//     render() {
+//         return (
+//             <h4>AAAAA</h4>
+//         )
+//     }
+// }
+
+
+
+
+
+
+
+
 class Promo extends Component {
-    constructor(props) {
-        super(props);
-        this.props.fetchPageData(this.props);
-        this.state = {
-            index: null
-        }
-    }
+
+    state = {
+        index: null
+    };
 
     static propTypes = {
         index: PropTypes.object,
     };
-
-
 
     toggle = () => {
         this.props.enableModal();
@@ -38,12 +86,17 @@ class Promo extends Component {
         }
     }
 
+    componentDidMount() {
+        this.props.fetchPageData(this.props);
+    }
+
     componentWillUnmount() {
-        this.setState((state) => {
-            return {
-                index: null
-            }
-        })
+        this.setState(state => ({ index: null }));
+    }
+
+    componentDidCatch(error, errorInfo) {
+        console.dir(errorInfo.componentStack);
+        console.dir(error);
     }
 
     render() {
@@ -58,6 +111,11 @@ class Promo extends Component {
 
                     {/*<Tabs/>*/}
                     {/*<SliderLIne/>*/}
+
+                    {/*<Bond>*/}
+                    {/*    <B2>AA</B2>*/}
+                    {/*</Bond>*/}
+
 
                     {/*<button onClick={this.toggle}>Active</button>*/}
                     {
