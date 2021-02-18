@@ -1,7 +1,7 @@
 <?php
 
 
-//sleep(33);
+//sleep(1);
 
 
 //header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
@@ -88,11 +88,11 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         }
     } catch (\Error $e) {
         //print "Error with your request" . $e->getMessage();
-        print json_encode(["server error" => $e . " URI Catch Error API"]);
+        print json_encode(["error" => true, "server error" => $e . " URI Catch Error API"]);
         //print "В ваш запрос беззастенчиво вкралась ошибка.";
     } catch (\Exception $e) {
         //print "Error with your request" . $e->getMessage();
-        print json_encode(["server exception" => $e . " URI Catch Error API"]);
+        print json_encode(["error" => true, "server exception" => $e . " URI Catch Error API"]);
         //print "В ваш запрос беззастенчиво вкралась ошибка.";
     }
 

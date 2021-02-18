@@ -17,6 +17,9 @@ class Promo extends Component {
     constructor(props) {
         super(props);
         this.props.fetchPageData(this.props);
+        this.state = {
+            index: null
+        }
     }
 
     static propTypes = {
@@ -24,13 +27,28 @@ class Promo extends Component {
     };
 
 
+
     toggle = () => {
         this.props.enableModal();
     };
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (!this.state.index && this.props.index) {
+            this.setState({ index: this.props.index })
+        }
+    }
+
+    componentWillUnmount() {
+        this.setState((state) => {
+            return {
+                index: null
+            }
+        })
+    }
+
     render() {
-        if (!this.props.index) return <div className={styles.spin_wrap}><Spinner/></div>;
-        const { phones, accessoires, gadgets } = this.props.index;
+        if (!this.state.index) return <div className={styles.spin_wrap}><Spinner/></div>;
+        const { phones, accessoires, gadgets } = this.state.index;
 
         return (
 

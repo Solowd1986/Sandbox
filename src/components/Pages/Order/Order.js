@@ -9,6 +9,9 @@ import Confirm from "./Confirm/Confirm";
 import { requestIndexData } from "../../../redux/middlware/requestToServer";
 import * as modalActions from "../../../redux/entities/modal/actions";
 
+import EmptyOrderPage from "./EmptyOrderPage/EmptyOrderPage";
+import OrderForm from "./OrderForm/OrderForm";
+
 
 class Order extends Component {
 
@@ -16,67 +19,14 @@ class Order extends Component {
         window.scrollTo(0, 0) // always on top of page, without smooth scroll
     }
 
-    submit = (evt) => {
-        if (!evt.currentTarget.checkValidity()) {
-            for (const formElement of evt.currentTarget.elements) {
-                if (formElement.nodeName === "INPUT" && formElement.type === "text" || formElement.type === "email") {
-                    if (!formElement.checkValidity()) {
-                        for (const key in formElement.validity) {
-                            if (formElement.validity[key] === true) {
-                                //console.log(key);
-                            }
-                        }
-                    }
-                }
-
-            }
-        }
-        evt.preventDefault();
-    };
-
     render() {
-        return (
-            <>
-                {this.props.amountOfProductsInCart > 0
-                    ?
-                    <div className={`${common.container} ${styles.container_checkout_bg}`}>
-                        <div className={`${common.wrapper} ${styles.order}`}>
-                            <div className={styles.line}>
-                                <span className={styles.line_stage}>Ваша корзина</span>
-                                <span className={styles.line_stage}>Оплата и доставка</span>
-                                <span className={`${styles.line_stage} ${styles.line_stage__unactive}`}>Успешное оформление</span>
-                            </div>
-                            <form
-                                onSubmit={this.submit}
-                                className={styles.form}
-                                action=""
-                                name="order-form"
-                                method="POST"
-                                noValidate={true}>
-                                <OrderInfo/>
-                                <OrderSummary/>
-                            </form>
-                        </div>
-                    </div>
-                    :
-                    <>
-                        <div className={`${common.container}`}>
-                            <div className={`${common.wrapper} ${styles.empty_order}`}>
-                                <h1>Корзина покупок</h1>
-                                <p>У вас нет товаров для заказа</p>
-                            </div>
-                        </div>
-                    </>
-                }
-            </>
-        )
+        return this.props.amountOfProductsInCart > 0 ? <OrderForm/> : <EmptyOrderPage/>;
     }
 }
 
 
 function mapStateToProps(state) {
     return {
-        products: state.cart.products,
         amountOfProductsInCart: state.cart.amountOfProductsInCart,
     }
 }

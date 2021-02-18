@@ -110,7 +110,6 @@ class Category extends Component {
         }
 
 
-
         if (currentRoute !== nextRoute) {
 
             const { match: { path: route, params: data }, history } = this.props;
@@ -144,6 +143,17 @@ class Category extends Component {
             })
         }
     }
+
+    componentWillUnmount() {
+        this.setState((state) => {
+            return {
+                ...state,
+                categoryProductsList: null,
+                lastIndex: 0
+            }
+        })
+    }
+
 
     render() {
         /**

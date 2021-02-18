@@ -18,34 +18,27 @@ import Spinner from "../../Core/Modal/Spinner/Spinner";
 class Product extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            products: {}
-        };
-        //console.log(this.props);
-        //console.log(this.props.match.path);
         this.props.fetchPageData(this.props);
-
-        //this.props.fetchProductData(this.props.match.params.category, this.props.match.params.id);
-    }
-
-    componentDidMount() {
-        //window.scrollTo(0, 0); // always on top of page
-    }
-
-    componentWillUnmount() {
-        this.props.clearProduct();
+        this.state = {
+            product: null
+        }
     }
 
     isProductInCart = (products, id) => products.find(item => item.id === id);
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (!this.state.product && this.props.product) {
+            this.setState({ product: this.props.product })
+        }
+    }
+
+    componentWillUnmount() {
+        this.setState({ product: null })
+    }
+
     render() {
-
-        //console.log(this.props);
-        if (!this.props.product) return <Spinner/>;
-        const { main: category, data: product } = this.props.product;
-
-        //console.log(product);
-        //console.log(category);
+        if (!this.state.product) return <Spinner/>;
+        const { main: category, data: product } = this.state.product;
 
 
         const productPriceClassList = { main: `${styles.price}`, discount: `${styles.discount}` };
@@ -112,11 +105,8 @@ class Product extends Component {
 
 function mapStateToProps(state) {
     return {
-        db: state.db,
         cart: state.cart,
         product: state.db.product,
-        pageData: state.db.pageData,
-
     }
 }
 
@@ -130,10 +120,6 @@ function mapDispatchToProps(dispatch) {
         onDeleteFromCart: (evt, id) => {
             dispatch(cart.removeItemFromCart(evt, id))
         },
-        clearProduct: (evt, id) => {
-            dispatch(server.clearProduct())
-        },
-
         fetchPageData: (params) => {
             dispatch(server.fetchPageData(params));
         },

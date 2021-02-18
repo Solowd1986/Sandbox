@@ -92,7 +92,7 @@ class OrderItem extends Component {
                 <div className={styles.info_inner_wrapper}>
                     <p className={styles.product_title}>
                         <span>{item.title}</span>
-                        <span>({color})</span>
+                        <span>({item.color || item.specifications.color})</span>
                     </p>
 
                     <div className={styles.counter_block}>

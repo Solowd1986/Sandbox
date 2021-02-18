@@ -7,21 +7,21 @@ export const fetchPageData = (params) => (dispatch, getState, api) => {
     //console.log(data);
     //console.log(history);
 
-
-    const page = !Object.keys(data).length ? "index" : route.match(/\/([a-z]*)\/\:/)[1];
-
+    const pageType = !Object.keys(data).length ? "index" : route.match(/\/([a-z]*)\/\:/)[1];
     const apiRoute =
         !Object.keys(data).length
             ? "index"
             : route.match(/\/([a-z]*)\/\:/)[1] + "/" + Object.values(data).join("/");
 
-
     api.get(apiRoute)
         .then(response => {
             //console.dir('success');
             //console.log(response.data);
-            dispatch({ type: "server/fetchPageData", payload: { page, data: response.data } })
+            if (response.data.error) history.push("/404");
+            dispatch({ type: "server/fetchPageData", payload: { pageType, data: response.data } })
         }).catch(error => {
+        console.dir(error);
+        return
         //console.log('fail 1');
         //console.dir(error);
         if (error.code === "ECONNABORTED" || /50[0-9]/.test(error.response.status.toString())) {
