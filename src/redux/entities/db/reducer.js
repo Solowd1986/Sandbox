@@ -45,7 +45,11 @@ const initialState = {
             imgAlt: "slider-image"
         }
     ],
-    product: {},
+
+    index: null,
+    category: null,
+    product: null,
+
     lastIndex: 0,
     fetchingLazyDataEnd: true
 };
@@ -54,25 +58,19 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
 
-        case "server/getIndexData": {
+
+        case "server/fetchPageData": {
             return {
                 ...state,
-                index: action.payload
+                [action.payload.page]: action.payload.data
             };
         }
+
 
         case "server/fetchingLazy": {
             return {
                 ...state,
                 fetchingLazyDataEnd: false,
-            };
-        }
-
-
-        case "server/getCategoryData": {
-            return {
-                ...state,
-                category: action.payload
             };
         }
 
@@ -89,21 +87,7 @@ export default (state = initialState, action) => {
             };
         }
 
-        case "server/fetchCategoryProducts": {
 
-            return {
-                ...state,
-                category: action.payload
-            };
-        }
-
-        case "server/fetchProductData": {
-
-            return {
-                ...state,
-                product: action.payload
-            };
-        }
 
 
         case "server/startRequest": {
@@ -115,7 +99,7 @@ export default (state = initialState, action) => {
             //console.log("start request");
             return {
                 ...state,
-                product: {}
+                product: null
             };
         }
 

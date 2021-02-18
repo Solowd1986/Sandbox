@@ -25,7 +25,7 @@ class Product extends Component {
         //console.log(this.props.match.path);
         this.props.fetchPageData(this.props);
 
-        this.props.fetchProductData(this.props.match.params.category, this.props.match.params.id);
+        //this.props.fetchProductData(this.props.match.params.category, this.props.match.params.id);
     }
 
     componentDidMount() {
@@ -41,8 +41,7 @@ class Product extends Component {
     render() {
 
         //console.log(this.props);
-        if (!this.props.product || Object.keys(this.props.product).length === 0) return <Spinner/>;
-
+        if (!this.props.product) return <Spinner/>;
         const { main: category, data: product } = this.props.product;
 
         //console.log(product);
@@ -115,7 +114,9 @@ function mapStateToProps(state) {
     return {
         db: state.db,
         cart: state.cart,
-        product: state.db.product
+        product: state.db.product,
+        pageData: state.db.pageData,
+
     }
 }
 
@@ -132,9 +133,7 @@ function mapDispatchToProps(dispatch) {
         clearProduct: (evt, id) => {
             dispatch(server.clearProduct())
         },
-        fetchProductData: (category, id) => {
-            dispatch(server.fetchProductData(category, id))
-        },
+
         fetchPageData: (params) => {
             dispatch(server.fetchPageData(params));
         },

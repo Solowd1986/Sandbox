@@ -9,16 +9,15 @@ import * as modal from "../../../redux/entities/modal/actions";
 import * as PropTypes from "prop-types";
 import * as server from "../../../redux/entities/db/actions";
 import Spinner from "../../Core/Modal/Spinner/Spinner";
-import Tabs from "../../Core/Tabs/Tabs";
-import SliderLIne from "../../Core/Sliders/SliderLine/SliderLine";
+
+
+import classNames from "classnames";
 
 class Promo extends Component {
     constructor(props) {
         super(props);
-        this.props.getData();
         this.props.fetchPageData(this.props);
     }
-
 
     static propTypes = {
         index: PropTypes.object,
@@ -29,13 +28,8 @@ class Promo extends Component {
         this.props.enableModal();
     };
 
-
-
     render() {
-        //console.log('no promo');
-
         if (!this.props.index) return <div className={styles.spin_wrap}><Spinner/></div>;
-
         const { phones, accessoires, gadgets } = this.props.index;
 
         return (
@@ -46,10 +40,7 @@ class Promo extends Component {
                     {/*<Tabs/>*/}
                     {/*<SliderLIne/>*/}
 
-
-
-                    <button onClick={this.toggle}>Active</button>
-
+                    {/*<button onClick={this.toggle}>Active</button>*/}
                     {
                         this.props.isModalActive
                         &&
@@ -103,9 +94,6 @@ function mapDispatchToProps(dispatch) {
     return {
         enableModal: () => {
             dispatch(modal.enableModal());
-        },
-        getData: () => {
-            dispatch(server.getData());
         },
         fetchPageData: (params) => {
             dispatch(server.fetchPageData(params));

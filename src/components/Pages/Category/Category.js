@@ -15,18 +15,11 @@ class Category extends Component {
         super(props);
         //console.log(this.props);
         this.state = {
-            categoryProductsList: {},
+            categoryProductsList: null,
             lastIndex: 0
         };
 
-        //const { match: {path: route, params: data}, history }  = this.props;
-        // console.log(route);
-        // console.log(data);
-        // console.log(history);
-
         this.props.fetchPageData(this.props);
-
-        this.props.fetchCategoryProducts(this.props.match.params.type, this.props.history);
     }
 
 
@@ -66,11 +59,9 @@ class Category extends Component {
         this.setState(state => ({ categoryProductsList: { ...this.state.categoryProductsList, data } }));
     };
 
-
     componentDidMount() {
         window.scrollTo(0, 0);
     }
-
 
     componentDidUpdate(prevProps, prevState, snapshot) {
 
@@ -79,7 +70,7 @@ class Category extends Component {
         }
 
 
-        const isThisInitialSetState = Object.keys(this.state.categoryProductsList).length === 0;
+        const isThisInitialSetState = !this.state.categoryProductsList;
 
         const currentCategoryAlias = !isThisInitialSetState && this.state.categoryProductsList.main.alias;
         const nextCategoryAlias = !isThisInitialSetState && this.props.category.main.alias;
@@ -127,7 +118,8 @@ class Category extends Component {
             console.log(data);
             console.log(history);
 
-            this.props.fetchCategoryProducts(nextRoute);
+            this.props.fetchPageData(this.props);
+            //this.props.fetchCategoryProducts(nextRoute);
         }
 
 
@@ -172,7 +164,7 @@ class Category extends Component {
          *
          */
 
-        const isProductsListEmpty = Object.keys(this.state.categoryProductsList).length === 0;
+        const isProductsListEmpty = !this.state.categoryProductsList;
         const alias = isProductsListEmpty ? null : this.state.categoryProductsList.main.alias;
 
         if (isProductsListEmpty || alias !== this.props.match.params.type) {
@@ -188,7 +180,6 @@ class Category extends Component {
 const mapStateToProps = (state) => {
     return {
         category: state.db.category,
-        data: state.db.data,
         sortType: state.sort.sortType,
         lazy: state.db.lazy,
         lastIndex: state.db.lastIndex
@@ -197,9 +188,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchCategoryProducts: (category, history) => {
-            dispatch(server.fetchCategoryProducts(category, history));
-        },
         fetchPageData: (params) => {
             dispatch(server.fetchPageData(params));
         },
