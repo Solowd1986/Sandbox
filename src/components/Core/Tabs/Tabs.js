@@ -95,6 +95,18 @@ class Tabs extends Component {
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid cumque
                         ducimus, eius ex fugiat ipsa ipsam libero maxime minus nihil nostrum officia pariatur
                         placeat quasi qui quia repellat voluptas.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid cumque
+                        ducimus, eius ex fugiat ipsa ipsam libero maxime minus nihil nostrum officia pariatur
+                        placeat quasi qui quia repellat voluptas.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid cumque
+                        ducimus, eius ex fugiat ipsa ipsam libero maxime minus nihil nostrum officia pariatur
+                        placeat quasi qui quia repellat voluptas.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid cumque
+                        ducimus, eius ex fugiat ipsa ipsam libero maxime minus nihil nostrum officia pariatur
+                        placeat quasi qui quia repellat voluptas.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid cumque
+                        ducimus, eius ex fugiat ipsa ipsam libero maxime minus nihil nostrum officia pariatur
+                        placeat quasi qui quia repellat voluptas.
                     </p>
                 </li>
             </ul>

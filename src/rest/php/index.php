@@ -3,6 +3,10 @@
 
 //sleep(33);
 
+
+//header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
+
+//die;
 //print json_encode("true");
 //die();
 

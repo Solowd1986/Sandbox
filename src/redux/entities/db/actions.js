@@ -43,31 +43,35 @@ export const fetchPageData = (params) => (dispatch, getState, api) => {
             : route.match(/\/([a-z]*)\/\:/)[1] + "/" + Object.values(data).join("/");
 
 
-    // api.get(apiRoute)
-    //     .then(response => {
-    //         console.dir('success');
-    //         console.log(response.data);
-    //     }).catch(error => {
-    //         console.log('fail 1');
-    //         if (error.code === "ECONNABORTED") {
-    //             api.get(apiRoute)
-    //                 .then(response => {
-    //                 }).catch(error => {
-    //                 console.log('fail 2');
-    //                 if (error.code === "ECONNABORTED") {
-    //                     api.get(apiRoute)
-    //                         .then(response => {
-    //                             console.log('succ 3');
-    //                         }).catch(error => {
-    //                         console.log('fail 3');
-    //                         if (error.code === "ECONNABORTED") {
-    //                             console.log('fail 33');
-    //                         }
-    //                     })
-    //                 }
-    //             })
-    //         }
-    //     });
+    api.get(apiRoute)
+        .then(response => {
+            console.dir('success');
+            console.log(response.data);
+        }).catch(error => {
+        console.log('fail 1');
+        console.dir(error);
+        if (error.code === "ECONNABORTED" || /50[0-9]/.test(error.response.status.toString())) {
+            api.get(apiRoute)
+                .then(response => {
+
+                }).catch(error => {
+
+                console.log('fail 2');
+
+                if (error.code === "ECONNABORTED" || /50[0-9]/.test(error.response.status.toString())) {
+                    api.get(apiRoute)
+                        .then(response => {
+                            console.log('succ 3');
+                        }).catch(error => {
+                        console.log('fail 3');
+                        if (error.code === "ECONNABORTED" || /50[0-9]/.test(error.response.status.toString())) {
+                            console.log('fail 33');
+                        }
+                    })
+                }
+            })
+        }
+    });
 
 
     //console.log(!!Object.keys(data).length);
@@ -98,7 +102,7 @@ export const fetchPageData = (params) => (dispatch, getState, api) => {
     // console.log(data);
     // console.log(history);
 
-    console.log('page data');
+    //console.log('page data');
 
 };
 
