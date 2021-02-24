@@ -21,7 +21,11 @@ class Product extends Component {
         product: null
     };
 
-    isProductInCart = (products, id) => products.find(item => item.id === id);
+    isProductInCart = (products, id) => {
+        if (!products) return false;
+        return products.find(item => item.id === id)
+
+    };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (!this.state.product && this.props.product) {

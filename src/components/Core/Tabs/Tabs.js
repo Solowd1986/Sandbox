@@ -12,18 +12,14 @@ class Tabs extends Component {
 
     componentDidMount() {
         this.list = Array.from(this.refList.current.children);
-        //this.list.forEach(item => this.params[item.children[0].innerText] = item.scrollHeight);
         this.list.forEach(item => {
             item.children[1].style.cssText =
                 "height: auto; overflow: initial, position: absolute; visibility: hidden";
             this.params[item.children[0].innerText] = item.children[1].clientHeight;
             item.children[1].style.cssText = "";
         });
-
         this.list[0].children[1].style.height = `${this.params[this.list[0].children[0].innerText]}px`;
-
     }
-
 
     open = (evt) => {
         if (evt.target.nextSibling.dataset.active) return;

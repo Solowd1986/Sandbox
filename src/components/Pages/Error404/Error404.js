@@ -27,9 +27,7 @@ const Error404 = props => {
                 </svg>
                 <h1 className={styles.msg}>Страница не найдена</h1>
                 <NavLink to={"/"} className={styles.btn}>НА ГЛАВНУЮ</NavLink>
-
             </div>
-
         </div>
     )
 };
@@ -37,9 +35,3 @@ const Error404 = props => {
 export default Error404;
 
 
-{/*<div className={styles.wrapper}>*/
-}
-{/*    <NavLink to={"/"}/>*/
-}
-{/*</div>*/
-}

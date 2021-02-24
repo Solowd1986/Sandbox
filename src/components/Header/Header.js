@@ -8,12 +8,10 @@ import NavbarList from "./Partials/NavbarList";
 import Userbar from "./Partials/Userbar";
 
 class Header extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isPageScrolled: false
-        }
-    }
+
+    state = {
+        isPageScrolled: false
+    };
 
     componentDidMount() {
         window.addEventListener("scroll", this.handleScroll);

@@ -13,8 +13,6 @@ export default function changeAmountOfProduct(state, evt, id, quantity) {
     currentProduct.quantity = Math.max(min, Math.min(max, quantity));
     products[products.indexOf(products.find(item => item.id === id))] = currentProduct;
 
-    //localStorage.setItem("cart", JSON.stringify(products));
-
     return {
         ...state,
         products

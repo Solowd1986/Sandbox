@@ -79,10 +79,9 @@ class NavbarList extends React.Component {
                 {/*Аксессуары*/}
                 <li className={styles.header__nav_item}>
                     <NavLink
-
-                             to={"/category/accessoires"}
-                             className={styles.header__nav_link}
-                             activeClassName={styles.link_active_class}>
+                        to={"/category/accessoires"}
+                        className={styles.header__nav_link}
+                        activeClassName={styles.link_active_class}>
                         Аксессуары
                         <span className={styles.header__nav_link__arrow}/>
                     </NavLink>

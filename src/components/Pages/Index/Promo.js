@@ -11,63 +11,13 @@ import * as server from "../../../redux/entities/db/actions";
 import Spinner from "../../Core/Modal/Spinner/Spinner";
 import classNames from "classnames";
 
-
-// class Bond extends Component {
-//
-//     constructor(props) {
-//         super(props);
-//         this.state = { hasError: false };
-//     }
-
-// static getDerivedStateFromError(error) {
-//     console.log('ee', error);
-//     // Update state so the next render will show the fallback UI.
-//     return { hasError: true };
-// }
-//
-// componentDidCatch(error, errorInfo) {
-//     // You can also log the error to an error reporting service
-//     //logErrorToMyService(error, errorInfo);
-//     //debugger;
-//     console.dir(error);
-//     console.dir(errorInfo);
-//     console.log('INNER Bound Error');
-// }
+import FormikForm from "../../Core/Form/Formik/FormikForm";
 
 
-//     render() {
-//         if (this.state.hasError) {
-//             // You can render any custom fallback UI
-//             return <h1>ERRRORRR</h1>
-//         }
-//         return this.props.children;
-//     }
-// }
-//
-//
-// class B2 extends Component {
-//
-//     componentDidMount() {
-//         this.setS1tate({name: 12});
-//     }
-//
-//
-//     render() {
-//         return (
-//             <h4>AAAAA</h4>
-//         )
-//     }
-// }
-
-
-
-
-
-
+import { NavLink } from "react-router-dom";
 
 
 class Promo extends Component {
-
     state = {
         index: null
     };
@@ -94,28 +44,24 @@ class Promo extends Component {
         this.setState(state => ({ index: null }));
     }
 
-    componentDidCatch(error, errorInfo) {
-        console.dir(errorInfo.componentStack);
-        console.dir(error);
-    }
 
     render() {
+        //console.log(this.props);
+
 
         if (!this.state.index) return <div className={styles.spin_wrap}><Spinner/></div>;
         const { phones, accessoires, gadgets } = this.state.index;
+
 
         return (
 
             <section className={`container ${styles.wrapper}`}>
                 <main className={`wrapper ${styles.content}`}>
 
-                    {/*<Tabs/>*/}
-                    {/*<SliderLIne/>*/}
+                    <NavLink to={"/secret"}>Go to secret page </NavLink>
+                    <NavLink to={"/login"}>Go to login page </NavLink>
 
-                    {/*<Bond>*/}
-                    {/*    <B2>AA</B2>*/}
-                    {/*</Bond>*/}
-
+                    {/*<FormikForm/>*/}
 
                     {/*<button onClick={this.toggle}>Active</button>*/}
                     {
