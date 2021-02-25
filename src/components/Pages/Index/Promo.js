@@ -48,7 +48,6 @@ class Promo extends Component {
     render() {
         //console.log(this.props);
 
-
         if (!this.state.index) return <div className={styles.spin_wrap}><Spinner/></div>;
         const { phones, accessoires, gadgets } = this.state.index;
 
@@ -62,6 +61,8 @@ class Promo extends Component {
                     <NavLink to={"/login"}>Go to login page </NavLink>
 
                     {/*<FormikForm/>*/}
+
+                    {0 ?? 12}
 
                     {/*<button onClick={this.toggle}>Active</button>*/}
                     {

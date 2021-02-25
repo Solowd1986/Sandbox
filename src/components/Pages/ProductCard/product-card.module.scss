@@ -40,10 +40,6 @@
   text-transform: uppercase;
   background-color: $red-100;
 
-  &__not_in_stock {
-    text-decoration: line-through;
-    background-color: $grey;
-  }
 
   &__categorie {
     align-self: center;
@@ -52,9 +48,14 @@
   }
 }
 
-.link {
-  //margin-bottom: 10px;
+.not_in_stock {
+  text-decoration: line-through;
+  background-color: $grey;
 }
+
+
+
+
 
 
 .img {

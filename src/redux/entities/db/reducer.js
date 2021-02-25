@@ -1,16 +1,6 @@
-import db from "./mock-data/database"
-
-import { List } from "immutable";
+import * as types from "./constants/db"
 
 const initialState = {
-    listTestingData: new List([
-            { id: 1, name: "Bob" },
-            { id: 2, name: "Stan" },
-            { id: 3, name: "Glen" },
-            { id: 4, name: "Mike" },
-        ]
-    ),
-
     index: null,
     category: null,
     product: null,
@@ -22,9 +12,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-
-
-        case "server/fetchPageData": {
+        case types.SERVER_FETCH_PAGE_DATA : {
             return {
                 ...state,
                 [action.payload.pageType]: action.payload.data

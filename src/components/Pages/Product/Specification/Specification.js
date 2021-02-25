@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./specification.module.scss";
 
 const Specification = ({ specs }) => {
+    console.log(specs);
+
     return (
         <>
             <div className={styles.attributes}>
@@ -18,19 +20,19 @@ const Specification = ({ specs }) => {
                     </tr>
                     <tr>
                         <td>Тип корпуса</td>
-                        <td>{specs.caseType}</td>
+                        <td>{specs.casetype}</td>
                     </tr>
                     <tr>
                         <td>Материал корпуса</td>
-                        <td>{specs.caseMaterial}</td>
+                        <td>{specs.casematerial}</td>
                     </tr>
                     <tr>
                         <td>Тип SIM-карты</td>
-                        <td>{specs.simType}</td>
+                        <td>{specs.simtype}</td>
                     </tr>
                     <tr>
                         <td>Количество SIM-карт</td>
-                        <td>{specs.simCount}</td>
+                        <td>{specs.simcount}</td>
                     </tr>
                     <tr>
                         <td>Вес</td>
@@ -48,19 +50,19 @@ const Specification = ({ specs }) => {
                     <tbody>
                     <tr>
                         <td>Тип экрана</td>
-                        <td>{specs.screenType}</td>
+                        <td>{specs.screentype}</td>
                     </tr>
                     <tr>
                         <td>Диагональ</td>
-                        <td>{specs.screenSize}</td>
+                        <td>{specs.screensize}</td>
                     </tr>
                     <tr>
                         <td>Размер изображения</td>
-                        <td>{specs.screenResolution}</td>
+                        <td>{specs.screenresolution}</td>
                     </tr>
                     <tr>
                         <td>Автоматический поворот экрана</td>
-                        <td>{specs.screenRotate}</td>
+                        <td>{specs.screenrotate}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -70,31 +72,31 @@ const Specification = ({ specs }) => {
                     <tbody>
                     <tr>
                         <td>Тыловая фотокамера</td>
-                        <td>{specs.mainCamera}</td>
+                        <td>{specs.maincamera}</td>
                     </tr>
                     <tr>
                         <td>Фотовспышка</td>
-                        <td>{specs.flashType}</td>
+                        <td>{specs.flashtype}</td>
                     </tr>
                     <tr>
                         <td>Функции тыловой фотокамеры</td>
-                        <td>{specs.mainCameraFunction}</td>
+                        <td>{specs.maincamerafunction}</td>
                     </tr>
                     <tr>
                         <td>Диафрагма тыловой фотокамеры</td>
-                        <td>{specs.caseType}</td>
+                        <td>{specs.casetype}</td>
                     </tr>
                     <tr>
                         <td>Запись видео</td>
-                        <td>{specs.recordingVideo}</td>
+                        <td>{specs.recordingvideo}</td>
                     </tr>
                     <tr>
                         <td>Макс. частота кадров видео</td>
-                        <td>{specs.maximumFramerate}</td>
+                        <td>{specs.maximumframerate}</td>
                     </tr>
                     <tr>
                         <td>Аудио</td>
-                        <td>{specs.audioSupport}</td>
+                        <td>{specs.audiosupport}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -104,7 +106,7 @@ const Specification = ({ specs }) => {
                     <tbody>
                     <tr>
                         <td>Стандарт</td>
-                        <td>{specs.connectionStandart}</td>
+                        <td>{specs.connectionstandart}</td>
                     </tr>
                     <tr>
                         <td>Поддержка диапазонов LTE</td>
@@ -130,11 +132,11 @@ const Specification = ({ specs }) => {
                     </tr>
                     <tr>
                         <td>Количество ядер процессора</td>
-                        <td>{specs.cpuCoresAmount}</td>
+                        <td>{specs.cpucoresamount}</td>
                     </tr>
                     <tr>
                         <td>Видеопроцессор</td>
-                        <td>{specs.videoCpu}</td>
+                        <td>{specs.videocpu}</td>
                     </tr>
                     <tr>
                         <td>Объем встроенной памяти</td>
@@ -156,11 +158,11 @@ const Specification = ({ specs }) => {
                     </tr>
                     <tr>
                         <td>Тип аккумулятора</td>
-                        <td>{specs.accType}</td>
+                        <td>{specs.acctype}</td>
                     </tr>
                     <tr>
                         <td>Тип разъема для зарядки</td>
-                        <td>{specs.connectorType}</td>
+                        <td>{specs.connectortype}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -174,7 +176,7 @@ const Specification = ({ specs }) => {
                     </tr>
                     <tr>
                         <td>Дата анонсирования</td>
-                        <td>{specs.announceDate}</td>
+                        <td>{specs.announcedate}</td>
                     </tr>
                     </tbody>
                 </table>

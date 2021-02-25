@@ -81,13 +81,11 @@ class Category extends Component {
         }
 
 
-        //ADD SMOOTH SCROLL BOTTOM
-        if (this.props.lastIndex > 0 && this.state.lastIndex !== this.props.lastIndex) {
-            //console.log(1);
-
-            //window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-            //window.scrollTo(20000, 20000);
+        // если индекс изменялся и стейт уравнялся с пропсами, то есть данные показаны и отрендерены - тогда проматываем
+        if (this.props.lastIndex > 0 && this.state.lastIndex === this.props.lastIndex) {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
+
 
         // lazy load
         if (!isThisInitialSetState && this.props.lazy && this.state.lastIndex !== this.props.lastIndex) {
@@ -107,9 +105,9 @@ class Category extends Component {
         if (currentRoute !== nextRoute) {
 
             const { match: { path: route, params: data }, history } = this.props;
-            console.log(route);
-            console.log(data);
-            console.log(history);
+            //console.log(route);
+            //console.log(data);
+            //console.log(history);
 
             this.props.fetchPageData(this.props);
             //this.props.fetchCategoryProducts(nextRoute);
@@ -167,6 +165,9 @@ class Category extends Component {
          * Приходитм опять сюда: алиас стейста равен пропсам пути (пута) - проверка пройдена, отрисовываем категоирю
          *
          */
+
+
+        console.log('ren');
 
         const isProductsListEmpty = !this.state.categoryProductsList;
         const alias = isProductsListEmpty ? null : this.state.categoryProductsList.main.alias;

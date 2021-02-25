@@ -1,8 +1,8 @@
-export default function addItemToCart(state, evt, item) {
+export default function addItemToCart(state, item) {
 
     const products = !state.products ? [] : [...state.products];
-    const product = { ...item, quantity: 1 };
     if (!products.includes(item)) {
+        const product = { ...item, quantity: 1 };
         products.push(product);
     }
 

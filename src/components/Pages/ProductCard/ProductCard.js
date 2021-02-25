@@ -1,114 +1,53 @@
-import React, {Component} from "react";
-import common from "~scss/common.module.scss";
-import styles from "./product-card.module.scss";
-
-import {connect} from "react-redux";
-import {NavLink} from "react-router-dom";
+import React, { Component } from "react";
 
 import ProductPrice from "../../Core/ProductPrice/ProductPrice";
 import OrderButton from "../../Core/OrderButton/OrderButton";
 import PromoProductCard from "./PromoProductCard";
-import * as cart from "../../../redux/entities/cart/actions";
+import { NavLink } from "react-router-dom";
+import * as PropTypes from "prop-types";
+
+import styles from "./product-card.module.scss";
+import classNames from "classnames";
 
 class ProductCard extends Component {
 
-    isProductInCart = (products, id) => {
-        if (!products) return false;
-        return products.find(item => item.id === id);
+    static propTypes = {
+        item: PropTypes.object,
+        specifications: PropTypes.object,
+        color: PropTypes.string
     };
 
-
     render() {
-        const { cart, category, item, classList } = this.props;
+        const { category, item, item: { rest } } = this.props;
 
-        //console.log(item);
+        const tagClassList = classNames(styles.tag, {
+            [styles.not_in_stock]: rest === 0
+        });
+        const productColor = item.specifications ? <span className={styles.color}>{`"${item.specifications.color}"`}</span> : null;
 
         return (
-            <li key={item.id} className={`${styles.item} ${classList ? classList : ''}`}>
-                <span className={item.rest > 0 ? `${styles.tag}` : `${styles.tag} ${styles.tag__not_in_stock}`}>
-                    В наличии
-                </span>
+            <li key={item.id} className={styles.item}>
+                <span className={tagClassList}>В наличии</span>
 
-                <NavLink to={`/product/${category.alias}/${item.id}`} className={styles.link}>
-                    <img className={styles.img}
-                         src={item.img.md} // path from public folder
-                         alt={item["img_alt"]}
-                    />
+                <NavLink to={`/product/${category.alias}/${item.id}`}>
+                    <img className={styles.img} src={item.img.md} alt={item["img_alt"]}/>
                 </NavLink>
 
                 <div className={styles.title}>
                     <span>{item.title}</span>
-                    <span className={styles.color}>
-                        {item.specifications && `"${(item.specifications.color)}"`}
-                    </span>
+                    {productColor}
                 </div>
 
                 <PromoProductCard item={{ alias: category.alias, rest: item.rest, adsType: item["ads_type"] }}/>
                 <ProductPrice product={item}/>
-
-
-                {/*
-                    Вид кнопки зависит от isProductInCart: если такой товар есть - то можно убрать. Иначе - добавить.
-                    Передаваемый в компонент текст кнопки (props.children) зависит от количества товара: "Нет в наличии"/"Добавить в заказ"
-                    Если же товар уже в корзине, то текст один: "Убрать"
-                    При клике выполняется метод onAddToCart. Он состоит из двух action: disableButton и addItemAsync
-                    Суть такова:
-                    1. При клике на кнопку в cart ставится buttonsDisabled = true и кнопки зависящие от этого - отключаются
-                    2. Это можно увидеть в блоке OrderButton - атрибут disabled (не путать с data-disabled) зависит от:
-                       состояния buttonsDisabled, от остатка товара - чтоб нельзя добавить в корзину, если товара нет, или
-                       просто от передачи disabled={true} конкретному компоненту кнопки.
-                    3. Также, нужно дать кнопке класс визуализирующий ее отключение и визуализацию запроса к серверу.
-                    4. Имя этого класса передается в атрибуте data-disabled. В action disableButton этот класс добавляется
-                    5. Кому добавлять понятно из evt - обращаемся к evt.target, так класс получит только кнопка, по которой был клик
-                    6. Этот процесс продолжается, пока buttonsDisabled не перейдет в false, это происходит в функции addItem
-                    7. Эта функция вызывается не сразу, через 1 секунду, для имитации запроса, она обернута в addItemAsync для этого
-                    8. Когда секунда проходит, в числе прочего buttonsDisabled переводится в false, и важно: в addItem удаляется
-                       класс из атрибута data-disabled, чтобы пропал спиннер и стили "ожидания овтета от сервера".
-                */}
-                {
-                    this.isProductInCart(cart.products, item.id)
-                        ?
-                        <OrderButton
-                            product={item}
-                            onClick={(evt) => this.props.onDeleteFromCart(evt, item.id)}>
-                            Убрать из заказа
-                        </OrderButton>
-                        :
-                        <OrderButton
-                            product={item}
-                            onClick={(evt) => {
-                                // данная связка методов используется только в компонентах Promo/Category. В Product - нет,
-                                // модалка с корзиной не нужна
-                                this.props.onAddToCart(evt, item);
-                            }}>
-                            {item.rest === 0 ? "Нет в наличии" : "Добавить в заказ"}
-                        </OrderButton>
-                }
+                <OrderButton product={item}/>
             </li>
         )
     }
 }
 
 
-function mapStateToProps(state) {
-    return {
-        db: state.db,
-        cart: state.cart
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        onAddToCart: (evt, item) => {
-            dispatch(cart.addItemToCart(evt, item))
-        },
-        onDeleteFromCart: (evt, id) => {
-            dispatch(cart.removeItemFromCart(evt, id))
-        },
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);
+export default ProductCard;
 
 
 

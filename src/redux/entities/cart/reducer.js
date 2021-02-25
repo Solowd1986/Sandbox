@@ -14,13 +14,13 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case types.CART_ADD_ITEM: {
-            const { evt, item } = action.payload;
-            return addItemToCart(state, evt, item);
+            const { item } = action.payload;
+            return addItemToCart(state, item);
         }
 
         case types.CART_REMOVE_ITEM : {
-            const { evt, id } = action.payload;
-            return removeItemFromCart(state, evt, id);
+            const { item } = action.payload;
+            return removeItemFromCart(state, item);
         }
 
         case types.CART_CHANGE_PRODUCT_AMOUNT : {

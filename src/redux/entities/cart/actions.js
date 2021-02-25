@@ -1,21 +1,19 @@
 import * as types from "./constants/cart";
 
-export const addItemToCart = (evt, item) => {
+export const addItemToCart = (item) => {
     return {
         type: types.CART_ADD_ITEM,
         payload: {
-            evt,
             item
         }
     }
 };
 
-export const removeItemFromCart = (evt, id) => {
+export const removeItemFromCart = (item) => {
     return {
         type: types.CART_REMOVE_ITEM,
         payload: {
-            evt,
-            id
+            item
         }
     }
 };

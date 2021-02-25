@@ -8,7 +8,6 @@ import OrderButton from "../../Core/OrderButton/OrderButton";
 import ProductPrice from "../../Core/ProductPrice/ProductPrice";
 import ProductTabs from "./ProductTabs/ProductTabs";
 import PromoBadge from "../../Core/PromoBadge/PromoBadge";
-import * as cart from "../../../redux/entities/cart/actions";
 import * as server from "../../../redux/entities/db/actions";
 
 import { connect } from "react-redux";
@@ -19,12 +18,6 @@ class Product extends Component {
 
     state = {
         product: null
-    };
-
-    isProductInCart = (products, id) => {
-        if (!products) return false;
-        return products.find(item => item.id === id)
-
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -45,46 +38,8 @@ class Product extends Component {
         if (!this.state.product) return <Spinner/>;
 
         const { main: category, data: product } = this.state.product;
-
-
         const productPriceClassList = { main: `${styles.price}`, discount: `${styles.discount}` };
         const productAvailability = "Наличие: " + (product.rest === 0 ? "нет в наличии" : "в наличии");
-
-        let orderButton = null;
-
-        const onDeleteFromCart = (evt) => {
-            this.props.onDeleteFromCart(evt, product.id);
-        };
-
-        const onAddToCart = (evt) => {
-            this.props.onAddToCart(evt, product);
-        };
-
-        if (this.isProductInCart(this.props.cart.products, product.id)) {
-            orderButton =
-                <div className={styles.btn_block}>
-                    <OrderButton
-                        product={product}
-                        classList={styles.remove_from_cart}
-                        onClick={onDeleteFromCart}>
-                        Убрать из заказа
-                    </OrderButton>
-                </div>;
-        } else {
-            const isButtonDisabled = product.rest === 0;
-            const classList = classNames(styles.add_to_cart, {
-                [styles.remove_from_cart]: product.rest === 0
-            });
-            orderButton =
-                <div className={styles.btn_block}>
-                    <OrderButton
-                        product={product}
-                        classList={classList}
-                        onClick={onAddToCart}>
-                        {product.rest !== 0 ? "Добавить в заказ" : "Нет в наличии"}
-                    </OrderButton>
-                </div>;
-        }
 
         return (
             <>
@@ -96,7 +51,10 @@ class Product extends Component {
                             <h1 className={styles.order__title}>{product.title}</h1>
                             <p className={styles.order__desc}>{product.desc}</p>
                             <ProductPrice product={product} classList={productPriceClassList}/>
-                            {orderButton}
+
+                            <div className={styles.btn_wrapper}>
+                                <OrderButton product={product} classList={styles.btn_order}/>
+                            </div>
                             <span>{productAvailability}</span>
                         </div>
                     </div>
@@ -111,21 +69,12 @@ class Product extends Component {
 
 function mapStateToProps(state) {
     return {
-        cart: state.cart,
         product: state.db.product,
     }
 }
 
-
 function mapDispatchToProps(dispatch) {
     return {
-
-        onAddToCart: (evt, item) => {
-            dispatch(cart.addItemToCart(evt, item))
-        },
-        onDeleteFromCart: (evt, id) => {
-            dispatch(cart.removeItemFromCart(evt, id))
-        },
         fetchPageData: (params) => {
             dispatch(server.fetchPageData(params));
         },
