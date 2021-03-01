@@ -24,6 +24,19 @@ class Category extends Component {
         return null
     }
 
+    /*
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+
+        return (
+            cond || cond2 || cond3
+
+        );
+
+        return true;
+    }
+    */
+
+
 
     sortDataList = (evt, dataList = this.state.categoryProductsList.data, sortType = this.props.sortType) => {
         if (!dataList) return;
@@ -58,11 +71,14 @@ class Category extends Component {
         window.scrollTo(0, 0);
     }
 
+
     componentDidUpdate(prevProps, prevState, snapshot) {
 
+        // блок сортировки
         if (prevProps.sortType !== this.props.sortType) {
             this.sortDataList();
         }
+
 
         const isThisInitialSetState = !this.state.categoryProductsList;
 
@@ -73,7 +89,7 @@ class Category extends Component {
         const nextRoute = this.props.match.params.type;
 
 
-
+        // блок первого выставления стейт
         if (isThisInitialSetState) {
             this.setState({
                 categoryProductsList: this.props.category
@@ -102,6 +118,7 @@ class Category extends Component {
         }
 
 
+        // блок запуска запроса данных при разных рутах
         if (currentRoute !== nextRoute) {
 
             const { match: { path: route, params: data }, history } = this.props;
@@ -166,9 +183,7 @@ class Category extends Component {
          *
          */
 
-
-        console.log('ren');
-
+            //console.log('ren');
         const isProductsListEmpty = !this.state.categoryProductsList;
         const alias = isProductsListEmpty ? null : this.state.categoryProductsList.main.alias;
 

@@ -6,37 +6,7 @@ import * as modal from "../../../../redux/entities/modal/actions";
 import { connect } from "react-redux";
 
 
-// пример метода для смены state нормальной
-function changeState(id, property, value, storage) {
-    const elem = storage.find(item => item.id === id);
-    const list = [...storage];
-    const cloneDeep = require('lodash.clonedeep');
-    const tempElem = cloneDeep(elem);
-    tempElem[property] = value;
-    list[list.indexOf(elem)] = tempElem;
-    return list;
-}
-
-
-const users1 = [
-    { id: 1, name: "bob" },
-    { id: 2, name: "glen" },
-    { id: 3, name: "john" },
-];
-
-const users2 = changeState(2, "name", "stan", users1);
-// console.dir(users1);
-// console.dir(users2);
-// console.log(users1[0] === users2[0]);
-// console.log(users1[1] === users2[1]);
-// console.log(users1[2] === users2[2]);
-
-
 class OrderItem extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     state = {
         item: this.props.item
     };
@@ -77,14 +47,12 @@ class OrderItem extends Component {
     };
 
     render() {
-        console.log(this.props);
+        //console.log(this.props);
 
         const { item, item: { img_alt: alt, img } } = this.props;
-
         const discount = item.discount ? item.price - (item.price * 10 / 100) : item.price;
         const price = new Intl.NumberFormat().format(discount * item.quantity) + " р.";
-        //const color = item.color || item.specifications.color;
-        const color = null;
+
 
         return (
             <div className={styles.info}>

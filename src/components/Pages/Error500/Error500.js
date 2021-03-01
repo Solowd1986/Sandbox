@@ -6,7 +6,7 @@ import { withRouter } from "react-router";
 class Error500 extends Component {
 
     reload = () => {
-        this.props.history.go(0);
+        this.props.history.push("/");
     };
 
     render() {
@@ -18,7 +18,7 @@ class Error500 extends Component {
                         <h3>ОШИБКА 500</h3>
                         <p>Дела на стороне сервера немного <span>нестабильны</span>...</p>
                         <p onClick={this.reload} className={styles.link}>
-                            ПОПРОБОВАТЬ ЕЩЕ РАЗ
+                            ВЕРНУТЬСЯ НА ГЛАВНУЮ СТРАНИЦУ
                         </p>
                     </div>
                 </div>

@@ -5,12 +5,11 @@ export default class FormikForm extends Component {
     render() {
         return (
             <Formik
-                initialValues={{ email: '', password: '' }}
-
+                initialValues={{ email: "", password: "" }}
                 validate={values => {
                     const errors = {};
                     if (!values.email) {
-                        errors.email = 'Required';
+                        errors.email = 'Email Is Required';
                     } else if (
                         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
                     ) {
@@ -53,10 +52,7 @@ export default class FormikForm extends Component {
                             value={values.password}
                         />
                         {errors.password && touched.password && errors.password}
-
-                        <button type="submit" disabled={isSubmitting}>
-                            Submit
-                        </button>
+                        <button type="submit" disabled={isSubmitting}>Submit</button>
                     </form>
                 )}
             </Formik>

@@ -72,7 +72,6 @@ class RequestHandler extends DbConnect
             shuffle($new_arr);
         }
 
-
         // Отдаем массив из двух полей: список продуктов, со всеми данными и блок служебной информации для категории
         return ["main" => self::getCategoryInfo($category), "data" => $new_arr];
     }

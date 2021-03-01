@@ -28,7 +28,6 @@ class OrderButton extends Component {
     }
 
     isProductInCart = (cart, title, id) => {
-        if (!cart) return false;
         return cart.find(item => item.title === title && item.id === id);
     };
 
@@ -37,36 +36,34 @@ class OrderButton extends Component {
         const { cart, product, product: { title, id, rest } } = this.props;
 
         const isProductInCart = this.isProductInCart(cart, title, id);
+
+        const spinnerIcon = <span className={styles.loader}/>; //Спиннер появится при состоянии :disabled у кнопки
         const innerText = !rest ? "Нет в наличии" : !isProductInCart ? "Добавить в заказ" : "Убрать из заказа";
+
         const clickHandler = !isProductInCart
             ? (evt) => this.onClick(evt, product, this.props.onAddToCart)
             : (evt) => this.onClick(evt, product, this.props.onDeleteFromCart);
-
 
         const classList = classNames(common.btn, styles.order__btn, {
             [styles.btn_grey_bg]: isProductInCart || rest === 0,
             [this.props.classList]: this.props.classList,
         });
 
-
         return (
             <button className={classList} onClick={clickHandler} disabled={rest === 0}>
                 {cartIcon}
-                <span className={styles.loader}/>
-                {/*Спиннер появится при состоянии :disabled у кнопки*/}
+                {spinnerIcon}
                 {innerText}
             </button>
         )
     }
 }
 
-
 const mapStateToProps = (state) => {
     return {
         cart: state.cart.products
     }
 };
-
 
 function mapDispatchToProps(dispatch) {
     return {

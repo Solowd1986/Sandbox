@@ -15,6 +15,7 @@ import FormikForm from "../../Core/Form/Formik/FormikForm";
 
 
 import { NavLink } from "react-router-dom";
+import { Map } from "immutable";
 
 
 class Promo extends Component {
@@ -44,6 +45,12 @@ class Promo extends Component {
         this.setState(state => ({ index: null }));
     }
 
+    refTre = ({ target: node }) => {
+
+        console.log(node);
+    };
+
+
 
     render() {
         //console.log(this.props);
@@ -51,9 +58,24 @@ class Promo extends Component {
         if (!this.state.index) return <div className={styles.spin_wrap}><Spinner/></div>;
         const { phones, accessoires, gadgets } = this.state.index;
 
+        const list = new Map({
+            name: [
+                { age: 12 },
+                { age: 14 },
+                { age: 15 },
+            ]
+        });
+
+        //const res = list.set("name", [...list.name, {age: 22}]);
+        //const res = [...list.name, {age: 22}];
+        //console.dir(list);
+        //console.dir(res);
+        //console.log(list res);
+
+
+
 
         return (
-
             <section className={`container ${styles.wrapper}`}>
                 <main className={`wrapper ${styles.content}`}>
 
@@ -62,7 +84,12 @@ class Promo extends Component {
 
                     {/*<FormikForm/>*/}
 
-                    {0 ?? 12}
+                    {/*<MyForm/>*/}
+
+                    <div onClick={this.refTre}>
+                        TEXT
+                    </div>
+
 
                     {/*<button onClick={this.toggle}>Active</button>*/}
                     {
@@ -73,31 +100,20 @@ class Promo extends Component {
                         </Modal>
                     }
 
+
                     <h2 className={styles.section_title}>Рекомендуем</h2>
                     <ul className={styles.list}>
-                        {phones.data.map((item, i) => {
-                            return (
-                                <ProductCard key={i} item={item} category={phones.main}/>
-                            )
-                        })}
+                        {phones.data.map((item, i) => <ProductCard key={i} item={item} category={phones.main}/>)}
                     </ul>
 
                     <h2 className={styles.section_title}>Популярные гаджеты</h2>
                     <ul className={styles.list}>
-                        {gadgets.data.map((item, i) => {
-                            return (
-                                <ProductCard key={i} item={item} category={gadgets.main}/>
-                            )
-                        })}
+                        {gadgets.data.map((item, i) => <ProductCard key={i} item={item} category={gadgets.main}/>)}
                     </ul>
 
                     <h2 className={styles.section_title}>Аксессуары</h2>
                     <ul className={styles.list}>
-                        {accessoires.data.map((item, i) => {
-                            return (
-                                <ProductCard key={i} item={item} category={accessoires.main}/>
-                            )
-                        })}
+                        {accessoires.data.map((item, i) => <ProductCard key={i} item={item} category={accessoires.main}/>)}
                     </ul>
                 </main>
             </section>

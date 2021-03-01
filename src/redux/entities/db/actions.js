@@ -45,7 +45,6 @@ export const fetchLazyCategoryProducts = (category) => (dispatch, getState, api)
     api.get(`category/${category}`)
         .then(responce => {
             //console.dir('success');
-
             dispatch({ type: "server/fetchLazyCategoryProducts", payload: responce.data })
         }).catch(error => {
 

@@ -7,12 +7,10 @@ class Order extends Component {
     componentDidMount() {
         window.scrollTo(0, 0) // always on top of page, without smooth scroll
     }
-
     render() {
         return this.props.amountOfProductsInCart > 0 ? <OrderForm/> : <EmptyOrderPage/>;
     }
 }
-
 
 function mapStateToProps(state) {
     return {
