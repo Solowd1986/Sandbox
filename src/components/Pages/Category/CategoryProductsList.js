@@ -8,9 +8,9 @@ import ProductCard from "../ProductCard/ProductCard";
 export default class CategoryProductsList extends Component {
     render() {
         const { category, products } = this.props;
+
         return (
             <div className={styles.category_wrapper}>
-
                 <div className={styles.sign_bg}>
                     <img
                         className={`${styles.sign_bg__img} ${category.alias === "gadgets" && styles.img_fit}`}
@@ -18,7 +18,6 @@ export default class CategoryProductsList extends Component {
                         alt={category.img.alt}/>
                     <h3 className={styles.sign_bg__title}>{category.title}</h3>
                 </div>
-
                 <div className={`${common.wrapper} ${styles.filters_wrapper}`}>
                     <SortPorducts/>
                 </div>
@@ -26,14 +25,7 @@ export default class CategoryProductsList extends Component {
                 <div className={`${common.wrapper} ${styles.list_wrapper}`}>
                     <LazyLoad categoryName={category.alias}>
                         <ul className={styles.list}>
-                            {
-                                products.map((item, i) => {
-                                    return (
-                                        <ProductCard key={i} item={item} category={category}/>
-                                    )
-                                })
-                            }
-
+                            {products.map((item, i) => <ProductCard key={i} item={item} category={category}/>)}
                         </ul>
                     </LazyLoad>
                 </div>

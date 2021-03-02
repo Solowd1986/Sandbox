@@ -3,23 +3,20 @@ import styles from "./modal.module.scss";
 import classNames from "classnames";
 
 import * as util from "./helpers/functions";
+
+import ModalContent from "@components/Core/Modal/ModalContent/ModalContent";
 import Spinner from "./Spinner/Spinner";
 
-import * as modal from "../../../redux/entities/modal/actions";
+import * as modalActions from "@redux/entities/modal/actions";
 import { connect } from "react-redux";
-import ModalContent from "./ModalContent/ModalContent";
 
 class Modal extends Component {
-
     constructor(props) {
         super(props);
         util.addScrollbarOffset();
         this.delayModalTimer = null;
+        this.state = { isDelayEnded: false };
     }
-
-    state = {
-        isDelayEnded: false
-    };
 
     componentDidMount = () => {
         if (this.props.delay) {
@@ -47,15 +44,20 @@ class Modal extends Component {
     render() {
         const { bg = true, delay = false, children = null } = this.props;
         const classList = classNames(styles.overlay, {
-            [styles.overlay_bg]: bg === true
+            [styles.overlay_bg]: bg
         });
 
-        let modalContent = null;
-        if (delay && !this.state.isDelayEnded) {
-            modalContent = <Spinner/>;
-        } else {
-            modalContent = <ModalContent children={children}/>
-        }
+        const modalContent =
+            delay && !this.state.isDelayEnded
+                ? <Spinner/>
+                : <ModalContent children={children} closeModal={this.disableModal}/>;
+
+        // реализуй проброс метода отключения модалки в компонент
+        // который она оборачивает. Для самой модалки отключение только кликом по оверлею
+
+        // реализуй невисимость оверлая от блокировки всплытия клика. То есть, добавь например дата-атрибут оверлую
+        // и проверя при клике совпадение, причем через currentTarget (или как там),
+        // чтобы ловить именно клик по оверелю, а не тот, что всплыл
 
         return (
             <div onClick={this.disableModal} className={classList}>
@@ -68,7 +70,7 @@ class Modal extends Component {
 function mapDispatchToProps(dispatch) {
     return {
         disableModal: () => {
-            dispatch(modal.disableModal());
+            dispatch(modalActions.disableModal());
         }
     }
 }

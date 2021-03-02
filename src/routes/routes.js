@@ -5,6 +5,7 @@ import Order from "~components/Pages/Order/Order";
 import Error404 from "../components/Pages/Error404/Error404";
 import Delivery from "../components/Pages/Delivery/Delivery";
 import Error500 from "../components/Pages/Error500/Error500";
+import Error400 from "../components/Pages/Error400/Error400";
 
 /**
  * Ход работы:
@@ -23,6 +24,7 @@ const routes = [
     { url: "/product/:category/:id", component: Product, exact: true },
     { url: "/order", component: Order, exact: true },
     { url: "/delivery", component: Delivery, exact: true },
+    { url: "/400", component: Error400, exact: true },
     { url: "/404", component: Error404, exact: true },
     { url: "/500", component: Error500, exact: true }
 ];

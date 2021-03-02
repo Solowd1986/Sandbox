@@ -62,13 +62,14 @@ class Category extends Component {
                 break;
             }
         }
+        // так мы сохраняем блок main и заменяем блок data, в state categoryProductsList состоит из двух полей
         this.setState(state => ({ categoryProductsList: { ...this.state.categoryProductsList, data } }));
     };
 
 
     componentDidMount() {
         this.props.fetchPageData(this.props);
-        window.scrollTo(0, 0);
+        //window.scrollTo(0, 0);
     }
 
 

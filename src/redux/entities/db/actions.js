@@ -7,7 +7,6 @@ export const fetchPageData = (params) => (dispatch, getState, api) => {
         !Object.keys(data).length
             ? "index"
             : route.match(/\/([a-z]*)\/\:/)[1] + "/" + Object.values(data).join("/");
-
     api.get(apiRoute)
         .then(response => {
             if (response.data.error) history.push("/404");

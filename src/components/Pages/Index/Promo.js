@@ -1,21 +1,33 @@
 import React, { Component } from "react";
-//import common from "~scss/common.module.scss";
+
 import styles from "./promo.module.scss";
-import { connect } from "react-redux";
-import ProductCard from "../ProductCard/ProductCard";
-import Modal from "../../Core/Modal/Modal";
-import CartModal from "../../Core/CartModal/CartModal";
-import * as modal from "../../../redux/entities/modal/actions";
-import * as PropTypes from "prop-types";
-import * as server from "../../../redux/entities/db/actions";
-import Spinner from "../../Core/Modal/Spinner/Spinner";
 import classNames from "classnames";
+import * as PropTypes from "prop-types";
+
+import ProductCard from "@components/Pages/ProductCard/ProductCard";
+import Modal from "@components/Core/Modal/Modal";
+import Spinner from "@components/Core/Modal/Spinner/Spinner";
+import CartModal from "@components/Core/CartModal/CartModal";
+
+import * as cartSelector from "@redux/entities/cart/selectors/cartSelectors";
+import * as modalSelectors from "@redux/entities/modal/selectors/modalSelector";
+
+import * as modalActions from "@redux/entities/modal/actions";
+import * as serverActions from "@redux/entities/db/actions";
+import { connect } from "react-redux";
+
+
 
 import FormikForm from "../../Core/Form/Formik/FormikForm";
 
 
 import { NavLink } from "react-router-dom";
 import { Map } from "immutable";
+import DataStore from "../../Partials/DataStore";
+
+
+
+
 
 
 class Promo extends Component {
@@ -45,12 +57,6 @@ class Promo extends Component {
         this.setState(state => ({ index: null }));
     }
 
-    refTre = ({ target: node }) => {
-
-        console.log(node);
-    };
-
-
 
     render() {
         //console.log(this.props);
@@ -73,12 +79,9 @@ class Promo extends Component {
         //console.log(list res);
 
 
-
-
         return (
             <section className={`container ${styles.wrapper}`}>
                 <main className={`wrapper ${styles.content}`}>
-
                     <NavLink to={"/secret"}>Go to secret page </NavLink>
                     <NavLink to={"/login"}>Go to login page </NavLink>
 
@@ -86,9 +89,8 @@ class Promo extends Component {
 
                     {/*<MyForm/>*/}
 
-                    <div onClick={this.refTre}>
-                        TEXT
-                    </div>
+                    <DataStore/>
+
 
 
                     {/*<button onClick={this.toggle}>Active</button>*/}
@@ -124,8 +126,8 @@ class Promo extends Component {
 function mapStateToProps(state) {
     return {
         index: state.db.index,
-        cart: state.cart,
-        isModalActive: state.modal.isModalActive
+        cart: cartSelector.cartItemsSelector(state),
+        isModalActive: modalSelectors.modalStatusSelector(state)
     }
 }
 
@@ -133,10 +135,10 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         enableModal: () => {
-            dispatch(modal.enableModal());
+            dispatch(modalActions.enableModal());
         },
         fetchPageData: (params) => {
-            dispatch(server.fetchPageData(params));
+            dispatch(serverActions.fetchPageData(params));
         },
     }
 }
