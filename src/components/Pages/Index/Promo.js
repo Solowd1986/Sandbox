@@ -4,10 +4,10 @@ import styles from "./promo.module.scss";
 import classNames from "classnames";
 import * as PropTypes from "prop-types";
 
-import ProductCard from "@components/Pages/ProductCard/ProductCard";
-import Modal from "@components/Core/Modal/Modal";
-import Spinner from "@components/Core/Modal/Spinner/Spinner";
-import CartModal from "@components/Core/CartModal/CartModal";
+import ProductCard from "@components/Partials/ProductCard/ProductCard";
+import Modal from "@components/Partials/Modal/Modal";
+import Spinner from "@components/Partials/Modal/Spinner/Spinner";
+import CartModal from "@components/Other/CartModal/CartModal";
 
 import * as cartSelector from "@redux/entities/cart/selectors/cartSelectors";
 import * as modalSelectors from "@redux/entities/modal/selectors/modalSelector";
@@ -17,17 +17,14 @@ import * as serverActions from "@redux/entities/db/actions";
 import { connect } from "react-redux";
 
 
-
-import FormikForm from "../../Core/Form/Formik/FormikForm";
+import FormikForm from "../../Other/Form/Formik/FormikForm";
 
 
 import { NavLink } from "react-router-dom";
 import { Map } from "immutable";
-import DataStore from "../../Partials/DataStore";
+import DataStore from "../../Test/DataStore";
 
-
-
-
+import Stores from "../../Test/Stores"
 
 
 class Promo extends Component {
@@ -49,7 +46,7 @@ class Promo extends Component {
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         this.props.fetchPageData(this.props);
     }
 
@@ -89,8 +86,9 @@ class Promo extends Component {
 
                     {/*<MyForm/>*/}
 
-                    <DataStore/>
+                    <DataStore data={12}/>
 
+                    {/*<Stores/>*/}
 
 
                     {/*<button onClick={this.toggle}>Active</button>*/}
@@ -101,7 +99,6 @@ class Promo extends Component {
                             <CartModal products={this.props.cart.products}/>
                         </Modal>
                     }
-
 
                     <h2 className={styles.section_title}>Рекомендуем</h2>
                     <ul className={styles.list}>
@@ -126,7 +123,7 @@ class Promo extends Component {
 function mapStateToProps(state) {
     return {
         index: state.db.index,
-        cart: cartSelector.cartItemsSelector(state),
+        cart: cartSelector.cartStateSelector(state),
         isModalActive: modalSelectors.modalStatusSelector(state)
     }
 }

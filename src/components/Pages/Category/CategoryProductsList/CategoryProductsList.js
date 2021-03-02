@@ -1,11 +1,17 @@
 import React, { Component } from "react";
-import common from "~scss/common.module.scss";
-import styles from "./category.module.scss";
-import SortPorducts from "../../Core/SortProducts/SortProducts";
-import LazyLoad from "../../Core/LazyLoad/LazyLoad";
-import ProductCard from "../ProductCard/ProductCard";
 
-export default class CategoryProductsList extends Component {
+//import common from "@scss/common.module.scss";
+//import styles from "../category.module.scss";
+
+import styles from "./category-products-list.module.scss";
+import classNames from "classnames";
+
+import SortPorducts from "@components/Other/SortProducts/SortProducts";
+import LazyLoad from "@components/Other/LazyLoad/LazyLoad";
+import ProductCard from "@components/Partials/ProductCard/ProductCard";
+
+
+class CategoryProductsList extends Component {
     render() {
         const { category, products } = this.props;
 
@@ -18,11 +24,11 @@ export default class CategoryProductsList extends Component {
                         alt={category.img.alt}/>
                     <h3 className={styles.sign_bg__title}>{category.title}</h3>
                 </div>
-                <div className={`${common.wrapper} ${styles.filters_wrapper}`}>
+                <div className={classNames("wrapper", styles.filters_wrapper)}>
                     <SortPorducts/>
                 </div>
 
-                <div className={`${common.wrapper} ${styles.list_wrapper}`}>
+                <div className={classNames("wrapper", styles.list_wrapper)}>
                     <LazyLoad categoryName={category.alias}>
                         <ul className={styles.list}>
                             {products.map((item, i) => <ProductCard key={i} item={item} category={category}/>)}
@@ -33,5 +39,12 @@ export default class CategoryProductsList extends Component {
         )
     }
 }
+
+export default CategoryProductsList;
+
+
+
+
+
 
 

@@ -1,8 +1,4 @@
-@import "~scss/common.module";
-
-
-
-
+@import "~scss/utils/utils.scss";
 
 .category_wrapper {
   margin-bottom: 70px;
@@ -93,6 +89,7 @@
     text-align: center;
   }
 }
+
 /*  ================================*/
 
 
@@ -175,7 +172,6 @@
 }
 
 
-
 .img_centered {
   align-self: center;
 }
@@ -250,7 +246,6 @@
     text-decoration: line-through;
   }
 }
-
 
 
 .item_buy_btn {

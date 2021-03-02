@@ -4,14 +4,14 @@ import styles from "./product.module.scss";
 import classNames from "classnames";
 
 import ProductSlider from "./ProductSlider/ProductSlider";
-import OrderButton from "../../Core/OrderButton/OrderButton";
-import ProductPrice from "../../Core/ProductPrice/ProductPrice";
+import OrderButton from "../../Partials/OrderButton/OrderButton";
+import ProductPrice from "../../Partials/ProductPrice/ProductPrice";
 import ProductTabs from "./ProductTabs/ProductTabs";
-import PromoBadge from "../../Core/PromoBadge/PromoBadge";
+import PromoBadge from "../../Partials/PromoBadge/PromoBadge";
 import * as server from "../../../redux/entities/db/actions";
 
 import { connect } from "react-redux";
-import Spinner from "../../Core/Modal/Spinner/Spinner";
+import Spinner from "../../Partials/Modal/Spinner/Spinner";
 
 
 class Product extends Component {

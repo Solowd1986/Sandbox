@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styles from "./lazy-load.module.scss"
 
 import { connect } from "react-redux";
-import Modal from "../Modal/Modal";
+import Modal from "../../Partials/Modal/Modal";
 import * as server from "../../../redux/entities/db/actions";
 import classNames from "classnames";
 

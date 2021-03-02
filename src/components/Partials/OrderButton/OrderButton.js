@@ -1,10 +1,16 @@
 import React, { Component } from "react";
-import common from "~scss/common.module.scss";
+
+import common from "@scss/common.module.scss";
 import styles from "./order-button.module.scss";
+
 import classNames from "classnames";
 import { connect } from "react-redux";
-import * as cart from "../../../redux/entities/cart/actions";
+
+import * as cart from "@redux/entities/cart/actions";
+import * as cartSelector from "@redux/entities/cart/selectors/cartSelectors";
+
 import cartIcon from "./img/cart";
+
 
 class OrderButton extends Component {
     constructor(props) {
@@ -27,10 +33,7 @@ class OrderButton extends Component {
         clearTimeout(this.delayAddingItem);
     }
 
-    isProductInCart = (cart, title, id) => {
-        return cart.find(item => item.title === title && item.id === id);
-    };
-
+    isProductInCart = (cart, title, id) => cart.find(item => item.title === title && item.id === id);
 
     render() {
         const { cart, product, product: { title, id, rest } } = this.props;
@@ -61,7 +64,7 @@ class OrderButton extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        cart: state.cart.products
+        cart: cartSelector.cartItemsSelector(state)
     }
 };
 

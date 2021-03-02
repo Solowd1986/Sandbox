@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import Error400 from "../../Pages/Error400/Error400";
-
+import Error400 from "@components/Pages/Error/Error400/Error400";
 
 class ErrorBoundary extends React.Component {
     constructor(props) {
@@ -9,7 +8,6 @@ class ErrorBoundary extends React.Component {
     }
 
     static getDerivedStateFromError(error) {
-        // Update state so the next render will show the fallback UI.
         return { hasError: true };
     }
 
@@ -17,12 +15,10 @@ class ErrorBoundary extends React.Component {
         // You can also log the error to an error reporting service
         //logErrorToMyService(error, errorInfo);
         console.log('Catch Bound Error');
-
     }
 
     render() {
         if (this.state.hasError) {
-            // You can render any custom fallback UI
             return <Error400/>
         }
         return this.props.children;

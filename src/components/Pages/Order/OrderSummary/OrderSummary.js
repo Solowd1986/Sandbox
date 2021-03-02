@@ -4,7 +4,7 @@ import styles from "./order-summary.module.scss";
 import { connect } from "react-redux";
 import * as modalActions from "../../../../redux/entities/modal/actions";
 
-import Modal from "../../../Core/Modal/Modal";
+import Modal from "../../../Partials/Modal/Modal";
 import OrderPrice from "../OrderPrice/OrderPrice";
 import OrderItem from "../OrderItem/OrderItem";
 import Confirm from "../Confirm/Confirm";

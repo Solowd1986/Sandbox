@@ -5,13 +5,13 @@ import routes from "../../routes/routes";
 import { Provider } from "react-redux";
 import store from "../../redux/store";
 
-import Layout from "../../components/Core/Layout/Layout";
-import ErrorBoundary from "../../components/Core/ErrorBoundary/ErrorBoundary";
+import Layout from "../Partials/Layout/Layout";
+import ErrorBoundary from "../Helpers/ErrorBoundary/ErrorBoundary";
 
 
-import Secret from "../Core/Auth/Secret";
-import Login from "../Core/Auth/Login";
-import Error404 from "../Pages/Error404/Error404";
+import Secret from "../Other/Auth/Secret";
+import Login from "../Other/Auth/Login";
+import Error404 from "../Pages/Error/Error404/Error404";
 
 const hello = (props) => {
 debugger;

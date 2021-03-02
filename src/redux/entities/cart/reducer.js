@@ -15,7 +15,6 @@ export default (state = initialState, action) => {
         case types.CART_ADD_ITEM: {
             const { item } = action.payload;
 
-
             //state.products! ? new List([]) : state.products.push(item);
             // let products = [...state.products];
             // if (!state.products.includes(item)) {

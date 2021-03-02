@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import common from "~scss/common.module.scss";
-import styles from "./category.module.scss";
-import Layout from "~components/Core/Layout/Layout";
+
+import BlockOverlay from "@components/Partials/Modal/BlockOverlay/BlockOverlay";
+import CategoryProductsList from "./CategoryProductsList/CategoryProductsList";
+
+import * as utils from "../../Partials/Modal/helpers/functions";
+import * as server from "@redux/entities/db/actions";
 import { connect } from "react-redux";
-import * as utils from "../../Core/Modal/helpers/functions";
-import * as server from "../../../redux/entities/db/actions";
-import CategoryProductsList from "./CategoryProductsList";
-import BlockOverlay from "../../Core/Modal/BlockOverlay/BlockOverlay";
+
+
 import { List } from "immutable";
 
 

@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 import * as util from "./helpers/functions";
 
-import ModalContent from "@components/Core/Modal/ModalContent/ModalContent";
+import ModalContent from "@components/Partials/Modal/ModalContent/ModalContent";
 import Spinner from "./Spinner/Spinner";
 
 import * as modalActions from "@redux/entities/modal/actions";

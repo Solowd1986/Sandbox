@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-import ProductPrice from "../../Core/ProductPrice/ProductPrice";
-import OrderButton from "../../Core/OrderButton/OrderButton";
+import ProductPrice from "@components/Partials/ProductPrice/ProductPrice";
+import OrderButton from "@components/Partials/OrderButton/OrderButton";
 import PromoProductCard from "./PromoProductCard";
 import { NavLink } from "react-router-dom";
 import * as PropTypes from "prop-types";
@@ -18,11 +18,12 @@ class ProductCard extends Component {
     };
 
     render() {
-        const { category, item, item: { rest } } = this.props;
 
+        const { category, item, item: { rest } } = this.props;
         const tagClassList = classNames(styles.tag, {
-            [styles.not_in_stock]: rest === 0
+            [styles.not_in_stock]: !rest
         });
+
         const productColor = item.specifications ? <span className={styles.color}>{`"${item.specifications.color}"`}</span> : null;
 
         return (
