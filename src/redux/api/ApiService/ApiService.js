@@ -11,8 +11,39 @@ class ApiService {
             },
         });
     }
+
+
+    fetchData = (params) => {
+        const { match: { path: route, params: data }, history } = params;
+        const apiRoute =
+            !Object.keys(data).length
+                ? "index"
+                : route.match(/\/([a-z]*)\/\:/)[1] + "/" + Object.values(data).join("/");
+
+        return this.api.get(apiRoute)
+            .then(result => result)
+            .catch(error => {
+                if (error.code === "ECONNABORTED" || /50[0-9]/.test(error.response.status.toString())) {
+                    //console.log('fst fail');
+                    return this.api.get(apiRoute)
+                        .then(result => result)
+                        .catch(error => {
+                            if (error.code === "ECONNABORTED" || /50[0-9]/.test(error.response.status.toString())) {
+                                //console.log('second fail');
+                                return this.api.get(apiRoute)
+                                    .then(result => result)
+                                    .catch(error => {
+                                        history.push("/500");
+                                    })
+                            }
+                        })
+                }
+            });
+    };
+
 }
 
-export default new ApiService().api;
+//export default new ApiService().api;
+export default new ApiService();
 
 

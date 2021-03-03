@@ -46,9 +46,10 @@ class Promo extends Component {
         }
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         this.props.fetchPageData(this.props);
     }
+
 
     componentWillUnmount() {
         this.setState(state => ({ index: null }));
@@ -62,12 +63,19 @@ class Promo extends Component {
         const { phones, accessoires, gadgets } = this.state.index;
 
         const list = new Map({
-            name: [
+            public: true,
+            ages: [
                 { age: 12 },
                 { age: 14 },
                 { age: 15 },
             ]
         });
+
+        const list2 = list.get("ages").push({ age: 21 });
+        console.log(list2);
+
+        console.log(list2 === list);
+
 
         //const res = list.set("name", [...list.name, {age: 22}]);
         //const res = [...list.name, {age: 22}];
@@ -86,7 +94,7 @@ class Promo extends Component {
 
                     {/*<MyForm/>*/}
 
-                    <DataStore data={12}/>
+                    {/*<DataStore data={12}/>*/}
 
                     {/*<Stores/>*/}
 

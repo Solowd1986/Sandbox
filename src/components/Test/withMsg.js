@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 
-export default function withMsg(Props) {
-    return class extends Component {
-
-        log = () => {
-            return "got some logs, boys!"
-        };
+export default function withMsg(PropsComponent) {
+    return class extends PropsComponent {
+        constructor(props) {
+            console.log('outer props', props);
+            super(props);
+            this.state = { loaded: false };
+        }
 
         render() {
-            return (
-                <Props log={this.log}/>
-            )
+            if (this.state.loaded) {
+                return super.render();
+            }
+            return <div>...loaded...</div>;
         }
     }
 }

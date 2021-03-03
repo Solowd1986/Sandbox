@@ -12,10 +12,10 @@ class DataStore extends Component {
         console.log('props', props);
         super(props);
     }
-
     parentName = () => {
         return "Glow";
     };
+
 
     render() {
         return (
@@ -26,6 +26,6 @@ class DataStore extends Component {
     }
 }
 
-export default withParent(DataStore);
+export default withMsg(DataStore);
 
 

@@ -7,9 +7,7 @@ import * as utils from "../../Partials/Modal/helpers/functions";
 import * as server from "@redux/entities/db/actions";
 import { connect } from "react-redux";
 
-
 import { List } from "immutable";
-
 
 class Category extends Component {
 
