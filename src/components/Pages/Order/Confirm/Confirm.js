@@ -1,8 +1,8 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import styles from "./confirm.module.scss";
 import img from "./img/thanks_sir.png";
 
-export default class extends Component {
+class Confirm extends Component {
     render() {
         return (
             <div className={styles.checkout_modal}>
@@ -14,4 +14,5 @@ export default class extends Component {
     }
 }
 
+export default Confirm;
 

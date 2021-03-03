@@ -27,6 +27,62 @@ import DataStore from "../../Test/DataStore";
 import Stores from "../../Test/Stores"
 
 
+class Inner extends Component {
+    render() {
+        console.log(this.props);
+        return (
+            <section style={{ padding: "40px", color: "white", backgroundColor: "green" }}>
+                HELLO
+                <button onClick={this.props.closeModal}>Close</button>
+            </section>
+        );
+    }
+}
+
+/*
+function withModal(WrappedComponent) {
+    return class extends Component {
+        state = {
+            isModalActive: true
+        };
+
+
+
+        closeModal = (evt) => {
+            if (!("modal" in evt.target.dataset)) return;
+
+            // console.dir(evt.target.dataset);
+            // console.log("wrapper" in evt.target.dataset);
+            //
+            // return
+
+            this.setState({
+                isModalActive: false});
+        };
+
+
+        render() {
+            if (this.state.isModalActive) {return (
+                <div style={{ backgroundColor: 'red', width: " 400px", height: "400px"}} onClick={this.closeModal} data-modal={true}>
+                    <div>
+                        <WrappedComponent closeModal={() => this.setState({isModalActive: false})}/>
+                    </div>
+                </div>
+            )} else {
+                return null;
+            }
+        }
+    }
+}
+
+
+*/
+
+import withModal from "@components/Helpers/Hoc/withModal/withModal";
+import Confirm from "@components/Pages/Order/Confirm/Confirm";
+
+
+
 class Promo extends Component {
     state = {
         index: null
@@ -71,17 +127,10 @@ class Promo extends Component {
             ]
         });
 
+        const ModalState = withModal(Confirm);
+
         const list2 = list.get("ages").push({ age: 21 });
-        console.log(list2);
-
-        console.log(list2 === list);
-
-
-        //const res = list.set("name", [...list.name, {age: 22}]);
-        //const res = [...list.name, {age: 22}];
-        //console.dir(list);
-        //console.dir(res);
-        //console.log(list res);
+        //console.log(list2);
 
 
         return (
@@ -97,6 +146,8 @@ class Promo extends Component {
                     {/*<DataStore data={12}/>*/}
 
                     {/*<Stores/>*/}
+
+                    <ModalState/>
 
 
                     {/*<button onClick={this.toggle}>Active</button>*/}

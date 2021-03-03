@@ -47,6 +47,10 @@ class Modal extends Component {
             [styles.overlay_bg]: bg
         });
 
+
+        //console.log(this.props);
+
+
         const modalContent =
             delay && !this.state.isDelayEnded
                 ? <Spinner/>

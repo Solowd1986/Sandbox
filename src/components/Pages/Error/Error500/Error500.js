@@ -18,7 +18,7 @@ class Error500 extends Component {
                         <h3>ОШИБКА 500</h3>
                         <p>Дела на стороне сервера немного <span>нестабильны</span>...</p>
                         <p onClick={this.reload} className={styles.link}>
-                            ВЕРНУТЬСЯ НА ГЛАВНУЮ СТРАНИЦУ
+                            ВЕРНУТЬСЯ НА ГЛАВНУЮ
                         </p>
                     </div>
                 </div>

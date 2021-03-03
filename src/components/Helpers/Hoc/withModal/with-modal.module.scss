@@ -1,4 +1,4 @@
-@import "~scss/common.module";
+@import "~scss/utils/utils.scss";
 
 .overlay {
   display: flex;
@@ -13,30 +13,3 @@
   background-color: rgba(0, 0, 0, 0.8);
 
 }
-
-.overlay_bg {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -12,7 +12,6 @@ class ApiService {
         });
     }
 
-
     fetchData = (params) => {
         const { match: { path: route, params: data }, history } = params;
         const apiRoute =
@@ -21,20 +20,28 @@ class ApiService {
                 : route.match(/\/([a-z]*)\/\:/)[1] + "/" + Object.values(data).join("/");
 
         return this.api.get(apiRoute)
-            .then(result => result)
+            .then(response => {
+                if (response.data.error) history.push("/404");
+                return response;
+            })
             .catch(error => {
                 if (error.code === "ECONNABORTED" || /50[0-9]/.test(error.response.status.toString())) {
-                    //console.log('fst fail');
+                    console.log('fst fail');
                     return this.api.get(apiRoute)
                         .then(result => result)
                         .catch(error => {
                             if (error.code === "ECONNABORTED" || /50[0-9]/.test(error.response.status.toString())) {
-                                //console.log('second fail');
+                                console.log('second fail');
                                 return this.api.get(apiRoute)
                                     .then(result => result)
                                     .catch(error => {
-                                        history.push("/500");
+                                        if (error.code === "ECONNABORTED" || /50[0-9]/.test(error.response.status.toString())) {
+                                            console.log('third fail');
+                                            return this.api.get(apiRoute)
+                                                .then(result => result)
+                                        }
                                     })
+
                             }
                         })
                 }
@@ -42,6 +49,7 @@ class ApiService {
     };
 
 }
+
 
 //export default new ApiService().api;
 export default new ApiService();
