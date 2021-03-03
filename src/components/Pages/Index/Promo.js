@@ -6,7 +6,7 @@ import * as PropTypes from "prop-types";
 
 import ProductCard from "@components/Partials/ProductCard/ProductCard";
 import Modal from "@components/Partials/Modal/Modal";
-import Spinner from "@components/Partials/Modal/Spinner/Spinner";
+import Spinner from "@components/Partials/Spinner/Spinner";
 import CartModal from "@components/Other/CartModal/CartModal";
 
 import * as cartSelector from "@redux/entities/cart/selectors/cartSelectors";
@@ -80,6 +80,7 @@ function withModal(WrappedComponent) {
 
 import withModal from "@components/Helpers/Hoc/withModal/withModal";
 import Confirm from "@components/Pages/Order/Confirm/Confirm";
+import withDelay from "@components/Helpers/Hoc/withDelay/withDelay";
 
 
 
@@ -127,11 +128,11 @@ class Promo extends Component {
             ]
         });
 
-        const ModalState = withModal(Confirm);
+
+        const ModalState = withModal(Spinner);
 
         const list2 = list.get("ages").push({ age: 21 });
         //console.log(list2);
-
 
         return (
             <section className={`container ${styles.wrapper}`}>
@@ -147,7 +148,7 @@ class Promo extends Component {
 
                     {/*<Stores/>*/}
 
-                    <ModalState/>
+                    {/*<ModalState/>*/}
 
 
                     {/*<button onClick={this.toggle}>Active</button>*/}

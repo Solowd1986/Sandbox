@@ -3,11 +3,13 @@ import React, { Component } from "react";
 import BlockOverlay from "@components/Partials/Modal/BlockOverlay/BlockOverlay";
 import CategoryProductsList from "./CategoryProductsList/CategoryProductsList";
 
-import * as utils from "../../Partials/Modal/helpers/functions";
+import * as utils from "../../Helpers/Functions/functions";
 import * as server from "@redux/entities/db/actions";
 import { connect } from "react-redux";
 
 import { List } from "immutable";
+import withModal from "@components/Helpers/Hoc/withModal/withModal";
+import Spinner from "@components/Partials/Spinner/Spinner";
 
 class Category extends Component {
 
@@ -188,7 +190,9 @@ class Category extends Component {
         const alias = isProductsListEmpty ? null : this.state.categoryProductsList.main.alias;
 
         if (isProductsListEmpty || alias !== this.props.match.params.type) {
-            return <BlockOverlay/>;
+            const SpinnerModal = withModal(Spinner, true, true);
+            return <SpinnerModal/>;
+            //return <BlockOverlay/>;
         } else {
             const { main: category, data: products } = this.state.categoryProductsList;
             return <CategoryProductsList category={category} products={products}/>;

@@ -11,7 +11,7 @@ import PromoBadge from "../../Partials/PromoBadge/PromoBadge";
 import * as server from "../../../redux/entities/db/actions";
 
 import { connect } from "react-redux";
-import Spinner from "../../Partials/Modal/Spinner/Spinner";
+import Spinner from "../../Partials/Spinner/Spinner";
 
 
 class Product extends Component {

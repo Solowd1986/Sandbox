@@ -1,27 +1,30 @@
 import React, { Component } from "react";
 import styles from "./order-summary.module.scss";
 
-import { connect } from "react-redux";
-import * as modalActions from "../../../../redux/entities/modal/actions";
+import Confirm from "@components/Pages/Order/Confirm/Confirm";
+import OrderPrice from "@components/Pages/Order/OrderPrice/OrderPrice";
+import OrderItem from "@components/Pages/Order/OrderItem/OrderItem";
 
-import Modal from "../../../Partials/Modal/Modal";
-import OrderPrice from "../OrderPrice/OrderPrice";
-import OrderItem from "../OrderItem/OrderItem";
-import Confirm from "../Confirm/Confirm";
+import withDelay from "@components/Helpers/Hoc/withDelay/withDelay";
+import withModal from "@components/Helpers/Hoc/withModal/withModal";
+
+import { connect } from "react-redux";
 
 class OrderSummary extends Component {
+    state = {
+        isUserConfirmedOrder: false
+    };
 
     confirmOrder = () => {
-        this.props.enableModal();
+        this.setState({ isUserConfirmedOrder: true });
     };
 
     render() {
-        const { isModalActive, listOfProducts } = this.props;
-        const confirmOrderModal = isModalActive ? <Modal delay={true}><Confirm/></Modal> : null;
-
+        const { listOfProducts } = this.props;
+        const ConfirmModalWindow = withDelay(withModal(Confirm));
         return (
             <section className={styles.summary}>
-                {confirmOrderModal}
+                {this.state.isUserConfirmedOrder ? <ConfirmModalWindow/> : null}
                 <h2 className={styles.caption}>Ваш заказ</h2>
                 {listOfProducts.map(item => <OrderItem key={item.title} item={item}/>)}
                 <OrderPrice listOfProducts={listOfProducts}/>
@@ -35,17 +38,8 @@ class OrderSummary extends Component {
 
 function mapStateToProps(state) {
     return {
-        isModalActive: state.modal.isModalActive,
         listOfProducts: state.cart.products
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        enableModal: () => {
-            dispatch(modalActions.enableModal());
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(OrderSummary);
+export default connect(mapStateToProps)(OrderSummary);

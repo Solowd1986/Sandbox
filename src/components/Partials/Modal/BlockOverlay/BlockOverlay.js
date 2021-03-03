@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./block-overlay.module.scss"
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../../Spinner/Spinner";
 
 
 class BlockOverlay extends Component {

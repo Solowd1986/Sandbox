@@ -7,6 +7,7 @@ import { List } from "immutable";
 const initialState = {
     amountOfProductsInCart: 0,
     minAmountOfProduct: 1,
+    modalCartShowedToUserCount: 0,
     products: []
 };
 

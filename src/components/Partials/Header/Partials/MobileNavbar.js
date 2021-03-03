@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./mobile-navbar.module.scss";
 import {NavLink} from "react-router-dom";
 import classNames from "classnames";
-import * as utils from "../../Modal/helpers/functions";
+import * as utils from "../../../Helpers/Functions/functions";
 
 class MobileNavbar extends React.Component {
     state = {
