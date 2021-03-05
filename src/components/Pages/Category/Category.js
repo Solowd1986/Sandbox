@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 
-import BlockOverlay from "@components/Partials/Modal/BlockOverlay/BlockOverlay";
 import CategoryProductsList from "./CategoryProductsList/CategoryProductsList";
+import Spinner from "@components/Partials/Spinner/Spinner";
+import withModal from "@components/Helpers/Hoc/withModal/withModal";
 
-import * as utils from "../../Helpers/Functions/functions";
-import * as server from "@redux/entities/db/actions";
+import * as utils from "@components/Helpers/Functions/functions";
+import * as serverActions from "@redux/entities/db/actions";
 import { connect } from "react-redux";
 
 import { List } from "immutable";
-import withModal from "@components/Helpers/Hoc/withModal/withModal";
-import Spinner from "@components/Partials/Spinner/Spinner";
+
 
 class Category extends Component {
 
@@ -18,25 +18,13 @@ class Category extends Component {
         lastIndex: 0
     };
 
-    static getDerivedStateFromProps(props, state) {
-        // это нужно чтобы при переходе по мольному скроллу как при создании компонента категории так и при обновлении
-        // при переходам по сссылкам, кажыдй раз сбрасывался отступ и запрет прокрутки.
-        utils.removeScrollbarOffset();
-        return null
-    }
 
-    /*
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-
-        return (
-            cond || cond2 || cond3
-
-        );
-
-        return true;
-    }
-    */
-
+    // static getDerivedStateFromProps(props, state) {
+    //     // это нужно чтобы при переходе по мольному скроллу как при создании компонента категории так и при обновлении
+    //     // при переходам по сссылкам, кажыдй раз сбрасывался отступ и запрет прокрутки.
+    //     //utils.removeScrollbarOffset();
+    //     return null
+    // }
 
 
     sortDataList = (evt, dataList = this.state.categoryProductsList.data, sortType = this.props.sortType) => {
@@ -70,8 +58,8 @@ class Category extends Component {
 
     componentDidMount() {
         this.props.fetchPageData(this.props);
-        //window.scrollTo(0, 0);
     }
+
 
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -155,13 +143,11 @@ class Category extends Component {
         }
     }
 
+
     componentWillUnmount() {
-        this.setState((state) => {
-            return {
-                ...state,
-                categoryProductsList: null,
-                lastIndex: 0
-            }
+        this.setState({
+            categoryProductsList: null,
+            lastIndex: 0
         })
     }
 
@@ -184,15 +170,13 @@ class Category extends Component {
          * Приходитм опять сюда: алиас стейста равен пропсам пути (пута) - проверка пройдена, отрисовываем категоирю
          *
          */
-
             //console.log('ren');
         const isProductsListEmpty = !this.state.categoryProductsList;
         const alias = isProductsListEmpty ? null : this.state.categoryProductsList.main.alias;
 
         if (isProductsListEmpty || alias !== this.props.match.params.type) {
-            const SpinnerModal = withModal(Spinner, true, true);
+            const SpinnerModal = withModal(Spinner, { bg: false, interactionsDisabled: true });
             return <SpinnerModal/>;
-            //return <BlockOverlay/>;
         } else {
             const { main: category, data: products } = this.state.categoryProductsList;
             return <CategoryProductsList category={category} products={products}/>;
@@ -213,7 +197,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchPageData: (params) => {
-            dispatch(server.fetchPageData(params));
+            dispatch(serverActions.fetchPageData(params));
         },
     }
 };

@@ -6,13 +6,12 @@ import * as PropTypes from "prop-types";
 
 import ProductCard from "@components/Partials/ProductCard/ProductCard";
 import Modal from "@components/Partials/Modal/Modal";
+
 import Spinner from "@components/Partials/Spinner/Spinner";
 import CartModal from "@components/Other/CartModal/CartModal";
 
 import * as cartSelector from "@redux/entities/cart/selectors/cartSelectors";
-import * as modalSelectors from "@redux/entities/modal/selectors/modalSelector";
 
-import * as modalActions from "@redux/entities/modal/actions";
 import * as serverActions from "@redux/entities/db/actions";
 import { connect } from "react-redux";
 
@@ -39,84 +38,53 @@ class Inner extends Component {
     }
 }
 
-/*
-function withModal(WrappedComponent) {
-    return class extends Component {
-        state = {
-            isModalActive: true
-        };
-
-
-
-        closeModal = (evt) => {
-            if (!("modal" in evt.target.dataset)) return;
-
-            // console.dir(evt.target.dataset);
-            // console.log("wrapper" in evt.target.dataset);
-            //
-            // return
-
-            this.setState({
-                isModalActive: false});
-        };
-
-
-        render() {
-            if (this.state.isModalActive) {return (
-                <div style={{ backgroundColor: 'red', width: " 400px", height: "400px"}} onClick={this.closeModal} data-modal={true}>
-                    <div>
-                        <WrappedComponent closeModal={() => this.setState({isModalActive: false})}/>
-                    </div>
-                </div>
-            )} else {
-                return null;
-            }
-        }
-    }
-}
-
-
-*/
 
 import withModal from "@components/Helpers/Hoc/withModal/withModal";
 import Confirm from "@components/Pages/Order/Confirm/Confirm";
 import withDelay from "@components/Helpers/Hoc/withDelay/withDelay";
+import Login from "@components/Other/Auth/Login";
 
 
 
 class Promo extends Component {
-    state = {
-        index: null
-    };
+    constructor(props) {
+        super(props);
+        this.state = { index: this.props.index }
+    }
+
+    // state = {
+    //     index: null
+    // };
 
     static propTypes = {
         index: PropTypes.object,
     };
 
-    toggle = () => {
-        this.props.enableModal();
-    };
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (!this.state.index && this.props.index) {
-            this.setState({ index: this.props.index })
-        }
-    }
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     if (!this.state.index && this.props.index) {
+    //         this.setState({ index: this.props.index })
+    //     }
+    // }
 
     componentDidMount() {
-        this.props.fetchPageData(this.props);
+        //this.props.fetchPageData(this.props);
     }
 
-
     componentWillUnmount() {
-        this.setState(state => ({ index: null }));
+        this.setState({ index: null });
     }
 
 
     render() {
         //console.log(this.props);
+        // localStorage.setItem("auth", JSON.stringify({
+        //     token: "asrgretdvtyrty",
+        //     user: "bob"
+        // }));
 
-        if (!this.state.index) return <div className={styles.spin_wrap}><Spinner/></div>;
+        const SpinnerModal = withModal(Spinner, { bg: false, interactionsDisabled: true });
+
+        if (!this.state.index) return <div className={styles.spin_wrap}><SpinnerModal/></div>;
         const { phones, accessoires, gadgets } = this.state.index;
 
         const list = new Map({
@@ -127,6 +95,7 @@ class Promo extends Component {
                 { age: 15 },
             ]
         });
+
 
 
         const ModalState = withModal(Spinner);
@@ -149,6 +118,8 @@ class Promo extends Component {
                     {/*<Stores/>*/}
 
                     {/*<ModalState/>*/}
+
+                    <Login/>
 
 
                     {/*<button onClick={this.toggle}>Active</button>*/}
@@ -180,26 +151,5 @@ class Promo extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        index: state.db.index,
-        cart: cartSelector.cartStateSelector(state),
-        isModalActive: modalSelectors.modalStatusSelector(state)
-    }
-}
-
-
-function mapDispatchToProps(dispatch) {
-    return {
-        enableModal: () => {
-            dispatch(modalActions.enableModal());
-        },
-        fetchPageData: (params) => {
-            dispatch(serverActions.fetchPageData(params));
-        },
-    }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Promo);
+export default Promo;
 

@@ -1,22 +1,32 @@
 import React, { Component } from "react";
 
-export default class Login extends Component {
+//import * as cartSelector from "@redux/entities/cart/selectors/cartSelectors";
+import * as authActions from "@redux/entities/auth/actions";
+import { connect } from "react-redux";
 
-
+class Login extends Component {
     render() {
         const { logged } = this.props;
         return (
-            <button onClick={this.login}>Login</button>
+            <button onClick={this.props.setToken}>Login</button>
         )
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        index: state.db.index,
+    }
+}
 
-/*
-<form className="form" action="/" name="auth-form" method="POST" >
-    <input className="form__input" type="text" name="login" placeholder="Enter login..."/>
-    <input className="form__input" type="password" name="psw" placeholder="Enter psw..."/>
-    <input className="form__submit" type="submit" name="auth-submit" value="Send"/>
-</form>
 
- */
+function mapDispatchToProps(dispatch) {
+    return {
+        setToken: () => {
+            dispatch(authActions.authUser());
+        },
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

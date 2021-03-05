@@ -7,12 +7,12 @@ function withDelay(PropsComponent, ms = 1500) {
     return class extends Component {
         constructor(props) {
             super(props);
-            util.addScrollbarOffset();
             this.timer = null;
             this.state = { isDelayEnded: false };
         }
 
         componentDidMount() {
+            util.addScrollbarOffset();
             this.timer = setTimeout(() => {
                 this.setState((state) => {
                     return {

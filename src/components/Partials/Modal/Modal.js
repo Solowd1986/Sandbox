@@ -7,7 +7,6 @@ import * as util from "../../Helpers/Functions/functions";
 import ModalContent from "@components/Partials/Modal/ModalContent/ModalContent";
 import Spinner from "../Spinner/Spinner";
 
-import * as modalActions from "@redux/entities/modal/actions";
 import { connect } from "react-redux";
 
 class Modal extends Component {
@@ -74,7 +73,7 @@ class Modal extends Component {
 function mapDispatchToProps(dispatch) {
     return {
         disableModal: () => {
-            dispatch(modalActions.disableModal());
+            //dispatch(modalActions.disableModal());
         }
     }
 }

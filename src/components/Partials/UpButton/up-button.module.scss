@@ -1,25 +1,4 @@
-@import "~scss/common.module";
-
-.btn {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 13;
-  padding: 15px 20px;
-  border-radius: 5px;
-  background-color: $red;
-  cursor: pointer;
-  transition: background-color .4s linear;
-
-  &:hover {
-    background-color: darken($red, 15%);
-  }
-
-  &:active, &:focus {
-    outline: 0;
-  }
-}
-
+@import "@scss/utils/utils.scss";
 
 .up {
   display: block;
@@ -37,13 +16,17 @@
   opacity: 0;
   transition: opacity .3s linear;
 
-  &__show {
-    opacity: 0.8;
+  @media (max-width: 1028px) {
+    right: 15px;
   }
 
   &:hover {
     opacity: 0.95;
     cursor: pointer;
   }
+}
+
+.show {
+  opacity: 0.8;
 
 }

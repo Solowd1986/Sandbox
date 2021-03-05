@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styles from "./order_item.module.scss"
 
 import * as cart from "../../../../redux/entities/cart/actions";
-import * as modal from "../../../../redux/entities/modal/actions";
 import { connect } from "react-redux";
 
 

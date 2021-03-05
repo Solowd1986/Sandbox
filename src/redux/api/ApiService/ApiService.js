@@ -7,7 +7,10 @@ class ApiService {
             timeout: 1000 * 5,
             withCredentials: true,
             headers: {
-                'Authorization': `Bearer ${JSON.parse(decodeURIComponent(localStorage.getItem("token")))}`,
+                'Authorization': `Bearer ${
+                    localStorage.getItem("auth")
+                    &&
+                    JSON.parse(decodeURIComponent(localStorage.getItem("auth"))).auth.token}`,
             },
         });
     }

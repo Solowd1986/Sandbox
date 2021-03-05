@@ -10,11 +10,10 @@ import * as util from "@components/Helpers/Functions/functions";
  */
 //</editor-fold>
 
-function withModal(WrappedComponent, parentCentered = false, interactionsDisabled = false) {
+function withModal(WrappedComponent, { fixed = false, bg = true, interactionsDisabled = false } = {}) {
     return class extends Component {
         constructor(props) {
             super(props);
-            util.addScrollbarOffset();
             this.state = {
                 isModalActive: true
             };
@@ -33,12 +32,22 @@ function withModal(WrappedComponent, parentCentered = false, interactionsDisable
             }
         }
 
+        componentDidMount() {
+            util.addScrollbarOffset();
+        }
+
+        componentWillUnmount() {
+            util.removeScrollbarOffset();
+        }
+
+
         render() {
             if (!this.state.isModalActive) return null;
 
             const classList = classNames({
-                [styles.overlay]: !parentCentered,
-                [styles.wrapper]: parentCentered,
+                [styles.overlay]: !fixed,
+                [styles.wrapper]: fixed,
+                [styles.bg]: bg
             });
             return (
                 <div className={classList} onClick={this.closeModal} data-modal={true}>

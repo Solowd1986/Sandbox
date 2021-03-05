@@ -1,8 +1,8 @@
 import MainPage from "@components/Pages/Index/MainPage";
 import Category from "@components/Pages/Category/Category";
 import Product from "@components/Pages/SingleProduct/Product";
-import Order from "@components/Pages/Order/Order";
 import Delivery from "@components/Pages/Delivery/Delivery";
+import Order from "@components/Pages/Order/Order";
 
 import Error400 from "@components/Pages/Error/Error400/Error400";
 import Error404 from "@components/Pages/Error/Error404/Error404";

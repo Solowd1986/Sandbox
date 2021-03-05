@@ -10,13 +10,21 @@ const activeMiddlewareList = [
 
 ];
 
-const preloadedState = JSON.parse(decodeURIComponent(localStorage.getItem("cart")));
+const preloadedState = {
+    ...JSON.parse(decodeURIComponent(localStorage.getItem("cart"))),
+    ...JSON.parse(decodeURIComponent(localStorage.getItem("auth"))),
+};
+
+
 const enhancedStore = composeEnhancers(applyMiddleware(...activeMiddlewareList));
 const store = preloadedState ? createStore(reducer, preloadedState, enhancedStore) : createStore(reducer, enhancedStore);
 
 store.subscribe(() => {
     if (store.getState().cart.products.length) {
         localStorage.setItem("cart", encodeURIComponent(JSON.stringify({ cart: store.getState().cart })));
+    }
+    if (store.getState().auth.token) {
+        localStorage.setItem("auth", encodeURIComponent(JSON.stringify({ auth: store.getState().auth })));
     }
 });
 

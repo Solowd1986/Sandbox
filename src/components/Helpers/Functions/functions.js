@@ -10,8 +10,9 @@ export const calcScrollBarWidth = () => {
 
 export const addScrollbarOffset = () => {
     const scrollBarWidth = calcScrollBarWidth();
+    document.body.style.overflow = "hidden";
     if (scrollBarWidth > 0) {
-        document.body.style.cssText = `overflow: hidden; padding-right: ${calcScrollBarWidth()}px`;
+        document.body.style.paddingRight = `${scrollBarWidth}px`;
     }
 };
 

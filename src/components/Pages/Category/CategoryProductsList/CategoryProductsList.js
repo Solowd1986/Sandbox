@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 
-//import common from "@scss/common.module.scss";
-//import styles from "../category.module.scss";
-
 import styles from "./category-products-list.module.scss";
 import classNames from "classnames";
 

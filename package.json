@@ -108,6 +108,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
+    "preanalyze": "node scripts/build.js",
     "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {

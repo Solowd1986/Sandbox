@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import styles from "./up-button.module.scss";
+import classNames from "classnames";
 
 class UpButton extends Component {
     constructor(props) {
@@ -36,9 +37,11 @@ class UpButton extends Component {
     };
 
     render() {
+        const classList = classNames(styles.up, {
+            [styles.show]: this.state.isPageScrolledToBottom
+        });
         return (
-            // checkScroll() && <button onClick={scrollUp} className={`${styles.btn}`}>Up</button>
-            <div data-fs={true} onClick={this.scrollUp} className={`${styles.up} ${this.state.isPageScrolledToBottom && styles.up__show}`}/>
+            <div onClick={this.scrollUp} className={classList}/>
         )
     }
 }
