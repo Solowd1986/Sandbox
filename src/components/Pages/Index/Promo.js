@@ -66,9 +66,6 @@ class Promo extends Component {
     //     }
     // }
 
-    componentDidMount() {
-        //this.props.fetchPageData(this.props);
-    }
 
     componentWillUnmount() {
         this.setState({ index: null });
@@ -109,7 +106,7 @@ class Promo extends Component {
                     <NavLink to={"/secret"}>Go to secret page </NavLink>
                     <NavLink to={"/login"}>Go to login page </NavLink>
 
-                    {/*<FormikForm/>*/}
+                    <FormikForm/>
 
                     {/*<MyForm/>*/}
 
@@ -119,7 +116,7 @@ class Promo extends Component {
 
                     {/*<ModalState/>*/}
 
-                    <Login/>
+                    {/*<Login/>*/}
 
 
                     {/*<button onClick={this.toggle}>Active</button>*/}

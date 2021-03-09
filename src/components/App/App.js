@@ -1,22 +1,17 @@
 import React, { Component } from "react";
+
+import Layout from "@components/Partials/Layout/Layout";
+import ErrorBoundary from "@components/Helpers/ErrorBoundary/ErrorBoundary";
+import ScrollToTop from "@components/Helpers/Hoc/withScrollToTop/ScrollToTop";
+
+import Secret from "@components/Other/Auth/Secret";
+import Login from "@components/Other/Auth/Login";
+
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import routes from "../../routes/routes";
+import routes from "@root/routes/routes";
 
 import { Provider } from "react-redux";
-import store from "../../redux/store";
-
-import Layout from "../Partials/Layout/Layout";
-import ErrorBoundary from "../Helpers/ErrorBoundary/ErrorBoundary";
-
-
-import Secret from "../Other/Auth/Secret";
-import Login from "../Other/Auth/Login";
-import Error404 from "../Pages/Error/Error404/Error404";
-
-const hello = (props) => {
-debugger;
-    return <div>Hello</div>;
-};
+import store from "@redux/store";
 
 export default class App extends Component {
     render() {
@@ -26,25 +21,22 @@ export default class App extends Component {
                     <BrowserRouter>
                         <ErrorBoundary>
                             <Layout>
-                                <Switch>
-                                    <Route path={"/name"} render={({ history }) => {
-                                        //console.log({history});
-                                        return (
-                                            <div onClick={() => history.push("5")}>Hello</div>
-                                        )
-                                    }}/>
-                                    <Route path={"/secret"} component={Secret}/>
-                                    <Route path={"/login"} component={Login}/>
-                                    {routes.map((route) =>
-                                        <Route
-                                            key={route.url}
-                                            path={route.url}
-                                            component={route.component}
-                                            exact={route.exact}/>)
-                                    }
+                                <ScrollToTop>
+                                    <Switch>
 
-                                    <Redirect to={"/404"}/> // редирект, если рута не нашлось
-                                </Switch>
+                                        <Route path={"/secret"} component={Secret}/>
+                                        <Route path={"/login"} component={Login}/>
+
+                                        {routes.map((route) =>
+                                            <Route
+                                                key={route.url}
+                                                path={route.url}
+                                                component={route.component}
+                                                exact={route.exact}/>)
+                                        }
+                                        <Redirect to={"/404"}/> // редирект, если рута не нашлось
+                                    </Switch>
+                                </ScrollToTop>
                             </Layout>
                         </ErrorBoundary>
                     </BrowserRouter>

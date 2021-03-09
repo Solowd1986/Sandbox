@@ -23,6 +23,9 @@ store.subscribe(() => {
     if (store.getState().cart.products.length) {
         localStorage.setItem("cart", encodeURIComponent(JSON.stringify({ cart: store.getState().cart })));
     }
+    if (localStorage.getItem("cart") && !store.getState().cart.products.length) {
+        localStorage.removeItem("cart");
+    }
     if (store.getState().auth.token) {
         localStorage.setItem("auth", encodeURIComponent(JSON.stringify({ auth: store.getState().auth })));
     }

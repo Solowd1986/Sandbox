@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import styles from "./header.module.scss";
 import classNames from "classnames";
 
-import MobileNavbar from "./Partials/MobileNavbar";
-import Logo from "./Partials/Logo";
-import NavbarList from "./Partials/NavbarList";
-import Userbar from "./Partials/Userbar";
+import MobileNavbar from "./Partials/MobileNavbar/MobileNavbar";
+import Logo from "./Partials/Logo/Logo";
+import NavbarList from "./Partials/NavbarList/NavbarList";
+import Userbar from "./Partials/Userbar/Userbar";
 
 class Header extends Component {
 

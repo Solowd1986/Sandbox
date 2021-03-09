@@ -1,23 +1,20 @@
-import React, { Component } from "react";
-import styles from "./input.module.scss";
+import React from "react";
+import classNames from "classnames";
 
-class Input extends Component {
-    render() {
-        const { type, classList } = this.props;
-        const id = `${this.props.type || "text"}-id-${Math.random().toString(34).slice(2)}`;
+const InputText = ({ type, children, name, classList: cl = null }) => {
+    const id = `${type || "text"}-id-${Math.random().toString(34).slice(2)}`;
+    const classList = classNames(cl);
+    return (
+        <>
+            <input id={id} type={type} name={name} className={classList}/>
+            <label htmlFor={id}>
+                {children}
+            </label>
+        </>
+    )
+};
 
-        return (
-            <>
-                <input id={id}/>
-                <label htmlFor={id}>
-                    <span/>
-                </label>
-            </>
-        )
-    }
-}
-
-export default Input;
+export default InputText;
 
 
 

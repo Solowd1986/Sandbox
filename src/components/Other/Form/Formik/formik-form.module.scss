@@ -1,13 +1,4 @@
-@import "@scss/utils/utils.scss";
-
-.form {
-  display: flex;
-  @media (max-width: 1120px) {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
+@import "~scss/utils/utils.scss";
 
 .formik {
   display: flex;
@@ -23,5 +14,15 @@
 
   & > div {
     border: 2px solid red;
+  }
+}
+
+.inp {
+  margin: 10px;
+  padding: 10px;
+
+  & > input {
+    margin-left: 15px;
+    padding: 5px;
   }
 }

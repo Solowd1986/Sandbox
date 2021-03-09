@@ -1,6 +1,3 @@
-import addItemToCart from "./reducer_functions/addItemToCart";
-import removeItemFromCart from "./reducer_functions/removeItemFromCart";
-import changeAmountOfProduct from "./reducer_functions/changeAmountOfProduct";
 import * as types from "./constants/cart";
 import { List } from "immutable";
 
@@ -8,6 +5,7 @@ const initialState = {
     amountOfProductsInCart: 0,
     minAmountOfProduct: 1,
     modalCartShowedToUserCount: 0,
+    shippingPrice: 400,
     products: []
 };
 
@@ -16,33 +14,62 @@ export default (state = initialState, action) => {
         case types.CART_ADD_ITEM: {
             const { item } = action.payload;
 
-            //state.products! ? new List([]) : state.products.push(item);
-            // let products = [...state.products];
-            // if (!state.products.includes(item)) {
-            //     products = state.products.push(item);
-            // }
-            //
-            //
-            // console.log(products);
-            //
-            //
-            // return {
-            //     ...state,
-            //     amountOfProductsInCart: state.amountOfProductsInCart + 1,
-            //     products,
-            // };
+            const products = !state.products ? [] : [...state.products];
+            if (!products.includes(item)) {
+                const product = { ...item, quantity: 1 };
+                products.push(product);
+            }
 
-            return addItemToCart(state, item);
+            return {
+                ...state,
+                amountOfProductsInCart: state.amountOfProductsInCart + 1,
+                products,
+            };
         }
 
         case types.CART_REMOVE_ITEM : {
             const { item } = action.payload;
-            return removeItemFromCart(state, item);
+            const index = state.products.indexOf(state.products.find(product => product.id === item.id && product.title === item.title));
+            const products = [
+                ...state.products.slice(0, index),
+                ...state.products.slice(index + 1)
+            ];
+
+            return {
+                ...state,
+                amountOfProductsInCart: state.amountOfProductsInCart - 1,
+                products
+            };
         }
+
 
         case types.CART_CHANGE_PRODUCT_AMOUNT : {
             const { evt, id, quantity } = action.payload;
-            return changeAmountOfProduct(state, evt, id, quantity);
+
+            if (isNaN(Math.abs(parseInt(quantity)))) return state;
+
+            const products = [...state.products];
+            const currentProduct = { ...products.find(item => item.id === id) };
+
+            const min = state.minAmountOfProduct;
+            const max = currentProduct.rest;
+
+            currentProduct.quantity = Math.max(min, Math.min(max, quantity));
+            products[products.indexOf(products.find(item => item.id === id))] = currentProduct;
+
+            return {
+                ...state,
+                products
+            };
+        }
+
+        case types.CART_CHANGE_SHIPPING_PRICE : {
+            const { price } = action.payload;
+            if (isNaN(parseInt(price))) return state;
+            return {
+                ...state,
+                shippingPrice: parseInt(price)
+            };
         }
 
         default:

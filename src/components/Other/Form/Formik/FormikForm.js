@@ -1,30 +1,59 @@
 import React, { Component } from "react";
+import styles from "./formik-form.module.scss"
+
 import { Formik } from 'formik';
+import * as yup from "yup";
 
 export default class FormikForm extends Component {
     render() {
+
+        const phones = [
+            { id: 1, title: "phone 1", qnt: 1, max: 8, price: 1200 },
+            { id: 2, title: "phone 2", qnt: 1, max: 56, price: 4610 },
+            { id: 3, title: "phone 3", qnt: 1, max: 15, price: 2167 },
+        ];
+
+        const validationSchema = yup.object().shape({
+            name:
+                yup.string().matches(/^[a-z]/, "Логин не должен начинаться с числа").matches(/^\w+$/, "Логин должен состоять лишь из чисел и букв").min(4, "Логин должен включать не менее 4 символов").max(15, "Логин должен включать не более 15 символов").required("Данное поле обязательно"),
+            //email:
+        });
+
+        const rebr = (arr) => {
+            const res = {};
+            arr.forEach(item => {
+                res[item.title] = item.qnt
+            });
+            return res;
+        };
+
+        //console.log(rebr(phones));
+
         return (
             <Formik
-                initialValues={{ email: "", password: "" }}
-                validate={values => {
-                    const errors = {};
-                    if (!values.email) {
-                        errors.email = 'Email Is Required';
-                    } else if (
-                        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                    ) {
-                        errors.email = 'Invalid email address';
-                    }
-                    return errors;
-                }}
+                initialValues={{ email: "sam@ya.ru", password: "1234", ...rebr(phones), name: "" }}
+
+                validationSchema={validationSchema}
+
+                // validate={values => {
+                //     const errors = {};
+                //     if (!values.email) {
+                //         errors.email = 'Email Is Required';
+                //     } else if (
+                //         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                //     ) {
+                //         errors.email = 'Invalid email address';
+                //     }
+                //     return errors;
+                // }}
 
                 onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
                         alert(JSON.stringify(values, null, 2));
                         setSubmitting(false);
-                    }, 400);
-                }}
-            >
+                    }, 40);
+                }}>
+
                 {({
                       values,
                       errors,
@@ -33,9 +62,45 @@ export default class FormikForm extends Component {
                       handleBlur,
                       handleSubmit,
                       isSubmitting,
-                      /* and other goodies */
+                      isValid,
+                      dirty
                   }) => (
-                    <form onSubmit={handleSubmit}>
+
+                    <form onSubmit={handleSubmit} className={styles.formik}>
+                        {
+                            phones.map(item => {
+                                return (
+                                    <div key={item.id} className={styles.inp}>
+                                        <span>{item.title}</span>
+                                        <input
+                                            name={item.title}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={item.qnt}
+                                            type="text"/>
+                                        <span>del</span>
+                                    </div>
+                                )
+                            })
+                        }
+
+                        <input
+                            type="text"
+                            name="name"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.name}
+                        />
+                        {errors.name && touched.name && errors.name}
+
+                        {/*
+                        <input type="radio" checked onChange={handleChange} onBlur={handleBlur} name={"rad"} value={1}/>
+                        <input type="radio" onChange={handleChange} onBlur={handleBlur} name={"rad"} value={2}/>
+                        <input type="radio" onChange={handleChange} onBlur={handleBlur} name={"rad"} value={3}/>
+                        */}
+
+
+
                         <input
                             type="email"
                             name="email"
@@ -52,7 +117,13 @@ export default class FormikForm extends Component {
                             value={values.password}
                         />
                         {errors.password && touched.password && errors.password}
-                        <button type="submit" disabled={isSubmitting}>Submit</button>
+
+                        <button
+                            type="submit"
+                            disabled={!isValid && !dirty}>
+
+                            Submit
+                        </button>
                     </form>
                 )}
             </Formik>

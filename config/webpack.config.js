@@ -343,6 +343,7 @@ module.exports = function (webpackEnv) {
                 '@scss': path.resolve('src/assets/scss/'),
                 '@components': path.resolve('src/components/'),
                 '@redux': path.resolve('src/redux/'),
+                '@root': path.resolve('src/'),
 
                 // Allows for better profiling with ReactDevTools
                 ...(isEnvProductionProfile && {

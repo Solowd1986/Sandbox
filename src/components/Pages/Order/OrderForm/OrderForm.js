@@ -1,25 +1,63 @@
 import React, { Component } from "react";
 import styles from "./order-form.module.scss";
-import classNames from "classnames";
 
-import OrderInfo from "../OrderInfo/OrderInfo";
-import OrderSummary from "../OrderSummary/OrderSummary";
+import OrderInfo from "./OrderInfo/OrderInfo";
+import OrderSummary from "./OrderSummary/OrderSummary";
+import InputText from "@components/Other/Form/Input/Input";
+
+import Confirm from "@components/Pages/Order/Confirm/Confirm";
+import withDelay from "@components/Helpers/Hoc/withDelay/withDelay";
+import withModal from "@components/Helpers/Hoc/withModal/withModal";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+
+
+const Basic = () => (
+    <div>
+
+        <h1>Sign Up</h1>
+        <Formik
+            initialValues={{ email: '', password: '' }}
+            validate={values => {
+                const errors = {};
+                if (!values.email) {
+                    errors.email = 'Required';
+                } else if (
+                    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                ) {
+                    errors.email = 'Invalid email address';
+                }
+                return errors;
+            }}
+            onSubmit={(values, { setSubmitting }) => {
+                setTimeout(() => {
+                    alert(JSON.stringify(values, null, 2));
+                    setSubmitting(false);
+                }, 100);
+            }}
+        >
+            {({ isSubmitting }) => (
+                <Form className={styles.formik}>
+
+                    <Field type="email" name="email"/>
+                    <ErrorMessage name="email" component="div"/>
+                    <Field type="password" name="password"/>
+                    <ErrorMessage name="password" component="div"/>
+                    <button type="submit" disabled={isSubmitting}>Submit</button>
+                </Form>
+            )}
+        </Formik>
+
+    </div>
+);
 
 class OrderForm extends Component {
     constructor(props) {
         super(props);
         this.form = React.createRef();
-        this.state = null;
+        this.state = { isUserConfirmOrder: false };
     }
 
-    componentDidMount() {
-        this.setState({
-            //shippingPrice:
-        });
-    }
-
-
-    submit = (evt) => {
+    confirmOrder = (evt) => {
         //
         // if (!evt.currentTarget.checkValidity()) {
         //     for (const formElement of evt.currentTarget.elements) {
@@ -36,6 +74,9 @@ class OrderForm extends Component {
         //     }
         // }
 
+        evt.preventDefault();
+
+        //return
         console.dir(this.form);
         const form = new FormData(this.form.current);
         const formDataObject = {};
@@ -43,38 +84,31 @@ class OrderForm extends Component {
             formDataObject[key] = value;
         }
         console.dir(formDataObject);
-
-        evt.preventDefault();
+        this.setState({ isUserConfirmOrder: true });
     };
+
+
 
     render() {
 
         //  ВЫВЕДИ МОДАЛКУ ОПИРАЯСЬ НА ВВЕДЕННОЕ В ФОРМУ ИМЯ ИЛИ ВАРИАНТ С JOHN DOE
 
+        const ConfirmModalWindow = withDelay(withModal(Confirm));
         return (
-            <div className={classNames("container", styles.container_checkout_bg)}>
-                <div className={classNames("wrapper", styles.order)}>
-                    <div className={styles.line}>
-                        <span className={styles.line_stage}>Ваша корзина</span>
-                        <span className={styles.line_stage}>Оплата и доставка</span>
-                        <span className={classNames(styles.line_stage, styles.line_stage__unactive)}>
-                            Успешное оформление
-                        </span>
-                    </div>
-
-                    <form
-                        ref={this.form}
-                        onSubmit={this.submit}
-                        className={styles.form}
-                        action=""
-                        name="order-form"
-                        method="POST"
-                        noValidate={true}>
-                        <OrderInfo/>
-                        <OrderSummary/>
-                    </form>
-                </div>
-            </div>
+            <>
+                {this.state.isUserConfirmOrder ? <ConfirmModalWindow/> : null}
+                <Basic/>
+                <form
+                    ref={this.form}
+                    onSubmit={this.confirmOrder}
+                    className={styles.form}
+                    name="order-form"
+                    method="POST"
+                    noValidate>
+                    <OrderInfo/>
+                    <OrderSummary/>
+                </form>
+            </>
         )
     }
 }

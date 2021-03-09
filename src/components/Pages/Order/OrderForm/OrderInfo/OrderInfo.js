@@ -6,77 +6,8 @@ import basketShipping from "./img/basket-shipping.png";
 
 
 import ReactDOM from 'react-dom';
-import { Formik, Field, Form } from 'formik';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
 
-
-const Basic = () => (
-    <div>
-
-        <h1>Sign Up</h1>
-        <Formik
-            initialValues={{
-                picked: "",
-            }}
-            onSubmit={async (values) => {
-                await new Promise((r) => setTimeout(r, 500));
-                alert(JSON.stringify(values, null, 2));
-            }}>
-
-            {
-                ({ values }) => (
-                    <Form>
-                        <div id="my-radio-group">Picked</div>
-                        <div role="group" aria-labelledby="my-radio-group">
-
-                            <div className={styles.cards_wrapper}>
-                                <Field id={"moscow"} type="radio" name="shipping" value="moscow"/>
-                                <label htmlFor="moscow" className={styles.card}>
-                                    <div className={styles.card__info}>
-                                        <span> Доставка по Москве</span>
-                                        <span className={styles.card__pay}>400 р.</span>
-                                    </div>
-                                    <div className={styles.card__extra}>сегодня</div>
-                                </label>
-
-                                <Field id={"pickup"} type="radio" name="shipping" value="pickup"/>
-                                <label htmlFor="pickup" className={styles.card}>
-                                    <div className={styles.card__info}>
-                                        <span>Самовывоз</span>
-                                        <span className={styles.card__pay}>бесплатно</span>
-                                    </div>
-                                    <div className={styles.card__extra}>Москва, Барклая 6, стр. 5, БЦ "Барклай Плаза" (м. Парк Победы)</div>
-                                </label>
-
-                                <Field id={"russia"} type="radio" name="shipping" value="russia"/>
-                                <label htmlFor="russia" className={styles.card}>
-                                    <div className={styles.card__info}>
-                                        <span>Доставка по России</span>
-                                        <span className={styles.card__pay}>450 р.</span>
-                                    </div>
-                                    <div className={styles.card__extra}>
-                                        <img src={basketEpayment} alt="shipping"/>
-                                    </div>
-                                </label>
-                            </div>
-
-                            <label>
-                                <Field type="radio" name="picked" value="One"/>
-                                One
-                            </label>
-
-                            <label>
-                                <Field type="radio" name="picked" value="Two"/>
-                                Two
-                            </label>
-                            <div>Picked: {values.picked}</div>
-                        </div>
-
-                        <button onSubmit={onSubmit} type="submit">Submit</button>
-                    </Form>
-                )}
-        </Formik>
-    </div>
-);
 
 
 export default class OrderInfo extends Component {
@@ -84,20 +15,20 @@ export default class OrderInfo extends Component {
     show = (evt) => {
         //console.log(evt.target.value);
     };
+
     render() {
         return (
             <section className={styles.info}>
 
-                {/*<Basic/>*/}
-
                 {/*Delivery*/}
+
                 <div>
                     <h2 className={styles.order_title}>1. Доставка</h2>
                     <div className={styles.cards_wrapper}>
 
                         {/*checked={true} */}
 
-                        <input onChange={this.show} checked id={"moscow"} type="radio" name={"shipping"} value={400} data-delivery={true}/>
+                        <input onChange={this.show} checked id="moscow" type="radio" name="shipping" value={400} data-delivery={true}/>
                         <label htmlFor="moscow" className={styles.card}>
                             <div className={styles.card__info}>
                                 <span> Доставка по Москве</span>

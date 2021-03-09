@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./order_item.module.scss"
 
-import * as cart from "../../../../redux/entities/cart/actions";
+import * as cart from "@redux/entities/cart/actions";
 import { connect } from "react-redux";
 
 
@@ -37,8 +37,8 @@ class OrderItem extends Component {
         })
     };
 
-    deleteFromOrder = (evt) => {
-        this.props.onDeleteProductFromCart(evt, this.props.item.id)
+    deleteFromOrder = () => {
+        this.props.onDeleteProductFromCart(this.props.item)
     };
 
     normalizeValue = (value) => {
@@ -96,8 +96,8 @@ function mapDispatchToProps(dispatch) {
         onChangeAmountOfProduct: (evt, id, quantity) => {
             dispatch(cart.changeAmountOfProduct(evt, id, quantity))
         },
-        onDeleteProductFromCart: (evt, id) => {
-            dispatch(cart.removeItemFromCart(evt, id))
+        onDeleteProductFromCart: (item) => {
+            dispatch(cart.removeItemFromCart(item))
         }
     }
 }
