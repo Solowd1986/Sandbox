@@ -8,7 +8,9 @@ import InputText from "@components/Other/Form/Input/Input";
 import Confirm from "@components/Pages/Order/Confirm/Confirm";
 import withDelay from "@components/Helpers/Hoc/withDelay/withDelay";
 import withModal from "@components/Helpers/Hoc/withModal/withModal";
+
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import * as yup from "yup";
 
 
 const Basic = () => (
@@ -58,24 +60,7 @@ class OrderForm extends Component {
     }
 
     confirmOrder = (evt) => {
-        //
-        // if (!evt.currentTarget.checkValidity()) {
-        //     for (const formElement of evt.currentTarget.elements) {
-        //         if (formElement.nodeName === "INPUT" && formElement.type === "text" || formElement.type === "email") {
-        //             if (!formElement.checkValidity()) {
-        //                 for (const key in formElement.validity) {
-        //                     if (formElement.validity[key] === true) {
-        //                         //console.log(key);
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //
-        //     }
-        // }
-
         evt.preventDefault();
-
         //return
         console.dir(this.form);
         const form = new FormData(this.form.current);
@@ -94,24 +79,79 @@ class OrderForm extends Component {
         //  ВЫВЕДИ МОДАЛКУ ОПИРАЯСЬ НА ВВЕДЕННОЕ В ФОРМУ ИМЯ ИЛИ ВАРИАНТ С JOHN DOE
 
         const ConfirmModalWindow = withDelay(withModal(Confirm));
+
+        const validationSchema = yup.object().shape({
+            name:
+                yup.string().matches(/^\w+$/, "Логин должен состоять из латинницы и цифр").matches(/^[a-z]/, "Логин не должен начинаться с числа").min(4, "Логин должен включать не менее 4 символов").max(15, "Логин должен включать не более 15 символов").required("Данное поле обязательно"),
+            email: yup.string().email("Введите корректный email").required("Данное поле обязательно"),
+        });
+
+        const rebr = (arr) => {
+            const res = {};
+            arr.forEach(item => {
+                res[item.title] = item.qnt
+            });
+            return res;
+        };
+
         return (
             <>
                 {this.state.isUserConfirmOrder ? <ConfirmModalWindow/> : null}
-                <Basic/>
-                <form
-                    ref={this.form}
-                    onSubmit={this.confirmOrder}
-                    className={styles.form}
-                    name="order-form"
-                    method="POST"
-                    noValidate>
-                    <OrderInfo/>
-                    <OrderSummary/>
-                </form>
+                <Formik
+                    initialValues={{ email: "sam@ya.ru", password: "1234", name: "", }}
+
+                    //validationSchema={validationSchema}
+
+                    // validate={values => {
+                    //     const errors = {};
+                    //     if (!values.email) {
+                    //         errors.email = 'Email Is Required';
+                    //     } else if (
+                    //         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                    //     ) {
+                    //         errors.email = 'Invalid email address';
+                    //     }
+                    //     return errors;
+                    // }}
+
+                    onSubmit={(values, { setSubmitting }) => {
+                        //console.log('loggg');
+
+                        setTimeout(() => {
+                            alert(JSON.stringify(values, null, 2));
+                            setSubmitting(false);
+                        }, 40);
+                    }}
+                >
+
+                    {(formikProps) => (
+                        <form
+                            ref={this.form}
+                            onSubmit={formikProps.handleSubmit}
+                            className={styles.form}
+                            name="order-form"
+                            method="POST">
+                            <OrderInfo formikProps={formikProps}/>
+                            <OrderSummary formikProps={formikProps}/>
+                        </form>
+
+                    )}
+                </Formik>
             </>
         )
     }
 }
 
+// {
+//     values,
+//         errors,
+//         touched,
+//         handleChange,
+//         handleBlur,
+//         handleSubmit,
+//         isSubmitting,
+//         isValid,
+//         dirty
+// }
 
 export default OrderForm;

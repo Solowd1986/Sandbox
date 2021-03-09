@@ -8,15 +8,15 @@ export default class FormikForm extends Component {
     render() {
 
         const phones = [
-            { id: 1, title: "phone 1", qnt: 1, max: 8, price: 1200 },
-            { id: 2, title: "phone 2", qnt: 1, max: 56, price: 4610 },
-            { id: 3, title: "phone 3", qnt: 1, max: 15, price: 2167 },
+            { id: 1, title: "phone 1", qnt: 1, rest: 8, price: 1200 },
+            { id: 2, title: "phone 2", qnt: 1, rest: 56, price: 4610 },
+            { id: 3, title: "phone 3", qnt: 1, rest: 15, price: 2167 },
         ];
 
         const validationSchema = yup.object().shape({
             name:
-                yup.string().matches(/^[a-z]/, "Логин не должен начинаться с числа").matches(/^\w+$/, "Логин должен состоять лишь из чисел и букв").min(4, "Логин должен включать не менее 4 символов").max(15, "Логин должен включать не более 15 символов").required("Данное поле обязательно"),
-            //email:
+                yup.string().matches(/^\w+$/, "Логин должен состоять из латинницы и цифр").matches(/^[a-z]/, "Логин не должен начинаться с числа").min(4, "Логин должен включать не менее 4 символов").max(15, "Логин должен включать не более 15 символов").required("Данное поле обязательно"),
+            email: yup.string().email("Введите корректный email").required("Данное поле обязательно"),
         });
 
         const rebr = (arr) => {
@@ -47,12 +47,15 @@ export default class FormikForm extends Component {
                 //     return errors;
                 // }}
 
+                handleBlur={e => console.log("bluuuuurr", { e })}
+
                 onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
                         alert(JSON.stringify(values, null, 2));
                         setSubmitting(false);
                     }, 40);
-                }}>
+                }}
+            >
 
                 {({
                       values,
@@ -66,6 +69,7 @@ export default class FormikForm extends Component {
                       dirty
                   }) => (
 
+
                     <form onSubmit={handleSubmit} className={styles.formik}>
                         {
                             phones.map(item => {
@@ -73,6 +77,8 @@ export default class FormikForm extends Component {
                                     <div key={item.id} className={styles.inp}>
                                         <span>{item.title}</span>
                                         <input
+                                            min={1}
+                                            max={item.rest}
                                             name={item.title}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
@@ -120,8 +126,7 @@ export default class FormikForm extends Component {
 
                         <button
                             type="submit"
-                            disabled={!isValid && !dirty}>
-
+                            disabled={!isValid || !dirty}>
                             Submit
                         </button>
                     </form>

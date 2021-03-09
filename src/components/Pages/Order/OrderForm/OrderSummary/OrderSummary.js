@@ -8,9 +8,7 @@ import { connect } from "react-redux";
 
 class OrderSummary extends Component {
     render() {
-        console.log(this.props);
-
-        const { listOfProducts, shippingPrice } = this.props;
+        const { listOfProducts, shippingPrice, formikProps: { isValid, dirty } } = this.props;
         return (
             <section className={styles.summary}>
                 <h2 className={styles.caption}>Ваш заказ</h2>

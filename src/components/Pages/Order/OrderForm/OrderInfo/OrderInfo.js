@@ -1,34 +1,46 @@
 import React, { Component } from "react";
 import styles from "./order-info.module.scss";
+import * as PropTypes from "prop-types";
 
 import basketEpayment from "./img/basket-epayment.png";
 import basketShipping from "./img/basket-shipping.png";
 
+import * as cartActions from "@redux/entities/cart/actions";
+import { connect } from "react-redux";
 
-import ReactDOM from 'react-dom';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+class OrderInfo extends Component {
 
+    static propTypes = {
+        formikProps: PropTypes.object
+    };
 
+    state = {
+        shippingMethod: "moscow",
+        paymentMethod: "cash"
+    };
 
-export default class OrderInfo extends Component {
-
-    show = (evt) => {
-        //console.log(evt.target.value);
+    handlerShipping = (evt) => {
+        if (evt.target.name === "shippingMethod") this.props.changeShippingPrice(evt.target.value);
+        this.props.formikProps.handleChange(evt);
+        this.setState({ [evt.target.name]: evt.target.id });
     };
 
     render() {
         return (
             <section className={styles.info}>
-
                 {/*Delivery*/}
-
                 <div>
                     <h2 className={styles.order_title}>1. Доставка</h2>
                     <div className={styles.cards_wrapper}>
-
-                        {/*checked={true} */}
-
-                        <input onChange={this.show} checked id="moscow" type="radio" name="shipping" value={400} data-delivery={true}/>
+                        <input
+                            checked={this.state.shippingMethod === "moscow"}
+                            onChange={this.handlerShipping}
+                            id="moscow"
+                            type="radio"
+                            name="shippingMethod"
+                            value={400}
+                            data-delivery={true}
+                        />
                         <label htmlFor="moscow" className={styles.card}>
                             <div className={styles.card__info}>
                                 <span> Доставка по Москве</span>
@@ -37,7 +49,14 @@ export default class OrderInfo extends Component {
                             <div className={styles.card__extra}>сегодня</div>
                         </label>
 
-                        <input id={"pickup"} type="radio" name={"shipping"} value={0} data-delivery={true}/>
+                        <input id="pickup"
+                               checked={this.state.shippingMethod === "pickup"}
+                               onChange={this.handlerShipping}
+                               type="radio"
+                               name="shippingMethod"
+                               value={0}
+                               data-delivery={true}
+                        />
                         <label htmlFor="pickup" className={styles.card}>
                             <div className={styles.card__info}>
                                 <span>Самовывоз</span>
@@ -46,7 +65,14 @@ export default class OrderInfo extends Component {
                             <div className={styles.card__extra}>Москва, Барклая 6, стр. 5, БЦ "Барклай Плаза" (м. Парк Победы)</div>
                         </label>
 
-                        <input id={"russia"} type="radio" name={"shipping"} value={450} data-delivery={true}/>
+                        <input id="russia"
+                               checked={this.state.shippingMethod === "russia"}
+                               onChange={this.handlerShipping}
+                               type="radio"
+                               name="shippingMethod"
+                               value={450}
+                               data-delivery={true}
+                        />
                         <label htmlFor="russia" className={styles.card}>
                             <div className={styles.card__info}>
                                 <span>Доставка по России</span>
@@ -71,7 +97,8 @@ export default class OrderInfo extends Component {
                                    minLength="3"
                                    autoComplete="on"
                                    placeholder="Имя"
-                                   required/>
+                                // required
+                            />
                         </label>
 
                         <label className={styles.form__label}>
@@ -82,18 +109,20 @@ export default class OrderInfo extends Component {
                                    minLength="3"
                                    autoComplete="on"
                                    placeholder="Телефон"
-                                   required/>
+                                //required
+                            />
                         </label>
 
                         <label className={styles.form__label}>
                             <input className={styles.form__input}
-                                   name="customer-email"
+                                   name="email"
                                    type="email"
                                    maxLength="255"
                                    minLength="3"
                                    autoComplete="on"
                                    placeholder="Email"
-                                   required/>
+                                //required
+                            />
                         </label>
 
                         <label className={`${styles.form__label} ${styles.form__label__full_width}`}>
@@ -104,7 +133,8 @@ export default class OrderInfo extends Component {
                                    minLength="3"
                                    autoComplete="on"
                                    placeholder="Адрес"
-                                   required/>
+                                //required
+                            />
                         </label>
 
                         <label className={`${styles.form__label} ${styles.form__label__full_width}`}>
@@ -121,7 +151,15 @@ export default class OrderInfo extends Component {
                 <div>
                     <h2 className={styles.order_title}>3. Оплата</h2>
                     <div className={styles.cards_wrapper}>
-                        <input id={"cash"} type="radio" name={"payment"} value={"cash"} data-payment={true}/>
+                        <input
+                            id="cash"
+                            checked={this.state.paymentMethod === "cash"}
+                            onChange={this.handlerShipping}
+                            type="radio"
+                            name="paymentMethod"
+                            value="cash"
+                            data-payment={true}
+                        />
                         <label htmlFor={"cash"} className={`${styles.card}`}>
                             <div data-payment={true}>
                                 <p className={styles.card__info}>
@@ -130,7 +168,15 @@ export default class OrderInfo extends Component {
                             </div>
                         </label>
 
-                        <input id={"emoney"} type="radio" name={"payment"} value={"emoney"} data-payment={true}/>
+                        <input
+                            id="emoney"
+                            checked={this.state.paymentMethod === "emoney"}
+                            onChange={this.handlerShipping}
+                            type="radio"
+                            name="paymentMethod"
+                            value="emoney"
+                            data-payment={true}
+                        />
                         <label htmlFor={"emoney"} className={styles.card}>
                             <div>
                                 <p className={styles.card__info}>
@@ -142,7 +188,15 @@ export default class OrderInfo extends Component {
                             </div>
                         </label>
 
-                        <input id={"card"} type="radio" name={"payment"} value={"card"} data-payment={true}/>
+                        <input
+                            id="card"
+                            checked={this.state.paymentMethod === "card"}
+                            onChange={this.handlerShipping}
+                            type="radio"
+                            name="paymentMethod"
+                            value="card"
+                            data-payment={true}
+                        />
                         <label htmlFor={"card"} className={styles.card}>
                             <div>
                                 <p className={styles.card__info}>
@@ -157,4 +211,14 @@ export default class OrderInfo extends Component {
     }
 }
 
+
+function mapDispatchToProps(dispatch) {
+    return {
+        changeShippingPrice: (price) => {
+            dispatch(cartActions.changeShippingPrice(price));
+        },
+    }
+}
+
+export default connect(null, mapDispatchToProps)(OrderInfo);
 
