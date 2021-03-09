@@ -56,7 +56,9 @@
 
   &:disabled {
     background-color: rgba(99, 110, 117, 0.4);
+  }
 
+  &[data-touched='true']:disabled {
     &::after {
       content: "";
       position: absolute;
@@ -66,6 +68,7 @@
       left: 0;
       background: url("img/arr-lg.png") no-repeat left;
       background-size: 200px;
+      animation: show-arrow 1s ease-in;
 
       @media (max-width: 1120px) {
         content: "Пожалуйста, заполните форму ниже";
@@ -86,4 +89,11 @@
 }
 
 
-
+@keyframes show-arrow {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

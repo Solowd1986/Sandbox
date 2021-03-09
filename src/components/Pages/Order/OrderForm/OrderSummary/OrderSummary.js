@@ -7,6 +7,7 @@ import OrderItem from "@components/Pages/Order/OrderForm/OrderSummary/OrderItem/
 import { connect } from "react-redux";
 
 class OrderSummary extends Component {
+
     render() {
         const { listOfProducts, shippingPrice, formik: { isValid, dirty } } = this.props;
         return (
@@ -14,7 +15,7 @@ class OrderSummary extends Component {
                 <h2 className={styles.caption}>Ваш заказ</h2>
                 {listOfProducts.map(item => <OrderItem key={item.title} item={item}/>)}
                 <OrderPrice listOfProducts={listOfProducts} shippingPrice={shippingPrice}/>
-                <button type="submit" disabled={!isValid} className={styles.order_btn}>
+                <button type="submit" onClick={(evt) => evt.target.dataset.touched = true} disabled={!isValid} className={styles.order_btn}>
                     Оформить заказ
                 </button>
             </section>
