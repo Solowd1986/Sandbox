@@ -9,48 +9,9 @@ import Confirm from "@components/Pages/Order/Confirm/Confirm";
 import withDelay from "@components/Helpers/Hoc/withDelay/withDelay";
 import withModal from "@components/Helpers/Hoc/withModal/withModal";
 
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { Formik } from "formik";
 import * as yup from "yup";
 
-
-const Basic = () => (
-    <div>
-
-        <h1>Sign Up</h1>
-        <Formik
-            initialValues={{ email: '', password: '' }}
-            validate={values => {
-                const errors = {};
-                if (!values.email) {
-                    errors.email = 'Required';
-                } else if (
-                    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                ) {
-                    errors.email = 'Invalid email address';
-                }
-                return errors;
-            }}
-            onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                }, 100);
-            }}
-        >
-            {({ isSubmitting }) => (
-                <Form className={styles.formik}>
-
-                    <Field type="email" name="email"/>
-                    <ErrorMessage name="email" component="div"/>
-                    <Field type="password" name="password"/>
-                    <ErrorMessage name="password" component="div"/>
-                    <button type="submit" disabled={isSubmitting}>Submit</button>
-                </Form>
-            )}
-        </Formik>
-
-    </div>
-);
 
 class OrderForm extends Component {
     constructor(props) {
@@ -81,9 +42,22 @@ class OrderForm extends Component {
         const ConfirmModalWindow = withDelay(withModal(Confirm));
 
         const validationSchema = yup.object().shape({
+            // login:
+            //     yup.string().
+            //     matches(/^\w+$/, "Логин должен состоять из латинницы и цифр").
+            //     matches(/^[a-z]/, "Логин не должен начинаться с числа").
+            //     min(4, "Логин должен включать не менее 4 символов").
+            //     max(15, "Логин должен включать не более 15 символов").
+            //     required("Данное поле обязательно"),
             name:
-                yup.string().matches(/^\w+$/, "Логин должен состоять из латинницы и цифр").matches(/^[a-z]/, "Логин не должен начинаться с числа").min(4, "Логин должен включать не менее 4 символов").max(15, "Логин должен включать не более 15 символов").required("Данное поле обязательно"),
+                yup.string().matches(/[а-яА-Я]+/, "Имя должно состоять из кириллицы").matches(/^[а-яА-Я]/, "Имя должно начинаться с буквы").min(3, "Имя должно включать не менее 3 символов").max(15, "Имя должно включать не более 15 символов").required("Данное поле обязательно"),
             email: yup.string().email("Введите корректный email").required("Данное поле обязательно"),
+            phone:
+                yup.string().min(18, "Телефон должен включать не менее 11 символов").max(18, "Телефон должен включать не более 11 символов").required("Данное поле обязательно"),
+            address:
+                yup.string().matches(/^[а-яА-Яa-zA-Z0-9\.\:\-\,\s]+$/, "Введите корректный адрес").max(200, "Адрес должен включать не более 200 символов").required("Данное поле обязательно"),
+            comment:
+                yup.string().min(3, "Комментарий должен включать не менее 3 символов").max(300, "Комментарий должен включать не более 300 символов")
         });
 
         const rebr = (arr) => {
@@ -98,41 +72,24 @@ class OrderForm extends Component {
             <>
                 {this.state.isUserConfirmOrder ? <ConfirmModalWindow/> : null}
                 <Formik
-                    initialValues={{ email: "sam@ya.ru", password: "1234", name: "", }}
-
-                    //validationSchema={validationSchema}
-
-                    // validate={values => {
-                    //     const errors = {};
-                    //     if (!values.email) {
-                    //         errors.email = 'Email Is Required';
-                    //     } else if (
-                    //         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                    //     ) {
-                    //         errors.email = 'Invalid email address';
-                    //     }
-                    //     return errors;
-                    // }}
-
+                    initialValues={{ name: "", email: "", phone: "", address: "", comment: "" }}
+                    validationSchema={validationSchema}
                     onSubmit={(values, { setSubmitting }) => {
-                        //console.log('loggg');
-
                         setTimeout(() => {
                             alert(JSON.stringify(values, null, 2));
                             setSubmitting(false);
                         }, 40);
                     }}
                 >
-
-                    {(formikProps) => (
+                    {(formik) => (
                         <form
                             ref={this.form}
-                            onSubmit={formikProps.handleSubmit}
+                            onSubmit={formik.handleSubmit}
                             className={styles.form}
                             name="order-form"
                             method="POST">
-                            <OrderInfo formikProps={formikProps}/>
-                            <OrderSummary formikProps={formikProps}/>
+                            <OrderInfo formik={formik}/>
+                            <OrderSummary formik={formik}/>
                         </form>
 
                     )}

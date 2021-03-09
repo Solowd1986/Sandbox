@@ -5,14 +5,20 @@ import * as PropTypes from "prop-types";
 import basketEpayment from "./img/basket-epayment.png";
 import basketShipping from "./img/basket-shipping.png";
 
+import IMask from 'imask';
+
 import * as cartActions from "@redux/entities/cart/actions";
 import { connect } from "react-redux";
 
 class OrderInfo extends Component {
-
     static propTypes = {
-        formikProps: PropTypes.object
+        formik: PropTypes.object
     };
+
+    constructor(props) {
+        super(props);
+        this.phone = React.createRef();
+    }
 
     state = {
         shippingMethod: "moscow",
@@ -21,11 +27,19 @@ class OrderInfo extends Component {
 
     handlerShipping = (evt) => {
         if (evt.target.name === "shippingMethod") this.props.changeShippingPrice(evt.target.value);
-        this.props.formikProps.handleChange(evt);
+        this.props.formik.handleChange(evt);
         this.setState({ [evt.target.name]: evt.target.id });
     };
 
+    handleChangePhone = (evt) => {
+        this.props.formik.handleChange(evt);
+        const maskOptions = { mask: '+{7} (000) 000-00-00' };
+        IMask(this.phone.current, maskOptions);
+    };
+
     render() {
+        const { formik: { errors, touched, handleChange, handleBlur } } = this.props;
+
         return (
             <section className={styles.info}>
                 {/*Delivery*/}
@@ -82,6 +96,7 @@ class OrderInfo extends Component {
                                 <img src={basketEpayment} alt="shipping"/>
                             </div>
                         </label>
+
                     </div>
                 </div>
 
@@ -91,58 +106,63 @@ class OrderInfo extends Component {
                     <div className={styles.form_user_data}>
                         <label className={styles.form__label}>
                             <input className={styles.form__input}
-                                   name="customer-name"
+                                   onChange={handleChange}
+                                   onBlur={handleBlur}
+                                   name="name"
                                    type="text"
-                                   maxLength="255"
-                                   minLength="3"
                                    autoComplete="on"
                                    placeholder="Имя"
-                                // required
                             />
+                            {errors.name && touched.name && <span className={styles.field_error}>{errors.name}</span>}
                         </label>
 
                         <label className={styles.form__label}>
                             <input className={styles.form__input}
-                                   name="customer-phone"
+                                   onChange={this.handleChangePhone}
+                                   onBlur={handleBlur}
+                                   ref={this.phone}
+                                   name="phone"
                                    type="text"
-                                   maxLength="255"
-                                   minLength="3"
                                    autoComplete="on"
                                    placeholder="Телефон"
-                                //required
                             />
+                            {errors.phone && touched.phone && <span className={styles.field_error}>{errors.phone}</span>}
                         </label>
 
                         <label className={styles.form__label}>
                             <input className={styles.form__input}
+                                   onChange={handleChange}
+                                   onBlur={handleBlur}
                                    name="email"
                                    type="email"
-                                   maxLength="255"
-                                   minLength="3"
                                    autoComplete="on"
                                    placeholder="Email"
-                                //required
                             />
+                            {errors.email && touched.email && <span className={styles.field_error}>{errors.email}</span>}
                         </label>
 
                         <label className={`${styles.form__label} ${styles.form__label__full_width}`}>
                             <input className={styles.form__input}
-                                   name="customer-address"
+                                   onChange={handleChange}
+                                   onBlur={handleBlur}
+                                   name="address"
                                    type="text"
-                                   maxLength="255"
-                                   minLength="3"
                                    autoComplete="on"
                                    placeholder="Адрес"
-                                //required
                             />
+                            {errors.address && touched.address && <span className={styles.field_error}>{errors.address}</span>}
                         </label>
 
                         <label className={`${styles.form__label} ${styles.form__label__full_width}`}>
                             <textarea className={styles.form__input}
-                                      name="customer-comment"
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
+                                      name="comment"
                                       id="" cols="30"
                                       rows="10"
-                                      placeholder="Комментарий"/>
+                                      placeholder="Комментарий"
+                            />
+                            {errors.comment && touched.comment && <span className={styles.field_error}>{errors.comment}</span>}
                         </label>
                     </div>
                 </div>

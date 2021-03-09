@@ -114,7 +114,7 @@ export default class FormikForm extends Component {
                             onBlur={handleBlur}
                             value={values.email}
                         />
-                        {errors.email && touched.email && errors.email}
+                        {errors.email && touched.email && <span className={styles.fieldError}>{errors.email}</span>}
                         <input
                             type="password"
                             name="password"
