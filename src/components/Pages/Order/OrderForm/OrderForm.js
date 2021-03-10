@@ -19,7 +19,6 @@ import { connect } from "react-redux";
 class OrderForm extends Component {
     constructor(props) {
         super(props);
-        this._confirmModalVisible = false;
         this.isFormTouched = false;
         this.form = React.createRef();
         this.validationSchema = setValidateSchema(["name", "phone", "email", "address", "comment"]);
@@ -60,22 +59,15 @@ class OrderForm extends Component {
 
 
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log(nextState.fields);
-        // console.log(this.state.fields);
-        // console.log('--------------');
-        //console.log('should');
-        //console.log('shw', this.isFormTouched );
-
         return this.isFormTouched && !this.state.isUserConfirmOrder;
-
     }
 
     componentDidUpdate(prevProps, prevState) {
         if (!this.isFormTouched && this.state.isUserConfirmOrder) {
+
             this.setState({ isUserConfirmOrder: false });
         }
     }
-
 
     checkFieldsErrors = () => {
         const verifyFields = Object.values(this.state.fields).filter(item => item.error !== undefined);
