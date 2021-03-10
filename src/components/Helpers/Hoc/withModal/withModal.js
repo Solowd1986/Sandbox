@@ -40,7 +40,6 @@ function withModal(WrappedComponent, { fixed = false, bg = true, interactionsDis
 
         componentDidMount() {
             util.addScrollbarOffset();
-            console.log('modal mnt');
         }
 
         componentWillUnmount() {
@@ -56,9 +55,10 @@ function withModal(WrappedComponent, { fixed = false, bg = true, interactionsDis
                 [styles.wrapper]: fixed,
                 [styles.bg]: bg
             });
+
             return (
                 <div className={classList} onClick={this.closeModal} data-modal={true}>
-                    <WrappedComponent/>
+                    <WrappedComponent closeModal={this.closeModalFromChildren}/>
                 </div>
             )
         }

@@ -7,8 +7,8 @@ import basketShipping from "./img/basket-shipping.png";
 
 class OrderInfo extends Component {
     static propTypes = {
-        type: PropTypes.string,
-        paymentMethod: PropTypes.string,
+        shipping: PropTypes.string,
+        payment: PropTypes.string,
     };
     render() {
         const { handleChange, fields, shipping, payment } = this.props;
@@ -91,9 +91,7 @@ class OrderInfo extends Component {
 
                         <label className={styles.form__label}>
                             <input className={styles.form__input}
-                                // onChange={this.handleChangePhone}
                                    onChange={handleChange}
-                                   ref={this.phone}
                                    name="phone"
                                    type="text"
                                    autoComplete="on"
@@ -105,33 +103,37 @@ class OrderInfo extends Component {
 
                         <label className={styles.form__label}>
                             <input className={styles.form__input}
-
+                                   onChange={handleChange}
                                    name="email"
                                    type="email"
+                                   value={"sam@ya.ru"}
                                    autoComplete="on"
                                    placeholder="Email"
                             />
-                            {/*{errors.email && touched.email && <span className={styles.field_error}>{errors.email}</span>}*/}
+                            {fields.email.error && <span className={styles.field_error}>{fields.email.msg}</span>}
                         </label>
 
                         <label className={`${styles.form__label} ${styles.form__label__full_width}`}>
                             <input className={styles.form__input}
+                                   onChange={handleChange}
                                    name="address"
                                    type="text"
+
                                    autoComplete="on"
                                    placeholder="Адрес"
                             />
-                            {/*{errors.address && touched.address && <span className={styles.field_error}>{errors.address}</span>}*/}
+                            {fields.address.error && <span className={styles.field_error}>{fields.address.msg}</span>}
                         </label>
 
                         <label className={`${styles.form__label} ${styles.form__label__full_width}`}>
                             <textarea className={styles.form__input}
+                                      onChange={handleChange}
                                       name="comment"
                                       id="" cols="30"
                                       rows="10"
                                       placeholder="Комментарий"
                             />
-                            {/*{errors.comment && touched.comment && <span className={styles.field_error}>{errors.comment}</span>}*/}
+                            {fields.comment.error && <span className={styles.field_error}>{fields.comment.msg}</span>}
                         </label>
                     </div>
                 </div>

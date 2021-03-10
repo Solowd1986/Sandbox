@@ -9,23 +9,23 @@ import Confirm from "@components/Pages/Order/Confirm/Confirm";
 import withDelay from "@components/Helpers/Hoc/withDelay/withDelay";
 import withModal from "@components/Helpers/Hoc/withModal/withModal";
 
+import Inputmask from "inputmask";
+
 import setValidateSchema from "@components/Helpers/Validation/validateSchema/validateSchema"
 import * as yup from "yup";
 
 import { connect } from "react-redux";
 
-import Inputmask from "inputmask";
-
 
 class OrderForm extends Component {
     constructor(props) {
         super(props);
+        this._confirmModalVisible = false;
         this.form = React.createRef();
-        this.validationSchema = setValidateSchema(["name", "phone"]);
-
+        this.validationSchema = setValidateSchema(["name", "phone", "email", "address", "comment"]);
         this.state = {
             isUserConfirmOrder: false,
-
+            isFormValid: true,
             fields: {
                 name: {
                     touched: false,
@@ -37,24 +37,37 @@ class OrderForm extends Component {
                     error: false,
                     msg: ""
                 },
+                email: {
+                    touched: false,
+                    error: false,
+                    msg: ""
+                },
+                address: {
+                    touched: false,
+                    error: false,
+                    msg: ""
+                },
+                comment: {
+                    touched: false,
+                    error: false,
+                    msg: ""
+                },
                 shipping: "moscow",
-                // shipping: {
-                //     price: 400,
-                //     type: "moscow",
-                // },
-
                 payment: "cash",
             }
         };
     }
 
+    checkFieldsErrors = () => {
+        const verifyFields = Object.values(this.state.fields).filter(item => item.error !== undefined);
+        if (!this.state.isFormValid && verifyFields.every(item => !item.error)) {
+            this.setState({ isFormValid: true });
+        }
+    };
+
 
     handleSubmit = (evt) => {
         evt.preventDefault();
-        //console.log('st');
-        //console.dir(this.form.current);
-        //if (this.state.isUserConfirmOrder) this.setState(state => ({ isUserConfirmOrder: false }));
-
         const fields = {};
         Array.from(this.form.current.elements).forEach(item => {
             if (Object.keys(this.state.fields).includes(item.name)) {
@@ -63,21 +76,10 @@ class OrderForm extends Component {
             }
         });
 
-
-        if (!this.validationSchema.isValidSync(fields)) return;
-
-        console.log('all ok');
-
-        const list = this.props.listOfProducts;
-
-        //console.log(list);
-
-
-        // const formDataObject = {};
-        // for (let [key, value] of form.entries()) {
-        //     formDataObject[key] = value;
-        // }
-
+        if (!this.validationSchema.isValidSync(fields)) {
+            this.setState({ isFormValid: false });
+            return
+        }
 
         const form = new FormData(this.form.current);
         const userOrderInfo = {
@@ -86,26 +88,21 @@ class OrderForm extends Component {
         };
 
         for (const [key, value] of form.entries()) {
-            console.log(key);
-            console.log(value);
+            //console.log(key);
+            //console.log(value);
 
-            (list.some(item => item.title === key))
-                ? userOrderInfo.userOrder.push(list.find(item => item.title === key))
+            (this.props.listOfProducts.some(item => item.title === key))
+                ? userOrderInfo.userOrder.push(this.props.listOfProducts.find(item => item.title === key))
                 : userOrderInfo.userInfo[key] = value
         }
 
-
-        // console.log(userOrderInfo);
-        //
-        //
-        // return
-
-
         evt.target.reset();
-        alert(JSON.stringify(userOrderInfo, null, 2))
+        //alert(JSON.stringify(userOrderInfo, null, 2));
+        this.setState({ isUserConfirmOrder: true });
+    };
 
-        //this.setState({ isUserConfirmOrder: true });
-
+    rechck = () => {
+        this.forceUpdate()
     };
 
 
@@ -140,13 +137,10 @@ class OrderForm extends Component {
     //</editor-fold>
 
     handleChange = (evt) => {
-        //console.log(evt);
         const { target, target: { name: inputName, value: inputValue } } = evt;
-
         if (this.state.isUserConfirmOrder) this.setState(state => ({ isUserConfirmOrder: false }));
         if (!Object.keys(this.state.fields).includes(inputName)) return;
         if (inputName === "phone") new Inputmask("+7 (999) 999-99-99").mask(target);
-
         if (inputName === "shipping") this.setState(state => {
             return {
                 ...state,
@@ -166,21 +160,17 @@ class OrderForm extends Component {
                 }
             }
         });
-
         this.handleValidation(inputName, inputValue);
+        this.checkFieldsErrors();
     };
 
-
     render() {
-
         const ConfirmModalWindow = withDelay(withModal(Confirm));
-        const listOfProducts = this.props.listOfProducts;
-
-        //console.dir(listOfProducts);
-
         return (
             <>
                 {this.state.isUserConfirmOrder ? <ConfirmModalWindow/> : null}
+
+                <button onClick={this.rechck}>Recheck</button>
                 <form
                     ref={this.form}
                     onSubmit={this.handleSubmit}
@@ -193,7 +183,7 @@ class OrderForm extends Component {
                         shipping={this.state.fields.shipping}
                         payment={this.state.fields.payment}
                     />
-                    <OrderSummary shipping={this.state.fields.shipping}/>
+                    <OrderSummary isFormValid={this.state.isFormValid} shipping={this.state.fields.shipping}/>
                 </form>
             </>
         )

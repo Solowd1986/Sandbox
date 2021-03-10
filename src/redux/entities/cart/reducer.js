@@ -5,7 +5,6 @@ const initialState = {
     amountOfProductsInCart: 0,
     minAmountOfProduct: 1,
     modalCartShowedToUserCount: 0,
-    shippingPrice: 400,
     products: []
 };
 

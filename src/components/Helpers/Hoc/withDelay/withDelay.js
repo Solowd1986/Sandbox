@@ -12,8 +12,6 @@ function withDelay(PropsComponent, ms = 1500) {
         }
 
         componentDidMount() {
-            //console.log('delay mnt');
-
             util.addScrollbarOffset();
             this.timer = setTimeout(() => {
                 this.setState((state) => {
@@ -22,6 +20,10 @@ function withDelay(PropsComponent, ms = 1500) {
                     }
                 })
             }, ms);
+        }
+
+        componentWillUnmount() {
+            clearTimeout(this.timer)
         }
 
         render() {

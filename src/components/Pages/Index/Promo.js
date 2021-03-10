@@ -106,7 +106,7 @@ class Promo extends Component {
                     <NavLink to={"/secret"}>Go to secret page </NavLink>
                     <NavLink to={"/login"}>Go to login page </NavLink>
 
-                    <FormikForm/>
+                    {/*<FormikForm/>*/}
 
                     {/*<MyForm/>*/}
 
