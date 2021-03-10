@@ -9,6 +9,11 @@ import basketShipping from "./img/basket-shipping.png";
 import * as cartActions from "@redux/entities/cart/actions";
 import { connect } from "react-redux";
 
+
+import { IMaskInput } from 'react-imask';
+
+
+
 class OrderInfo extends Component {
     static propTypes = {
         formik: PropTypes.object
@@ -105,10 +110,12 @@ class OrderInfo extends Component {
                                    name="name"
                                    type="text"
                                    autoComplete="on"
+                                   value={"имя"}
                                    placeholder="Имя"
                             />
                             {fields.name.error && <span className={styles.field_error}>{fields.name.msg}</span>}
                         </label>
+
 
                         <label className={styles.form__label}>
                             <input className={styles.form__input}
@@ -118,6 +125,7 @@ class OrderInfo extends Component {
                                    name="phone"
                                    type="text"
                                    autoComplete="on"
+                                   value={"+7 (021) 444-44-44"}
                                    placeholder="Телефон"
                             />
                             {fields.phone.error && <span className={styles.field_error}>{fields.phone.msg}</span>}
