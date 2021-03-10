@@ -10,7 +10,7 @@ import * as util from "@components/Helpers/Functions/functions";
  */
 //</editor-fold>
 
-function withModal(WrappedComponent, props = {}, { fixed = false, bg = true, interactionsDisabled = false } = {}) {
+function withModal(WrappedComponent, { fixed = false, bg = true, interactionsDisabled = false } = {}) {
     return class extends Component {
         constructor(props) {
             super(props);
@@ -26,6 +26,12 @@ function withModal(WrappedComponent, props = {}, { fixed = false, bg = true, int
             });
         };
 
+        closeModalFromChildren = (evt) => {
+            this.setState({
+                isModalActive: false
+            });
+        };
+
         componentDidUpdate(prevProps, prevState) {
             if (!this.state.isModalActive) {
                 util.removeScrollbarOffset();
@@ -34,6 +40,7 @@ function withModal(WrappedComponent, props = {}, { fixed = false, bg = true, int
 
         componentDidMount() {
             util.addScrollbarOffset();
+            console.log('modal mnt');
         }
 
         componentWillUnmount() {
@@ -51,7 +58,7 @@ function withModal(WrappedComponent, props = {}, { fixed = false, bg = true, int
             });
             return (
                 <div className={classList} onClick={this.closeModal} data-modal={true}>
-                    <WrappedComponent {...props} handlerCloseModal={() => this.setState({ isModalActive: false })}/>
+                    <WrappedComponent/>
                 </div>
             )
         }

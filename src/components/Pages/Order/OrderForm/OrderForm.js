@@ -10,7 +10,9 @@ import withDelay from "@components/Helpers/Hoc/withDelay/withDelay";
 import withModal from "@components/Helpers/Hoc/withModal/withModal";
 
 import { Formik } from "formik";
+import IMask from 'imask';
 import * as yup from "yup";
+
 import { connect } from "react-redux";
 
 
@@ -21,8 +23,6 @@ const val = yup.object().shape({
         yup.string().min(18, "Телефон должен включать не менее 11 символов").max(18, "Телефон должен включать не более 11 символов").required("Данное поле обязательно phone"),
 });
 
-import IMask from 'imask';
-
 
 class OrderForm extends Component {
     constructor(props) {
@@ -32,6 +32,7 @@ class OrderForm extends Component {
 
         this.state = {
             isUserConfirmOrder: false,
+            showed: false,
             fields: {
                 name: {
                     touched: false,
@@ -48,6 +49,13 @@ class OrderForm extends Component {
     }
 
 
+    // componentDidUpdate(prevProps, prevState) {
+    //     if (this.state.isUserConfirmOrder) {
+    //         this.setState(state => ({isUserConfirmOrder: false}) );
+    //     }
+    // }
+
+
     confirmOrder = (evt) => {
         evt.preventDefault();
         //return
@@ -62,34 +70,70 @@ class OrderForm extends Component {
     };
 
 
-    handleSub = (evt) => {
+    handleSubmit = (evt) => {
         evt.preventDefault();
+        //console.log('st');
+        //console.dir(this.form.current);
+        if (this.state.isUserConfirmOrder) this.setState(state => ({ isUserConfirmOrder: false }));
+
+        const fields = {};
+        Array.from(this.form.current.elements).forEach(item => {
+            if (Object.keys(this.state.fields).includes(item.name)) {
+                fields[item.name] = item.value;
+                yup.reach(val, item.name).validate(item.value).then((sucess) => this.validateSuccess(sucess, item.name)).catch((error) => this.validateError(error, item.name));
+            }
+        });
 
 
-        const form = new FormData(this.form.current);
-        const formDataObject = {};
-        for (let [key, value] of form.entries()) {
-            formDataObject[key] = value;
-            //console.log(val.isValidSync({[key]: value}));
-        }
+        //val.isValidSync();
+
+        if (!val.isValidSync(fields)) return;
+
+
+        console.log('all ok');
+
+        //
+        // const form = new FormData(this.form.current);
+        // const formDataObject = {};
+        // for (let [key, value] of form.entries()) {
+        //     formDataObject[key] = value;
+        //     //console.log(val.isValidSync({[key]: value}));
+        // }
+
+
+        evt.target.reset();
+        this.setState({ isUserConfirmOrder: true });
+
+
+        //
+        // const form = new FormData(this.form.current);
+        // const formDataObject = {};
+        // for (let [key, value] of form.entries()) {
+        //     formDataObject[key] = value;
+        //     //console.log(val.isValidSync({[key]: value}));
+        // }
+
+
+
 
         //console.log(val.isValidSync({name: "ыфвфыв"}));
 
         //console.log(formDataObject);
 
 
-        console.dir(Object.keys(formDataObject));
-
-        const result = [];
-        this.props.listOfProducts.map(item => {
-            if (Object.keys(formDataObject).includes(item.title)) result.push(item);
-        });
+        // console.dir(Object.keys(formDataObject));
+        //
+        // const result = [];
+        // this.props.listOfProducts.map(item => {
+        //     if (Object.keys(formDataObject).includes(item.title)) result.push(item);
+        // });
         //console.log(result);
 
         //console.dir(evt);
 
 
-        evt.target.reset();
+        //evt.target.reset();
+
     };
 
 
@@ -109,14 +153,74 @@ class OrderForm extends Component {
     phone = target => {
         //console.log(target);
         const maskOptions = { mask: '+{7} (000) 000-00-00' };
-        IMask(target, maskOptions);
+        const mask = IMask(target, maskOptions);
     };
 
 
-    handleChange = ({ target, target: { name: inputName, value: inputValue } }) => {
+    validateSuccess = (success, inputName) => {
+        this.setState(state => ({
+            fields: {
+                ...state.fields,
+                [inputName]: {
+                    touched: state.fields[inputName].touched,
+                    error: false,
+                    msg: ""
+                }
+            }
+        }));
+
+    };
+
+
+    validateError = (error, inputName) => {
+        //console.log(error);
+        //console.log(inputName);
+
+        if (error.message === this.state.fields[inputName].msg) return;
+
+
+        this.setState(state => ({
+            fields: {
+                ...state.fields,
+                [inputName]: {
+                    touched: state.fields[inputName].touched,
+                    error: true,
+                    msg: error.message
+                }
+            }
+        }));
+    };
+
+
+    phoneKey = (evt) => {
+        console.dir(evt);
+    };
+
+
+    handleChange = (evt) => {
+        const { target, target: { name: inputName, value: inputValue } } = evt;
         //console.dir(evt);
+        if (this.state.isUserConfirmOrder) this.setState(state => ({ isUserConfirmOrder: false }));
         if (!Object.keys(this.state.fields).includes(inputName)) return;
+        //console.log(inputValue);
+
         if (inputName === "phone") this.phone(target);
+
+        //console.dir(evt);
+        if (inputName === "phone") {
+
+
+            //console.log(evt.target.value.length);
+
+            //console.log(/^[0-9]+$/.test(evt.target.value));
+
+            //if (!(/^[0-9]+$/.test(evt.target.value))) return;
+            //if (evt.target.value.length === 6) evt.target.value += ") ";
+            //if (evt.target.value.length === 11) evt.target.value += "-";
+            //if (evt.target.value.length === 14) evt.target.value += "-";
+
+        }
+
 
         yup.reach(val, inputName).validate(inputValue).then(s => {
             //console.log('suc', s);
@@ -153,22 +257,26 @@ class OrderForm extends Component {
     };
 
 
-    handleFocus = ({ target: { name: inputName } }) => {
-        if (!Object.keys(this.state.fields).includes(inputName)) return;
-        //console.dir(evt.target.name);
-        //return
-        this.setState(state => ({
-            fields: {
-                ...state.fields,
-                [inputName]: {
-                    touched: true,
-                    error: state.fields[inputName].error,
-                    msg: state.fields[inputName].msg
-                }
-            }
-        }));
+    phoneFocus = (evt) => {
+        evt.target.value = "+7(";
     };
 
+
+    // handleFocus = ({ target: { name: inputName } }) => {
+    //     if (!Object.keys(this.state.fields).includes(inputName)) return;
+    //     //console.dir(evt.target.name);
+    //     //return
+    //     this.setState(state => ({
+    //         fields: {
+    //             ...state.fields,
+    //             [inputName]: {
+    //                 touched: true,
+    //                 error: state.fields[inputName].error,
+    //                 msg: state.fields[inputName].msg
+    //             }
+    //         }
+    //     }));
+    // };
 
 
     render() {
@@ -216,13 +324,12 @@ class OrderForm extends Component {
                 {this.state.isUserConfirmOrder ? <ConfirmModalWindow/> : null}
                 <form
                     ref={this.form}
-                    onSubmit={this.handleSub}
+                    onSubmit={this.handleSubmit}
                     className={styles.form}
                     name="order-form"
                     method="POST">
                     <OrderInfo
                         handleChange={this.handleChange}
-                        handleFocus={this.handleFocus}
                         fields={this.state.fields}
                     />
                     <OrderSummary/>

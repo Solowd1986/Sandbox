@@ -4,10 +4,11 @@ import img from "./img/thanks_sir.png";
 import classNames from "classnames";
 
 class Confirm extends Component {
+
     render() {
         return (
             <div className={classNames("animate__animated animate__bounceInRight", styles.checkout_modal)}>
-                <span onClick={this.props.handlerCloseModal} className={styles.close}/>
+                <span className={styles.close}/>
                 <img src={img} alt="image-checkout"/>
                 <h3>Спасибо за заказ</h3>
                 <p>Наш менеджер свяжется с вами в ближайшее время</p>

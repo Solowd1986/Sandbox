@@ -34,7 +34,7 @@ class OrderInfo extends Component {
     };
 
     render() {
-        const { handleChange, handleFocus, fields } = this.props;
+        const { handleChange, fields } = this.props;
         return (
             <section className={styles.info}>
                 {/*Delivery*/}
@@ -102,27 +102,25 @@ class OrderInfo extends Component {
                         <label className={styles.form__label}>
                             <input className={styles.form__input}
                                    onChange={handleChange}
-                                   onFocus={handleFocus}
                                    name="name"
                                    type="text"
                                    autoComplete="on"
                                    placeholder="Имя"
                             />
-                            {fields.name.error && fields.name.touched && <span className={styles.field_error}>{fields.name.msg}</span>}
+                            {fields.name.error && <span className={styles.field_error}>{fields.name.msg}</span>}
                         </label>
 
                         <label className={styles.form__label}>
                             <input className={styles.form__input}
                                 // onChange={this.handleChangePhone}
                                    onChange={handleChange}
-                                   onFocus={handleFocus}
                                    ref={this.phone}
                                    name="phone"
                                    type="text"
                                    autoComplete="on"
                                    placeholder="Телефон"
                             />
-                            {fields.phone.error && fields.phone.touched && <span className={styles.field_error}>{fields.phone.msg}</span>}
+                            {fields.phone.error && <span className={styles.field_error}>{fields.phone.msg}</span>}
                         </label>
 
                         <label className={styles.form__label}>
