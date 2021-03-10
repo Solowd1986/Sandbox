@@ -10,13 +10,13 @@ class OrderSummary extends Component {
 
 
     render() {
-        const { listOfProducts, shippingPrice } = this.props;
+        const { listOfProducts, shippingPrice, formik: { isValid, dirty } } = this.props;
         return (
             <section className={styles.summary}>
                 <h2 className={styles.caption}>Ваш заказ</h2>
                 {listOfProducts.map(item => <OrderItem key={item.title} item={item}/>)}
                 <OrderPrice listOfProducts={listOfProducts} shippingPrice={shippingPrice}/>
-                <button type="submit" onClick={(evt) => evt.target.dataset.touched = true} className={styles.order_btn}>
+                <button type="submit" onClick={(evt) => evt.target.dataset.touched = true} disabled={!isValid} className={styles.order_btn}>
                     Оформить заказ
                 </button>
             </section>

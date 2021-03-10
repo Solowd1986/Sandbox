@@ -14,29 +14,31 @@ class OrderInfo extends Component {
     static propTypes = {
         formik: PropTypes.object
     };
+    state = {
+        shippingMethod: "moscow",
+        paymentMethod: "cash"
+    };
 
     constructor(props) {
         super(props);
         this.phone = React.createRef();
     }
 
-    state = {
-        shippingMethod: "moscow",
-        paymentMethod: "cash"
-    };
-
     handlerShipping = (evt) => {
         if (evt.target.name === "shippingMethod") this.props.changeShippingPrice(evt.target.value);
+        this.props.formik.handleChange(evt);
         this.setState({ [evt.target.name]: evt.target.id });
     };
 
     handleChangePhone = (evt) => {
         const maskOptions = { mask: '+{7} (000) 000-00-00' };
         IMask(this.phone.current, maskOptions);
+        this.props.formik.handleChange(evt);
     };
 
     render() {
-        const { handleChange, handleFocus, fields } = this.props;
+        const { formik: { errors, touched, handleChange, handleBlur } } = this.props;
+
         return (
             <section className={styles.info}>
                 {/*Delivery*/}
@@ -104,58 +106,62 @@ class OrderInfo extends Component {
                         <label className={styles.form__label}>
                             <input className={styles.form__input}
                                    onChange={handleChange}
-                                   onFocus={handleFocus}
+                                   onBlur={handleBlur}
                                    name="name"
                                    type="text"
                                    autoComplete="on"
                                    placeholder="Имя"
                             />
-                            {fields.name.error && fields.name.touched && <span className={styles.field_error}>{fields.name.msg}</span>}
+                            {errors.name && touched.name && <span className={styles.field_error}>{errors.name}</span>}
                         </label>
 
                         <label className={styles.form__label}>
                             <input className={styles.form__input}
-                                // onChange={this.handleChangePhone}
-                                   onChange={handleChange}
-                                   onFocus={handleFocus}
+                                   onChange={this.handleChangePhone}
+                                   onBlur={handleBlur}
                                    ref={this.phone}
                                    name="phone"
                                    type="text"
                                    autoComplete="on"
                                    placeholder="Телефон"
                             />
-                            {fields.phone.error && fields.phone.touched && <span className={styles.field_error}>{fields.phone.msg}</span>}
+                            {errors.phone && touched.phone && <span className={styles.field_error}>{errors.phone}</span>}
                         </label>
 
                         <label className={styles.form__label}>
                             <input className={styles.form__input}
-
+                                   onChange={handleChange}
+                                   onBlur={handleBlur}
                                    name="email"
                                    type="email"
                                    autoComplete="on"
                                    placeholder="Email"
                             />
-                            {/*{errors.email && touched.email && <span className={styles.field_error}>{errors.email}</span>}*/}
+                            {errors.email && touched.email && <span className={styles.field_error}>{errors.email}</span>}
                         </label>
 
                         <label className={`${styles.form__label} ${styles.form__label__full_width}`}>
                             <input className={styles.form__input}
+                                   onChange={handleChange}
+                                   onBlur={handleBlur}
                                    name="address"
                                    type="text"
                                    autoComplete="on"
                                    placeholder="Адрес"
                             />
-                            {/*{errors.address && touched.address && <span className={styles.field_error}>{errors.address}</span>}*/}
+                            {errors.address && touched.address && <span className={styles.field_error}>{errors.address}</span>}
                         </label>
 
                         <label className={`${styles.form__label} ${styles.form__label__full_width}`}>
                             <textarea className={styles.form__input}
+                                      onChange={handleChange}
+                                      onBlur={handleBlur}
                                       name="comment"
                                       id="" cols="30"
                                       rows="10"
                                       placeholder="Комментарий"
                             />
-                            {/*{errors.comment && touched.comment && <span className={styles.field_error}>{errors.comment}</span>}*/}
+                            {errors.comment && touched.comment && <span className={styles.field_error}>{errors.comment}</span>}
                         </label>
                     </div>
                 </div>

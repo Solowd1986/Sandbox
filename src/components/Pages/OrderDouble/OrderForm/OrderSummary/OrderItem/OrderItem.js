@@ -73,7 +73,6 @@ class OrderItem extends Component {
                             <input
                                 type="text" name="customer-product-count"
                                 onChange={this.onChangeInput}
-                                name={item.title}
                                 onBlur={this.onBlurInput}
                                 value={this.state.item.quantity}
                             />

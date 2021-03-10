@@ -10,7 +10,7 @@ import * as util from "@components/Helpers/Functions/functions";
  */
 //</editor-fold>
 
-function withModal(WrappedComponent, { fixed = false, bg = true, interactionsDisabled = false } = {}) {
+function withModal(WrappedComponent, props = {}, { fixed = false, bg = true, interactionsDisabled = false } = {}) {
     return class extends Component {
         constructor(props) {
             super(props);
@@ -51,7 +51,7 @@ function withModal(WrappedComponent, { fixed = false, bg = true, interactionsDis
             });
             return (
                 <div className={classList} onClick={this.closeModal} data-modal={true}>
-                    <WrappedComponent handlerCloseModal={() => this.setState({ isModalActive: false })}/>
+                    <WrappedComponent {...props} handlerCloseModal={() => this.setState({ isModalActive: false })}/>
                 </div>
             )
         }
