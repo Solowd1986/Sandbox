@@ -64,13 +64,10 @@ class OrderForm extends Component {
         // console.log(this.state.fields);
         // console.log('--------------');
         //console.log('should');
-
         //console.log('shw', this.isFormTouched );
 
-        if (this.isFormTouched && !this.state.isUserConfirmOrder) {
-            return true;
-        }
-        return false;
+        return this.isFormTouched && !this.state.isUserConfirmOrder;
+
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -162,7 +159,6 @@ class OrderForm extends Component {
         if (inputName === "shipping") this.setState(state => ({ ...state, fields: { ...state.fields, shipping: inputValue } }));
         //if (inputName === "shipping") this.setState(state => update(state, {shipping: {$set: inputValue}}));
         if (inputName === "payment") this.setState(state => ({ ...state, fields: { ...state.fields, payment: inputValue } }));
-
         this.handleValidation(inputName, inputValue);
         this.checkFieldsErrors();
     };
