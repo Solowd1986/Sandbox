@@ -1,26 +1,26 @@
 import React, { Component } from "react";
 import styles from "./order-form.module.scss";
+import update from 'immutability-helper';
 
 import OrderInfo from "./OrderInfo/OrderInfo";
 import OrderSummary from "./OrderSummary/OrderSummary";
-import InputText from "@components/Other/Form/Input/Input";
 
 import Confirm from "@components/Pages/Order/Confirm/Confirm";
 import withDelay from "@components/Helpers/Hoc/withDelay/withDelay";
 import withModal from "@components/Helpers/Hoc/withModal/withModal";
 
-import Inputmask from "inputmask";
-
 import setValidateSchema from "@components/Helpers/Validation/validateSchema/validateSchema"
+import Inputmask from "inputmask";
 import * as yup from "yup";
 
-import { connect } from "react-redux";
 
+import { connect } from "react-redux";
 
 class OrderForm extends Component {
     constructor(props) {
         super(props);
         this._confirmModalVisible = false;
+        this.isFormTouched = false;
         this.form = React.createRef();
         this.validationSchema = setValidateSchema(["name", "phone", "email", "address", "comment"]);
         this.state = {
@@ -58,13 +58,34 @@ class OrderForm extends Component {
         };
     }
 
+
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log(nextState.fields);
+        // console.log(this.state.fields);
+        // console.log('--------------');
+        //console.log('should');
+
+        //console.log('shw', this.isFormTouched );
+
+        if (this.isFormTouched && !this.state.isUserConfirmOrder) {
+            return true;
+        }
+        return false;
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (!this.isFormTouched && this.state.isUserConfirmOrder) {
+            this.setState({ isUserConfirmOrder: false });
+        }
+    }
+
+
     checkFieldsErrors = () => {
         const verifyFields = Object.values(this.state.fields).filter(item => item.error !== undefined);
         if (!this.state.isFormValid && verifyFields.every(item => !item.error)) {
             this.setState({ isFormValid: true });
         }
     };
-
 
     handleSubmit = (evt) => {
         evt.preventDefault();
@@ -75,6 +96,8 @@ class OrderForm extends Component {
                 this.handleValidation(item.name, item.value);
             }
         });
+        this.isFormTouched = true;
+
 
         if (!this.validationSchema.isValidSync(fields)) {
             this.setState({ isFormValid: false });
@@ -90,7 +113,6 @@ class OrderForm extends Component {
         for (const [key, value] of form.entries()) {
             //console.log(key);
             //console.log(value);
-
             (this.props.listOfProducts.some(item => item.title === key))
                 ? userOrderInfo.userOrder.push(this.props.listOfProducts.find(item => item.title === key))
                 : userOrderInfo.userInfo[key] = value
@@ -98,11 +120,8 @@ class OrderForm extends Component {
 
         evt.target.reset();
         //alert(JSON.stringify(userOrderInfo, null, 2));
+        //console.log('set shw');
         this.setState({ isUserConfirmOrder: true });
-    };
-
-    rechck = () => {
-        this.forceUpdate()
     };
 
 
@@ -136,41 +155,36 @@ class OrderForm extends Component {
     };
     //</editor-fold>
 
-    handleChange = (evt) => {
-        const { target, target: { name: inputName, value: inputValue } } = evt;
-        if (this.state.isUserConfirmOrder) this.setState(state => ({ isUserConfirmOrder: false }));
+    handleChange = ({ target, target: { name: inputName, value: inputValue } }) => {
+        this.isFormTouched = true;
         if (!Object.keys(this.state.fields).includes(inputName)) return;
         if (inputName === "phone") new Inputmask("+7 (999) 999-99-99").mask(target);
-        if (inputName === "shipping") this.setState(state => {
-            return {
-                ...state,
-                fields: {
-                    ...state.fields,
-                    shipping: inputValue
-                }
-            }
-        });
+        if (inputName === "shipping") this.setState(state => ({ ...state, fields: { ...state.fields, shipping: inputValue } }));
+        //if (inputName === "shipping") this.setState(state => update(state, {shipping: {$set: inputValue}}));
+        if (inputName === "payment") this.setState(state => ({ ...state, fields: { ...state.fields, payment: inputValue } }));
 
-        if (inputName === "payment") this.setState(state => {
-            return {
-                ...state,
-                fields: {
-                    ...state.fields,
-                    payment: inputValue
-                }
-            }
-        });
         this.handleValidation(inputName, inputValue);
         this.checkFieldsErrors();
     };
 
     render() {
-        const ConfirmModalWindow = withDelay(withModal(Confirm));
+        //console.log('in render');
+
+        //const ConfirmModalWindow = withDelay(withModal(Confirm));
+
+        let ConfirmModalWindow = null;
+
+        if (this.state.isUserConfirmOrder && this.isFormTouched) {
+            //console.log('cond redy');
+            ConfirmModalWindow = withDelay(withModal(Confirm));
+            //console.log(ConfirmModalWindow);
+            this.isFormTouched = false;
+        }
+
+        //{this.state.isUserConfirmOrder ? <ConfirmModalWindow/> : null}
         return (
             <>
-                {this.state.isUserConfirmOrder ? <ConfirmModalWindow/> : null}
-
-                <button onClick={this.rechck}>Recheck</button>
+                {ConfirmModalWindow ? <ConfirmModalWindow/> : null}
                 <form
                     ref={this.form}
                     onSubmit={this.handleSubmit}

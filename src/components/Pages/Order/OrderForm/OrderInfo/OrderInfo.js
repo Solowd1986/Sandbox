@@ -135,6 +135,7 @@ class OrderInfo extends Component {
                             />
                             {fields.comment.error && <span className={styles.field_error}>{fields.comment.msg}</span>}
                         </label>
+
                     </div>
                 </div>
 
