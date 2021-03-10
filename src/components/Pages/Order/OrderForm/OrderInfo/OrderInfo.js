@@ -5,7 +5,6 @@ import * as PropTypes from "prop-types";
 import basketEpayment from "./img/basket-epayment.png";
 import basketShipping from "./img/basket-shipping.png";
 
-import IMask from 'imask';
 
 import * as cartActions from "@redux/entities/cart/actions";
 import { connect } from "react-redux";
@@ -31,8 +30,7 @@ class OrderInfo extends Component {
     };
 
     handleChangePhone = (evt) => {
-        const maskOptions = { mask: '+{7} (000) 000-00-00' };
-        IMask(this.phone.current, maskOptions);
+
     };
 
     render() {

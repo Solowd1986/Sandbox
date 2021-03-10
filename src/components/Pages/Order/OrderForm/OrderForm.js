@@ -21,6 +21,7 @@ const val = yup.object().shape({
         yup.string().min(18, "Телефон должен включать не менее 11 символов").max(18, "Телефон должен включать не более 11 символов").required("Данное поле обязательно phone"),
 });
 
+import IMask from 'imask';
 
 
 class OrderForm extends Component {
@@ -105,23 +106,25 @@ class OrderForm extends Component {
 
     };
 
-    handleChangeer = (evt) => {
+    phone = target => {
+        //console.log(target);
+        const maskOptions = { mask: '+{7} (000) 000-00-00' };
+        IMask(target, maskOptions);
+    };
+
+
+    handleChange = ({ target, target: { name: inputName, value: inputValue } }) => {
         //console.dir(evt);
-        if (!Object.keys(this.state.fields).includes(evt.target.name)) return;
+        if (!Object.keys(this.state.fields).includes(inputName)) return;
+        if (inputName === "phone") this.phone(target);
 
-        const value = evt.target.value;
-        const title = evt.target.name;
-
-        //console.log(title);
-
-
-        yup.reach(val, title).validate(value).then(s => {
-            console.log('suc', s);
+        yup.reach(val, inputName).validate(inputValue).then(s => {
+            //console.log('suc', s);
             this.setState(state => ({
                 fields: {
                     ...state.fields,
-                    [evt.target.name]: {
-                        touched: state.fields[evt.target.name].touched,
+                    [inputName]: {
+                        touched: state.fields[inputName].touched,
                         error: false,
                         msg: ""
                     }
@@ -129,17 +132,17 @@ class OrderForm extends Component {
             }))
         }).catch(e => {
             //console.dir(e);
-            if (e.message === this.state.fields[evt.target.name].msg) return;
+            if (e.message === this.state.fields[inputName].msg) return;
 
 
-            console.dir(e);
-            console.log('error', e.message);
+            //console.dir(e);
+            //console.log('error', e.message);
             //return
             this.setState(state => ({
                 fields: {
                     ...state.fields,
-                    [evt.target.name]: {
-                        touched: state.fields[evt.target.name].touched,
+                    [inputName]: {
+                        touched: state.fields[inputName].touched,
                         error: true,
                         msg: e.message
                     }
@@ -150,17 +153,17 @@ class OrderForm extends Component {
     };
 
 
-    handleFocus = (evt) => {
-        if (!Object.keys(this.state.fields).includes(evt.target.name)) return;
+    handleFocus = ({ target: { name: inputName } }) => {
+        if (!Object.keys(this.state.fields).includes(inputName)) return;
         //console.dir(evt.target.name);
         //return
         this.setState(state => ({
             fields: {
                 ...state.fields,
-                [evt.target.name]: {
+                [inputName]: {
                     touched: true,
-                    error: state.fields[evt.target.name].error,
-                    msg: state.fields[evt.target.name].msg
+                    error: state.fields[inputName].error,
+                    msg: state.fields[inputName].msg
                 }
             }
         }));
@@ -218,7 +221,7 @@ class OrderForm extends Component {
                     name="order-form"
                     method="POST">
                     <OrderInfo
-                        handleChange={this.handleChangeer}
+                        handleChange={this.handleChange}
                         handleFocus={this.handleFocus}
                         fields={this.state.fields}
                     />
