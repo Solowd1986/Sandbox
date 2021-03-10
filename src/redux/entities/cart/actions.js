@@ -18,14 +18,6 @@ export const removeItemFromCart = (item) => {
     }
 };
 
-export const changeShippingPrice = (price) => {
-    return {
-        type: types.CART_CHANGE_SHIPPING_PRICE,
-        payload: {
-            price
-        }
-    }
-};
 
 export const changeAmountOfProduct = (evt, id, quantity) => {
     return {

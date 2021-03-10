@@ -25,6 +25,7 @@ class OrderForm extends Component {
 
         this.state = {
             isUserConfirmOrder: false,
+
             fields: {
                 name: {
                     touched: false,
@@ -35,7 +36,14 @@ class OrderForm extends Component {
                     touched: false,
                     error: false,
                     msg: ""
-                }
+                },
+                shipping: "moscow",
+                // shipping: {
+                //     price: 400,
+                //     type: "moscow",
+                // },
+
+                payment: "cash",
             }
         };
     }
@@ -78,22 +86,23 @@ class OrderForm extends Component {
         };
 
         for (const [key, value] of form.entries()) {
+            console.log(key);
+            console.log(value);
+
             (list.some(item => item.title === key))
                 ? userOrderInfo.userOrder.push(list.find(item => item.title === key))
-                : userOrderInfo.userInfo[key] = value;
+                : userOrderInfo.userInfo[key] = value
         }
 
 
-        console.log(userOrderInfo);
-
-
-        return
-
-
+        // console.log(userOrderInfo);
+        //
+        //
+        // return
 
 
         evt.target.reset();
-        alert(JSON.stringify(formDataObject, null, 2))
+        alert(JSON.stringify(userOrderInfo, null, 2))
 
         //this.setState({ isUserConfirmOrder: true });
 
@@ -131,10 +140,33 @@ class OrderForm extends Component {
     //</editor-fold>
 
     handleChange = (evt) => {
+        //console.log(evt);
         const { target, target: { name: inputName, value: inputValue } } = evt;
+
         if (this.state.isUserConfirmOrder) this.setState(state => ({ isUserConfirmOrder: false }));
         if (!Object.keys(this.state.fields).includes(inputName)) return;
         if (inputName === "phone") new Inputmask("+7 (999) 999-99-99").mask(target);
+
+        if (inputName === "shipping") this.setState(state => {
+            return {
+                ...state,
+                fields: {
+                    ...state.fields,
+                    shipping: inputValue
+                }
+            }
+        });
+
+        if (inputName === "payment") this.setState(state => {
+            return {
+                ...state,
+                fields: {
+                    ...state.fields,
+                    payment: inputValue
+                }
+            }
+        });
+
         this.handleValidation(inputName, inputValue);
     };
 
@@ -158,8 +190,10 @@ class OrderForm extends Component {
                     <OrderInfo
                         handleChange={this.handleChange}
                         fields={this.state.fields}
+                        shipping={this.state.fields.shipping}
+                        payment={this.state.fields.payment}
                     />
-                    <OrderSummary/>
+                    <OrderSummary shipping={this.state.fields.shipping}/>
                 </form>
             </>
         )

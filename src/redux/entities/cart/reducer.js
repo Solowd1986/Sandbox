@@ -63,14 +63,6 @@ export default (state = initialState, action) => {
             };
         }
 
-        case types.CART_CHANGE_SHIPPING_PRICE : {
-            const { price } = action.payload;
-            if (isNaN(parseInt(price))) return state;
-            return {
-                ...state,
-                shippingPrice: parseInt(price)
-            };
-        }
 
         default:
             return state;

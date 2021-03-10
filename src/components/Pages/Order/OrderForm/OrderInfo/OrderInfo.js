@@ -5,41 +5,13 @@ import * as PropTypes from "prop-types";
 import basketEpayment from "./img/basket-epayment.png";
 import basketShipping from "./img/basket-shipping.png";
 
-
-import * as cartActions from "@redux/entities/cart/actions";
-import { connect } from "react-redux";
-
-
-import { IMaskInput } from 'react-imask';
-
-
-
 class OrderInfo extends Component {
     static propTypes = {
-        formik: PropTypes.object
+        type: PropTypes.string,
+        paymentMethod: PropTypes.string,
     };
-
-    constructor(props) {
-        super(props);
-        this.phone = React.createRef();
-    }
-
-    state = {
-        shippingMethod: "moscow",
-        paymentMethod: "cash"
-    };
-
-    handlerShipping = (evt) => {
-        if (evt.target.name === "shippingMethod") this.props.changeShippingPrice(evt.target.value);
-        this.setState({ [evt.target.name]: evt.target.id });
-    };
-
-    handleChangePhone = (evt) => {
-
-    };
-
     render() {
-        const { handleChange, fields } = this.props;
+        const { handleChange, fields, shipping, payment } = this.props;
         return (
             <section className={styles.info}>
                 {/*Delivery*/}
@@ -47,12 +19,12 @@ class OrderInfo extends Component {
                     <h2 className={styles.order_title}>1. Доставка</h2>
                     <div className={styles.cards_wrapper}>
                         <input
-                            checked={this.state.shippingMethod === "moscow"}
-                            onChange={this.handlerShipping}
+                            checked={shipping === "moscow"}
+                            onChange={handleChange}
                             id="moscow"
                             type="radio"
-                            name="shippingMethod"
-                            value={400}
+                            name="shipping"
+                            value={"moscow"}
                             data-delivery={true}
                         />
                         <label htmlFor="moscow" className={styles.card}>
@@ -64,11 +36,11 @@ class OrderInfo extends Component {
                         </label>
 
                         <input id="pickup"
-                               checked={this.state.shippingMethod === "pickup"}
-                               onChange={this.handlerShipping}
+                               checked={shipping === "pickup"}
+                               onChange={handleChange}
                                type="radio"
-                               name="shippingMethod"
-                               value={0}
+                               name="shipping"
+                               value={"pickup"}
                                data-delivery={true}
                         />
                         <label htmlFor="pickup" className={styles.card}>
@@ -80,11 +52,11 @@ class OrderInfo extends Component {
                         </label>
 
                         <input id="russia"
-                               checked={this.state.shippingMethod === "russia"}
-                               onChange={this.handlerShipping}
+                               checked={shipping === "russia"}
+                               onChange={handleChange}
                                type="radio"
-                               name="shippingMethod"
-                               value={450}
+                               name="shipping"
+                               value={"russia"}
                                data-delivery={true}
                         />
                         <label htmlFor="russia" className={styles.card}>
@@ -170,10 +142,10 @@ class OrderInfo extends Component {
                     <div className={styles.cards_wrapper}>
                         <input
                             id="cash"
-                            checked={this.state.paymentMethod === "cash"}
-                            onChange={this.handlerShipping}
+                            checked={payment === "cash"}
+                            onChange={handleChange}
                             type="radio"
-                            name="paymentMethod"
+                            name="payment"
                             value="cash"
                             data-payment={true}
                         />
@@ -187,10 +159,10 @@ class OrderInfo extends Component {
 
                         <input
                             id="emoney"
-                            checked={this.state.paymentMethod === "emoney"}
-                            onChange={this.handlerShipping}
+                            checked={payment === "emoney"}
+                            onChange={handleChange}
                             type="radio"
-                            name="paymentMethod"
+                            name="payment"
                             value="emoney"
                             data-payment={true}
                         />
@@ -207,10 +179,10 @@ class OrderInfo extends Component {
 
                         <input
                             id="card"
-                            checked={this.state.paymentMethod === "card"}
-                            onChange={this.handlerShipping}
+                            checked={payment === "card"}
+                            onChange={handleChange}
                             type="radio"
-                            name="paymentMethod"
+                            name="payment"
                             value="card"
                             data-payment={true}
                         />
@@ -229,13 +201,5 @@ class OrderInfo extends Component {
 }
 
 
-function mapDispatchToProps(dispatch) {
-    return {
-        changeShippingPrice: (price) => {
-            dispatch(cartActions.changeShippingPrice(price));
-        },
-    }
-}
-
-export default connect(null, mapDispatchToProps)(OrderInfo);
+export default OrderInfo;
 
