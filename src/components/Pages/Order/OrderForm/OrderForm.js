@@ -44,27 +44,22 @@ class OrderForm extends Component {
             isFormValid: true,
             fields: {
                 name: {
-                    touched: false,
                     error: false,
                     msg: ""
                 },
                 phone: {
-                    touched: false,
                     error: false,
                     msg: ""
                 },
                 email: {
-                    touched: false,
                     error: false,
                     msg: ""
                 },
                 address: {
-                    touched: false,
                     error: false,
                     msg: ""
                 },
                 comment: {
-                    touched: false,
                     error: false,
                     msg: ""
                 },
@@ -124,52 +119,37 @@ class OrderForm extends Component {
         this.setState({ isUserConfirmOrder: true });
     };
 
-
-    //<editor-fold desc="handleValidation">
     handleValidation = (inputName, inputValue) => {
         if (!(inputName in this.validationSchema.fields)) return;
         yup.reach(this.validationSchema, inputName).validate(inputValue).then(success => {
-            this.setState(state => ({
-                fields: {
-                    ...state.fields,
-                    [inputName]: {
-                        touched: state.fields[inputName].touched,
-                        error: false,
-                        msg: ""
-                    }
-                }
+            this.setState(produce(this.state, draft => {
+                draft["fields"][inputName].error = false;
+                draft["fields"][inputName].msg = "";
             }));
         }).catch(error => {
             if (error.message === this.state.fields[inputName].msg) return;
-            this.setState(state => ({
-                fields: {
-                    ...state.fields,
-                    [inputName]: {
-                        touched: state.fields[inputName].touched,
-                        error: true,
-                        msg: error.message
-                    }
-                }
+            this.setState(produce(this.state, draft => {
+                draft["fields"][inputName].error = true;
+                draft["fields"][inputName].msg = error.message;
+                draft["isFormValid"] = false;
             }));
         });
     };
-    //</editor-fold>
+
 
     handleChange = ({ target, target: { name: inputName, value: inputValue } }) => {
         this.isFormTouched = true;
         if (!Object.keys(this.state.fields).includes(inputName)) return;
         if (inputName === "phone") new Inputmask("+7 (999) 999-99-99").mask(target);
 
-        //if (inputName === "shipping") this.setState(state => ({ ...state, fields: { ...state.fields, shipping: inputValue } }));
-        //if (inputName === "shipping") this.setState(state => update(state, {shipping: {$set: inputValue}}));
         if (inputName === "shipping") this.setState(produce(this.state, draft => {
             draft["fields"].shipping = inputValue
         }));
         if (inputName === "payment") this.setState(produce(this.state, draft => {
             draft["fields"].payment = inputValue
         }));
-
         this.handleValidation(inputName, inputValue);
+        // каждый ввод тест на ошибки всей формы, еслли все ок - true в isFormValid, и снятие disabled с кнопки submit
         this.checkFieldsErrors();
     };
 
