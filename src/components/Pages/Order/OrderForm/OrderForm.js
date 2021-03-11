@@ -13,7 +13,6 @@ import setValidateSchema from "@components/Helpers/Validation/validateSchema/val
 import Inputmask from "inputmask";
 import * as yup from "yup";
 
-
 import { connect } from "react-redux";
 
 class OrderForm extends Component {
@@ -57,14 +56,12 @@ class OrderForm extends Component {
         };
     }
 
-
     shouldComponentUpdate(nextProps, nextState) {
         return this.isFormTouched && !this.state.isUserConfirmOrder;
     }
 
     componentDidUpdate(prevProps, prevState) {
         if (!this.isFormTouched && this.state.isUserConfirmOrder) {
-
             this.setState({ isUserConfirmOrder: false });
         }
     }
@@ -78,6 +75,8 @@ class OrderForm extends Component {
 
     handleSubmit = (evt) => {
         evt.preventDefault();
+        this.isFormTouched = true;
+
         const fields = {};
         Array.from(this.form.current.elements).forEach(item => {
             if (Object.keys(this.state.fields).includes(item.name)) {
@@ -85,8 +84,6 @@ class OrderForm extends Component {
                 this.handleValidation(item.name, item.value);
             }
         });
-        this.isFormTouched = true;
-
 
         if (!this.validationSchema.isValidSync(fields)) {
             this.setState({ isFormValid: false });
@@ -157,22 +154,17 @@ class OrderForm extends Component {
 
     render() {
         //console.log('in render');
-
-        //const ConfirmModalWindow = withDelay(withModal(Confirm));
-
         let ConfirmModalWindow = null;
-
         if (this.state.isUserConfirmOrder && this.isFormTouched) {
-            //console.log('cond redy');
             ConfirmModalWindow = withDelay(withModal(Confirm));
-            //console.log(ConfirmModalWindow);
             this.isFormTouched = false;
         }
-
+        ///const ConfirmModalWindow = withDelay(withModal(Confirm));
         //{this.state.isUserConfirmOrder ? <ConfirmModalWindow/> : null}
         return (
             <>
                 {ConfirmModalWindow ? <ConfirmModalWindow/> : null}
+                {/*{this.state.isUserConfirmOrder ? <ConfirmModalWindow/> : null}*/}
                 <form
                     ref={this.form}
                     onSubmit={this.handleSubmit}
