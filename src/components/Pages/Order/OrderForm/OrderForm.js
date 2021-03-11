@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styles from "./order-form.module.scss";
 import update from 'immutability-helper';
+import produce from "immer"
+
 
 import OrderInfo from "./OrderInfo/OrderInfo";
 import OrderSummary from "./OrderSummary/OrderSummary";
@@ -57,6 +59,7 @@ class OrderForm extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
+        //console.log('shl');
         return this.isFormTouched && !this.state.isUserConfirmOrder;
     }
 
@@ -76,14 +79,15 @@ class OrderForm extends Component {
     handleSubmit = (evt) => {
         evt.preventDefault();
         this.isFormTouched = true;
-
         const fields = {};
+
         Array.from(this.form.current.elements).forEach(item => {
             if (Object.keys(this.state.fields).includes(item.name)) {
                 fields[item.name] = item.value;
                 this.handleValidation(item.name, item.value);
             }
         });
+
 
         if (!this.validationSchema.isValidSync(fields)) {
             this.setState({ isFormValid: false });
@@ -145,9 +149,16 @@ class OrderForm extends Component {
         this.isFormTouched = true;
         if (!Object.keys(this.state.fields).includes(inputName)) return;
         if (inputName === "phone") new Inputmask("+7 (999) 999-99-99").mask(target);
-        if (inputName === "shipping") this.setState(state => ({ ...state, fields: { ...state.fields, shipping: inputValue } }));
+
+        //if (inputName === "shipping") this.setState(state => ({ ...state, fields: { ...state.fields, shipping: inputValue } }));
         //if (inputName === "shipping") this.setState(state => update(state, {shipping: {$set: inputValue}}));
-        if (inputName === "payment") this.setState(state => ({ ...state, fields: { ...state.fields, payment: inputValue } }));
+        if (inputName === "shipping") this.setState(produce(this.state, draft => {
+            draft["fields"].shipping = inputValue
+        }));
+        if (inputName === "payment") this.setState(produce(this.state, draft => {
+            draft["fields"].payment = inputValue
+        }));
+
         this.handleValidation(inputName, inputValue);
         this.checkFieldsErrors();
     };

@@ -1,31 +1,28 @@
 import React, { Component } from "react";
+import * as PropTypes from "prop-types";
 
 import CategoryProductsList from "./CategoryProductsList/CategoryProductsList";
 import Spinner from "@components/Partials/Spinner/Spinner";
 import withModal from "@components/Helpers/Hoc/withModal/withModal";
 
-import * as utils from "@components/Helpers/Functions/functions";
 import * as serverActions from "@redux/entities/db/actions";
+
+import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
 
 import { List } from "immutable";
 
-
 class Category extends Component {
-
     state = {
         categoryProductsList: null,
         lastIndex: 0
     };
 
-
-    // static getDerivedStateFromProps(props, state) {
-    //     // это нужно чтобы при переходе по мольному скроллу как при создании компонента категории так и при обновлении
-    //     // при переходам по сссылкам, кажыдй раз сбрасывался отступ и запрет прокрутки.
-    //     //utils.removeScrollbarOffset();
-    //     return null
-    // }
-
+    static propTypes = {
+        clearCategoryPageData: PropTypes.func,
+        sortType: PropTypes.string,
+        lastIndex: PropTypes.number
+    };
 
     sortDataList = (evt, dataList = this.state.categoryProductsList.data, sortType = this.props.sortType) => {
         if (!dataList) return;
@@ -54,21 +51,16 @@ class Category extends Component {
         // так мы сохраняем блок main и заменяем блок data, в state categoryProductsList состоит из двух полей
         this.setState(state => ({ categoryProductsList: { ...this.state.categoryProductsList, data } }));
     };
-
-
     componentDidMount() {
         this.props.fetchPageData(this.props);
     }
 
 
-
     componentDidUpdate(prevProps, prevState, snapshot) {
-
         // блок сортировки
         if (prevProps.sortType !== this.props.sortType) {
             this.sortDataList();
         }
-
 
         const isThisInitialSetState = !this.state.categoryProductsList;
 
@@ -77,7 +69,6 @@ class Category extends Component {
 
         const currentRoute = prevProps.match.params.type;
         const nextRoute = this.props.match.params.type;
-
 
         // блок первого выставления стейт
         if (isThisInitialSetState) {
@@ -145,16 +136,17 @@ class Category extends Component {
 
 
     componentWillUnmount() {
-        this.setState({
-            categoryProductsList: null,
-            lastIndex: 0
-        })
+        this.props.clearCategoryPageData();
     }
 
 
+    isProductListEmpty = () => !this.state.categoryProductsList;
+    getCurrentCategoryAlias = () => this.state.categoryProductsList && this.state.categoryProductsList.main.alias;
+    isThisAnotherCategoryPage = () => this.getCurrentCategoryAlias() !== this.props.match.params.type;
+    clearComponentState = () => this.setState(state => ({ categoryProductsList: null, lastIndex: 0 }));
+
     render() {
         /**
-         *
          * 1. Как только пришли, конструктор создает запрос и формирует начальный state
          * 2. В рендер стейт пуст, значит выводим спиннер.
          * 3. Данные пришли, рендер, стейт все еще пуст, но в DidUpdate меняет стейт
@@ -168,9 +160,7 @@ class Category extends Component {
          * Данные пришли, сравниваем: алисас стейста все еще не равен пропсам. Потому что новые данные покатегории пришли
          * но еещ не записаны в стейст, опять спиннер. В дидапдейст ставим новый стейст и вызываем ре-рендер
          * Приходитм опять сюда: алиас стейста равен пропсам пути (пута) - проверка пройдена, отрисовываем категоирю
-         *
          */
-            //console.log('ren');
         const isProductsListEmpty = !this.state.categoryProductsList;
         const alias = isProductsListEmpty ? null : this.state.categoryProductsList.main.alias;
 
@@ -184,7 +174,6 @@ class Category extends Component {
     }
 }
 
-
 const mapStateToProps = (state) => {
     return {
         category: state.db.category,
@@ -194,16 +183,26 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        fetchPageData: (params) => {
-            dispatch(serverActions.fetchPageData(params));
-        },
-    }
-};
-
-
+const mapDispatchToProps = (dispatch) => ({ ...bindActionCreators(serverActions, dispatch) });
 export default connect(mapStateToProps, mapDispatchToProps)(Category);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -63,6 +63,12 @@ export const fetchingLazy = () => {
     }
 };
 
+export const clearCategoryPageData = () => {
+    return {
+        type: "server/clearCategoryPageData",
+    }
+};
+
 export const fetchLazyCategoryProducts = (category) => (dispatch, getState, api) => {
     api.get(`category/${category}`)
         .then(responce => {

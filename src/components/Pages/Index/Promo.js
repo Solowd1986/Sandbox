@@ -84,8 +84,15 @@ class Promo extends Component {
         if (!this.state.index) return <div className={styles.spin_wrap}><SpinnerModal/></div>;
         const { phones, accessoires, gadgets } = this.state.index;
 
+
+        const uk = "first";
         const list = new Map({
             public: true,
+            users: {
+                dates: {
+                    first: "bob"
+                }
+            },
             ages: [
                 { age: 12 },
                 { age: 14 },
@@ -97,7 +104,17 @@ class Promo extends Component {
 
         const ModalState = withModal(Spinner);
 
-        const list2 = list.get("ages").push({ age: 21 });
+        const list2 = list.setIn(["users", "dates", "first"], "12");
+
+        //console.log(list.get("users"));
+        //console.log(list2.get("users"));
+
+        //console.log(list2.get("ages"));
+
+
+
+
+
         //console.log(list2);
 
         return (

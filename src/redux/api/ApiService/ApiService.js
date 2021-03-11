@@ -1,19 +1,20 @@
 class ApiService {
     constructor() {
         this._axios = require('axios').default;
+        this._decodeRecord = (recordName) => JSON.parse(decodeURIComponent(localStorage.getItem(recordName)));
 
         this.api = this._axios.create({
             baseURL: "/api/",
             timeout: 1000 * 5,
             withCredentials: true,
             headers: {
-                'Authorization': `Bearer ${
-                    localStorage.getItem("auth")
-                    &&
-                    JSON.parse(decodeURIComponent(localStorage.getItem("auth"))).auth.token}`,
+                'Authorization': `Bearer ${localStorage.getItem("auth") && this._decodeRecord("auth").auth.token}`,
             },
         });
     }
+
+    get = (uri) => this.api.get(uri);
+    post = (uri, opt = {}) => this.api.post(uri, opt);
 
     fetchData = (params) => {
         const { match: { path: route, params: data }, history } = params;
@@ -53,8 +54,6 @@ class ApiService {
 
 }
 
-
-//export default new ApiService().api;
 export default new ApiService();
 
 

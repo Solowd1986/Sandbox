@@ -19,6 +19,14 @@ export default (state = initialState, action) => {
             };
         }
 
+        case types.SERVER_CLEAR_CATEGORY_PAGE_DATA: {
+            return {
+                ...state,
+                category: null,
+                lastIndex: 0,
+            };
+        }
+
 
         case "server/fetchingLazy": {
             return {
@@ -26,7 +34,6 @@ export default (state = initialState, action) => {
                 fetchingLazyDataEnd: false,
             };
         }
-
 
         case "server/fetchLazyCategoryProducts": {
             //console.log(action.payload);
@@ -38,8 +45,6 @@ export default (state = initialState, action) => {
                 lazy: action.payload.data
             };
         }
-
-
 
 
         case "server/startRequest": {
