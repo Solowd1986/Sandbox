@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./with-modal.module.scss";
 import classNames from "classnames";
-import * as util from "@components/Helpers/Functions/functions";
+import * as util from "@components/Helpers/Functions/scrollbarHelper";
 
 //<editor-fold desc="Описание">
 /**

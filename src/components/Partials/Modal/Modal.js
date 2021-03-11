@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styles from "./modal.module.scss";
 import classNames from "classnames";
 
-import * as util from "../../Helpers/Functions/functions";
+import * as util from "../../Helpers/Functions/scrollbarHelper";
 
 import ModalContent from "@components/Partials/Modal/ModalContent/ModalContent";
 import Spinner from "../Spinner/Spinner";

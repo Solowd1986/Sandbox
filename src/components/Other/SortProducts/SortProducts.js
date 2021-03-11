@@ -31,7 +31,6 @@ class SortPorducts extends Component {
      * -> вызов controlSortPanel, проверка на true продена -> скрытие панели.
      * @param evt
      */
-
     toggleSortPanel = (evt) => {
         evt.stopPropagation();
         if (!this.state.showSortPanel) {

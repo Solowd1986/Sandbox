@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import styles from "./order-form.module.scss";
-import update from 'immutability-helper';
-import produce from "immer"
-
 
 import OrderInfo from "./OrderInfo/OrderInfo";
 import OrderSummary from "./OrderSummary/OrderSummary";
@@ -14,9 +11,28 @@ import withModal from "@components/Helpers/Hoc/withModal/withModal";
 import setValidateSchema from "@components/Helpers/Validation/validateSchema/validateSchema"
 import Inputmask from "inputmask";
 import * as yup from "yup";
+import produce from "immer"
 
 import { connect } from "react-redux";
 
+
+//<editor-fold desc="Описание работы submit формы">
+/**
+ * Ход работы формы:
+ * 1. Клик по кнопке submit, ставит флаг isTouched. Проверяются все поля формы на ошибки, заполняется state errors, если есть
+ * 2. Проводим общую проверку формы, если есть ошибки - ставим флаг isFormValid в false и перерисовываем компонент.
+ * 3. Поскольку ранее мы проверили все элементы, то на этапе render все полученные ошибки будут показаны.
+ * 4. Если пользователь исправил ошибки и снова жмет submit, то меняем isUserConfirmOrder в true.
+ * 5. Это вызывает вход в shouldComponentUpdate, isFormTouched равно true, isUserConfirmOrder пока false, на этом этапе.
+ * 6. Проходит render, выводится модальное окно с подтверждением. Тут же меняется isTouched на false.
+ * 7. Далее этап componentDidUpdate, this.isFormTouched сейчас false, а isUserConfirmOrder уже true, меняем его через setState
+ * 8. По идее, это вызывает re-render, а значит, должно пропасть модальное окно.
+ * 9. Но в блоке shouldComponentUpdate поводом для render является isFormTouched равное true, а сейчас оно сброшено в false
+ * 10. Поэтому любой re-render будет запрещен.
+ * 11. Для того, чтобы дальше все работало корректно, каждый вызов обработчика действий пользователя, Submit или Change ставит
+ *     isFormTouched в true, а isUserConfirmOrder сброшено в false ранее(в componentDidUpdate). Поэтому re-render's пройдут.
+ */
+    //</editor-fold>
 class OrderForm extends Component {
     constructor(props) {
         super(props);
@@ -59,7 +75,6 @@ class OrderForm extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        //console.log('shl');
         return this.isFormTouched && !this.state.isUserConfirmOrder;
     }
 
@@ -88,7 +103,6 @@ class OrderForm extends Component {
             }
         });
 
-
         if (!this.validationSchema.isValidSync(fields)) {
             this.setState({ isFormValid: false });
             return
@@ -101,16 +115,12 @@ class OrderForm extends Component {
         };
 
         for (const [key, value] of form.entries()) {
-            //console.log(key);
-            //console.log(value);
             (this.props.listOfProducts.some(item => item.title === key))
                 ? userOrderInfo.userOrder.push(this.props.listOfProducts.find(item => item.title === key))
                 : userOrderInfo.userInfo[key] = value
         }
 
         evt.target.reset();
-        //alert(JSON.stringify(userOrderInfo, null, 2));
-        //console.log('set shw');
         this.setState({ isUserConfirmOrder: true });
     };
 
@@ -164,18 +174,14 @@ class OrderForm extends Component {
     };
 
     render() {
-        //console.log('in render');
         let ConfirmModalWindow = null;
         if (this.state.isUserConfirmOrder && this.isFormTouched) {
             ConfirmModalWindow = withDelay(withModal(Confirm));
             this.isFormTouched = false;
         }
-        ///const ConfirmModalWindow = withDelay(withModal(Confirm));
-        //{this.state.isUserConfirmOrder ? <ConfirmModalWindow/> : null}
         return (
             <>
                 {ConfirmModalWindow ? <ConfirmModalWindow/> : null}
-                {/*{this.state.isUserConfirmOrder ? <ConfirmModalWindow/> : null}*/}
                 <form
                     ref={this.form}
                     onSubmit={this.handleSubmit}

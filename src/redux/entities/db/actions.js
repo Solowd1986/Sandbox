@@ -63,9 +63,9 @@ export const fetchingLazy = () => {
     }
 };
 
-export const clearCategoryPageData = () => {
+export const clearCategoryPageReduxData = () => {
     return {
-        type: "server/clearCategoryPageData",
+        type: "server/clearCategoryPageReduxData",
     }
 };
 

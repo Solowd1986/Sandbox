@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import common from "~scss/common.module.scss";
 import styles from "./delivery.module.scss";
 import deliveryBanner from "./img/_delivery-banner.png";
-import * as utils from "../../Helpers/Functions/functions";
+import * as utils from "../../Helpers/Functions/scrollbarHelper";
 
 
 class Delivery extends Component {

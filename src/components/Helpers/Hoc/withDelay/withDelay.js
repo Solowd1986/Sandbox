@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./with-delay.module.scss";
 import Spinner from "@components/Partials/Spinner/Spinner";
-import * as util from "@components/Helpers/Functions/functions";
+import * as util from "@components/Helpers/Functions/scrollbarHelper";
 
 function withDelay(PropsComponent, ms = 1500) {
     return class extends Component {
