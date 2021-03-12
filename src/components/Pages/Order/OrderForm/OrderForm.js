@@ -19,7 +19,7 @@ import { connect } from "react-redux";
 //<editor-fold desc="Описание работы submit формы">
 /**
  * Ход работы формы:
- * 1. Клик по кнопке submit, ставит флаг isTouched. Проверяются все поля формы на ошибки, заполняется state errors, если есть
+ * 1. Клик по кнопке submit ставит флаг isTouched. Проверяются все поля формы на ошибки, заполняется state errors, если есть
  * 2. Проводим общую проверку формы, если есть ошибки - ставим флаг isFormValid в false и перерисовываем компонент.
  * 3. Поскольку ранее мы проверили все элементы, то на этапе render все полученные ошибки будут показаны.
  * 4. Если пользователь исправил ошибки и снова жмет submit, то меняем isUserConfirmOrder в true.
@@ -86,6 +86,23 @@ class OrderForm extends Component {
         }
     };
 
+    handleValidation = (inputName, inputValue) => {
+        if (!(inputName in this.validationSchema.fields)) return;
+        yup.reach(this.validationSchema, inputName).validate(inputValue).then(success => {
+            this.setState(produce(this.state, draft => {
+                draft["fields"][inputName].error = false;
+                draft["fields"][inputName].msg = "";
+            }));
+        }).catch(error => {
+            if (error.message === this.state.fields[inputName].msg) return;
+            this.setState(produce(this.state, draft => {
+                draft["fields"][inputName].error = true;
+                draft["fields"][inputName].msg = error.message;
+                draft["isFormValid"] = false;
+            }));
+        });
+    };
+
     handleSubmit = (evt) => {
         evt.preventDefault();
         this.isFormTouched = true;
@@ -119,29 +136,10 @@ class OrderForm extends Component {
         this.setState({ isUserConfirmOrder: true });
     };
 
-    handleValidation = (inputName, inputValue) => {
-        if (!(inputName in this.validationSchema.fields)) return;
-        yup.reach(this.validationSchema, inputName).validate(inputValue).then(success => {
-            this.setState(produce(this.state, draft => {
-                draft["fields"][inputName].error = false;
-                draft["fields"][inputName].msg = "";
-            }));
-        }).catch(error => {
-            if (error.message === this.state.fields[inputName].msg) return;
-            this.setState(produce(this.state, draft => {
-                draft["fields"][inputName].error = true;
-                draft["fields"][inputName].msg = error.message;
-                draft["isFormValid"] = false;
-            }));
-        });
-    };
-
-
     handleChange = ({ target, target: { name: inputName, value: inputValue } }) => {
         this.isFormTouched = true;
         if (!Object.keys(this.state.fields).includes(inputName)) return;
         if (inputName === "phone") new Inputmask("+7 (999) 999-99-99").mask(target);
-
         if (inputName === "shipping") this.setState(produce(this.state, draft => {
             draft["fields"].shipping = inputValue
         }));

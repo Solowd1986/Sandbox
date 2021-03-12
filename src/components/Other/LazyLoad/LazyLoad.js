@@ -1,106 +1,11 @@
 import React, { Component } from "react";
 import styles from "./lazy-load.module.scss"
-
-import { connect } from "react-redux";
-import Modal from "../../Partials/Modal/Modal";
-import * as server from "../../../redux/entities/db/actions";
 import classNames from "classnames";
 
+import * as server from "../../../redux/entities/db/actions";
+import { connect } from "react-redux";
+
 class LazyLoad extends Component {
-    constructor(props) {
-        super(props);
-        this.controller = null;
-        this.signal = null;
-        this.timer = null;
-    }
-
-
-    initRequest = (getDataBtn, disableOverlay) => {
-        let timeoutExceeded = false;
-        this.controller = new AbortController();
-        this.signal = this.controller.signal;
-
-        /**
-         * timeoutExceeded переводится в true по истечении таймера, так как controller.abort() приведет б лок catch
-         * Там, если время истекло, а не просто пользователь отменил, то выведем ошибку об ответе сервера
-         */
-        this.timer = setTimeout(() => {
-            timeoutExceeded = true;
-            this.controller.abort();
-            disableOverlay();
-        }, 5000);
-
-        fetch(
-            `api/${this.props.categoryName}/id/${this.props.lastIndex}/amount/${this.props.amountOfElements}`,
-            { signal: this.signal })
-
-            .then((res) => res.json().then(responce => {
-                //console.log(responce);
-
-                getDataBtn.classList.remove(styles.active);
-                disableOverlay();
-
-                if (responce.length === 0) {
-                    getDataBtn.remove();
-                }
-
-                const category = this.props.db.find(category => category.categoryAlias === this.props.categoryName);
-
-                // длина массива не больше максимума, так как если максимальное количество элементов равно 4, то длина
-                // результирующего массива не 4, а 3, из-за индексации, то есть проверка length пойдет как:
-                // 0 -> add el1 -> 1 -> add el2 -> 2 -> add el3 -> 3 -> add el4 -> exit
-                // JSON.parse(JSON.stringify - защита от обращения по ссылке, иначе key добавлялся к одному и тому же обьекту
-                function getRandom(array, maxAmount) {
-                    const result = [];
-                    while (result.length < maxAmount) {
-                        const index = Math.trunc(Math.random() * array.length);
-                        if (!result.includes(array[index])) {
-                            result.push(JSON.parse(JSON.stringify(array[index])));
-                        }
-                    }
-                    return result;
-                }
-
-
-                const resultCat = getRandom(category.productList, this.props.amountOfElements);
-
-                // случайно азадем последний индекс добавленного элемента, это уже для нормального запроса к серверу
-                const lastIndex = Math.floor(Math.random() * 10);
-                const cat = this.props.categoryName;
-                this.props.setServerData({ arrayOfElements: resultCat, cat, lastIndex });
-            })).catch(err => {
-            console.dir(err);
-
-            disableOverlay();
-            getDataBtn.classList.remove(styles.active);
-            // таймер истек, значит сервер не ответил вовремя, а значит - покажем сообщение об ошибке
-            if (timeoutExceeded) {
-                getDataBtn.classList.add(styles.error);
-                console.log("abort from catch in lazyload component - timer exceeded");
-            }
-
-            if (err.message !== "The user aborted a request.") {
-                getDataBtn.classList.add(styles.error);
-                console.log("abort from catch in lazyload component - error from server");
-            }
-            clearTimeout(this.timer);
-        });
-    };
-
-    abortRequest = () => {
-        this.controller.abort();
-        clearTimeout(this.timer);
-    };
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-
-        // if (this.props.fetchEnded) {
-        //     this.setState({
-        //         fetched: true
-        //     });
-        // }
-    }
-
     loadHandler = (evt) => {
         const getDataBtn = evt.currentTarget;
         this.props.fetchButton();
@@ -108,14 +13,15 @@ class LazyLoad extends Component {
     };
 
     render() {
-        //console.log(this.props);
         const classList = classNames(styles.more, {
-            [styles.active]: this.props.fetchEnded === false
+            [styles.active]: !this.props.fetchEnded
         });
+
         return (
             <>
                 <div className={styles.data_wrapper}>
                     {this.props.children}
+
                     <button onClick={this.loadHandler} className={classList}>
                         <svg
                             className={styles.loader}
