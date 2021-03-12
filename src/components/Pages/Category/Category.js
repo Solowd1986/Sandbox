@@ -48,8 +48,10 @@ class Category extends Component {
     getCurrentCategoryAlias = () => this.state.categoryProductsList && this.state.categoryProductsList.main.alias;
     isThisAnotherCategoryPage = () => this.getCurrentCategoryAlias() !== this.props.match.params.type;
     clearComponentState = () => this.setState(state => ({ categoryProductsList: null, lastIndex: 0 }));
+
     sortDataList = (evt, dataList = this.state.categoryProductsList.data, sortType = this.props.sortType) => {
         if (!dataList) return;
+
         const cloneDeep = require('lodash.clonedeep');
         let data = cloneDeep(dataList);
 
@@ -129,10 +131,13 @@ class Category extends Component {
             this.sortDataList();
             this.isSorted = true;
         }
-        if (this.props.lastIndex > 0 && !this.isSorted && this.state.lastIndex === this.props.lastIndex) {
+
+        if (this.props.lastIndex > 0 || this.props.lastIndex === -1
+            &&
+            !this.isSorted && this.state.lastIndex === this.props.lastIndex) {
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
-        prevProps.sortType === this.props.sortType ? this.isSorted = false : null;
+        if (prevProps.sortType === this.props.sortType) this.isSorted = false;
     }
 
 
@@ -141,7 +146,7 @@ class Category extends Component {
     }
 
     componentWillUnmount() {
-        this.props.clearCategoryPageReduxData(); // очистка reudx-state при каждом размонтировании компонента
+        this.props.clearCategoryPageReduxData(); // очистка redux-state при каждом размонтировании компонента
     }
 
     render() {

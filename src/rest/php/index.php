@@ -1,7 +1,7 @@
 <?php
 
 
-//sleep(2);
+//sleep(1);
 //header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
 //die();
 
@@ -35,9 +35,11 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             $product_id = trim(filter_var($list[1], FILTER_SANITIZE_STRING));
             print json_encode(Request::getOneItem($product_id, $category_title));
 
-        } elseif (strpos($res, "lazyload") !== false) {
+        } elseif (strpos($res, "lazy") !== false) {
             // timeout 4 sec maximun, else - error msg
             //sleep(1);
+            print json_encode("lazy ok");
+
             $category_title = substr($res, strpos($res, "/") + 1);
             //var_dump_pre(Request::getLazyLoadItems($category_title));
         } else {
