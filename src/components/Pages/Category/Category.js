@@ -8,6 +8,9 @@ import withModal from "@components/Helpers/Hoc/withModal/withModal";
 import { bindActionCreators } from 'redux';
 import * as serverActions from "@redux/entities/db/actions";
 import { connect } from "react-redux";
+
+import arrayShuffle from "@components/Helpers/Functions/arrayShuffle";
+import createDeepCopyOfObject from "@components/Helpers/Lodash/lodashCloning";
 import produce from "immer";
 
 
@@ -49,35 +52,34 @@ class Category extends Component {
     isThisAnotherCategoryPage = () => this.getCurrentCategoryAlias() !== this.props.match.params.type;
     clearComponentState = () => this.setState(state => ({ categoryProductsList: null, lastIndex: 0 }));
 
-    sortDataList = (evt, dataList = this.state.categoryProductsList.data, sortType = this.props.sortType) => {
-        if (!dataList) return;
-
-        const cloneDeep = require('lodash.clonedeep');
-        let data = cloneDeep(dataList);
-
-        switch (sortType) {
+    sortProductsList = () => {
+        let stateProductsCopy = createDeepCopyOfObject(this.state.categoryProductsList.data);
+        switch (this.props.sortType) {
             case "по популярности": {
+                stateProductsCopy = arrayShuffle(stateProductsCopy);
                 break;
             }
             case "по возрастанию цены": {
-                data.sort((a, b) => a.price - b.price);
+                stateProductsCopy.sort((a, b) => a.price - b.price);
                 break;
             }
             case "по убыванию цены": {
-                data.sort((a, b) => b.price - a.price);
+                stateProductsCopy.sort((a, b) => b.price - a.price);
                 break;
             }
-            case "по новизне": {
+            case "по новинкам": {
+                stateProductsCopy = arrayShuffle(stateProductsCopy);
                 break;
             }
             case "по скидкам": {
+                stateProductsCopy = arrayShuffle(stateProductsCopy);
                 break;
             }
         }
-        // так мы сохраняем блок main и заменяем блок data, в state categoryProductsList состоит из двух полей
-        this.setState(state => ({ categoryProductsList: { ...this.state.categoryProductsList, data } }));
+        this.setState(produce(this.state, draft => {
+            draft["categoryProductsList"].data = stateProductsCopy;
+        }));
     };
-
 
     //<editor-fold desc="Вариации смены state">
     /**
@@ -128,7 +130,7 @@ class Category extends Component {
             }));
         }
         if (prevProps.sortType !== this.props.sortType) {
-            this.sortDataList();
+            this.sortProductsList();
             this.isSorted = true;
         }
 

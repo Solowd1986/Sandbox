@@ -38,10 +38,8 @@ class ProductSlider extends Component {
 
     render() {
         const { list, alt } = this.props;
-        //console.log(list);
         return (
             <div className={styles.order__img_wrapper}>
-
                 <img
                     width={480}
                     height={480}
@@ -53,11 +51,11 @@ class ProductSlider extends Component {
 
                 <div className={styles.slider}
                      ref={this.listSmallImgRef}>
-                    {list.map(item => (
-                        <img key={item} width="60" height="60"
+                    {list.map(path => (
+                        <img key={path} width="60" height="60"
                              onClick={this.toggleSlide}
                              className={styles.img}
-                             src={`${item}`}
+                             src={path}
                              alt={alt}
                         />
                     ))}

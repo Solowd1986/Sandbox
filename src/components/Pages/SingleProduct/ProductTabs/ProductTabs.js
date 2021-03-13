@@ -37,7 +37,6 @@ class ProductTabs extends Component {
 
 
     render() {
-        //console.log('ft', this.props);
         const {
             category: { alias },
             product: { promo, specifications = null }

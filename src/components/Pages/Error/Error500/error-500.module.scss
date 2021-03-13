@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "Press";
-  src: url("fonts/Press.ttf") format("truetype");
+  font-family: "Error";
+  src: url("fonts/error.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -87,7 +87,7 @@ body div#error div#box:after {
 body div#error h3 {
   position: relative;
   margin-bottom: 10px;
-  font-family: Press, sans-serif;
+  font-family: Error, sans-serif;
   font-size: 40px;
   font-weight: 700;
   text-transform: uppercase;
@@ -118,7 +118,7 @@ body div#error h3:after {
 
 body div#error p {
   position: relative;
-  font-family: Press, sans-serif;
+  font-family: Error, sans-serif;
 }
 
 body div#error p:first-of-type {

@@ -6,8 +6,9 @@ import img from "./img/error-400.png";
 
 class Error400 extends Component {
 
-    reload = () => {
-        this.props.history.go("/");
+    redirect = () => {
+        this.props.resetErrorState();
+        this.props.history.push("/");
     };
 
     render() {
@@ -16,7 +17,7 @@ class Error400 extends Component {
                 <div className={styles.content}>
                     <img src={img} alt="image"/>
                     <h3 className={styles.title}>Что-то пошло не так!</h3>
-                    <p onClick={this.reload} className={styles.btn}>
+                    <p onClick={this.redirect} className={styles.btn}>
                         НА ГЛАВНУЮ
                     </p>
                 </div>
