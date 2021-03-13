@@ -23,7 +23,6 @@ export default class App extends Component {
                             <Layout>
                                 <ScrollToTop>
                                     <Switch>
-
                                         <Route path={"/secret"} component={Secret}/>
                                         <Route path={"/login"} component={Login}/>
 

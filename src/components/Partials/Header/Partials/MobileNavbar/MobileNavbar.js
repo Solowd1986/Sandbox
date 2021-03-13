@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./mobile-navbar.module.scss";
 import { NavLink } from "react-router-dom";
 import classNames from "classnames";
-import * as utils from "@components/Helpers/Functions/scrollbarHelper";
 
 class MobileNavbar extends React.Component {
 

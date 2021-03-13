@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import common from "~scss/common.module.scss";
 import styles from "./product.module.scss";
-import classNames from "classnames";
+import cn from "classnames";
 
 import ProductSlider from "./ProductSlider/ProductSlider";
 import OrderButton from "../../Partials/OrderButton/OrderButton";
@@ -29,20 +28,20 @@ class Product extends Component {
     componentDidMount() {
         this.props.fetchPageData(this.props);
     }
-    
+
     render() {
         if (!this.state.product) return <Spinner/>;
-        
+
         const { main: category, data: product } = this.state.product;
         console.log(product);
-        
+
         const productPriceClassList = { main: `${styles.price}`, discount: `${styles.discount}` };
         const productAvailability = "Наличие: " + (product.rest === 0 ? "нет в наличии" : "в наличии");
 
         return (
             <>
-                <section className={`${common.container} ${styles.item_bg}`}>
-                    <div className={`${common.wrapper} ${styles.order}`}>
+                <section className={cn("container", styles.item_bg)}>
+                    <div className={cn("wrapper", styles.order)}>
                         <ProductSlider list={product.slider} alt={product.img_alt}/>
                         <div className={styles.order__info_wrapper}>
                             <h1 className={styles.order__title}>{product.title}</h1>

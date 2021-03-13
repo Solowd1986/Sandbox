@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import common from "~scss/common.module.scss";
 import styles from "./delivery.module.scss";
+import cn from "classnames";
+
 import deliveryBanner from "./img/_delivery-banner.png";
 import * as utils from "../../Helpers/Functions/scrollbarHelper";
 
@@ -24,7 +25,7 @@ class Delivery extends Component {
                     <h3 className={styles.sign_bg__title}>Доставка и оплата</h3>
                 </div>
 
-                <div className={`${common.wrapper} ${styles.delivery_wrapper}`}>
+                <div className={cn("wrapper", styles.delivery_wrapper)}>
 
                     <h2 className={styles.title}>Доставка</h2>
 

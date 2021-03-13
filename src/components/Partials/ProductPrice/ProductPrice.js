@@ -21,6 +21,7 @@ const ProductPrice = ({ product: { price, discount, rest }, classList = null }) 
         finalPrice = new Intl.NumberFormat().format(price - (price * 10 / 100)) + "р.";
     }
 
+    if (rest === 0) return null;
     return (
         <span className={finalPriceClassList}>
             {previousPrice}

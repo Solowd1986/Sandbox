@@ -47,7 +47,7 @@ class RequestHandler extends DbConnect
             // Создаем массив изображений, не включая в него служебные поля типа id, на клиенте они не нужны
             $img_list = [];
             foreach (self::getImg($product["id"], $product_foreign_key_name, $category_img_table) as $k => $v) {
-                if (!in_array($k, ["id", $product_foreign_key_name])) {
+                if (!in_array($k, ["id", $product_foreign_key_name]) && $v) {
                     $img_list[$k] = "/static/media/" . $category . "/" . $v;
                 }
             }
@@ -65,15 +65,15 @@ class RequestHandler extends DbConnect
         }
 
 
-        if ($limit) {
-            $new_arr = $list_of_products;
-        } else {
-            $new_arr = array_slice(array_merge($list_of_products, $list_of_products), 0, 8);
-            shuffle($new_arr);
-        }
+//        if ($limit) {
+//            $new_arr = $list_of_products;
+//        } else {
+//            $new_arr = array_slice(array_merge($list_of_products, $list_of_products), 0, 8);
+//            shuffle($new_arr);
+//        }
 
         // Отдаем массив из двух полей: список продуктов, со всеми данными и блок служебной информации для категории
-        return ["main" => self::getCategoryInfo($category), "data" => $new_arr];
+        return ["main" => self::getCategoryInfo($category), "data" => $list_of_products];
     }
 
     private static function getImg($id, $field, $tablename)
@@ -152,8 +152,10 @@ class RequestHandler extends DbConnect
         $img_slider = [];
         foreach (self::getImg($product["id"], $product_foreign_key_name, $category_img_table) as $k => $v) {
             if (!in_array($k, ["id", $product_foreign_key_name])) {
-                $img_list[$k] = "/static/media/" . $category . "/" . $v;
-                if ($k !== "md" && $k !== "sm") $img_slider[] = "/static/media/" . $category . "/" . $v;
+                if ($v) {
+                    $img_list[$k] = "/static/media/" . $category . "/" . $v;
+                    if ($k !== "md" && $k !== "sm") $img_slider[] = "/static/media/" . $category . "/" . $v;
+                }
             }
         }
 

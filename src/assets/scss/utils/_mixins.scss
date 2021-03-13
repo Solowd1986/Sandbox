@@ -1,4 +1,3 @@
-/*  Эффект подчеркивания для ссылок  */
 @mixin link-hover-underline-effect() {
 
   position: relative;
@@ -63,13 +62,6 @@
   margin-right: -$margin + px;
 }
 
-/*  Генеринруем свойства для нужного количества элементов, сочетается с медиа-запросами.
-    $item-columns - количество колонок, для которых генерируем динамическую ширину
-    $columns - общее количество колонок в блоке, от которых пойдет расчет
-    $offset - отступы между колонками, общее число пикселей - 30, а значит - с каждой стороны по 15px
-    $margin-bottom - отступ снизу, чтобы каждаая линия элементов не прилегала к нижеследующей
-================================
-*/
 @mixin generate-columns-for-item($item-columns, $columns: 12, $offset: 30, $margin-bottom: 20) {
   width: calc(100% / #{$columns} * #{$item-columns} - #{$offset}#{px});
   margin-left: $offset/2 + px;

@@ -1,7 +1,7 @@
 import React, { Component, createRef } from "react";
-import common from "~scss/common.module.scss";
 import styles from "./tabs.module.scss"
-import classNames from "classnames";
+import cn from "classnames";
+
 import Features from "../Features/Features";
 import Specification from "../Specification/Specification";
 import ProductDelivery from "../ProductDelivery/ProductDelivery";
@@ -42,8 +42,8 @@ class ProductTabs extends Component {
             product: { promo, specifications = null }
         } = this.props;
 
-        const tabLinkClassList = classNames(styles.info__nav_link);
-        const tabBodyClassList = classNames(styles.tab);
+        const tabLinkClassList = cn(styles.info__nav_link);
+        const tabBodyClassList = cn(styles.tab);
 
         let phoneSpecsLink = null;
         let phoneSpecs = null;
@@ -56,7 +56,7 @@ class ProductTabs extends Component {
         }
 
         return (
-            <section className={`${common.wrapper} ${styles.info}`}>
+            <section className={cn("wrapper", styles.info)}>
                 <nav className={styles.info__nav} ref={this.tabLinkList}>
                     <span onClick={this.tabHandler} className={tabLinkClassList} data-tab={"desc"}>
                         Описание
@@ -67,7 +67,7 @@ class ProductTabs extends Component {
                     </span>
                 </nav>
 
-                <div className={common.container}>
+                <div className={"container"}>
                     <ul ref={this.tabBodyList}>
                         <li className={tabBodyClassList} id={"desc"}><Features promo={promo}/></li>
                         {phoneSpecs}

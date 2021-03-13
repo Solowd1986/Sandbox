@@ -1,11 +1,11 @@
 import React from "react";
-import common from "~scss/common.module.scss";
 import styles from "./announcements.module.scss";
+import cn from "classnames";
 
 const Announcements = props => {
     return (
-        <section className={`${common.container} ${styles.announcements_item}`}>
-            <div className={`${common.wrapper}`}>
+        <section className={cn("wrapper", styles.announcements_item)}>
+            <div className={"wrapper"}>
                 <h3 className={styles.announcements__title}>Предстоящие мероприятия</h3>
                 <ul className={styles.announcements__list}>
                     <li>

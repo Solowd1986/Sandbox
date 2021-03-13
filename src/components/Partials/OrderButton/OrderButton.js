@@ -1,16 +1,11 @@
 import React, { Component } from "react";
-
-import common from "@scss/common.module.scss";
 import styles from "./order-button.module.scss";
-
-import classNames from "classnames";
-import { connect } from "react-redux";
+import cn from "classnames";
+import cartIcon from "./img/cart";
 
 import * as cart from "@redux/entities/cart/actions";
 import * as cartSelector from "@redux/entities/cart/selectors/cartSelectors";
-
-import cartIcon from "./img/cart";
-
+import { connect } from "react-redux";
 
 class OrderButton extends Component {
     constructor(props) {
@@ -47,7 +42,7 @@ class OrderButton extends Component {
             ? (evt) => this.onClick(evt, product, this.props.onAddToCart)
             : (evt) => this.onClick(evt, product, this.props.onDeleteFromCart);
 
-        const classList = classNames(common.btn, styles.order__btn, {
+        const classList = cn("btn", 'rest', styles.order__btn, {
             [styles.btn_grey_bg]: isProductInCart || rest === 0,
             [this.props.classList]: this.props.classList,
         });

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./header.module.scss";
-import classNames from "classnames";
+import cn from "classnames";
 
 import MobileNavbar from "./Partials/MobileNavbar/MobileNavbar";
 import Logo from "./Partials/Logo/Logo";
@@ -23,25 +23,19 @@ class Header extends Component {
     }
 
     handleScroll = () => {
-        if (window.scrollY > 200) {
-            this.setState({
-                isPageScrolled: true
-            });
-        } else {
-            this.setState({
-                isPageScrolled: false
-            });
-        }
+        window.scrollY > document.body.clientHeight
+            ? this.setState({ isPageScrolled: true })
+            : this.setState({ isPageScrolled: false })
     };
 
     render() {
-        const classList = classNames({
+        const classList = cn({
             [styles.header_fixed]: this.state.isPageScrolled
         });
         return (
             <header className={classList}>
                 <a className={`${styles.portfolio_controls} ${styles.portfolio_controls__right}`} href="#">перейти на GitHub проекта</a>
-                <nav className={classNames("wrapper", styles.common)}>
+                <nav className={cn("wrapper", styles.common)}>
                     <MobileNavbar/>
                     <Logo/>
                     <NavbarList/>
