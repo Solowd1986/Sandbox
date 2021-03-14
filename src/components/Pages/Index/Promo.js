@@ -121,8 +121,9 @@ class Promo extends Component {
         return (
             <section className={`container ${styles.wrapper}`}>
                 <main className={`wrapper ${styles.content}`}>
-                    <NavLink to={"/secret"}>Go to secret page </NavLink>
-                    <NavLink to={"/login"}>Go to login page </NavLink>
+
+                    {/*<NavLink to={"/secret"}>Go to secret page </NavLink>*/}
+                    {/*<NavLink to={"/login"}>Go to login page </NavLink>*/}
 
                     {/*<FormikForm/>*/}
 
