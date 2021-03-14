@@ -28,6 +28,8 @@ const validationSchemaFields = [
 
 export default function setValidateSchema(requestedFields) {
     const selectedFields = {};
+    // на каждой итерации получаем поле обьекта(через Object.keys), если оно в запрошенном массиве, то записываем
+    // в обьект это поле + значение этого поля (Object.values). Всегда нулевой индекс, так как поле всегда одно.
     for (const value of validationSchemaFields) {
         if (requestedFields.includes(Object.keys(value)[0])) {
             selectedFields[Object.keys(value)[0]] = Object.values(value)[0]
@@ -35,12 +37,6 @@ export default function setValidateSchema(requestedFields) {
     }
     return yup.object().shape(selectedFields);
 }
-
-
-
-
-
-
 
 
 

@@ -10,6 +10,7 @@ import Modal from "@components/Partials/Modal/Modal";
 import Spinner from "@components/Partials/Spinner/Spinner";
 import CartModal from "@components/Other/CartModal/CartModal";
 
+
 import * as cartSelector from "@redux/entities/cart/selectors/cartSelectors";
 
 import * as serverActions from "@redux/entities/db/actions";
@@ -74,6 +75,8 @@ class Promo extends Component {
 
 
     render() {
+
+
         //console.log(this.props);
         // localStorage.setItem("auth", JSON.stringify({
         //     token: "asrgretdvtyrty",
