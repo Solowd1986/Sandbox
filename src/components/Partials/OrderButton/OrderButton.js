@@ -42,13 +42,14 @@ class OrderButton extends Component {
             ? (evt) => this.onClick(evt, product, this.props.onAddToCart)
             : (evt) => this.onClick(evt, product, this.props.onDeleteFromCart);
 
-        const classList = cn("btn", 'rest', styles.order__btn, {
+        const classList = cn("btn", styles.order__btn, {
             [styles.btn_grey_bg]: isProductInCart || rest === 0,
+            [styles.btn_disabled]: !rest,
             [this.props.classList]: this.props.classList,
         });
 
         return (
-            <button className={classList} onClick={clickHandler} disabled={rest === 0}>
+            <button className={classList} onClick={clickHandler} disabled={!rest}>
                 {cartIcon}
                 {spinnerIcon}
                 {innerText}
