@@ -18,6 +18,7 @@ class RequestHandler extends DbConnect
 
     public static function getCategoryItems($category, $limit = null)
     {
+        $DEFAULT_NUMBER_OF_ELEMENTS = 8;
         // Получаем имена таблиц для картинок, промо и основного списка продуктов, основываясь на переданном значении
         $category_products_table = $category . "_list";
         $category_promo_table = substr($category, 0, strlen($category) - 1) . "_promo";
@@ -25,7 +26,7 @@ class RequestHandler extends DbConnect
 
         $products_query = $limit
             ? "SELECT * FROM {$category_products_table} LIMIT {$limit}"
-            : "SELECT * FROM {$category_products_table}";
+            : "SELECT * FROM {$category_products_table} LIMIT {$DEFAULT_NUMBER_OF_ELEMENTS}";
 
         $pdo = Connect::exec()->prepare($products_query);
         $pdo->execute();
