@@ -28,11 +28,12 @@ export default (state = initialState, action) => {
         }
 
         case types.SERVER_FETCH_LAZY_PAGE_DATA: {
+            console.dir(action.payload);
             return {
                 ...state,
                 fetchingLazyDataStart: false,
-                lastIndex: state.lastIndex + action.payload.data.length,
-                lazy: action.payload.data
+                lastIndex: action.payload.lastIndex,
+                lazy: action.payload.load
             };
         }
 

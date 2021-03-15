@@ -24,22 +24,32 @@ export const clearCategoryPageReduxData = () => {
 
 export const fetchLazyCategoryProducts = (category, index, history) => async (dispatch, getState, api) => {
     dispatch({ type: types.SERVER_START_FETCH_PAGE_DATA });
-    console.log(category);
-    console.log(history);
+
+    //console.log(category);
+    //console.log(history);
 
     const response = await api.get(`lazy/${category}/${index}`);
-    console.log(response);
 
-    return
-
-
-    try {
-        const response = await api.fetchData(params);
-        if (response.data.error) return;
-        dispatch({ type: types.SERVER_FETCH_LAZY_PAGE_DATA, payload: response.data })
-    } catch (e) {
-        history.push("/500");
+    //console.dir(response);
+    dispatch({
+        type: types.SERVER_FETCH_LAZY_PAGE_DATA,
+        payload: {
+            lastIndex: response.data.lastIndex,
+            load: response.data.load
     }
+    });
+    //console.log(response);
+
+    //return
+    //
+    //
+    // try {
+    //     const response = await api.fetchData(params);
+    //     if (response.data.error) return;
+    //     dispatch({ type: types.SERVER_FETCH_LAZY_PAGE_DATA, payload: response.data })
+    // } catch (e) {
+    //     history.push("/500");
+    // }
 };
 
 

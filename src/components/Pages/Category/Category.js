@@ -152,6 +152,7 @@ class Category extends Component {
     }
 
     render() {
+        //console.dir(this.props);
         if (this.isProductListStateEmpty() || this.isThisAnotherCategoryPage()) {
             const SpinnerModal = withModal(Spinner, { bg: false, interactionsDisabled: true });
             return <SpinnerModal/>;

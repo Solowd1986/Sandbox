@@ -16,7 +16,7 @@ class RequestHandler extends DbConnect
     }
 
 
-    public static function getCategoryItems($category, $limit = null)
+    public static function getCategoryItems($category, $limit = null, $offset = null)
     {
         $DEFAULT_NUMBER_OF_ELEMENTS = 8;
         // Получаем имена таблиц для картинок, промо и основного списка продуктов, основываясь на переданном значении
@@ -27,6 +27,11 @@ class RequestHandler extends DbConnect
         $products_query = $limit
             ? "SELECT * FROM {$category_products_table} LIMIT {$limit}"
             : "SELECT * FROM {$category_products_table} LIMIT {$DEFAULT_NUMBER_OF_ELEMENTS}";
+
+        if ($offset) {
+            //print json_encode([$category_products_table, $limit, $offset]);
+            $products_query = "SELECT * FROM {$category_products_table} LIMIT {$offset},{$limit}";
+        }
 
         $pdo = Connect::exec()->prepare($products_query);
         $pdo->execute();
@@ -64,15 +69,6 @@ class RequestHandler extends DbConnect
                     self::getSpecifications($product["id"], $product_foreign_key_name, $spec_table);
             }
         }
-
-
-//        if ($limit) {
-//            $new_arr = $list_of_products;
-//        } else {
-//            $new_arr = array_slice(array_merge($list_of_products, $list_of_products), 0, 8);
-//            shuffle($new_arr);
-//        }
-
         // Отдаем массив из двух полей: список продуктов, со всеми данными и блок служебной информации для категории
         return ["main" => self::getCategoryInfo($category), "data" => $list_of_products];
     }
@@ -88,9 +84,7 @@ class RequestHandler extends DbConnect
         }
     }
 
-
     // Получить общие данные по выбранной категории: ее название, alias, фоновое изображение страницы
-
     public static function getPromo($id, $field, $tablename)
     {
         try {
@@ -190,5 +184,36 @@ class RequestHandler extends DbConnect
         }
 
         return ["main" => self::getCategoryInfo($category), "data" => $product];
+    }
+
+    private static function getTableColumnsCount($tablename)
+    {
+        try {
+            $pdo = Connect::exec()->prepare("SELECT COUNT(*) FROM {$tablename}");
+            $pdo->execute();
+            return $pdo->fetchColumn();
+        } catch (\Exception $e) {
+            return "Ошибка при операции " . $e->getMessage();
+        }
+    }
+
+
+    public static function getLazyLoadItems($category, $index)
+    {
+        $base_index = 8;
+        $cnt_Of_rows = 8;
+        $last_index = $index === 0 ? $base_index : $index + $base_index;
+
+        if ($last_index + $cnt_Of_rows >= self::getTableColumnsCount($category . "_list")) {
+            return [
+                "lastIndex" => -1,
+                "load" => self::getCategoryItems($category, $cnt_Of_rows, $last_index)["data"]
+            ];
+        } else {
+            return [
+                "lastIndex" => $last_index,
+                "load" => self::getCategoryItems($category, $cnt_Of_rows, $last_index)["data"]
+            ];
+        }
     }
 }

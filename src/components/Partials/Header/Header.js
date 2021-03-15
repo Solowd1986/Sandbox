@@ -32,6 +32,7 @@ class Header extends Component {
             : this.setState({ isPageScrolled: false })
     };
 
+    //region Механизм фиксации header
     /**
      * Если выполняется условие по прокрутке, то header становиться fixed, смена позиционирования header на fixed
      * вызывает исчезновение его из потока, вся страница смещается вверх, ее высота уменьшается, условие появление
@@ -43,8 +44,9 @@ class Header extends Component {
      *    страница проскролена дальше выбранной точки?
      * 3. Если да, то header выше получает класс header_fixed, а this.offset получает высоту header-а
      * 4. Если же статус isPageScrolled сменился на false, то есть пользователь прокрутил вверх - убираем высоту для offset
-     * 5. Таким образом высота страницы одна, фиксирован header или нет, значит нет поводд для коллизий
+     * 5. Таким образом высота страницы одна, фиксирован header или нет, значит нет поводов для коллизий
      */
+    //endregion фиксации
     render() {
         const classList = cn({
             [styles.header_fixed]: this.state.isPageScrolled

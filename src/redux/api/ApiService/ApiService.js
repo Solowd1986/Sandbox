@@ -32,6 +32,7 @@ class ApiService {
 
         return this.api.get(uri)
             .then(response => {
+                //console.dir(response);
                 if (response.data.error) history.push("/404");
                 return response;
             })

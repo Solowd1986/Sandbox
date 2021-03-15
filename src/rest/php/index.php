@@ -13,6 +13,8 @@ use php\db\RequestHandler as Request;
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
     $uri = trim(filter_var($_SERVER["REQUEST_URI"], FILTER_SANITIZE_URL));
+    //print json_encode($uri);
+
     $prefix = "api/";
     $cnt = strpos($uri, $prefix) + strlen($prefix);
     $res = mb_substr($uri, $cnt, strlen($uri));
@@ -35,12 +37,17 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             $product_id = trim(filter_var($list[1], FILTER_SANITIZE_STRING));
             print json_encode(Request::getOneItem($product_id, $category_title));
 
-        } elseif (strpos($res, "lazy") !== false) {
+        } elseif (preg_match("/^lazy\/(?P<category>[a-z]+)\/(?P<index>[0-9]+)$/", $res, $matches)) {
+            $category_title = $matches["category"];
+            $last_index = $matches["index"];
+
+            //print json_encode([$category_title, $last_index]);
             // timeout 4 sec maximun, else - error msg
             //sleep(1);
-            print json_encode("lazy ok");
+            //print json_encode("lazy ok");
+            print json_encode(Request::getLazyLoadItems($category_title, $last_index));
 
-            $category_title = substr($res, strpos($res, "/") + 1);
+            //$category_title = substr($res, strpos($res, "/") + 1);
             //var_dump_pre(Request::getLazyLoadItems($category_title));
         } else {
             throw new Error("Page with this parametres not exist");
