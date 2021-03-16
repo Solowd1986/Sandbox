@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
             $product_id = trim(filter_var($list[1], FILTER_SANITIZE_STRING));
             print json_encode(Request::getOneItem($product_id, $category_title));
 
-        } elseif (preg_match("/^lazy\/(?P<category>[a-z]+)\/(?P<index>[0-9]+)$/", $res, $matches)) {
+        } elseif (preg_match("/^lazy\/(?P<category>[a-z]+)\/(?P<index>[0-9-]+)$/", $res, $matches)) {
             $category_title = $matches["category"];
             $last_index = $matches["index"];
 

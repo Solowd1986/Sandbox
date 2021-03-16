@@ -200,9 +200,17 @@ class RequestHandler extends DbConnect
 
     public static function getLazyLoadItems($category, $index)
     {
+        if ($index === "-1") {
+            return [
+                "lastIndex" => -1,
+                "load" => []
+            ];
+        }
+
         $base_index = 8;
         $cnt_Of_rows = 8;
         $last_index = $index === 0 ? $base_index : $index + $base_index;
+
 
         if ($last_index + $cnt_Of_rows >= self::getTableColumnsCount($category . "_list")) {
             return [

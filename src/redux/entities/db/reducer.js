@@ -27,6 +27,7 @@ export default (state = initialState, action) => {
             };
         }
 
+
         case types.SERVER_FETCH_LAZY_PAGE_DATA: {
             console.dir(action.payload);
             return {
@@ -36,6 +37,18 @@ export default (state = initialState, action) => {
                 lazy: action.payload.load
             };
         }
+
+
+        // case types.SERVER_FETCH_LAZY_PAGE_DATA: {
+        //     //console.log(action.payload);
+        //     return {
+        //         ...state,
+        //         fetchingLazyDataStart: false,
+        //         lastIndex: state.lastIndex + action.payload.load.data.length,
+        //         lazy: action.payload.load.data
+        //     };
+        // }
+
 
         case types.SERVER_CLEAR_CATEGORY_PAGE_REDUX_DATA: {
             return {

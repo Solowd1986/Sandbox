@@ -137,7 +137,19 @@ class Category extends Component {
         if (this.props.lastIndex > 0 || this.props.lastIndex === -1
             &&
             !this.isSorted && this.state.lastIndex === this.props.lastIndex) {
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            //console.log('down');
+            //console.log(document.body.scrollHeight);
+            //console.log(document.querySelector("main").scrollHeight);
+            //console.log(document.documentElement.scrollHeight);
+            //console.log(document.body.clientHeight);
+            //window.scrollTo(0,document.body.scrollHeight);
+
+
+            window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+
+
+            //window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+            //window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
         }
         if (prevProps.sortType === this.props.sortType) this.isSorted = false;
     }
@@ -153,6 +165,8 @@ class Category extends Component {
 
     render() {
         //console.dir(this.props);
+        //console.log('rend');
+
         if (this.isProductListStateEmpty() || this.isThisAnotherCategoryPage()) {
             const SpinnerModal = withModal(Spinner, { bg: false, interactionsDisabled: true });
             return <SpinnerModal/>;
