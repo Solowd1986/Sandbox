@@ -24,7 +24,6 @@ class CategoryProductsList extends Component {
                 <div className={classNames("wrapper", styles.filters_wrapper)}>
                     <SortPorducts/>
                 </div>
-
                 <div className={classNames("wrapper", styles.list_wrapper)}>
                     <LazyLoad categoryName={category.alias}>
                         <ul className={styles.list}>

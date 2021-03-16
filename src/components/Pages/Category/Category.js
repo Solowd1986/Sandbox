@@ -114,6 +114,8 @@ class Category extends Component {
      */
     //</editor-fold>
     componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('did');
+
         if (this.isProductListStateEmpty() && this.props.category) {
             this.setState(state => ({ categoryProductsList: this.props.category }));
         }
@@ -121,6 +123,7 @@ class Category extends Component {
             this.clearComponentState();
             this.props.clearCategoryPageReduxData();
             this.props.fetchPageData(this.props);
+
         }
         if (!this.isProductListStateEmpty() && this.state.lastIndex !== this.props.lastIndex) {
             this.setState(produce(this.state, draft => {
@@ -134,20 +137,23 @@ class Category extends Component {
             this.isSorted = true;
         }
 
-        if (this.props.lastIndex > 0 || this.props.lastIndex === -1
-            &&
+        if ((this.props.lastIndex > 0 || this.props.lastIndex === -1)
+            && !this.isThisAnotherCategoryPage() &&
             !this.isSorted && this.state.lastIndex === this.props.lastIndex) {
-            //console.log('down');
+
+            console.log('down');
             //console.log(document.body.scrollHeight);
             //console.log(document.querySelector("main").scrollHeight);
             //console.log(document.documentElement.scrollHeight);
             //console.log(document.body.clientHeight);
             //window.scrollTo(0,document.body.scrollHeight);
 
+            //console.log('scroll');
 
-            window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+            //window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
 
-
+            //document.querySelector("body").scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+            $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
             //window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
             //window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
         }

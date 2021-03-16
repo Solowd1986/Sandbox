@@ -27,7 +27,7 @@ class Header extends Component {
     }
 
     handleScroll = () => {
-        window.scrollY > document.body.clientHeight + this.header.current.clientHeight
+        window.scrollY > window.innerHeight + this.header.current.clientHeight
             ? this.setState({ isPageScrolled: true })
             : this.setState({ isPageScrolled: false })
     };
