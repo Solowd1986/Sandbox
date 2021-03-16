@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./error-500.module.scss";
+import cn from "classnames";
 import { withRouter } from "react-router";
 
 class Error500 extends Component {
@@ -11,7 +12,7 @@ class Error500 extends Component {
 
     render() {
         return (
-            <div className={styles.wrapper}>
+            <div className={cn("overlay", styles.overlay_bg)}>
                 <div className={styles.content}>
                     <div id={styles.error}>
                         <div id={styles.box}/>

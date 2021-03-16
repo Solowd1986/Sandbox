@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styles from "@components/Pages/Index/promo.module.scss";
 
 import Slider from "./Slider";
 import Promo from "./Promo";

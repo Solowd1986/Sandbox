@@ -1,30 +1,32 @@
 import React from "react";
 import styles from "./product-price.module.scss";
-import classNames from "classnames";
+import cn from "classnames";
 
-const ProductPrice = ({ product: { price, discount, rest }, classList = null }) => {
-    let previousPrice = null;
-    let finalPrice = null;
+//region Описание
+/**
+ * classList приходит от компонента SingleProduct, формат по-умолчанию ему дан, чтобы не выбрасывало ошибку,
+ * при попытке обратиться к свойству от null или undeifned (то есть если бы classList = null, например), по сути условие
+ * всегда сработает, так как classList всегда true при указанном подходе, но вместо класса подставится "", если ничего не
+ * передано  так что не проблема. А если набор классов все же придет, то они без проблем извлекутся и подставятся.
+ */
+    //endregion
+const ProductPrice = ({ product: { price, discount, rest }, classList = { main: "", discount: "" } }) => {
+        const formatPrice = price => new Intl.NumberFormat().format(price);
 
-    let previousPriceClassList = classNames(styles.discount);
-    let finalPriceClassList = classNames(styles.price);
+        let initialPriceClassList = cn(styles.discount, {
+            [classList.discount]: classList
+        });
+        let finalPriceClassList = cn(styles.price, {
+            [classList.main]: classList
+        });
 
-    if (classList) {
-        previousPriceClassList = classNames(styles.discount, classList.discount);
-        finalPriceClassList = classNames(styles.price, classList.main);
-    }
+        let initialPrice = discount ? <span className={initialPriceClassList}>{formatPrice(price)} р.</span> : null;
+        let finalPrice = discount ? formatPrice(price - (price * 10 / 100)) + " р." : formatPrice(price) + " р.";
 
-    if (rest === 0 || !discount) {
-        finalPrice = new Intl.NumberFormat().format(price) + "р.";
-    } else {
-        previousPrice = <span className={previousPriceClassList}>{new Intl.NumberFormat().format(price)} р.</span>;
-        finalPrice = new Intl.NumberFormat().format(price - (price * 10 / 100)) + "р.";
-    }
-
-    if (rest === 0) return null;
+        if (!rest) return null;
     return (
         <span className={finalPriceClassList}>
-            {previousPrice}
+            {initialPrice}
             {finalPrice}
         </span>
     )

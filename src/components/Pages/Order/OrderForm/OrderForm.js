@@ -7,13 +7,12 @@ import OrderSummary from "./OrderSummary/OrderSummary";
 import Confirm from "@components/Pages/Order/Confirm/Confirm";
 import withDelay from "@components/Helpers/Hoc/withDelay/withDelay";
 import withModal from "@components/Helpers/Hoc/withModal/withModal";
+import { connect } from "react-redux";
 
 import setValidateSchema from "@components/Helpers/Validation/validateSchema/validateSchema"
 import Inputmask from "inputmask";
 import * as yup from "yup";
 import produce from "immer"
-
-import { connect } from "react-redux";
 
 
 //<editor-fold desc="Описание работы submit формы">

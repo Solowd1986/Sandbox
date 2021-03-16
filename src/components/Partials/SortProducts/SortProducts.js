@@ -1,35 +1,23 @@
 import React, { Component } from "react";
 import styles from "./sort-products.module.scss";
-import classNames from "classnames";
-import * as sort from "../../../redux/entities/sort/actions";
+import cn from "classnames";
+import * as sort from "@redux/entities/sort/actions";
 import { connect } from "react-redux";
-
-//<editor-fold desc="Description">
-
-/**
- * Data
- * Datdf33
- * Datdfr4
- */
-
-//</editor-fold>
 
 class SortPorducts extends Component {
     constructor(props) {
         super(props);
         this.list = React.createRef();
+        this.state = {
+            showSortPanel: false,
+        };
     }
-
-    state = {
-        showSortPanel: false,
-    };
 
     /**
      * Запрещаем всплытие при клике на кнопку открытия панели или на элемент выбора типа сортироваки, чтобы ониэ
      * не провоцировали срабатывание обработчика клика по window, иначе каждый клик по ним вызывал бы закрытие
      * панели выбор типа сортировки: клик по кнопке -> showSortPanel: true -> перехват клика на всплытие до window
      * -> вызов controlSortPanel, проверка на true продена -> скрытие панели.
-     * @param evt
      */
     toggleSortPanel = (evt) => {
         evt.stopPropagation();
@@ -74,7 +62,7 @@ class SortPorducts extends Component {
     }
 
     render() {
-        const classList = classNames(styles.sort_list_panel, "animate__animated animate__fadeInUp animate__faster", {
+        const classList = cn(styles.sort_list_panel, "animate__animated animate__fadeInUp animate__faster", {
             [styles.panel_show]: this.state.showSortPanel === true,
             [styles.panel_hide]: this.state.showSortPanel === false,
         });

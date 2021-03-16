@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./mobile-navbar.module.scss";
 import { NavLink } from "react-router-dom";
-import classNames from "classnames";
+import styles from "./mobile-navbar.module.scss";
+import cn from "classnames";
 
 class MobileNavbar extends React.Component {
 
@@ -40,11 +40,14 @@ class MobileNavbar extends React.Component {
     }
 
     render() {
-        const classListToggleIcon = classNames(styles.mobile_menu__icon, {
+        const classListToggleIcon = cn(styles.mobile_menu__icon, {
             [styles.mobile_menu__icon__active]: this.state.isMobileMenuVisible,
         });
 
-        const classListMenuWrapper = classNames("animate__animated", "animate__fadeIn", "animate__fast", styles.header__mobile_menu_wrapper);
+        const classListMenuWrapper = cn(
+            "animate__animated", "animate__fadeIn", "animate__fast",
+            styles.header__mobile_menu_wrapper
+        );
 
         return (
             <>

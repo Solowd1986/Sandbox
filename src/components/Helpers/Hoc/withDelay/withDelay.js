@@ -27,7 +27,7 @@ function withDelay(PropsComponent, ms = 1500) {
         }
 
         render() {
-            if (!this.state.isDelayEnded) return <div className={styles.overlay}><Spinner/></div>;
+            if (!this.state.isDelayEnded) return <div className={"overlay"}><Spinner/></div>;
             return <PropsComponent/>
         }
     }

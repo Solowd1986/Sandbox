@@ -51,7 +51,7 @@ function withModal(WrappedComponent, { fixed = false, bg = true, interactionsDis
             if (!this.state.isModalActive) return null;
 
             const classList = classNames({
-                [styles.overlay]: !fixed,
+                ["overlay"]: !fixed,
                 [styles.wrapper]: fixed,
                 [styles.bg]: bg
             });

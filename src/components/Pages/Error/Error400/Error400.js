@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
 import styles from "./error-400.module.scss";
+import cn from "classnames";
 import { withRouter } from "react-router";
 import img from "./img/error-400.png";
 
@@ -13,7 +13,7 @@ class Error400 extends Component {
 
     render() {
         return (
-            <div className={styles.wrapper}>
+            <div className={cn("overlay", styles.overlay_bg)}>
                 <div className={styles.content}>
                     <img src={img} alt="image"/>
                     <h3 className={styles.title}>Что-то пошло не так!</h3>

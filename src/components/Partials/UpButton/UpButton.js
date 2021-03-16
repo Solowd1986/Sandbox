@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import styles from "./up-button.module.scss";
-import classNames from "classnames";
+import cn from "classnames";
 
 class UpButton extends Component {
     constructor(props) {
@@ -37,7 +37,7 @@ class UpButton extends Component {
     };
 
     render() {
-        const classList = classNames(styles.up, {
+        const classList = cn(styles.up, {
             [styles.show]: this.state.isPageScrolledToBottom
         });
         return (

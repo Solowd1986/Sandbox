@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./lazy-load.module.scss"
-import classNames from "classnames";
+import cn from "classnames";
 import * as PropTypes from "prop-types";
 
 import { withRouter } from "react-router";
@@ -13,18 +13,12 @@ class LazyLoad extends Component {
         categoryName: PropTypes.string.isRequired
     };
 
-    constructor(props) {
-        super(props);
-        //console.log(this.props);
-
-    }
-
     fetchLazyCategory = () => {
         this.props.fetchLazyCategoryProducts(this.props.categoryName, this.props.lastIndex, this.props.history)
     };
 
     render() {
-        const classList = classNames(styles.more, {
+        const classList = cn(styles.more, {
             [styles.active]: this.props.fetchStart
         });
 

@@ -1,12 +1,9 @@
 import React from "react";
-import styles from "./navbar-list.module.scss";
 import { NavLink } from "react-router-dom";
-
+import styles from "./navbar-list.module.scss";
 import { connect } from "react-redux";
 
 class NavbarList extends React.Component {
-
-
     render() {
         return (
             <ul className={styles.header__nav_list}>

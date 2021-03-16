@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import styles from "./product.module.scss";
 import cn from "classnames";
 
+import OrderButton from "@components/Partials/OrderButton/OrderButton";
+import ProductPrice from "@components/Partials/ProductPrice/ProductPrice";
+import PromoBadge from "@components/Partials/PromoBadge/PromoBadge";
 import ProductSlider from "./ProductSlider/ProductSlider";
-import OrderButton from "../../Partials/OrderButton/OrderButton";
-import ProductPrice from "../../Partials/ProductPrice/ProductPrice";
 import ProductTabs from "./ProductTabs/ProductTabs";
-import PromoBadge from "../../Partials/PromoBadge/PromoBadge";
-import * as server from "../../../redux/entities/db/actions";
 
+import * as server from "@redux/entities/db/actions";
 import { connect } from "react-redux";
-import Spinner from "../../Partials/Spinner/Spinner";
+import Spinner from "@components/Partials/Spinner/Spinner";
 
 
 class Product extends Component {
@@ -30,6 +30,8 @@ class Product extends Component {
     }
 
     render() {
+        console.log(this.props);
+
         if (!this.state.product) return <Spinner/>;
 
         const { main: category, data: product } = this.state.product;

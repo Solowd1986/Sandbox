@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styles from "./product-card.module.scss";
 
-
 class PromoProductCard extends Component {
 
     render() {

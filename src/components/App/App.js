@@ -4,9 +4,6 @@ import Layout from "@components/Partials/Layout/Layout";
 import ErrorBoundary from "@components/Helpers/ErrorBoundary/ErrorBoundary";
 import ScrollToTop from "@components/Helpers/Hoc/withScrollToTop/ScrollToTop";
 
-import Secret from "@components/Other/Auth/Secret";
-import Login from "@components/Other/Auth/Login";
-
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import routes from "@root/routes/routes";
 
@@ -23,9 +20,6 @@ export default class App extends Component {
                             <Layout>
                                 <ScrollToTop>
                                     <Switch>
-                                        <Route path={"/secret"} component={Secret}/>
-                                        <Route path={"/login"} component={Login}/>
-
                                         {routes.map((route) =>
                                             <Route
                                                 key={route.url}

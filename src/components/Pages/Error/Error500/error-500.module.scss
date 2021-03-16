@@ -1,3 +1,5 @@
+@import "~scss/utils/utils.scss";
+
 @font-face {
   font-family: "Error";
   src: url("fonts/error.ttf") format("truetype");
@@ -5,38 +7,18 @@
   font-style: normal;
 }
 
-
-.wrapper {
-  display: flex;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 999;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
+.overlay_bg {
+  background-color: $white;
 }
 
 .content {
   display: flex;
   flex-direction: column;
   text-align: center;
-
-  & > h1 {
-
-  }
-
   & > a {
-    color: red;
+    color: $red;
   }
-
 }
-
-
-$color-1: magenta;
-$color-2: cyan;
 
 #error {
   position: relative;
@@ -53,7 +35,7 @@ div#error div#box {
   height: 100%;
   top: 0;
   left: 0;
-  border: 1px solid #000;
+  border: 1px solid $black;
 
 }
 
@@ -65,19 +47,19 @@ body div#error div#box:after {
   height: 100%;
   top: 0;
   left: 0;
-  box-shadow: inset 0px 0px 0px 1px #000;
+  box-shadow: inset 0px 0px 0px 1px $black;
   animation: dance 2s infinite steps(1);
   mix-blend-mode: multiply;
 }
 
 body div#error div#box:before {
-  color: #f0f;
+  color: $purple-100;
   box-shadow: inset 0px 0px 0px 1px currentColor;
   clip-path: polygon(0 0, 65% 0, 35% 100%, 0 100%);
 }
 
 body div#error div#box:after {
-  color: #0ff;
+  color: $grey-900;
   box-shadow: inset 0px 0px 0px 1px currentColor;
   animation-duration: 0.5s;
   animation-direction: alternate;
@@ -105,13 +87,13 @@ body div#error h3:after {
 }
 
 body div#error h3:before {
-  color: #f0f;
+  color: $purple-100;
   animation: shiftright 2s steps(2) infinite;
   clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
 }
 
 body div#error h3:after {
-  color: #0ff;
+  color: $grey-900;
   animation: shiftleft 2s steps(2) infinite;
   clip-path: polygon(0 100%, 100% 100%, 100% 50%, 0 50%);
 }
@@ -139,16 +121,14 @@ body div#error p:last-child {
 }
 
 .link:hover {
-  color: darken($color-1, 10%);
-  //animation: shiftright 1.5s steps(2) infinite;
+  color: darken($purple-100, 10%);
 }
-
 
 body div#error p span {
   display: inline-block;
   position: relative;
   font-weight: bold;
-  color: #000;
+  color: $black;
   animation: blink 3s steps(1) infinite;
 }
 
@@ -162,13 +142,13 @@ body div#error p span:after {
 }
 
 body div#error p span:before {
-  color: #f0f;
+  color: $purple-100;
   animation: shiftright 1.5s steps(2) infinite;
   clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
 }
 
 body div#error p span:after {
-  color: #0ff;
+  color: $grey-900;
   animation: shiftleft 1.7s steps(2) infinite;
   clip-path: polygon(0 100%, 100% 100%, 100% 50%, 0 50%);
 }
@@ -327,7 +307,7 @@ body div#error p span:after {
 
 @-moz-keyframes blink {
   0%, 50%, 85%, 100% {
-    color: #000;
+    color: $black;
   }
 
   87%, 95% {
@@ -337,7 +317,7 @@ body div#error p span:after {
 
 @-webkit-keyframes blink {
   0%, 50%, 85%, 100% {
-    color: #000;
+    color: $black;
   }
 
   87%, 95% {
@@ -347,7 +327,7 @@ body div#error p span:after {
 
 @-o-keyframes blink {
   0%, 50%, 85%, 100% {
-    color: #000;
+    color: $black;
   }
 
   87%, 95% {
@@ -357,7 +337,7 @@ body div#error p span:after {
 
 @keyframes blink {
   0%, 50%, 85%, 100% {
-    color: #000;
+    color: $black;
   }
 
   87%, 95% {

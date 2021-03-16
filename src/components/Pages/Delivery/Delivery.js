@@ -1,21 +1,9 @@
 import React, { Component } from "react";
 import styles from "./delivery.module.scss";
 import cn from "classnames";
-
 import deliveryBanner from "./img/_delivery-banner.png";
-import * as utils from "../../Helpers/Functions/scrollbarHelper";
-
 
 class Delivery extends Component {
-    state = {};
-
-    static getDerivedStateFromProps(props, state) {
-        // это нужно чтобы при переходе по мольному скроллу как при создании компонента категории так и при обновлении
-        // при переходам по сссылкам, кажыдй раз сбрасывался отступ и запрет прокрутки.
-        utils.removeScrollbarOffset();
-        return null
-    }
-
     render() {
 
         return (

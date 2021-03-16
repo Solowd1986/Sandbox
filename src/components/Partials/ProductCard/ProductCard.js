@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import * as PropTypes from "prop-types";
 
 import styles from "./product-card.module.scss";
-import classNames from "classnames";
+import cn from "classnames";
 
 class ProductCard extends Component {
 
@@ -20,7 +20,7 @@ class ProductCard extends Component {
     render() {
 
         const { category, item, item: { rest } } = this.props;
-        const tagClassList = classNames(styles.tag, {
+        const tagClassList = cn(styles.tag, {
             [styles.not_in_stock]: !rest
         });
 

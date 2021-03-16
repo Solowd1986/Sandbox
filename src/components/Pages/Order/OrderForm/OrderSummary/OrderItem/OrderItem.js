@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./order_item.module.scss"
-import classNames from "classnames";
+import cn from "classnames";
 
 import * as cart from "@redux/entities/cart/actions";
 import { connect } from "react-redux";
@@ -67,12 +67,12 @@ class OrderItem extends Component {
 
                         <span
                             onClick={(evt) => this.changeAmount(evt, item.id, item.quantity - 1)}
-                            className={classNames(styles.counter, styles.counter_minus)}
+                            className={cn(styles.counter, styles.counter_minus)}
                         />
 
                         <label>
                             <input
-                                type="text" name="customer-product-count"
+                                type="text"
                                 onChange={this.onChangeInput}
                                 name={item.title}
                                 onBlur={this.onBlurInput}
@@ -82,7 +82,7 @@ class OrderItem extends Component {
 
                         <span
                             onClick={(evt) => this.changeAmount(evt, item.id, item.quantity + 1)}
-                            className={classNames(styles.counter, styles.counter_plus)}
+                            className={cn(styles.counter, styles.counter_plus)}
                         />
                     </div>
                 </div>
