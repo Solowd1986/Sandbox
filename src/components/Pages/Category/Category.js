@@ -6,7 +6,9 @@ import Spinner from "@components/Partials/Spinner/Spinner";
 import withModal from "@components/Helpers/Hoc/withModal/withModal";
 
 import { bindActionCreators } from 'redux';
-import * as serverActions from "@redux/entities/db/actions";
+import * as serverActions from "@redux/entities/server/actions";
+import * as serverSelectors from "@redux/entities/server/selectors/serverSelectors";
+import * as sortSelectors from "@redux/entities/sort/selectors/sortSelectors";
 import { connect } from "react-redux";
 
 import arrayShuffle from "@components/Helpers/Functions/arrayShuffle";
@@ -154,7 +156,7 @@ class Category extends Component {
 
     render() {
         if (this.isProductListStateEmpty() || this.isThisAnotherCategoryPage()) {
-            const SpinnerModal = withModal(Spinner, { bg: false, interactionsDisabled: true });
+            const SpinnerModal = withModal(Spinner, { bg: false, interactionsDisabled: true, });
             return <SpinnerModal/>;
         } else {
             const { main: category, data: products } = this.state.categoryProductsList;
@@ -165,10 +167,10 @@ class Category extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        category: state.db.category,
-        sortType: state.sort.sortType,
-        lazy: state.db.lazy,
-        lastIndex: state.db.lastIndex
+        category: serverSelectors.serverCategorySelector(state),
+        lazy: serverSelectors.serverLazySelector(state),
+        lastIndex: serverSelectors.serverLastIndexSelector(state),
+        sortType: sortSelectors.sortTypeSelector(state),
     }
 };
 

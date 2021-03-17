@@ -3,6 +3,7 @@ import styles from "./order-summary.module.scss";
 
 import OrderPrice from "@components/Pages/Order/OrderForm/OrderSummary/OrderPrice/OrderPrice";
 import OrderItem from "@components/Pages/Order/OrderForm/OrderSummary/OrderItem/OrderItem";
+import * as cartSelectors from "@redux/entities/cart/selectors/cartSelectors";
 import { connect } from "react-redux";
 
 class OrderSummary extends Component {
@@ -23,7 +24,7 @@ class OrderSummary extends Component {
 
 function mapStateToProps(state) {
     return {
-        listOfProducts: state.cart.products,
+        listOfProducts: cartSelectors.cartItemsSelector(state),
     }
 }
 

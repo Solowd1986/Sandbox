@@ -1,5 +1,6 @@
 import * as types from "./constants/cart";
-import { List } from "immutable";
+import lodashCloning from "@components/Helpers/Lodash/lodashCloning";
+import produce from "immer";
 
 const initialState = {
     amountOfProductsInCart: 0,
@@ -12,56 +13,44 @@ export default (state = initialState, action) => {
     switch (action.type) {
         case types.CART_ADD_ITEM: {
             const { item } = action.payload;
-
-            const products = !state.products ? [] : [...state.products];
+            const products = lodashCloning(state.products);
             if (!products.includes(item)) {
                 const product = { ...item, quantity: 1 };
                 products.push(product);
             }
 
-            return {
-                ...state,
-                amountOfProductsInCart: state.amountOfProductsInCart + 1,
-                products,
-            };
+            return produce(state, draft => {
+                draft["products"] = products;
+                draft["amountOfProductsInCart"] = state.amountOfProductsInCart + 1;
+            });
         }
 
         case types.CART_REMOVE_ITEM : {
             const { item } = action.payload;
-            const index = state.products.indexOf(state.products.find(product => product.id === item.id && product.title === item.title));
-            const products = [
-                ...state.products.slice(0, index),
-                ...state.products.slice(index + 1)
-            ];
+            const products = lodashCloning(state.products);
+            const index = products.indexOf(products.find(product =>
+                product.id === item.id && product.title === item.title));
+            products.splice(index, 1);
 
-            return {
-                ...state,
-                amountOfProductsInCart: state.amountOfProductsInCart - 1,
-                products
-            };
+            return produce(state, draft => {
+                draft["products"] = products;
+                draft["amountOfProductsInCart"] = state.amountOfProductsInCart - 1;
+            });
         }
 
-
         case types.CART_CHANGE_PRODUCT_AMOUNT : {
-            const { evt, id, quantity } = action.payload;
+            const { id, title, quantity } = action.payload;
 
             if (isNaN(Math.abs(parseInt(quantity)))) return state;
 
-            const products = [...state.products];
-            const currentProduct = { ...products.find(item => item.id === id) };
+            const products = lodashCloning(state.products);
+            const product = products.find(item => item.id === id && item.title === title);
+            product.quantity = Math.max(state.minAmountOfProduct, Math.min(product.rest, quantity));
 
-            const min = state.minAmountOfProduct;
-            const max = currentProduct.rest;
-
-            currentProduct.quantity = Math.max(min, Math.min(max, quantity));
-            products[products.indexOf(products.find(item => item.id === id))] = currentProduct;
-
-            return {
-                ...state,
-                products
-            };
+            return produce(state, draft => {
+                draft["products"] = products;
+            });
         }
-
 
         default:
             return state;

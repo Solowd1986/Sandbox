@@ -1,4 +1,4 @@
-export const cartStateSelector = state => state.cart;
 export const cartItemsSelector = state => state.cart.products;
+export const cartAmountOfProductsInCartSelector = state => state.cart.amountOfProductsInCart;
 
 

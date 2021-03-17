@@ -1,4 +1,4 @@
-import * as types from "./constants/db"
+import * as types from "./constants/server"
 
 export const fetchPageData = (params) => async (dispatch, getState, api) => {
     const { match: { path: route, params: data }, history } = params;
@@ -29,6 +29,7 @@ export const fetchLazyCategoryProducts = (category, index, history) => async (di
     //console.log(history);
 
     const response = await api.get(`lazy/${category}/${index}`);
+    //const response = await api.axrReq(`lazy/${category}/${index}`);
 
     //console.dir(response);
     dispatch({

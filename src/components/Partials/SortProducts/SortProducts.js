@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./sort-products.module.scss";
 import cn from "classnames";
 import * as sort from "@redux/entities/sort/actions";
+import * as sortSelectors from "@redux/entities/sort/selectors/sortSelectors";
 import { connect } from "react-redux";
 
 class SortPorducts extends Component {
@@ -95,7 +96,7 @@ class SortPorducts extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        sortType: state.sort.sortType,
+        sortType: sortSelectors.sortTypeSelector(state),
     }
 };
 

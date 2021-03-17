@@ -4,7 +4,8 @@ import cn from "classnames";
 import * as PropTypes from "prop-types";
 
 import { withRouter } from "react-router";
-import * as serverActions from "@redux/entities/db/actions";
+import * as serverActions from "@redux/entities/server/actions";
+import * as serverSelectors from "@redux/entities/server/selectors/serverSelectors";
 import { connect } from "react-redux";
 
 class LazyLoad extends Component {
@@ -52,8 +53,8 @@ class LazyLoad extends Component {
 
 function mapStateToProps(state) {
     return {
-        lastIndex: state.db.lastIndex,
-        fetchStart: state.db.fetchingLazyDataStart
+        lastIndex: serverSelectors.serverLastIndexSelector(state),
+        fetchStart: serverSelectors.serverfetchingLazyDataStartSelector(state)
     }
 }
 

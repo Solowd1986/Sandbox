@@ -7,6 +7,7 @@ import OrderSummary from "./OrderSummary/OrderSummary";
 import Confirm from "@components/Pages/Order/Confirm/Confirm";
 import withDelay from "@components/Helpers/Hoc/withDelay/withDelay";
 import withModal from "@components/Helpers/Hoc/withModal/withModal";
+import * as cartSelectors from "@redux/entities/cart/selectors/cartSelectors";
 import { connect } from "react-redux";
 
 import setValidateSchema from "@components/Helpers/Validation/validateSchema/validateSchema"
@@ -180,7 +181,7 @@ class OrderForm extends Component {
 
 function mapStateToProps(state) {
     return {
-        listOfProducts: state.cart.products,
+        listOfProducts: cartSelectors.cartItemsSelector(state),
     }
 }
 

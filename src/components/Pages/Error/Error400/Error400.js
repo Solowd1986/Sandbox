@@ -13,7 +13,7 @@ class Error400 extends Component {
 
     render() {
         return (
-            <div className={cn("overlay", styles.overlay_bg)}>
+            <div className={"overlay"}>
                 <div className={styles.content}>
                     <img src={img} alt="image"/>
                     <h3 className={styles.title}>Что-то пошло не так!</h3>

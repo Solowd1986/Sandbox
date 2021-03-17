@@ -1,29 +1,20 @@
 import React, { Component } from "react";
 
 import styles from "./promo.module.scss";
-import classNames from "classnames";
+import cn from "classnames";
 import * as PropTypes from "prop-types";
 
 import ProductCard from "@components/Partials/ProductCard/ProductCard";
-import Modal from "@components/Partials/Modal/Modal";
-
 import Spinner from "@components/Partials/Spinner/Spinner";
+
+
 import CartModal from "@components/Other/CartModal/CartModal";
 
-
-import * as cartSelector from "@redux/entities/cart/selectors/cartSelectors";
-
-import * as serverActions from "@redux/entities/db/actions";
-import { connect } from "react-redux";
-
-
 import FormikForm from "../../Other/Form/Formik/FormikForm";
-
 
 import { NavLink } from "react-router-dom";
 import { Map } from "immutable";
 import DataStore from "../../Test/DataStore";
-
 import Stores from "../../Test/Stores"
 
 
@@ -142,13 +133,6 @@ class Promo extends Component {
 
 
                     {/*<button onClick={this.toggle}>Active</button>*/}
-                    {
-                        this.props.isModalActive
-                        &&
-                        <Modal delay={true}>
-                            <CartModal products={this.props.cart.products}/>
-                        </Modal>
-                    }
 
                     <h2 className={styles.section_title}>Рекомендуем</h2>
                     <ul className={styles.list}>

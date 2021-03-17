@@ -1,9 +1,10 @@
-import * as types from "./constants/db"
+import * as types from "./constants/server"
 
 const initialState = {
     index: null,
     category: null,
     product: null,
+    lazy: null,
 
     lastIndex: 0,
     fetchingLazyDataStart: false
@@ -37,17 +38,6 @@ export default (state = initialState, action) => {
                 lazy: action.payload.load
             };
         }
-
-
-        // case types.SERVER_FETCH_LAZY_PAGE_DATA: {
-        //     //console.log(action.payload);
-        //     return {
-        //         ...state,
-        //         fetchingLazyDataStart: false,
-        //         lastIndex: state.lastIndex + action.payload.load.data.length,
-        //         lazy: action.payload.load.data
-        //     };
-        // }
 
 
         case types.SERVER_CLEAR_CATEGORY_PAGE_REDUX_DATA: {

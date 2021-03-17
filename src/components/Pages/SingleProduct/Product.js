@@ -8,9 +8,11 @@ import PromoBadge from "@components/Partials/PromoBadge/PromoBadge";
 import ProductSlider from "./ProductSlider/ProductSlider";
 import ProductTabs from "./ProductTabs/ProductTabs";
 
-import * as server from "@redux/entities/db/actions";
+import * as serverActions from "@redux/entities/server/actions";
+import * as serverSelectors from "@redux/entities/server/selectors/serverSelectors";
 import { connect } from "react-redux";
 import Spinner from "@components/Partials/Spinner/Spinner";
+import { bindActionCreators } from "redux";
 
 
 class Product extends Component {
@@ -67,16 +69,17 @@ class Product extends Component {
 
 function mapStateToProps(state) {
     return {
-        product: state.db.product,
+        product: serverSelectors.serverProductSelector(state),
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        fetchPageData: (params) => {
-            dispatch(server.fetchPageData(params));
-        },
-    }
-}
+// function mapDispatchToProps(dispatch) {
+//     return {
+//         fetchPageData: (params) => {
+//             dispatch(server.fetchPageData(params));
+//         },
+//     }
+// }
 
+const mapDispatchToProps = (dispatch) => ({ ...bindActionCreators(serverActions.fetchPageData, dispatch) });
 export default connect(mapStateToProps, mapDispatchToProps)(Product);

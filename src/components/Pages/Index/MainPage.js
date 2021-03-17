@@ -10,8 +10,10 @@ import PromoBadge from "../../Partials/PromoBadge/PromoBadge";
 import withModal from "@components/Helpers/Hoc/withModal/withModal";
 import Spinner from "@components/Partials/Spinner/Spinner";
 
-import * as serverActions from "@redux/entities/db/actions";
+import * as serverActions from "@redux/entities/server/actions";
+import * as serverSelectors from "@redux/entities/server/selectors/serverSelectors";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 class MainPage extends Component {
     componentDidMount() {
@@ -19,7 +21,7 @@ class MainPage extends Component {
     }
 
     render() {
-        const SpinnerModal = withModal(Spinner, { bg: false, interactionsDisabled: true });
+        const SpinnerModal = withModal(Spinner, { bg: false, interactionsDisabled: true, fixed: true });
         if (!this.props.index) return <SpinnerModal/>;
         return (
             <>
@@ -36,7 +38,7 @@ class MainPage extends Component {
 
 function mapStateToProps(state) {
     return {
-        index: state.db.index,
+        index: serverSelectors.serverIndexSelector(state),
     }
 }
 
@@ -48,6 +50,7 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
+//const mapDispatchToProps = (dispatch) => ({ ...bindActionCreators(serverActions.fetchPageData, dispatch) });
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
 
 

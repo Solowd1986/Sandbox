@@ -12,7 +12,7 @@ class Error500 extends Component {
 
     render() {
         return (
-            <div className={cn("overlay", styles.overlay_bg)}>
+            <div className={"overlay"}>
                 <div className={styles.content}>
                     <div id={styles.error}>
                         <div id={styles.box}/>

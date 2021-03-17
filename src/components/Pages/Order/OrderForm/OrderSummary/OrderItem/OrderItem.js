@@ -1,18 +1,27 @@
 import React, { Component } from "react";
 import styles from "./order_item.module.scss"
 import cn from "classnames";
+import * as PropTypes from "prop-types"
 
-import * as cart from "@redux/entities/cart/actions";
+import * as cartActions from "@redux/entities/cart/actions";
+import * as serverActions from "@redux/entities/server/actions";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 
 class OrderItem extends Component {
+
+    static propTypes = {
+        changeAmountOfProduct: PropTypes.func,
+        removeItemFromCart: PropTypes.func,
+    };
+
     state = {
         item: this.props.item
     };
 
     onChangeInput = (evt) => {
-        let quantity = Math.abs(parseInt(evt.target.value));
+        const quantity = Math.abs(parseInt(evt.target.value));
         if (isNaN(quantity)) return;
 
         this.setState(() => {
@@ -23,28 +32,25 @@ class OrderItem extends Component {
     };
 
     onBlurInput = (evt) => {
-        this.props.onChangeAmountOfProduct(evt, this.props.item.id, evt.target.value);
-        this.blur = true;
+        this.props.changeAmountOfProduct(this.props.item.id, this.props.item.title, evt.target.value);
         this.setState({
             item: { ...this.state.item, quantity: this.normalizeValue(evt.target.value) }
         });
     };
 
 
-    changeAmount = (evt, id, quantity) => {
-        this.props.onChangeAmountOfProduct(evt, id, quantity);
+    changeAmount = (id, title, quantity) => {
+        this.props.changeAmountOfProduct(id, title, quantity);
         this.setState({
             item: { ...this.state.item, quantity: this.normalizeValue(quantity) }
         })
     };
 
     deleteFromOrder = () => {
-        this.props.onDeleteProductFromCart(this.props.item)
+        this.props.removeItemFromCart(this.props.item)
     };
 
-    normalizeValue = (value) => {
-        return Math.max(1, Math.min(this.props.item.rest, Math.abs(parseInt(value))));
-    };
+    normalizeValue = (value) => Math.max(1, Math.min(this.props.item.rest, Math.abs(parseInt(value))));
 
     render() {
         //console.log(this.props);
@@ -66,7 +72,7 @@ class OrderItem extends Component {
                     <div className={styles.counter_block}>
 
                         <span
-                            onClick={(evt) => this.changeAmount(evt, item.id, item.quantity - 1)}
+                            onClick={(evt) => this.changeAmount(item.id, item.title, item.quantity - 1)}
                             className={cn(styles.counter, styles.counter_minus)}
                         />
 
@@ -81,7 +87,7 @@ class OrderItem extends Component {
                         </label>
 
                         <span
-                            onClick={(evt) => this.changeAmount(evt, item.id, item.quantity + 1)}
+                            onClick={(evt) => this.changeAmount(item.id, item.title, item.quantity + 1)}
                             className={cn(styles.counter, styles.counter_plus)}
                         />
                     </div>
@@ -93,18 +99,7 @@ class OrderItem extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        onChangeAmountOfProduct: (evt, id, quantity) => {
-            dispatch(cart.changeAmountOfProduct(evt, id, quantity))
-        },
-        onDeleteProductFromCart: (item) => {
-            dispatch(cart.removeItemFromCart(item))
-        }
-    }
-}
-
-
+const mapDispatchToProps = (dispatch) => ({ ...bindActionCreators(cartActions, dispatch) });
 export default connect(null, mapDispatchToProps)(OrderItem);
 
 

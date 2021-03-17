@@ -1,4 +1,15 @@
 
+html {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+body, body > div {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
 
 body {
   overflow-y: scroll;
@@ -57,7 +68,6 @@ body {
   z-index: 999;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.8);
 }
 
 

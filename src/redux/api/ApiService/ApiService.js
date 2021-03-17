@@ -1,6 +1,13 @@
+import axiosRetry from 'axios-retry';
+
+const req = require('axios').default;
+axiosRetry(req, { retries: 3 });
+
 class ApiService {
     constructor() {
         this._axios = require('axios').default;
+        this.axr = req;
+
         this._decodeRecord = (recordName) => JSON.parse(decodeURIComponent(localStorage.getItem(recordName)));
 
         this.api = this._axios.create({
@@ -12,6 +19,8 @@ class ApiService {
             },
         });
     }
+
+    axrReq = (path) => this.axr.get(path);
 
     get = (uri) => this.api.get(uri);
     post = (uri, opt = {}) => this.api.post(uri, opt);

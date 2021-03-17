@@ -5,6 +5,8 @@ import cn from "classnames";
 
 import EmptyOrderPage from "./EmptyOrderPage/EmptyOrderPage";
 import OrderForm from "./OrderForm/OrderForm";
+
+import * as cartSelectors from "@redux/entities/cart/selectors/cartSelectors";
 import { connect } from "react-redux";
 
 class Order extends Component {
@@ -29,7 +31,7 @@ class Order extends Component {
 
 function mapStateToProps(state) {
     return {
-        amountOfProductsInCart: state.cart.amountOfProductsInCart,
+        amountOfProductsInCart: cartSelectors.cartAmountOfProductsInCartSelector(state),
     }
 }
 

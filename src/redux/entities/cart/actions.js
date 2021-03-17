@@ -19,12 +19,12 @@ export const removeItemFromCart = (item) => {
 };
 
 
-export const changeAmountOfProduct = (evt, id, quantity) => {
+export const changeAmountOfProduct = (id, title, quantity) => {
     return {
         type: types.CART_CHANGE_PRODUCT_AMOUNT,
         payload: {
-            evt,
             id,
+            title,
             quantity
         }
     }
