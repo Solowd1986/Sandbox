@@ -15,7 +15,7 @@ class CategoryProductsList extends Component {
             <div className={styles.category_wrapper}>
                 <div className={styles.sign_bg}>
                     <img
-                        className={`${styles.sign_bg__img} ${category.alias === "gadgets" && styles.img_fit}`}
+                        className={cn(styles.sign_bg__img, styles.img_fit)}
                         src={category.img.path}
                         alt={category.img.alt}/>
                     <h3 className={styles.sign_bg__title}>{category.title}</h3>

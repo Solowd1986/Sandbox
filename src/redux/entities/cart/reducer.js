@@ -3,9 +3,7 @@ import lodashCloning from "@components/Helpers/Lodash/lodashCloning";
 import produce from "immer";
 
 const initialState = {
-    amountOfProductsInCart: 0,
     minAmountOfProduct: 1,
-    modalCartShowedToUserCount: 0,
     products: []
 };
 
@@ -21,7 +19,6 @@ export default (state = initialState, action) => {
 
             return produce(state, draft => {
                 draft["products"] = products;
-                draft["amountOfProductsInCart"] = state.amountOfProductsInCart + 1;
             });
         }
 
@@ -34,7 +31,6 @@ export default (state = initialState, action) => {
 
             return produce(state, draft => {
                 draft["products"] = products;
-                draft["amountOfProductsInCart"] = state.amountOfProductsInCart - 1;
             });
         }
 

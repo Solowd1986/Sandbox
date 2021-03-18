@@ -6,8 +6,7 @@ import reduxLogger from "./middlware/reduxLogger";
 import ApiService from "./api/ApiService/ApiService";
 
 const activeMiddlewareList = [
-    reduxThunk.withExtraArgument(ApiService)
-
+    reduxThunk.withExtraArgument(ApiService),
 ];
 
 const preloadedState = {

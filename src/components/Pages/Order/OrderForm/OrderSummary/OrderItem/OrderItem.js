@@ -12,45 +12,37 @@ import { connect } from "react-redux";
 class OrderItem extends Component {
 
     static propTypes = {
-        changeAmountOfProduct: PropTypes.func,
-        removeItemFromCart: PropTypes.func,
+        changeAmountOfProduct: PropTypes.func.isRequired,
+        removeItemFromCart: PropTypes.func.isRequired,
     };
 
     state = {
         item: this.props.item
     };
 
+    normalizeValue = (value) => Math.max(1, Math.min(this.props.item.rest, Math.abs(parseInt(value))));
+
     onChangeInput = (evt) => {
         const quantity = Math.abs(parseInt(evt.target.value));
         if (isNaN(quantity)) return;
-
-        this.setState(() => {
-            return {
-                item: { ...this.state.item, quantity }
-            }
-        })
+        this.setState({ item: { ...this.state.item, quantity } });
     };
 
     onBlurInput = (evt) => {
         this.props.changeAmountOfProduct(this.props.item.id, this.props.item.title, evt.target.value);
-        this.setState({
-            item: { ...this.state.item, quantity: this.normalizeValue(evt.target.value) }
-        });
+        this.setState({ item: { ...this.state.item, quantity: this.normalizeValue(evt.target.value) } });
     };
 
 
     changeAmount = (id, title, quantity) => {
         this.props.changeAmountOfProduct(id, title, quantity);
-        this.setState({
-            item: { ...this.state.item, quantity: this.normalizeValue(quantity) }
-        })
+        this.setState({ item: { ...this.state.item, quantity: this.normalizeValue(quantity) } });
     };
 
     deleteFromOrder = () => {
         this.props.removeItemFromCart(this.props.item)
     };
 
-    normalizeValue = (value) => Math.max(1, Math.min(this.props.item.rest, Math.abs(parseInt(value))));
 
     render() {
         //console.log(this.props);
@@ -79,8 +71,8 @@ class OrderItem extends Component {
                         <label>
                             <input
                                 type="text"
-                                onChange={this.onChangeInput}
                                 name={item.title}
+                                onChange={this.onChangeInput}
                                 onBlur={this.onBlurInput}
                                 value={this.state.item.quantity}
                             />
