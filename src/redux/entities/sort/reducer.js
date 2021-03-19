@@ -12,6 +12,11 @@ export default (state = initialState, action) => {
             };
         }
 
+        case types.SORT_DISCARD_SORT_TYPE: {
+            return {
+                sortType: "по популярности"
+            };
+        }
         default: {
             return state;
         }

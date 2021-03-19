@@ -9,49 +9,30 @@ require_once "./php/functions/functions.php";
 require_once "./php/db/RequestHandler.php";
 use php\db\RequestHandler as Request;
 
-
+//  /src/rest/php/index.php/api/category/phones
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
     $uri = trim(filter_var($_SERVER["REQUEST_URI"], FILTER_SANITIZE_URL));
-    //print json_encode($uri);
+    //print $uri;
 
     $prefix = "api/";
     $cnt = strpos($uri, $prefix) + strlen($prefix);
     $res = mb_substr($uri, $cnt, strlen($uri));
 
     try {
-        //  api\/index$ - true/false check
-        if ($res === "index") {
+        if (preg_match("/^index$/", $res)) {
             print json_encode(Request::getIndexPageData());
 
-        } elseif (strpos($res, "category") !== false) {
-            //     category\/([a-z]*)$
-            $category_title = trim(filter_var(substr($res, strpos($res, "/") + 1), FILTER_SANITIZE_STRING));
-            print json_encode(Request::getCategoryItems($category_title));
+        } elseif (preg_match("/^category\/(?P<category>[a-z]+)$/", $res, $matches)) {
+            print json_encode(Request::getCategoryItems($matches["category"]));
 
-        } elseif (strpos($res, "product") !== false) {
-            //   product\/([a-z]*)\/([0-9]*)$
-
-            $list = explode("/", substr($res, strpos($res, "/") + 1));
-            $category_title = trim(filter_var($list[0], FILTER_SANITIZE_STRING));
-            $product_id = trim(filter_var($list[1], FILTER_SANITIZE_STRING));
-            print json_encode(Request::getOneItem($product_id, $category_title));
+        } elseif (preg_match("/^product\/(?P<category>[a-z]+)\/(?P<id>[0-9]+)$/", $res, $matches)) {
+            print json_encode(Request::getOneItem($matches["id"], $matches["category"]));
 
         } elseif (preg_match("/^lazy\/(?P<category>[a-z]+)\/(?P<index>[0-9-]+)$/", $res, $matches)) {
-            $category_title = $matches["category"];
-            $last_index = $matches["index"];
-
-            //print json_encode([$category_title, $last_index]);
-            // timeout 4 sec maximun, else - error msg
-            //sleep(1);
-            //print json_encode("lazy ok");
-            print json_encode(Request::getLazyLoadItems($category_title, $last_index));
-
-            //$category_title = substr($res, strpos($res, "/") + 1);
-            //var_dump_pre(Request::getLazyLoadItems($category_title));
+            print json_encode(Request::getLazyLoadItems($matches["category"], $matches["index"]));
         } else {
             throw new Error("Page with this parametres not exist");
-            //return json_encode(["error" => "URI Route Error API"]);
         }
     } catch (\Error $e) {
         //print "Error with your request" . $e->getMessage();

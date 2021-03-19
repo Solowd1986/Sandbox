@@ -15,7 +15,7 @@ export default (state = initialState, action) => {
     switch (action.type) {
 
         case types.SERVER_FETCH_PAGE_DATA : {
-            console.log('act', action);
+            //console.log('act', action);
 
             return {
                 ...state,

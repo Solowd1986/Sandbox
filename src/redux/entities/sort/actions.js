@@ -8,3 +8,9 @@ export const changeSortType = (sortType) => {
         }
     }
 };
+
+export const discardSortType = () => {
+    return {
+        type: types.SORT_DISCARD_SORT_TYPE,
+    }
+};

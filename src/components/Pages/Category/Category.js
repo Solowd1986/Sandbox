@@ -7,6 +7,7 @@ import withModal from "@components/Helpers/Hoc/withModal/withModal";
 
 import { bindActionCreators } from 'redux';
 import * as serverActions from "@redux/entities/server/actions";
+import * as sortActions from "@redux/entities/sort/actions";
 import * as serverSelectors from "@redux/entities/server/selectors/serverSelectors";
 import * as sortSelectors from "@redux/entities/sort/selectors/sortSelectors";
 import { connect } from "react-redux";
@@ -37,6 +38,7 @@ class Category extends Component {
     static propTypes = {
         clearCategoryPageReduxData: PropTypes.func,
         sortType: PropTypes.string,
+        discardSortType: PropTypes.func,
         lastIndex: PropTypes.number
     };
 
@@ -122,8 +124,8 @@ class Category extends Component {
         if (this.isThisAnotherCategoryPage() && !this.isProductListStateEmpty()) {
             this.clearComponentState();
             this.props.clearCategoryPageReduxData();
+            this.props.discardSortType();
             this.props.fetchPageData(this.props);
-
         }
         if (!this.isProductListStateEmpty() && this.state.lastIndex !== this.props.lastIndex) {
             this.setState(produce(this.state, draft => {
@@ -132,7 +134,7 @@ class Category extends Component {
                 draft["categoryProductsList"]["data"] = [...this.state.categoryProductsList.data, ...this.props.lazy];
             }));
         }
-        if (prevProps.sortType !== this.props.sortType) {
+        if (prevProps.sortType !== this.props.sortType && !this.isThisAnotherCategoryPage()) {
             this.sortProductsList();
             this.isSorted = true;
         }
@@ -174,7 +176,7 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators(serverActions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ ...serverActions, ...sortActions }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(Category);
 
 

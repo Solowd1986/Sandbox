@@ -6,11 +6,9 @@ import SortPorducts from "@components/Partials/SortProducts/SortProducts";
 import LazyLoad from "@components/Partials/LazyLoad/LazyLoad";
 import ProductCard from "@components/Partials/ProductCard/ProductCard";
 
-
 class CategoryProductsList extends Component {
     render() {
         const { category, products } = this.props;
-
         return (
             <div className={styles.category_wrapper}>
                 <div className={styles.sign_bg}>
@@ -26,7 +24,7 @@ class CategoryProductsList extends Component {
                 <div className={cn("wrapper", styles.list_wrapper)}>
                     <LazyLoad categoryName={category.alias}>
                         <ul className={styles.list}>
-                            {products.map((item, i) => <ProductCard key={i} item={item} category={category}/>)}
+                            {products.map(item => <ProductCard key={item.title + item.id} item={item} category={category}/>)}
                         </ul>
                     </LazyLoad>
                 </div>
