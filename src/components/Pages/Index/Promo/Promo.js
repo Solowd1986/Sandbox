@@ -10,12 +10,12 @@ import Spinner from "@components/Partials/Spinner/Spinner";
 
 import CartModal from "@components/Other/CartModal/CartModal";
 
-import FormikForm from "../../Other/Form/Formik/FormikForm";
+import FormikForm from "../../../Other/Form/Formik/FormikForm";
 
 import { NavLink } from "react-router-dom";
 import { Map } from "immutable";
-import DataStore from "../../Test/DataStore";
-import Stores from "../../Test/Stores"
+import DataStore from "../../../Test/DataStore";
+import Stores from "../../../Test/Stores"
 
 
 class Inner extends Component {

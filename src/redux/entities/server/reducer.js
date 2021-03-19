@@ -15,6 +15,8 @@ export default (state = initialState, action) => {
     switch (action.type) {
 
         case types.SERVER_FETCH_PAGE_DATA : {
+            console.log('act', action);
+
             return {
                 ...state,
                 [action.payload.pageType]: action.payload.data
@@ -30,7 +32,6 @@ export default (state = initialState, action) => {
 
 
         case types.SERVER_FETCH_LAZY_PAGE_DATA: {
-            //console.dir(action.payload);
             return {
                 ...state,
                 fetchingLazyDataStart: false,

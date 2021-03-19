@@ -174,7 +174,7 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = (dispatch) => ({ ...bindActionCreators(serverActions, dispatch) });
+const mapDispatchToProps = dispatch => bindActionCreators(serverActions, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(Category);
 
 

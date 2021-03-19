@@ -3,10 +3,12 @@ import composeEnhancers from "./middlware/composeEnhancers";
 import reducer from "./entities/rootReducer";
 import reduxThunk from "redux-thunk";
 import reduxLogger from "./middlware/reduxLogger";
+import loggerExample from "@redux/middlware/loggerExample";
 import ApiService from "./api/ApiService/ApiService";
 
 const activeMiddlewareList = [
     reduxThunk.withExtraArgument(ApiService),
+    loggerExample
 ];
 
 const preloadedState = {

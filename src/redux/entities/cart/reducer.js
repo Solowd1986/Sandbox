@@ -25,8 +25,7 @@ export default (state = initialState, action) => {
         case types.CART_REMOVE_ITEM : {
             const { item } = action.payload;
             const products = lodashCloning(state.products);
-            const index = products.indexOf(products.find(product =>
-                product.id === item.id && product.title === item.title));
+            const index = products.findIndex(product => product.id === item.id && product.title === item.title);
             products.splice(index, 1);
 
             return produce(state, draft => {
